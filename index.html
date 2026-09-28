@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0403">
+    <title>✦ FENBO · РЫНОК ✦ Подпольный казик</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Атмосфера -->
+    <div class="smoke"></div>
+    <div class="lamp-flicker"></div>
+    <div class="dust-bg" id="dustBg"></div>
+
+    <!-- ============================================
+         ШАПКА
+         ============================================ -->
+    <div class="topbar-wrap">
+        <header class="topbar">
+            <a href="index.html" class="logo">FENBO<span class="sub">казик</span></a>
+
+            <nav class="topbar-nav">
+                <a href="index.html" class="active">Главная</a>
+                <a href="category/auctions.html">Аукционы</a>
+                <a href="category/ych.html">Ючи</a>
+                <a href="category/adopts.html">Адопты</a>
+                <a href="category/orders.html">Заказы</a>
+            </nav>
+
+            <div class="topbar-user">
+                <div class="wallet" title="Кошелёк FENBO">
+                    <div class="chip-icon"></div>
+                    <div class="balance">
+                        <div class="chips">1 250<span class="unit">FEN</span></div>
+                        <div class="usdt"><span class="usdt-icon">₮</span>12.50</div>
+                    </div>
+                    <div class="plus">+</div>
+                </div>
+                <div class="avatar" title="Профиль">F</div>
+            </div>
+        </header>
+    </div>
+
+    <!-- ============================================
+         HERO — НЕОНОВАЯ ВЫВЕСКА
+         ============================================ -->
+    <section class="casino-hero">
+        <div class="neon-sign">
+            <h1>FENBO<span>Casino</span></h1>
+        </div>
+        <p class="hero-tagline">
+            Только для своих. <span class="accent">Садись за стол</span> — игра начинается.
+        </p>
+    </section>
+
+    <!-- ============================================
+         ТАБЛО КАЗИНО
+         ============================================ -->
+    <div class="casino-board">
+        <div class="board-item">
+            <div class="board-icon">♠</div>
+            <div class="board-body">
+                <div class="board-value" data-count-to="2480">0</div>
+                <div class="board-label">Лотов на витрине</div>
+            </div>
+        </div>
+        <div class="board-item">
+            <div class="board-icon">♥</div>
+            <div class="board-body">
+                <div class="board-value" data-count-to="320">0</div>
+                <div class="board-label">Художников в зале</div>
+            </div>
+        </div>
+        <div class="board-item">
+            <div class="board-icon">♦</div>
+            <div class="board-body">
+                <div class="board-value" data-count-to="145">0</div>
+                <div class="board-label">Ставок сегодня</div>
+            </div>
+        </div>
+        <div class="board-item">
+            <div class="board-icon">♣</div>
+            <div class="board-body">
+                <div class="board-value" data-count-to="18500">0</div>
+                <div class="board-label">Банк казино, FEN</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         СЕКЦИЯ 1 — LIVE АУКЦИОНЫ
+         ============================================ -->
+    <section class="section">
+        <div class="section-head">
+            <h2 class="section-title">
+                <span class="live-dot"></span>
+                Live аукционы
+                <span class="count">· 4 стола активны</span>
+            </h2>
+            <a href="category/auctions.html" class="section-link">Все аукционы →</a>
+        </div>
+
+        <div class="auction-carousel">
+            <!-- Аукцион 1 -->
+            <a href="#" class="auction-card"
+               data-title="Сцена · 03:00"
+               data-author="MidnightLux"
+               data-bid="1250">
+                <div class="thumb">
+                    <div class="placeholder">♦</div>
+                    <span class="badge-live">LIVE</span>
+                    <span class="timer" data-end="2025-12-31T23:59:59"></span>
+                </div>
+                <div class="info">
+                    <div class="title">Сцена · 03:00</div>
+                    <div class="author"><span class="status"></span>MidnightLux</div>
+                    <div class="bid-row">
+                        <span class="bid-label">Ставка</span>
+                        <span class="bid-value">1 250<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="bid-count">· 12 ставок · лидер: Anonymous_01</div>
+                </div>
+            </a>
+
+            <!-- Аукцион 2 -->
+            <a href="#" class="auction-card"
+               data-title="Золотая клетка"
+               data-author="GoldenCage"
+               data-bid="2400">
+                <div class="thumb">
+                    <div class="placeholder">♣</div>
+                    <span class="badge-live">LIVE</span>
+                    <span class="timer" data-end="2025-12-30T18:00:00"></span>
+                </div>
+                <div class="info">
+                    <div class="title">Золотая клетка</div>
+                    <div class="author"><span class="status"></span>GoldenCage</div>
+                    <div class="bid-row">
+                        <span class="bid-label">Ставка</span>
+                        <span class="bid-value">2 400<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="bid-count">· 21 ставка · лидер: Noir_Art</div>
+                </div>
+            </a>
+
+            <!-- Аукцион 3 -->
+            <a href="#" class="auction-card"
+               data-title="Пурпурный дым"
+               data-author="PurpleSmoke"
+               data-bid="890">
+                <div class="thumb">
+                    <div class="placeholder">♥</div>
+                    <span class="badge-live">LIVE</span>
+                    <span class="timer" data-end="2025-12-29T12:30:00"></span>
+                </div>
+                <div class="info">
+                    <div class="title">Пурпурный дым</div>
+                    <div class="author"><span class="status"></span>PurpleSmoke</div>
+                    <div class="bid-row">
+                        <span class="bid-label">Ставка</span>
+                        <span class="bid-value">890<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="bid-count">· 7 ставок · лидер: Velvet_Rose</div>
+                </div>
+            </a>
+
+            <!-- Аукцион 4 -->
+            <a href="#" class="auction-card"
+               data-title="Алый закат"
+               data-author="ScarletSunset"
+               data-bid="3200">
+                <div class="thumb">
+                    <div class="placeholder">♠</div>
+                    <span class="badge-live">LIVE</span>
+                    <span class="timer" data-end="2025-12-28T22:00:00"></span>
+                </div>
+                <div class="info">
+                    <div class="title">Алый закат</div>
+                    <div class="author"><span class="status offline"></span>ScarletSunset</div>
+                    <div class="bid-row">
+                        <span class="bid-label">Ставка</span>
+                        <span class="bid-value">3 200<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="bid-count">· 34 ставки · лидер: TwinFlame</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================
+         СЕКЦИЯ 2 — ОТКРЫТЫЕ ЮЧИ
+         ============================================ -->
+    <section class="section">
+        <div class="section-head">
+            <h2 class="section-title">
+                🎟️ Открытые YCH
+                <span class="count">· 4 со свободными слотами</span>
+            </h2>
+            <a href="category/ych.html" class="section-link">Все YCH →</a>
+        </div>
+
+        <div class="ych-list">
+            <!-- YCH 1 -->
+            <a href="#" class="ych-card"
+               data-title="Парный портрет"
+               data-author="TwinFlame"
+               data-slots="2">
+                <div class="ych-thumb">❦</div>
+                <div class="ych-body">
+                    <div class="ych-title">Парный портрет</div>
+                    <div class="ych-author">by TwinFlame</div>
+                    <div class="ych-slots">
+                        Слоты:
+                        <div class="slot-bar">
+                            <div class="slot free"></div>
+                            <div class="slot free"></div>
+                            <div class="slot taken"></div>
+                        </div>
+                        2/3
+                    </div>
+                    <div class="ych-price">600 FEN</div>
+                </div>
+            </a>
+
+            <!-- YCH 2 -->
+            <a href="#" class="ych-card"
+               data-title="Шёлковые оковы"
+               data-author="BoundElegance"
+               data-slots="1">
+                <div class="ych-thumb">♣</div>
+                <div class="ych-body">
+                    <div class="ych-title">Шёлковые оковы</div>
+                    <div class="ych-author">by BoundElegance</div>
+                    <div class="ych-slots">
+                        Слоты:
+                        <div class="slot-bar">
+                            <div class="slot free"></div>
+                            <div class="slot taken"></div>
+                            <div class="slot taken"></div>
+                        </div>
+                        1/3
+                    </div>
+                    <div class="ych-price">450 FEN</div>
+                </div>
+            </a>
+
+            <!-- YCH 3 -->
+            <a href="#" class="ych-card"
+               data-title="Ночной гость"
+               data-author="Noir_Art"
+               data-slots="3">
+                <div class="ych-thumb">♠</div>
+                <div class="ych-body">
+                    <div class="ych-title">Ночной гость</div>
+                    <div class="ych-author">by Noir_Art</div>
+                    <div class="ych-slots">
+                        Слоты:
+                        <div class="slot-bar">
+                            <div class="slot free"></div>
+                            <div class="slot free"></div>
+                            <div class="slot free"></div>
+                        </div>
+                        3/3
+                    </div>
+                    <div class="ych-price">800 FEN</div>
+                </div>
+            </a>
+
+            <!-- YCH 4 -->
+            <a href="#" class="ych-card"
+               data-title="Бархатный вечер"
+               data-author="Velvet_Rose"
+               data-slots="1">
+                <div class="ych-thumb">♥</div>
+                <div class="ych-body">
+                    <div class="ych-title">Бархатный вечер</div>
+                    <div class="ych-author">by Velvet_Rose</div>
+                    <div class="ych-slots">
+                        Слоты:
+                        <div class="slot-bar">
+                            <div class="slot taken"></div>
+                            <div class="slot free"></div>
+                            <div class="slot taken"></div>
+                        </div>
+                        1/3
+                    </div>
+                    <div class="ych-price">900 FEN</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================
+         СЕКЦИЯ 3 — ГАЛЕРЕЯ АРТОВ
+         ============================================ -->
+    <section class="section">
+        <div class="section-head">
+            <h2 class="section-title">
+                🎨 Арты
+                <span class="count">· вся витрина зала</span>
+            </h2>
+        </div>
+
+        <div class="art-feed">
+
+            <a href="#" class="art-card" data-h="1" data-title="Бархатный вечер" data-author="Velvet_Rose" data-price="500">
+                <div class="thumb"><div class="placeholder">❦</div><span class="badge-type">Арт</span><span class="badge-hot">HOT</span></div>
+                <div class="info">
+                    <div class="title">Бархатный вечер</div>
+                    <div class="author"><span class="status"></span>Velvet_Rose</div>
+                    <div class="meta">
+                        <div class="price">500 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>1.2k · 👁 4.5k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="3" data-title="Ночная смена" data-author="Noir_Art" data-price="400">
+                <div class="thumb"><div class="placeholder">♠</div><span class="badge-type">Арт</span></div>
+                <div class="info">
+                    <div class="title">Ночная смена</div>
+                    <div class="author"><span class="status offline"></span>Noir_Art</div>
+                    <div class="meta">
+                        <div class="price">400 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>856 · 👁 2.1k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="2" data-title="Красный шёлк" data-author="ScarletDream" data-price="750">
+                <div class="thumb"><div class="placeholder">♥</div><span class="badge-type">Арт</span></div>
+                <div class="info">
+                    <div class="title">Красный шёлк</div>
+                    <div class="author"><span class="status"></span>ScarletDream</div>
+                    <div class="meta">
+                        <div class="price">750 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>2.4k · 👁 8.9k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="5" data-title="Тёмный бархат" data-author="DarkVelvet" data-price="550">
+                <div class="thumb"><div class="placeholder">♦</div><span class="badge-type">Арт</span></div>
+                <div class="info">
+                    <div class="title">Тёмный бархат</div>
+                    <div class="author"><span class="status"></span>DarkVelvet</div>
+                    <div class="meta">
+                        <div class="price">550 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>1.4k · 👁 4.1k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="4" data-title="Шёпот в темноте" data-author="WhisperArt" data-price="900">
+                <div class="thumb"><div class="placeholder">❦</div><span class="badge-type">Арт</span></div>
+                <div class="info">
+                    <div class="title">Шёпот в темноте</div>
+                    <div class="author"><span class="status"></span>WhisperArt</div>
+                    <div class="meta">
+                        <div class="price">900 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>1.9k · 👁 6.3k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="1" data-title="За кулисами" data-author="Backstage_" data-price="700">
+                <div class="thumb"><div class="placeholder">♣</div><span class="badge-type">Арт</span></div>
+                <div class="info">
+                    <div class="title">За кулисами</div>
+                    <div class="author"><span class="status"></span>Backstage_</div>
+                    <div class="meta">
+                        <div class="price">700 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>921 · 👁 3.4k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="3" data-title="Две свечи" data-author="TwinFlame" data-price="650">
+                <div class="thumb"><div class="placeholder">♥</div><span class="badge-type">Арт</span></div>
+                <div class="info">
+                    <div class="title">Две свечи</div>
+                    <div class="author"><span class="status offline"></span>TwinFlame</div>
+                    <div class="meta">
+                        <div class="price">650 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>3.1k · 👁 12k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="2" data-title="Шёлковые оковы" data-author="BoundElegance" data-price="1200">
+                <div class="thumb"><div class="placeholder">♠</div><span class="badge-type">Арт</span></div>
+                <div class="info">
+                    <div class="title">Шёлковые оковы</div>
+                    <div class="author"><span class="status"></span>BoundElegance</div>
+                    <div class="meta">
+                        <div class="price">1 200 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>1.8k · 👁 5.2k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="5" data-title="Сцена · 03:00" data-author="MidnightLux" data-price="1500">
+                <div class="thumb"><div class="placeholder">♦</div><span class="badge-type">Арт</span></div>
+                <div class="info">
+                    <div class="title">Сцена · 03:00</div>
+                    <div class="author"><span class="status"></span>MidnightLux</div>
+                    <div class="meta">
+                        <div class="price">1 500 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>631 · 👁 1.7k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="1" data-title="Пурпурный дым" data-author="PurpleSmoke" data-price="400">
+                <div class="thumb"><div class="placeholder">♣</div><span class="badge-type">Арт</span></div>
+                <div class="info">
+                    <div class="title">Пурпурный дым</div>
+                    <div class="author"><span class="status offline"></span>PurpleSmoke</div>
+                    <div class="meta">
+                        <div class="price">400 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>1.1k · 👁 2.9k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="4" data-title="Алый закат" data-author="ScarletSunset" data-price="1800">
+                <div class="thumb"><div class="placeholder">♥</div><span class="badge-type">Арт</span><span class="badge-hot">TOP</span></div>
+                <div class="info">
+                    <div class="title">Алый закат</div>
+                    <div class="author"><span class="status"></span>ScarletSunset</div>
+                    <div class="meta">
+                        <div class="price">1 800 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>3.5k · 👁 15k</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="art-card" data-h="2" data-title="Золотая клетка" data-author="GoldenCage" data-price="2000">
+                <div class="thumb"><div class="placeholder">♦</div><span class="badge-type">Арт</span></div>
+                <div class="info">
+                    <div class="title">Золотая клетка</div>
+                    <div class="author"><span class="status"></span>GoldenCage</div>
+                    <div class="meta">
+                        <div class="price">2 000 FEN</div>
+                        <div class="stats"><span class="heart">♥</span>2.7k · 👁 9.8k</div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- ============================================
+         ПОДВАЛ
+         ============================================ -->
+    <footer class="footer">
+        <a href="#" class="back-link">← Вернуться в главное меню</a>
+        <div>✦ FENBO · РЫНОК ✦ 2025 ✦ <span>Только 18+</span> ✦</div>
+    </footer>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>
