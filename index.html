@@ -2,164 +2,429 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✦ Mini Cards · Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#061410">
+    <title>✦ FENBO · РЫНОК ✦</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         /* ============================================
-           ПЕРЕМЕННЫЕ
+           ПАЛИТРА — MIDNIGHT EMERALD + GOLD + PLATINUM
            ============================================ */
         :root {
-            --bg-0: #07080c;
-            --bg-1: #0d0f15;
-            --bg-2: #14171f;
+            --bg-0: #061410;
+            --bg-1: #0a1c18;
+            --bg-2: #0f2a24;
+            --bg-3: #143830;
+
+            --emerald: #1a4a3f;
+            --emerald-glow: rgba(26, 74, 63, 0.5);
 
             --gold: #e8c168;
             --gold-hi: #ffd97a;
             --gold-deep: #8a6d2c;
-            --gold-glow: rgba(232, 193, 104, 0.5);
-            --gold-line: rgba(232, 193, 104, 0.6);
+            --gold-glow: rgba(232, 193, 104, 0.4);
 
-            --wine: #8b2a2a;
-            --wine-hi: #c04040;
+            --platinum: #c9c9c9;
+            --platinum-dim: rgba(201, 201, 201, 0.15);
 
-            --text-0: #f4f1ea;
-            --text-1: #b8b3a7;
-            --text-2: #6f6a5e;
+            --text-0: #e8e6e0;
+            --text-1: #a8a89e;
+            --text-2: #6a6a62;
 
-            --border: #1f232e;
+            --danger: #c04040;
+            --danger-hi: #e05050;
+            --danger-glow: rgba(192, 64, 64, 0.5);
+
+            --grad-gold: linear-gradient(180deg, #ffd97a 0%, #e8c168 50%, #8a6d2c 100%);
+
+            --radius: 8px;
+            --radius-sm: 3px;
+
+            --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.5);
+            --shadow-hover: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(232, 193, 104, 0.15);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
+        html { scroll-behavior: smooth; }
 
         body {
-            background: var(--bg-0);
+            background-color: var(--bg-0);
             background-image: 
-                radial-gradient(ellipse 60% 40% at 50% 0%, rgba(232, 193, 104, 0.06) 0%, transparent 60%);
+                radial-gradient(ellipse 70% 40% at 50% 0%, rgba(232, 193, 104, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 30% at 90% 100%, rgba(26, 74, 63, 0.15) 0%, transparent 60%),
+                linear-gradient(180deg, #061410 0%, #04080c 100%);
+            background-attachment: fixed;
             font-family: 'Inter', sans-serif;
             color: var(--text-0);
             min-height: 100vh;
-            padding: 60px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 0 0 60px;
+            position: relative;
+            overflow-x: hidden;
+            font-size: 14px;
+            line-height: 1.6;
+            letter-spacing: 0.15px;
         }
 
-        .demo-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: var(--gold);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            text-align: center;
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(232, 193, 104, 0.006) 2px, rgba(232, 193, 104, 0.006) 3px);
+            pointer-events: none;
+            z-index: 0;
         }
-        .demo-sub {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            color: var(--text-2);
-            margin-bottom: 48px;
-            font-size: 1rem;
+
+        .top-light {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 60vh;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(ellipse 40% 50% at 50% 0%, rgba(232, 193, 104, 0.12) 0%, transparent 70%);
+        }
+        .emerald-glow {
+            position: fixed;
+            bottom: 0; left: 0;
+            width: 60%; height: 50vh;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(ellipse 80% 60% at 0% 100%, rgba(26, 74, 63, 0.2) 0%, transparent 70%);
+        }
+        .dust-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .dust-bg .mote {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 230, 180, 1) 0%, rgba(232, 193, 104, 0.5) 40%, transparent 100%);
+            box-shadow: 0 0 6px rgba(232, 193, 104, 0.4);
+            opacity: 0;
+            animation: moteFloat linear infinite;
+        }
+        @keyframes moteFloat {
+            0% { opacity: 0; transform: translate3d(0, 0, 0); }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.3; }
+            100% { opacity: 0; transform: translate3d(var(--mx, 30px), -100vh, 0); }
         }
 
         /* ============================================
-           СЕТКА — 6 КАРТОЧЕК В РЯД
+           ШАПКА
            ============================================ */
-        .mini-grid {
+        .topbar-wrap { width: 100%; max-width: 1500px; position: relative; z-index: 20; padding: 0 40px; }
+        .topbar {
+            width: 100%;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 40px;
+            padding: 22px 0;
+            border-bottom: 1px solid var(--platinum-dim);
+        }
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 12px;
+            text-decoration: none;
+            display: flex;
+            align-items: baseline;
+            white-space: nowrap;
+            text-shadow: 0 0 30px rgba(232, 193, 104, 0.3);
+        }
+        .logo .sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--text-1);
+            letter-spacing: 2px;
+            margin-left: 10px;
+            font-weight: 400;
+        }
+        .topbar-nav {
+            display: flex;
+            justify-content: center;
+            gap: 38px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .topbar-nav a {
+            color: var(--text-1);
+            text-decoration: none;
+            transition: color 0.3s;
+            padding: 8px 0;
+            position: relative;
+            white-space: nowrap;
+        }
+        .topbar-nav a:hover, .topbar-nav a.active { color: var(--gold); }
+        .topbar-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -23px; left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 20px; height: 1px;
+            background: var(--gold);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+        .topbar-nav a:hover::after, .topbar-nav a.active::after { transform: translateX(-50%) scaleX(1); }
+
+        .topbar-user { display: flex; align-items: center; gap: 14px; justify-content: flex-end; }
+        .btn-new-lot {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--bg-0);
+            background: var(--grad-gold);
+            border: none;
+            padding: 11px 18px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 -1px 0 rgba(0, 0, 0, 0.15) inset, 0 4px 20px rgba(232, 193, 104, 0.25);
+        }
+        .btn-new-lot:hover {
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 -1px 0 rgba(0, 0, 0, 0.15) inset, 0 6px 30px rgba(232, 193, 104, 0.5);
+            transform: translateY(-1px);
+        }
+        .btn-new-lot .plus { font-size: 1rem; line-height: 1; font-weight: 400; }
+
+        .wallet {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 14px 7px 7px;
+            background: var(--bg-1);
+            border: 1px solid var(--platinum-dim);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .wallet:hover { border-color: var(--gold-deep); }
+        .wallet .chip-icon {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 25%, #fff6c8 0%, #ffe066 15%, #e8c168 35%, #8a6d2c 65%, #4a3a14 100%);
+            border: 1px solid #ffe066;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px var(--gold-glow), inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+            flex-shrink: 0;
+        }
+        .wallet .chip-icon::after { content: '♠'; font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 700; color: #0a0e14; }
+        .wallet .balance { display: flex; flex-direction: column; line-height: 1.15; }
+        .wallet .chips { font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; font-weight: 700; color: var(--gold); letter-spacing: 0.3px; }
+        .wallet .chips .unit { font-size: 0.58rem; color: var(--text-2); letter-spacing: 1.5px; margin-left: 3px; font-weight: 500; }
+        .wallet .usdt { font-family: 'Inter', sans-serif; font-size: 0.66rem; color: var(--text-2); display: flex; align-items: center; gap: 4px; margin-top: 1px; }
+        .wallet .usdt-icon { display: inline-flex; align-items: center; justify-content: center; width: 11px; height: 11px; background: #26A17B; border-radius: 50%; color: #fff; font-size: 0.55rem; font-weight: 700; }
+        .wallet .plus {
+            width: 20px; height: 20px;
+            border-radius: 3px;
+            background: rgba(232, 193, 104, 0.08);
+            border: 1px solid rgba(232, 193, 104, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 0.9rem;
+            line-height: 1;
+            transition: all 0.3s;
+        }
+        .wallet:hover .plus { background: var(--gold); color: var(--bg-0); }
+        .topbar-user .avatar {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0f2a24, #061410);
+            border: 1px solid var(--gold-deep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.92rem;
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .topbar-user .avatar:hover { border-color: var(--gold); box-shadow: 0 0 20px var(--gold-glow); }
+
+        /* ============================================
+           СЕКЦИИ
+           ============================================ */
+        .section { width: 100%; max-width: 1500px; padding: 40px 40px 55px; position: relative; z-index: 5; }
+        .section:first-of-type { padding-top: 56px; }
+        .section-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 26px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--platinum-dim);
+            position: relative;
+        }
+        .section-head::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0;
+            width: 60px; height: 1px;
+            background: var(--gold);
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-0);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .section-title .live-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--danger);
+            box-shadow: 0 0 12px var(--danger-glow);
+            animation: livePulse 1.6s infinite;
+        }
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.4); }
+        }
+        .section-title .count {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--text-2);
+            letter-spacing: 1px;
+            text-transform: none;
+        }
+        .section-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-1);
+            text-decoration: none;
+            padding: 10px 16px;
+            border: 1px solid var(--platinum-dim);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .section-link:hover { color: var(--gold); border-color: var(--gold-deep); background: rgba(232, 193, 104, 0.03); }
+
+        /* ============================================
+           СЕТКА — ПЛОТНАЯ, 5-6 В РЯД
+           ============================================ */
+        .lot-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
             gap: 16px;
-            width: 100%;
-            max-width: 1300px;
         }
 
         /* ============================================
-           КАРТОЧКА
+           КАРТОЧКА ЛОТА — MINI + PREMIUM
            ============================================ */
-        .mini-card {
+        .lot-card {
             position: relative;
             aspect-ratio: 4 / 5.4;
             background: var(--bg-1);
-            border-radius: 10px;
+            border-radius: var(--radius);
             overflow: hidden;
             cursor: pointer;
             display: flex;
             flex-direction: column;
+            box-shadow: var(--shadow-card);
 
-            /* Появление: стартовое состояние */
+            /* ENTRANCE: из прозрачности + сдвиг + blur */
             opacity: 0;
-            transform: translateY(20px);
-            animation: cardEntrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transform: translateY(24px);
+            filter: blur(6px);
+            animation: cardEntrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 
-            /* Плавность для hover-эффектов */
             transition: 
                 transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
                 box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        /* Stagger — карточки появляются одна за другой */
-        .mini-card:nth-child(1) { animation-delay: 0.05s; }
-        .mini-card:nth-child(2) { animation-delay: 0.12s; }
-        .mini-card:nth-child(3) { animation-delay: 0.19s; }
-        .mini-card:nth-child(4) { animation-delay: 0.26s; }
-        .mini-card:nth-child(5) { animation-delay: 0.33s; }
-        .mini-card:nth-child(6) { animation-delay: 0.40s; }
-        .mini-card:nth-child(7) { animation-delay: 0.47s; }
-        .mini-card:nth-child(8) { animation-delay: 0.54s; }
+        /* Stagger — карточки «сдаются» одна за другой */
+        .lot-card:nth-child(1) { animation-delay: 0.05s; }
+        .lot-card:nth-child(2) { animation-delay: 0.10s; }
+        .lot-card:nth-child(3) { animation-delay: 0.15s; }
+        .lot-card:nth-child(4) { animation-delay: 0.20s; }
+        .lot-card:nth-child(5) { animation-delay: 0.25s; }
+        .lot-card:nth-child(6) { animation-delay: 0.30s; }
+        .lot-card:nth-child(7) { animation-delay: 0.35s; }
+        .lot-card:nth-child(8) { animation-delay: 0.40s; }
+        .lot-card:nth-child(9) { animation-delay: 0.45s; }
+        .lot-card:nth-child(10) { animation-delay: 0.50s; }
+        .lot-card:nth-child(11) { animation-delay: 0.55s; }
+        .lot-card:nth-child(12) { animation-delay: 0.60s; }
 
         @keyframes cardEntrance {
             to {
                 opacity: 1;
                 transform: translateY(0);
+                filter: blur(0);
             }
         }
 
-        /* Hover — карточка приподнимается */
-        .mini-card:hover {
+        .lot-card:hover {
             transform: translateY(-6px);
-            box-shadow: 
-                0 24px 60px rgba(0, 0, 0, 0.7),
-                0 0 40px rgba(232, 193, 104, 0.15);
+            box-shadow: var(--shadow-hover);
         }
 
         /* ============================================
-           BORDER-BEAM — обегающая золотая линия
+           BORDER-BEAM — золотой луч по контуру
            ============================================ */
-        .mini-card::before {
+        .lot-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            border-radius: 10px;
+            border-radius: var(--radius);
             padding: 1px;
             background: linear-gradient(
                 115deg,
                 transparent 0%,
-                transparent 30%,
-                var(--gold-hi) 45%,
+                transparent 35%,
+                var(--gold-hi) 48%,
                 var(--gold) 50%,
-                var(--gold-hi) 55%,
-                transparent 70%,
+                var(--gold-hi) 52%,
+                transparent 65%,
                 transparent 100%
             );
             background-size: 300% 300%;
             background-position: 100% 100%;
-
-            -webkit-mask: 
-                linear-gradient(#fff 0 0) content-box, 
-                linear-gradient(#fff 0 0);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
-
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.4s ease;
             z-index: 5;
         }
-        .mini-card:hover::before {
+        .lot-card:hover::before {
             opacity: 1;
             animation: borderBeam 2.5s linear infinite;
         }
@@ -168,181 +433,285 @@
             100% { background-position: 0% 0%; }
         }
 
-        /* Внутренний тонкий контур всегда */
-        .mini-card::after {
+        /* Тонкий платиновый контур всегда */
+        .lot-card::after {
             content: '';
             position: absolute;
             inset: 0;
-            border-radius: 10px;
+            border-radius: var(--radius);
             padding: 1px;
             background: linear-gradient(
                 180deg, 
-                rgba(232, 193, 104, 0.08) 0%, 
+                rgba(201, 201, 201, 0.08) 0%, 
                 transparent 40%, 
                 transparent 60%, 
-                rgba(232, 193, 104, 0.12) 100%
+                rgba(232, 193, 104, 0.15) 100%
             );
-            -webkit-mask: 
-                linear-gradient(#fff 0 0) content-box, 
-                linear-gradient(#fff 0 0);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
             z-index: 4;
             transition: opacity 0.4s;
         }
-        .mini-card:hover::after { opacity: 0; }
+        .lot-card:hover::after { opacity: 0; }
 
         /* ============================================
            ПРЕВЬЮ
            ============================================ */
-        .mc-thumb {
+        .lc-thumb {
             position: relative;
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.35) 0%, transparent 55%),
-                        linear-gradient(135deg, #1a0508, #0a0205);
+            background: radial-gradient(ellipse at 40% 30%, rgba(26, 74, 63, 0.5) 0%, transparent 55%),
+                        linear-gradient(135deg, #0a1c18, #04080c);
         }
-        .mc-thumb.bg-2 { background: radial-gradient(ellipse at 40% 30%, rgba(232, 193, 104, 0.28) 0%, transparent 55%), linear-gradient(135deg, #1a1505, #0a0802); }
-        .mc-thumb.bg-3 { background: radial-gradient(ellipse at 40% 30%, rgba(120, 60, 160, 0.3) 0%, transparent 55%), linear-gradient(135deg, #15051a, #08020a); }
-        .mc-thumb.bg-4 { background: radial-gradient(ellipse at 40% 30%, rgba(60, 130, 190, 0.3) 0%, transparent 55%), linear-gradient(135deg, #05101a, #02060a); }
-        .mc-thumb.bg-5 { background: radial-gradient(ellipse at 40% 30%, rgba(60, 160, 150, 0.3) 0%, transparent 55%), linear-gradient(135deg, #051a18, #020a09); }
-        .mc-thumb.bg-6 { background: radial-gradient(ellipse at 40% 30%, rgba(200, 100, 40, 0.3) 0%, transparent 55%), linear-gradient(135deg, #1a0a05, #0a0402); }
+        .lc-thumb.bg-1 { background: radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.4) 0%, transparent 55%), linear-gradient(135deg, #1a0508, #0a0205); }
+        .lc-thumb.bg-2 { background: radial-gradient(ellipse at 40% 30%, rgba(232, 193, 104, 0.3) 0%, transparent 55%), linear-gradient(135deg, #1a1505, #0a0802); }
+        .lc-thumb.bg-3 { background: radial-gradient(ellipse at 40% 30%, rgba(120, 60, 160, 0.35) 0%, transparent 55%), linear-gradient(135deg, #15051a, #08020a); }
+        .lc-thumb.bg-4 { background: radial-gradient(ellipse at 40% 30%, rgba(60, 130, 190, 0.35) 0%, transparent 55%), linear-gradient(135deg, #05101a, #02060a); }
+        .lc-thumb.bg-5 { background: radial-gradient(ellipse at 40% 30%, rgba(26, 74, 63, 0.5) 0%, transparent 55%), linear-gradient(135deg, #051a18, #020a09); }
+        .lc-thumb.bg-6 { background: radial-gradient(ellipse at 40% 30%, rgba(200, 100, 40, 0.35) 0%, transparent 55%), linear-gradient(135deg, #1a0a05, #0a0402); }
 
-        .mc-thumb .mc-suit {
+        /* MUSEUM-STYLE: превью чуть увеличивается при hover (внутрь) */
+        .lc-thumb .lc-art {
             font-family: 'Cinzel', serif;
-            font-size: 3.2rem;
-            color: rgba(232, 193, 104, 0.15);
+            font-size: 3.4rem;
+            color: rgba(232, 193, 104, 0.16);
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), color 0.5s;
             text-shadow: 0 0 50px rgba(232, 193, 104, 0.4);
         }
-        .mini-card:hover .mc-thumb .mc-suit {
-            transform: scale(1.15);
-            color: rgba(232, 193, 104, 0.3);
+        .lot-card:hover .lc-thumb .lc-art {
+            transform: scale(1.06);
+            color: rgba(232, 193, 104, 0.28);
         }
 
-        /* Плавный градиент-«пар» снизу */
-        .mc-thumb::after {
-            content: '';
+        /* Водяной знак — динамическая сетка */
+        .lc-watermark {
             position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 50%;
-            background: linear-gradient(180deg, transparent 0%, rgba(13, 15, 21, 0.95) 100%);
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.35;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(232, 193, 104, 0.08) 18px, rgba(232, 193, 104, 0.08) 19px),
+                repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(232, 193, 104, 0.06) 18px, rgba(232, 193, 104, 0.06) 19px);
+            transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 2;
+            mix-blend-mode: overlay;
+        }
+        .lot-card:hover .lc-watermark {
+            opacity: 0.55;
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Водяной знак FENBO — по диагонали */
+        .lc-watermark::after {
+            content: 'FENBO';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: rgba(232, 193, 104, 0.14);
+            white-space: nowrap;
             pointer-events: none;
         }
 
+        /* Пар снизу */
+        .lc-thumb::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 55%;
+            background: linear-gradient(180deg, transparent 0%, rgba(6, 20, 16, 0.95) 100%);
+            pointer-events: none;
+            z-index: 3;
+        }
+
         /* ============================================
-           ТАЙМЕР и LIVE — крошечные в углах
+           LIVE + ТАЙМЕР — КРОШЕЧНЫЕ
            ============================================ */
-        .mc-live {
+        .lc-live {
             position: absolute;
             top: 8px; left: 8px;
             display: inline-flex;
             align-items: center;
             gap: 4px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.5rem;
+            font-size: 0.48rem;
             font-weight: 700;
             letter-spacing: 1.5px;
             color: #fff;
-            background: rgba(139, 42, 42, 0.85);
+            background: rgba(192, 64, 64, 0.85);
             backdrop-filter: blur(6px);
             padding: 3px 6px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm);
             text-transform: uppercase;
-            z-index: 3;
+            z-index: 4;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .mc-live::before {
+        .lc-live::before {
             content: '';
             width: 4px; height: 4px;
             border-radius: 50%;
             background: #fff;
             animation: livePulse 1.2s infinite;
         }
-        @keyframes livePulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.4); }
-        }
 
-        .mc-timer {
+        .lc-timer {
             position: absolute;
             top: 8px; right: 8px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.58rem;
+            font-size: 0.56rem;
             font-weight: 700;
             color: var(--gold);
-            background: rgba(7, 8, 12, 0.9);
+            background: rgba(6, 20, 16, 0.9);
             border: 1px solid rgba(232, 193, 104, 0.3);
             padding: 3px 6px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm);
             letter-spacing: 0.8px;
-            z-index: 3;
+            z-index: 4;
             backdrop-filter: blur(6px);
         }
 
+        /* Пульсация рамки за 10 минут */
+        .lot-card.ending-soon {
+            animation: cardEntrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+                       dangerPulse 2s ease-in-out infinite 1s;
+        }
+        @keyframes dangerPulse {
+            0%, 100% { box-shadow: var(--shadow-card); }
+            50% { box-shadow: var(--shadow-card), 0 0 30px rgba(192, 64, 64, 0.5); }
+        }
+        .lot-card.ending-soon .lc-timer {
+            color: var(--danger-hi);
+            border-color: rgba(192, 64, 64, 0.6);
+            background: rgba(60, 10, 10, 0.9);
+        }
+
         /* ============================================
-           ИНФО
+           ИНДИКАТОР СЛОТОВ (YCH) — золотые ячейки
            ============================================ */
-        .mc-info {
-            padding: 12px 14px 14px;
+        .lc-slots {
+            position: absolute;
+            bottom: 8px; left: 8px;
+            display: flex;
+            gap: 3px;
+            z-index: 4;
+        }
+        .lc-slot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(232, 193, 104, 0.4);
+            background: rgba(6, 20, 16, 0.7);
+            backdrop-filter: blur(6px);
+            transition: all 0.3s;
+        }
+        .lc-slot.free {
+            background: radial-gradient(circle at 30% 25%, #fff6c8 0%, #ffe066 20%, #e8c168 50%, #8a6d2c 100%);
+            border-color: #ffe066;
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+        .lc-slot.taken {
+            background: rgba(80, 30, 30, 0.6);
+            border-color: rgba(192, 64, 64, 0.4);
+        }
+
+        /* ============================================
+           КАТЕГОРИЯ (тонкая рамка)
+           ============================================ */
+        .lc-cat {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            transform: translateY(24px);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.44rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--gold);
+            background: rgba(6, 20, 16, 0.85);
+            border: 1px solid rgba(232, 193, 104, 0.35);
+            backdrop-filter: blur(6px);
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+            text-transform: uppercase;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 4;
+        }
+        .lot-card:hover .lc-cat {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        /* Если у карточки есть LIVE — категория сдвигается ниже */
+        .lot-card.has-live .lc-cat {
+            top: 30px;
+        }
+        .lot-card.has-live:hover .lc-cat {
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           ИНФО — стеклянный оверлей при hover
+           ============================================ */
+        .lc-info {
+            padding: 10px 12px 12px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             position: relative;
-            z-index: 3;
+            z-index: 4;
             background: var(--bg-1);
         }
 
-        .mc-title {
+        .lc-title {
             font-family: 'Cinzel', serif;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 500;
             color: var(--text-0);
-            letter-spacing: 0.8px;
+            letter-spacing: 0.6px;
             text-transform: uppercase;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .mc-author {
+        .lc-author {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-style: italic;
             color: var(--text-2);
-            margin-top: -6px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            margin-top: -4px;
         }
 
-        /* ============================================
-           ЦЕНА + ПОДЧЁРКИВАЮЩАЯ ЛИНИЯ
-           ============================================ */
-        .mc-price-wrap {
-            position: relative;
+        /* ЦЕНА — с растущей линией */
+        .lc-price-wrap {
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            padding-top: 8px;
+            gap: 3px;
+            padding-top: 6px;
             margin-top: auto;
         }
-
-        .mc-price-label {
+        .lc-price-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.45rem;
+            font-size: 0.44rem;
             font-weight: 600;
             letter-spacing: 1.8px;
             color: var(--text-2);
             text-transform: uppercase;
         }
-
-        .mc-price {
+        .lc-price {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 700;
             color: var(--gold);
             letter-spacing: 0.3px;
@@ -352,19 +721,17 @@
             display: inline-block;
             width: fit-content;
         }
-        .mc-price .unit {
-            font-size: 0.5rem;
+        .lc-price .unit {
+            font-size: 0.48rem;
             color: var(--text-2);
             font-weight: 500;
             margin-left: 3px;
             letter-spacing: 0.8px;
         }
-
-        /* Линия, растущая из центра */
-        .mc-price::after {
+        .lc-price::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -3px;
             left: 50%;
             transform: translateX(-50%) scaleX(0);
             width: 100%;
@@ -374,27 +741,39 @@
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
             transform-origin: center;
         }
-        .mini-card:hover .mc-price::after {
+        .lot-card:hover .lc-price::after {
             transform: translateX(-50%) scaleX(1);
         }
-        .mini-card:hover .mc-price {
+        .lot-card:hover .lc-price {
             color: var(--gold-hi);
             text-shadow: 0 0 20px rgba(232, 193, 104, 0.6);
         }
 
+        /* Вспышка цены при перебитии ставки */
+        .lc-price.bump {
+            animation: priceBump 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        @keyframes priceBump {
+            0% { color: var(--gold); text-shadow: 0 0 12px rgba(232, 193, 104, 0.25); transform: translateX(0); }
+            15% { color: #fff; text-shadow: 0 0 30px #fff, 0 0 60px var(--gold-hi); transform: translateX(-2px) scale(1.05); }
+            30% { transform: translateX(2px) scale(1.05); }
+            50% { color: var(--gold-hi); text-shadow: 0 0 30px var(--gold-glow); transform: translateX(0) scale(1.02); }
+            100% { color: var(--gold); text-shadow: 0 0 12px rgba(232, 193, 104, 0.25); transform: translateX(0) scale(1); }
+        }
+
         /* ============================================
-           КНОПКА — скрыта, появляется при hover
+           КНОПКА — СКРЫТА, ПОЯВЛЯЕТСЯ ПРИ HOVER
            ============================================ */
-        .mc-btn {
+        .lc-btn {
             position: absolute;
             bottom: 0; left: 0; right: 0;
             font-family: 'Inter', sans-serif;
-            font-size: 0.6rem;
+            font-size: 0.58rem;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--bg-0);
-            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+            background: var(--grad-gold);
             border: none;
             padding: 12px 10px;
             cursor: pointer;
@@ -403,44 +782,22 @@
             transition: 
                 opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
                 transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-            box-shadow: 
-                0 -4px 20px rgba(232, 193, 104, 0.4),
-                0 1px 0 rgba(255, 255, 255, 0.4) inset;
+            box-shadow: 0 -4px 20px rgba(232, 193, 104, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4) inset;
             z-index: 10;
         }
-        .mini-card:hover .mc-btn {
+        .lot-card:hover .lc-btn {
             opacity: 1;
             transform: translateY(0);
         }
-        .mc-btn:hover {
+        .lc-btn:hover {
             letter-spacing: 3px;
             filter: brightness(1.1);
         }
 
         /* ============================================
-           ТИП КАРТОЧКИ (бейдж)
+           СТАТИСТИКА
            ============================================ */
-        .mc-type {
-            position: absolute;
-            bottom: 8px; left: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.45rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: var(--text-1);
-            background: rgba(7, 8, 12, 0.75);
-            border: 1px solid rgba(232, 193, 104, 0.2);
-            backdrop-filter: blur(6px);
-            padding: 2px 6px;
-            border-radius: 3px;
-            text-transform: uppercase;
-            z-index: 3;
-        }
-
-        /* ============================================
-           СТАТИСТИКА (лайки / просмотры)
-           ============================================ */
-        .mc-stats {
+        .lc-stats {
             display: flex;
             gap: 8px;
             font-family: 'Inter', sans-serif;
@@ -448,222 +805,647 @@
             color: var(--text-2);
             padding-top: 4px;
         }
-        .mc-stats .heart { color: var(--wine-hi); }
+        .lc-stats .heart { color: var(--danger-hi); }
 
         /* ============================================
-           ДЕМО — блок с переключателем
+           ЛЕНТА СТАВОК — плавающий виджет
            ============================================ */
-        .demo-controls {
-            margin-bottom: 40px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
+        .bets-feed {
+            position: fixed;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            max-height: 60vh;
+            padding: 16px 14px;
+            background: linear-gradient(165deg, rgba(10, 28, 24, 0.95) 0%, rgba(6, 20, 16, 0.9) 100%);
+            border: 1px solid rgba(232, 193, 104, 0.25);
+            border-radius: var(--radius);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(26, 74, 63, 0.3);
+            z-index: 15;
+            overflow: hidden;
+            display: none;
         }
-        .demo-btn {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
+        @media (min-width: 1400px) { .bets-feed { display: block; } }
+
+        .bets-feed-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
             font-weight: 600;
-            letter-spacing: 1.5px;
+            letter-spacing: 3px;
+            color: var(--gold);
             text-transform: uppercase;
-            color: var(--text-1);
-            background: transparent;
-            border: 1px solid var(--border);
-            padding: 10px 18px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(232, 193, 104, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .demo-btn:hover { color: var(--gold); border-color: var(--gold-deep); }
-        .demo-btn.active { color: var(--bg-0); background: var(--gold); border-color: var(--gold); }
+        .bets-feed-title::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+            animation: livePulse 1.6s infinite;
+        }
+
+        .bets-feed-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            max-height: calc(60vh - 70px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bet-line {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68rem;
+            color: var(--text-1);
+            padding: 6px 8px;
+            border-radius: 3px;
+            background: rgba(232, 193, 104, 0.03);
+            border-left: 2px solid rgba(232, 193, 104, 0.3);
+            animation: betEntrance 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .bet-line .who { color: var(--gold); font-weight: 600; }
+        .bet-line .amount { color: var(--gold-hi); font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+        .bet-line .lot { color: var(--text-2); font-style: italic; font-family: 'Cormorant Garamond', serif; }
+
+        @keyframes betEntrance {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .bet-line.fade {
+            animation: betFade 0.6s ease forwards;
+        }
+        @keyframes betFade {
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+
+        /* ============================================
+           ПОДВАЛ
+           ============================================ */
+        .footer {
+            width: 100%;
+            max-width: 1500px;
+            text-align: center;
+            margin-top: 60px;
+            padding: 44px 40px 24px;
+            border-top: 1px solid var(--platinum-dim);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 3px;
+            color: var(--text-2);
+            text-transform: uppercase;
+            position: relative;
+            z-index: 5;
+        }
+        .footer .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: none;
+        }
+        .footer .back-link:hover { color: var(--gold-hi); text-shadow: 0 0 20px var(--gold-glow); }
+        .footer span { color: var(--danger-hi); }
+
+        /* ============================================
+           АДАПТИВ
+           ============================================ */
+        @media (max-width: 1000px) {
+            .topbar-wrap { padding: 0 24px; }
+            .topbar { gap: 24px; }
+            .topbar-nav { gap: 20px; font-size: 0.66rem; }
+            .logo { font-size: 1.3rem; letter-spacing: 8px; }
+            .btn-new-lot { display: none; }
+            .section { padding: 32px 24px 44px; }
+            .section:first-of-type { padding-top: 44px; }
+            .lot-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; }
+        }
+        @media (max-width: 768px) {
+            .topbar-wrap { padding: 0 16px; }
+            .topbar {
+                grid-template-columns: 1fr auto;
+                grid-template-areas: "logo user" "nav nav";
+                gap: 10px;
+                padding: 14px 0;
+            }
+            .logo { grid-area: logo; font-size: 1.15rem; letter-spacing: 6px; }
+            .logo .sub { font-size: 0.75rem; }
+            .topbar-nav {
+                grid-area: nav;
+                justify-content: center;
+                gap: 12px;
+                font-size: 0.58rem;
+                letter-spacing: 1.2px;
+                border-top: 1px solid var(--platinum-dim);
+                padding-top: 12px;
+                flex-wrap: wrap;
+            }
+            .topbar-nav a::after { bottom: -12px; }
+            .topbar-user { grid-area: user; gap: 8px; }
+            .wallet { padding: 5px 10px 5px 5px; gap: 7px; }
+            .wallet .chip-icon { width: 26px; height: 26px; font-size: 0.75rem; }
+            .wallet .chips { font-size: 0.78rem; }
+            .wallet .usdt { font-size: 0.58rem; }
+            .wallet .plus { width: 18px; height: 18px; font-size: 0.8rem; }
+            .topbar-user .avatar { width: 30px; height: 30px; font-size: 0.8rem; }
+
+            .section { padding: 26px 16px 34px; }
+            .section:first-of-type { padding-top: 34px; }
+            .section-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .section-title { font-size: 1rem; letter-spacing: 2px; }
+            .lot-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .lc-btn { opacity: 1; transform: translateY(0); }
+            .bets-feed { display: none; }
+        }
+        @media (max-width: 480px) {
+            .lot-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Уважение к "уменьшить движение" */
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
     </style>
 </head>
 <body>
 
-    <h1 class="demo-title">✦ Мини-карточки ✦</h1>
-    <p class="demo-sub">Compact · Elegant · Premium Micro-animations</p>
+    <div class="top-light"></div>
+    <div class="emerald-glow"></div>
+    <div class="dust-bg" id="dustBg"></div>
 
-    <div class="demo-controls">
-        <button class="demo-btn active" onclick="replayAnimations()">⟳ Повторить появление</button>
+    <!-- ЛЕНТА СТАВОК (плавающий виджет справа) -->
+    <aside class="bets-feed">
+        <div class="bets-feed-title">Live ставки</div>
+        <div class="bets-feed-list" id="betsFeed"></div>
+    </aside>
+
+    <!-- ШАПКА -->
+    <div class="topbar-wrap">
+        <header class="topbar">
+            <a href="#" class="logo">FENBO<span class="sub">— рынок</span></a>
+            <nav class="topbar-nav">
+                <a href="#" class="active">Главная</a>
+                <a href="#">Аукционы</a>
+                <a href="#">Ючи</a>
+                <a href="#">Адопты</a>
+                <a href="#">Заказы</a>
+            </nav>
+            <div class="topbar-user">
+                <button class="btn-new-lot" type="button"><span class="plus">+</span> Новый лот</button>
+                <div class="wallet" title="Кошелёк FENBO">
+                    <div class="chip-icon"></div>
+                    <div class="balance">
+                        <div class="chips">1 250<span class="unit">FEN</span></div>
+                        <div class="usdt"><span class="usdt-icon">₮</span>12.50</div>
+                    </div>
+                    <div class="plus">+</div>
+                </div>
+                <div class="avatar" title="Профиль">F</div>
+            </div>
+        </header>
     </div>
 
-    <div class="mini-grid" id="grid">
-
-        <!-- КАРТОЧКА 1 -->
-        <div class="mini-card">
-            <div class="mc-thumb bg-1">
-                <span class="mc-live">Live</span>
-                <span class="mc-timer" data-end="2027-12-31T23:59:59">—</span>
-                <span class="mc-suit">♦</span>
-                <span class="mc-type">Аукцион</span>
-            </div>
-            <div class="mc-info">
-                <div class="mc-title">Сцена · 03:00</div>
-                <div class="mc-author">MidnightLux</div>
-                <div class="mc-price-wrap">
-                    <span class="mc-price-label">Текущая ставка</span>
-                    <span class="mc-price">1 250<span class="unit">FEN</span></span>
-                </div>
-                <div class="mc-stats"><span class="heart">♥</span>12 · 👁 1.2k</div>
-            </div>
-            <button class="mc-btn">Сделать ставку</button>
+    <!-- АУКЦИОНЫ -->
+    <section class="section" id="auctions">
+        <div class="section-head">
+            <h2 class="section-title">
+                <span class="live-dot"></span>
+                Live аукционы
+                <span class="count">— столько столов активно</span>
+            </h2>
+            <a href="#" class="section-link">Все аукционы →</a>
         </div>
 
-        <!-- КАРТОЧКА 2 -->
-        <div class="mini-card">
-            <div class="mc-thumb bg-2">
-                <span class="mc-live">Live</span>
-                <span class="mc-timer" data-end="2027-12-30T18:00:00">—</span>
-                <span class="mc-suit">♣</span>
-                <span class="mc-type">Аукцион</span>
-            </div>
-            <div class="mc-info">
-                <div class="mc-title">Золотая клетка</div>
-                <div class="mc-author">GoldenCage</div>
-                <div class="mc-price-wrap">
-                    <span class="mc-price-label">Текущая ставка</span>
-                    <span class="mc-price">2 400<span class="unit">FEN</span></span>
+        <div class="lot-grid">
+
+            <div class="lot-card has-live" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250" data-bids="12" data-leader="Anonymous_01">
+                <div class="lc-thumb bg-1">
+                    <span class="lc-live">Live</span>
+                    <span class="lc-timer" data-end="2027-12-31T23:59:59">—</span>
+                    <span class="lc-art">♦</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Digital</span>
                 </div>
-                <div class="mc-stats"><span class="heart">♥</span>21 · 👁 3.4k</div>
+                <div class="lc-info">
+                    <div class="lc-title">Сцена · 03:00</div>
+                    <div class="lc-author">MidnightLux</div>
+                    <div class="lc-price-wrap">
+                        <span class="lc-price-label">Текущая ставка</span>
+                        <span class="lc-price" data-bid-el>1 250<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="lc-stats"><span class="heart">♥</span><span data-bids-el>12</span> · 👁 4.5k</div>
+                </div>
+                <button class="lc-btn" type="button">Сделать ставку</button>
             </div>
-            <button class="mc-btn">Сделать ставку</button>
+
+            <div class="lot-card has-live" data-title="Золотая клетка" data-author="GoldenCage" data-bid="2400" data-bids="21" data-leader="Noir_Art">
+                <div class="lc-thumb bg-2">
+                    <span class="lc-live">Live</span>
+                    <span class="lc-timer" data-end="2027-12-30T18:00:00">—</span>
+                    <span class="lc-art">♣</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Traditional</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Золотая клетка</div>
+                    <div class="lc-author">GoldenCage</div>
+                    <div class="lc-price-wrap">
+                        <span class="lc-price-label">Текущая ставка</span>
+                        <span class="lc-price" data-bid-el>2 400<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="lc-stats"><span class="heart">♥</span><span data-bids-el>21</span> · 👁 8.9k</div>
+                </div>
+                <button class="lc-btn" type="button">Сделать ставку</button>
+            </div>
+
+            <div class="lot-card has-live" data-title="Пурпурный дым" data-author="PurpleSmoke" data-bid="890" data-bids="7" data-leader="Velvet_Rose">
+                <div class="lc-thumb bg-3">
+                    <span class="lc-live">Live</span>
+                    <span class="lc-timer" data-end="2027-12-29T12:30:00">—</span>
+                    <span class="lc-art">♥</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Anime</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Пурпурный дым</div>
+                    <div class="lc-author">PurpleSmoke</div>
+                    <div class="lc-price-wrap">
+                        <span class="lc-price-label">Текущая ставка</span>
+                        <span class="lc-price" data-bid-el>890<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="lc-stats"><span class="heart">♥</span><span data-bids-el>7</span> · 👁 2.9k</div>
+                </div>
+                <button class="lc-btn" type="button">Сделать ставку</button>
+            </div>
+
+            <div class="lot-card has-live" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200" data-bids="34" data-leader="TwinFlame">
+                <div class="lc-thumb bg-4">
+                    <span class="lc-live">Live</span>
+                    <span class="lc-timer" data-end="2027-12-28T22:00:00">—</span>
+                    <span class="lc-art">♠</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Digital</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Алый закат</div>
+                    <div class="lc-author">ScarletSunset</div>
+                    <div class="lc-price-wrap">
+                        <span class="lc-price-label">Текущая ставка</span>
+                        <span class="lc-price" data-bid-el>3 200<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="lc-stats"><span class="heart">♥</span><span data-bids-el>34</span> · 👁 15k</div>
+                </div>
+                <button class="lc-btn" type="button">Сделать ставку</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ЮЧИ -->
+    <section class="section" id="ych">
+        <div class="section-head">
+            <h2 class="section-title">
+                🎟️ Открытые YCH
+                <span class="count">— со свободными слотами</span>
+            </h2>
+            <a href="#" class="section-link">Все YCH →</a>
         </div>
 
-        <!-- КАРТОЧКА 3 -->
-        <div class="mini-card">
-            <div class="mc-thumb bg-3">
-                <span class="mc-live">Live</span>
-                <span class="mc-timer" data-end="2027-12-29T12:30:00">—</span>
-                <span class="mc-suit">♥</span>
-                <span class="mc-type">Аукцион</span>
-            </div>
-            <div class="mc-info">
-                <div class="mc-title">Пурпурный дым</div>
-                <div class="mc-author">PurpleSmoke</div>
-                <div class="mc-price-wrap">
-                    <span class="mc-price-label">Текущая ставка</span>
-                    <span class="mc-price">890<span class="unit">FEN</span></span>
+        <div class="lot-grid">
+
+            <div class="lot-card" data-title="Парный портрет" data-author="TwinFlame" data-slots="2">
+                <div class="lc-thumb bg-5">
+                    <span class="lc-art">❦</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">YCH</span>
+                    <div class="lc-slots">
+                        <div class="lc-slot free"></div>
+                        <div class="lc-slot free"></div>
+                        <div class="lc-slot taken"></div>
+                    </div>
                 </div>
-                <div class="mc-stats"><span class="heart">♥</span>7 · 👁 890</div>
+                <div class="lc-info">
+                    <div class="lc-title">Парный портрет</div>
+                    <div class="lc-author">TwinFlame</div>
+                    <div class="lc-price-wrap">
+                        <span class="lc-price-label">Цена</span>
+                        <span class="lc-price">600<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="lc-stats"><span class="heart">♥</span>14 · 👁 3k</div>
+                </div>
+                <button class="lc-btn" type="button">Записаться</button>
             </div>
-            <button class="mc-btn">Сделать ставку</button>
+
+            <div class="lot-card" data-title="Шёлковые оковы" data-author="BoundElegance" data-slots="1">
+                <div class="lc-thumb bg-6">
+                    <span class="lc-art">♥</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">YCH</span>
+                    <div class="lc-slots">
+                        <div class="lc-slot free"></div>
+                        <div class="lc-slot taken"></div>
+                        <div class="lc-slot taken"></div>
+                    </div>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Шёлковые оковы</div>
+                    <div class="lc-author">BoundElegance</div>
+                    <div class="lc-price-wrap">
+                        <span class="lc-price-label">Цена</span>
+                        <span class="lc-price">450<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="lc-stats"><span class="heart">♥</span>9 · 👁 2k</div>
+                </div>
+                <button class="lc-btn" type="button">Записаться</button>
+            </div>
+
+            <div class="lot-card" data-title="Ночной гость" data-author="Noir_Art" data-slots="3">
+                <div class="lc-thumb bg-1">
+                    <span class="lc-art">♠</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">YCH</span>
+                    <div class="lc-slots">
+                        <div class="lc-slot free"></div>
+                        <div class="lc-slot free"></div>
+                        <div class="lc-slot free"></div>
+                    </div>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Ночной гость</div>
+                    <div class="lc-author">Noir_Art</div>
+                    <div class="lc-price-wrap">
+                        <span class="lc-price-label">Цена</span>
+                        <span class="lc-price">800<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="lc-stats"><span class="heart">♥</span>27 · 👁 4k</div>
+                </div>
+                <button class="lc-btn" type="button">Записаться</button>
+            </div>
+
+            <div class="lot-card" data-title="Бархатный вечер" data-author="Velvet_Rose" data-slots="1">
+                <div class="lc-thumb bg-3">
+                    <span class="lc-art">♦</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">YCH</span>
+                    <div class="lc-slots">
+                        <div class="lc-slot taken"></div>
+                        <div class="lc-slot free"></div>
+                        <div class="lc-slot taken"></div>
+                    </div>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Бархатный вечер</div>
+                    <div class="lc-author">Velvet_Rose</div>
+                    <div class="lc-price-wrap">
+                        <span class="lc-price-label">Цена</span>
+                        <span class="lc-price">900<span class="unit">FEN</span></span>
+                    </div>
+                    <div class="lc-stats"><span class="heart">♥</span>18 · 👁 3.4k</div>
+                </div>
+                <button class="lc-btn" type="button">Записаться</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- АРТЫ -->
+    <section class="section" id="arts">
+        <div class="section-head">
+            <h2 class="section-title">🎨 Витрина <span class="count">— работы зала</span></h2>
         </div>
 
-        <!-- КАРТОЧКА 4 -->
-        <div class="mini-card">
-            <div class="mc-thumb bg-4">
-                <span class="mc-live">Live</span>
-                <span class="mc-timer" data-end="2027-12-28T22:00:00">—</span>
-                <span class="mc-suit">♠</span>
-                <span class="mc-type">Аукцион</span>
-            </div>
-            <div class="mc-info">
-                <div class="mc-title">Алый закат</div>
-                <div class="mc-author">ScarletSunset</div>
-                <div class="mc-price-wrap">
-                    <span class="mc-price-label">Текущая ставка</span>
-                    <span class="mc-price">3 200<span class="unit">FEN</span></span>
-                </div>
-                <div class="mc-stats"><span class="heart">♥</span>34 · 👁 5.2k</div>
-            </div>
-            <button class="mc-btn">Сделать ставку</button>
-        </div>
+        <div class="lot-grid">
 
-        <!-- КАРТОЧКА 5 — YCH -->
-        <div class="mini-card">
-            <div class="mc-thumb bg-5">
-                <span class="mc-timer" style="color: var(--gold);">2/3</span>
-                <span class="mc-suit">❦</span>
-                <span class="mc-type">YCH</span>
-            </div>
-            <div class="mc-info">
-                <div class="mc-title">Парный портрет</div>
-                <div class="mc-author">TwinFlame</div>
-                <div class="mc-price-wrap">
-                    <span class="mc-price-label">Цена</span>
-                    <span class="mc-price">600<span class="unit">FEN</span></span>
+            <div class="lot-card" data-title="Бархатный вечер" data-author="Velvet_Rose">
+                <div class="lc-thumb bg-1">
+                    <span class="lc-art">❦</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Traditional</span>
                 </div>
-                <div class="mc-stats"><span class="heart">♥</span>14 · 👁 3k</div>
-            </div>
-            <button class="mc-btn">Записаться</button>
-        </div>
-
-        <!-- КАРТОЧКА 6 — YCH -->
-        <div class="mini-card">
-            <div class="mc-thumb bg-6">
-                <span class="mc-timer" style="color: var(--gold);">1/3</span>
-                <span class="mc-suit">♥</span>
-                <span class="mc-type">YCH</span>
-            </div>
-            <div class="mc-info">
-                <div class="mc-title">Шёлковые оковы</div>
-                <div class="mc-author">BoundElegance</div>
-                <div class="mc-price-wrap">
-                    <span class="mc-price-label">Цена</span>
-                    <span class="mc-price">450<span class="unit">FEN</span></span>
+                <div class="lc-info">
+                    <div class="lc-title">Бархатный вечер</div>
+                    <div class="lc-author">Velvet_Rose</div>
+                    <div class="lc-stats"><span class="heart">♥</span>1.2k · 👁 4.5k</div>
                 </div>
-                <div class="mc-stats"><span class="heart">♥</span>9 · 👁 2k</div>
             </div>
-            <button class="mc-btn">Записаться</button>
-        </div>
 
-        <!-- КАРТОЧКА 7 -->
-        <div class="mini-card">
-            <div class="mc-thumb bg-1">
-                <span class="mc-live">Live</span>
-                <span class="mc-timer" data-end="2027-12-27T15:00:00">—</span>
-                <span class="mc-suit">♦</span>
-                <span class="mc-type">Аукцион</span>
-            </div>
-            <div class="mc-info">
-                <div class="mc-title">Тёмный бархат</div>
-                <div class="mc-author">DarkVelvet</div>
-                <div class="mc-price-wrap">
-                    <span class="mc-price-label">Текущая ставка</span>
-                    <span class="mc-price">550<span class="unit">FEN</span></span>
+            <div class="lot-card" data-title="Ночная смена" data-author="Noir_Art">
+                <div class="lc-thumb bg-2">
+                    <span class="lc-art">♠</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Digital</span>
                 </div>
-                <div class="mc-stats"><span class="heart">♥</span>18 · 👁 2.1k</div>
-            </div>
-            <button class="mc-btn">Сделать ставку</button>
-        </div>
-
-        <!-- КАРТОЧКА 8 -->
-        <div class="mini-card">
-            <div class="mc-thumb bg-3">
-                <span class="mc-timer" style="color: var(--gold);">3/3</span>
-                <span class="mc-suit">♠</span>
-                <span class="mc-type">YCH</span>
-            </div>
-            <div class="mc-info">
-                <div class="mc-title">Ночной гость</div>
-                <div class="mc-author">Noir_Art</div>
-                <div class="mc-price-wrap">
-                    <span class="mc-price-label">Цена</span>
-                    <span class="mc-price">800<span class="unit">FEN</span></span>
+                <div class="lc-info">
+                    <div class="lc-title">Ночная смена</div>
+                    <div class="lc-author">Noir_Art</div>
+                    <div class="lc-stats"><span class="heart">♥</span>856 · 👁 2.1k</div>
                 </div>
-                <div class="mc-stats"><span class="heart">♥</span>27 · 👁 4k</div>
             </div>
-            <button class="mc-btn">Записаться</button>
-        </div>
 
-    </div>
+            <div class="lot-card" data-title="Красный шёлк" data-author="ScarletDream">
+                <div class="lc-thumb bg-3">
+                    <span class="lc-art">♥</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Anime</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Красный шёлк</div>
+                    <div class="lc-author">ScarletDream</div>
+                    <div class="lc-stats"><span class="heart">♥</span>2.4k · 👁 8.9k</div>
+                </div>
+            </div>
+
+            <div class="lot-card" data-title="Тёмный бархат" data-author="DarkVelvet">
+                <div class="lc-thumb bg-4">
+                    <span class="lc-art">♦</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Traditional</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Тёмный бархат</div>
+                    <div class="lc-author">DarkVelvet</div>
+                    <div class="lc-stats"><span class="heart">♥</span>1.4k · 👁 4.1k</div>
+                </div>
+            </div>
+
+            <div class="lot-card" data-title="Шёпот в темноте" data-author="WhisperArt">
+                <div class="lc-thumb bg-5">
+                    <span class="lc-art">♣</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Digital</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Шёпот в темноте</div>
+                    <div class="lc-author">WhisperArt</div>
+                    <div class="lc-stats"><span class="heart">♥</span>1.9k · 👁 6.3k</div>
+                </div>
+            </div>
+
+            <div class="lot-card" data-title="За кулисами" data-author="Backstage_">
+                <div class="lc-thumb bg-6">
+                    <span class="lc-art">❦</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Digital</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">За кулисами</div>
+                    <div class="lc-author">Backstage_</div>
+                    <div class="lc-stats"><span class="heart">♥</span>921 · 👁 3.4k</div>
+                </div>
+            </div>
+
+            <div class="lot-card" data-title="Две свечи" data-author="TwinFlame">
+                <div class="lc-thumb bg-1">
+                    <span class="lc-art">♥</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Traditional</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Две свечи</div>
+                    <div class="lc-author">TwinFlame</div>
+                    <div class="lc-stats"><span class="heart">♥</span>3.1k · 👁 12k</div>
+                </div>
+            </div>
+
+            <div class="lot-card" data-title="Шёлковые оковы" data-author="BoundElegance">
+                <div class="lc-thumb bg-2">
+                    <span class="lc-art">♠</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Digital</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Шёлковые оковы</div>
+                    <div class="lc-author">BoundElegance</div>
+                    <div class="lc-stats"><span class="heart">♥</span>1.8k · 👁 5.2k</div>
+                </div>
+            </div>
+
+            <div class="lot-card" data-title="Сцена · 03:00" data-author="MidnightLux">
+                <div class="lc-thumb bg-3">
+                    <span class="lc-art">♦</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Digital</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Сцена · 03:00</div>
+                    <div class="lc-author">MidnightLux</div>
+                    <div class="lc-stats"><span class="heart">♥</span>631 · 👁 1.7k</div>
+                </div>
+            </div>
+
+            <div class="lot-card" data-title="Пурпурный дым" data-author="PurpleSmoke">
+                <div class="lc-thumb bg-4">
+                    <span class="lc-art">♥</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Anime</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Пурпурный дым</div>
+                    <div class="lc-author">PurpleSmoke</div>
+                    <div class="lc-stats"><span class="heart">♥</span>1.1k · 👁 2.9k</div>
+                </div>
+            </div>
+
+            <div class="lot-card" data-title="Алый закат" data-author="ScarletSunset">
+                <div class="lc-thumb bg-5">
+                    <span class="lc-art">♠</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Traditional</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Алый закат</div>
+                    <div class="lc-author">ScarletSunset</div>
+                    <div class="lc-stats"><span class="heart">♥</span>3.5k · 👁 15k</div>
+                </div>
+            </div>
+
+            <div class="lot-card" data-title="Золотая клетка" data-author="GoldenCage">
+                <div class="lc-thumb bg-6">
+                    <span class="lc-art">♣</span>
+                    <div class="lc-watermark"></div>
+                    <span class="lc-cat">Traditional</span>
+                </div>
+                <div class="lc-info">
+                    <div class="lc-title">Золотая клетка</div>
+                    <div class="lc-author">GoldenCage</div>
+                    <div class="lc-stats"><span class="heart">♥</span>2.7k · 👁 9.8k</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <a href="#" class="back-link">← Вернуться в главное меню</a>
+        <div>✦ FENBO · РЫНОК ✦ 2025 ✦ <span>Только 18+</span> ✦</div>
+    </footer>
 
     <script>
-        /* ============================================
-           ТАЙМЕРЫ — обновляются каждую секунду
-           ============================================ */
+        /* ПЫЛЬ */
+        (function dustBg() {
+            const c = document.getElementById('dustBg');
+            if (!c) return;
+            for (let i = 0; i < 22; i++) {
+                const m = document.createElement('div');
+                m.className = 'mote';
+                const s = Math.random() * 2 + 1;
+                m.style.width = s + 'px';
+                m.style.height = s + 'px';
+                m.style.left = (Math.random() * 100) + '%';
+                m.style.bottom = '-10px';
+                m.style.setProperty('--mx', (Math.random() * 80 - 40) + 'px');
+                m.style.animationDuration = (Math.random() * 14 + 18) + 's';
+                m.style.animationDelay = (Math.random() * 15) + 's';
+                c.appendChild(m);
+            }
+        })();
+
+        /* ТАЙМЕРЫ */
         (function timers() {
             const timers = document.querySelectorAll('[data-end]');
             if (!timers.length) return;
             function pad(n) { return n < 10 ? '0' + n : n; }
             function update(el) {
                 const diff = Math.floor((new Date(el.dataset.end).getTime() - Date.now()) / 1000);
-                if (diff <= 0) { el.textContent = 'ЗАВЕРШЁН'; el.style.opacity = '0.5'; return; }
+                const card = el.closest('.lot-card');
+                if (diff <= 0) {
+                    el.textContent = 'ЗАВЕРШЁН';
+                    el.style.opacity = '0.5';
+                    if (card) card.classList.remove('ending-soon');
+                    return;
+                }
+                /* Пульс если меньше 10 минут (600 секунд) */
+                if (card) {
+                    if (diff < 600) card.classList.add('ending-soon');
+                    else card.classList.remove('ending-soon');
+                }
                 const d = Math.floor(diff / 86400);
                 const h = Math.floor((diff % 86400) / 3600);
                 const m = Math.floor((diff % 3600) / 60);
                 const s = diff % 60;
-                if (d > 0) el.textContent = d + 'д ' + pad(h) + 'ч';
+                if (d > 0) el.textContent = d + 'д ' + pad(h) + ':' + pad(m);
                 else if (h > 0) el.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
                 else el.textContent = pad(m) + ':' + pad(s);
             }
@@ -671,18 +1453,91 @@
             tick(); setInterval(tick, 1000);
         })();
 
-        /* ============================================
-           ПОВТОРИТЬ АНИМАЦИЮ ПОЯВЛЕНИЯ
-           ============================================ */
-        function replayAnimations() {
-            const grid = document.getElementById('grid');
-            const cards = grid.querySelectorAll('.mini-card');
+        /* ЖИВЫЕ СТАВКИ + ВСПЫШКА + ЛЕНТА */
+        (function liveBids() {
+            const cards = document.querySelectorAll('.lot-card.has-live');
+            if (!cards.length) return;
+            const fakeLeaders = ['Anonymous_01', 'Dark_Player', 'NightBidder', 'Anonymous_77', 'RedQueen', 'SilentBid', 'TwinFlame', 'GoldenCage', 'Noir_Art', 'Velvet_Rose', 'Midnight_777', 'Luxuria', 'CrimsonFang', 'SilverFox', 'IronMask'];
+            const feedList = document.getElementById('betsFeed');
+            const MAX_FEED = 7;
+
+            function formatNum(n) { return n.toLocaleString('ru-RU'); }
+
+            function pushBetFeed(who, amount, lotTitle) {
+                if (!feedList) return;
+                const line = document.createElement('div');
+                line.className = 'bet-line';
+                line.innerHTML = '<span class="who">' + who + '</span> → <span class="amount">' + formatNum(amount) + '</span> <span class="lot">«' + lotTitle + '»</span>';
+                feedList.insertBefore(line, feedList.firstChild);
+                while (feedList.children.length > MAX_FEED) {
+                    const last = feedList.lastChild;
+                    if (last) {
+                        last.classList.add('fade');
+                        setTimeout(() => last.remove(), 600);
+                    } else break;
+                }
+            }
+
+            function updateBid(card) {
+                const priceEl = card.querySelector('[data-bid-el]');
+                const bidsEl = card.querySelector('[data-bids-el]');
+                if (!priceEl) return;
+                let current = parseInt(card.dataset.bid, 10) || 0;
+                const step = Math.floor(Math.random() * 100) + 50;
+                current += step;
+                card.dataset.bid = current;
+                priceEl.innerHTML = formatNum(current) + '<span class="unit">FEN</span>';
+                priceEl.classList.remove('bump');
+                void priceEl.offsetWidth;
+                priceEl.classList.add('bump');
+                if (bidsEl) {
+                    let b = parseInt(bidsEl.textContent, 10) || 0;
+                    b += 1;
+                    bidsEl.textContent = b;
+                }
+                /* Лидер меняется иногда */
+                const leaders = fakeLeaders[Math.floor(Math.random() * fakeLeaders.length)];
+                pushBetFeed(leaders, current, card.dataset.title || 'Лот');
+            }
+
             cards.forEach(card => {
-                card.style.animation = 'none';
-                card.offsetHeight; /* форсируем reflow */
-                card.style.animation = '';
+                function sched() {
+                    const delay = Math.random() * 4000 + 4000; /* 4-8 сек */
+                    setTimeout(() => { updateBid(card); sched(); }, delay);
+                }
+                sched();
             });
-        }
+        })();
+
+        /* КЛИКИ */
+        (function clicks() {
+            document.querySelectorAll('.lot-card').forEach(card => {
+                card.addEventListener('click', e => {
+                    if (e.target.classList.contains('lc-btn')) return;
+                    alert('🎨 ЛОТ\n\nРабота: ' + (card.dataset.title || '—') + '\nАвтор: ' + (card.dataset.author || '—') + '\n\n(Здесь будет lightbox)');
+                });
+            });
+            document.querySelectorAll('.lc-btn').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    const card = btn.closest('.lot-card');
+                    alert('✦ ДЕЙСТВИЕ\n\nРабота: ' + (card.dataset.title || '—') + '\n\n(Здесь будет форма)');
+                });
+            });
+        })();
+
+        /* НАВИГАЦИЯ */
+        (function nav() {
+            document.querySelectorAll('.topbar-nav a').forEach(a => {
+                a.addEventListener('click', e => {
+                    const href = a.getAttribute('href');
+                    if (href && href !== '#' && !href.startsWith('#')) return;
+                    e.preventDefault();
+                    document.querySelectorAll('.topbar-nav a').forEach(x => x.classList.remove('active'));
+                    a.classList.add('active');
+                });
+            });
+        })();
     </script>
 
 </body>
