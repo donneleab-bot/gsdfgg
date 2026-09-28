@@ -2,13 +2,12 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#07080c">
-    <title>✦ FENBO · РЫНОК ✦</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✦ Mini Cards · Demo</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         /* ============================================
@@ -18,438 +17,216 @@
             --bg-0: #07080c;
             --bg-1: #0d0f15;
             --bg-2: #14171f;
-            --bg-3: #1b1f2a;
 
-            --line: rgba(240, 185, 11, 0.12);
-            --line-hi: rgba(240, 185, 11, 0.35);
-            --border: #1f232e;
-            --border-hi: #31374a;
+            --gold: #e8c168;
+            --gold-hi: #ffd97a;
+            --gold-deep: #8a6d2c;
+            --gold-glow: rgba(232, 193, 104, 0.5);
+            --gold-line: rgba(232, 193, 104, 0.6);
+
+            --wine: #8b2a2a;
+            --wine-hi: #c04040;
 
             --text-0: #f4f1ea;
             --text-1: #b8b3a7;
             --text-2: #6f6a5e;
 
-            --gold: #e8c168;
-            --gold-hi: #ffd97a;
-            --gold-deep: #8a6d2c;
-            --gold-glow: rgba(232, 193, 104, 0.35);
-
-            --wine: #8b2a2a;
-            --wine-hi: #b83838;
-            --wine-glow: rgba(139, 42, 42, 0.4);
-
-            --green: #0ecb81;
-            --green-glow: rgba(14, 203, 129, 0.4);
-            --ivory: #e8e3d7;
-
-            --radius-lg: 8px;
+            --border: #1f232e;
         }
 
-        /* ============================================
-           БАЗА
-           ============================================ */
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
-        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-0);
+            background: var(--bg-0);
             background-image: 
-                radial-gradient(ellipse 70% 40% at 50% 0%, rgba(232, 193, 104, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse 50% 30% at 90% 100%, rgba(139, 42, 42, 0.05) 0%, transparent 60%);
-            background-attachment: fixed;
+                radial-gradient(ellipse 60% 40% at 50% 0%, rgba(232, 193, 104, 0.06) 0%, transparent 60%);
             font-family: 'Inter', sans-serif;
             color: var(--text-0);
             min-height: 100vh;
+            padding: 60px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 0 0 60px;
-            position: relative;
-            overflow-x: hidden;
-            font-size: 14px;
-            line-height: 1.6;
-            letter-spacing: 0.15px;
-            font-feature-settings: 'ss01', 'cv11';
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: 
-                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(232, 193, 104, 0.008) 2px, rgba(232, 193, 104, 0.008) 3px);
-            pointer-events: none;
-            z-index: 0;
         }
 
-        .top-light {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 60vh;
-            pointer-events: none;
-            z-index: 1;
-            background: radial-gradient(ellipse 40% 50% at 50% 0%, rgba(232, 193, 104, 0.14) 0%, transparent 70%);
-        }
-        .side-light {
-            position: fixed;
-            top: 0; right: 0;
-            width: 50%; height: 100vh;
-            pointer-events: none;
-            z-index: 0;
-            background: radial-gradient(ellipse 60% 50% at 100% 30%, rgba(139, 42, 42, 0.06) 0%, transparent 70%);
-        }
-        .dust-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-        .dust-bg .mote {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 230, 180, 1) 0%, rgba(232, 193, 104, 0.5) 40%, transparent 100%);
-            box-shadow: 0 0 6px rgba(232, 193, 104, 0.4);
-            opacity: 0;
-            animation: moteFloat linear infinite;
-        }
-        @keyframes moteFloat {
-            0% { opacity: 0; transform: translate3d(0, 0, 0); }
-            20% { opacity: 0.5; }
-            80% { opacity: 0.3; }
-            100% { opacity: 0; transform: translate3d(var(--mx, 30px), -100vh, 0); }
-        }
-
-        /* ============================================
-           ШАПКА
-           ============================================ */
-        .topbar-wrap { width: 100%; max-width: 1440px; position: relative; z-index: 20; padding: 0 40px; }
-        .topbar {
-            width: 100%;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            align-items: center;
-            gap: 40px;
-            padding: 24px 0;
-            border-bottom: 1px solid var(--line);
-        }
-        .logo {
+        .demo-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-size: 1.4rem;
             color: var(--gold);
-            letter-spacing: 12px;
-            text-decoration: none;
-            display: flex;
-            align-items: baseline;
-            white-space: nowrap;
-            text-shadow: 0 0 30px rgba(232, 193, 104, 0.3);
-        }
-        .logo .sub {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1.05rem;
-            color: var(--text-1);
-            letter-spacing: 2px;
-            margin-left: 10px;
-            font-weight: 400;
-        }
-        .topbar-nav {
-            display: flex;
-            justify-content: center;
-            gap: 38px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .topbar-nav a {
-            color: var(--text-1);
-            text-decoration: none;
-            transition: color 0.3s;
-            padding: 8px 0;
-            position: relative;
-            white-space: nowrap;
-        }
-        .topbar-nav a:hover, .topbar-nav a.active { color: var(--gold); }
-        .topbar-nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -25px; left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 20px; height: 1px;
-            background: var(--gold);
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            box-shadow: 0 0 10px var(--gold-glow);
-        }
-        .topbar-nav a:hover::after, .topbar-nav a.active::after { transform: translateX(-50%) scaleX(1); }
-
-        .topbar-user { display: flex; align-items: center; gap: 14px; justify-content: flex-end; }
-        .btn-new-lot {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--bg-0);
-            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 100%);
-            border: none;
-            padding: 11px 18px;
-            border-radius: 3px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-            white-space: nowrap;
-            box-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.3) inset,
-                0 -1px 0 rgba(0, 0, 0, 0.15) inset,
-                0 4px 20px rgba(232, 193, 104, 0.25);
-        }
-        .btn-new-lot:hover {
-            box-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.5) inset,
-                0 -1px 0 rgba(0, 0, 0, 0.15) inset,
-                0 6px 30px rgba(232, 193, 104, 0.5);
-            transform: translateY(-1px);
-        }
-        .btn-new-lot .plus { font-size: 1rem; line-height: 1; font-weight: 400; }
-
-        .wallet {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 7px 14px 7px 7px;
-            background: var(--bg-1);
-            border: 1px solid var(--border);
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .wallet:hover { border-color: var(--gold-deep); }
-        .wallet .chip-icon {
-            width: 30px; height: 30px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 25%, #fff6c8 0%, #ffe066 15%, #e8c168 35%, #8a6d2c 65%, #4a3a14 100%);
-            border: 1px solid #ffe066;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px var(--gold-glow), inset 0 -2px 4px rgba(0, 0, 0, 0.4);
-            flex-shrink: 0;
-        }
-        .wallet .chip-icon::after { content: '♠'; font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 700; color: #0a0e14; }
-        .wallet .balance { display: flex; flex-direction: column; line-height: 1.15; }
-        .wallet .chips { font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; font-weight: 700; color: var(--gold); letter-spacing: 0.3px; }
-        .wallet .chips .unit { font-size: 0.58rem; color: var(--text-2); letter-spacing: 1.5px; margin-left: 3px; font-weight: 500; }
-        .wallet .usdt { font-family: 'Inter', sans-serif; font-size: 0.66rem; color: var(--text-2); display: flex; align-items: center; gap: 4px; margin-top: 1px; }
-        .wallet .usdt-icon { display: inline-flex; align-items: center; justify-content: center; width: 11px; height: 11px; background: #26A17B; border-radius: 50%; color: #fff; font-size: 0.55rem; font-weight: 700; }
-        .wallet .plus {
-            width: 20px; height: 20px;
-            border-radius: 3px;
-            background: rgba(232, 193, 104, 0.08);
-            border: 1px solid rgba(232, 193, 104, 0.35);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            font-size: 0.9rem;
-            font-weight: 400;
-            line-height: 1;
-            transition: all 0.3s;
-        }
-        .wallet:hover .plus { background: var(--gold); color: var(--bg-0); }
-        .topbar-user .avatar {
-            width: 36px; height: 36px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #2a1d0a, #4a3208);
-            border: 1px solid var(--gold-deep);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cinzel', serif;
-            font-size: 0.92rem;
-            color: var(--gold);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .topbar-user .avatar:hover { border-color: var(--gold); box-shadow: 0 0 20px var(--gold-glow); }
-
-        /* ============================================
-           СЕКЦИИ
-           ============================================ */
-        .section { width: 100%; max-width: 1440px; padding: 40px 40px 55px; position: relative; z-index: 5; }
-        .section:first-of-type { padding-top: 56px; }
-        .section-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-            margin-bottom: 28px;
-            padding-bottom: 18px;
-            border-bottom: 1px solid var(--line);
-            position: relative;
-        }
-        .section-head::after {
-            content: '';
-            position: absolute;
-            bottom: -1px; left: 0;
-            width: 60px; height: 1px;
-            background: var(--gold);
-            box-shadow: 0 0 12px var(--gold-glow);
-        }
-        .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.35rem;
-            font-weight: 500;
-            color: var(--ivory);
             letter-spacing: 4px;
             text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 14px;
+            margin-bottom: 8px;
+            text-align: center;
         }
-        .section-title .live-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--wine);
-            box-shadow: 0 0 12px var(--wine-glow);
-            animation: livePulse 1.6s infinite;
-        }
-        @keyframes livePulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.4); }
-        }
-        .section-title .count {
+        .demo-sub {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem;
             font-style: italic;
-            font-weight: 400;
             color: var(--text-2);
-            letter-spacing: 1px;
-            text-transform: none;
+            margin-bottom: 48px;
+            font-size: 1rem;
         }
-        .section-link {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-1);
-            text-decoration: none;
-            padding: 10px 16px;
-            border: 1px solid var(--border);
-            border-radius: 3px;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-        .section-link:hover { color: var(--gold); border-color: var(--gold-deep); background: rgba(232, 193, 104, 0.03); }
 
         /* ============================================
-           КАРУСЕЛЬ
+           СЕТКА — 6 КАРТОЧЕК В РЯД
            ============================================ */
-        .carousel-wrap { position: relative; }
-        .carousel {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            padding: 8px 4px 8px;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 16px;
+            width: 100%;
+            max-width: 1300px;
         }
-        .carousel::-webkit-scrollbar { display: none; width: 0; height: 0; }
-
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 46px; height: 46px;
-            border-radius: 50%;
-            background: rgba(13, 15, 21, 0.95);
-            border: 1px solid var(--line-hi);
-            color: var(--gold);
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            z-index: 10;
-            backdrop-filter: blur(10px);
-            user-select: none;
-        }
-        .carousel-nav:hover { background: var(--bg-2); border-color: var(--gold); box-shadow: 0 0 24px var(--gold-glow); }
-        .carousel-nav.prev { left: -20px; }
-        .carousel-nav.next { right: -20px; }
-        .carousel-nav:disabled { opacity: 0.25; cursor: not-allowed; }
-        .carousel-nav:disabled:hover { background: rgba(13, 15, 21, 0.95); border-color: var(--line-hi); box-shadow: none; }
-
-        @media (max-width: 900px) { .carousel-nav { display: none; } }
 
         /* ============================================
-           АУКЦИОНЫ
+           КАРТОЧКА
            ============================================ */
-        .auction-card {
-            flex: 0 0 280px;
-            scroll-snap-align: start;
+        .mini-card {
+            position: relative;
+            aspect-ratio: 4 / 5.4;
             background: var(--bg-1);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-lg);
+            border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             display: flex;
             flex-direction: column;
-            position: relative;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+
+            /* Появление: стартовое состояние */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cardEntrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+            /* Плавность для hover-эффектов */
+            transition: 
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .auction-card::before {
+
+        /* Stagger — карточки появляются одна за другой */
+        .mini-card:nth-child(1) { animation-delay: 0.05s; }
+        .mini-card:nth-child(2) { animation-delay: 0.12s; }
+        .mini-card:nth-child(3) { animation-delay: 0.19s; }
+        .mini-card:nth-child(4) { animation-delay: 0.26s; }
+        .mini-card:nth-child(5) { animation-delay: 0.33s; }
+        .mini-card:nth-child(6) { animation-delay: 0.40s; }
+        .mini-card:nth-child(7) { animation-delay: 0.47s; }
+        .mini-card:nth-child(8) { animation-delay: 0.54s; }
+
+        @keyframes cardEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hover — карточка приподнимается */
+        .mini-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 
+                0 24px 60px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(232, 193, 104, 0.15);
+        }
+
+        /* ============================================
+           BORDER-BEAM — обегающая золотая линия
+           ============================================ */
+        .mini-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            border-radius: var(--radius-lg);
+            border-radius: 10px;
             padding: 1px;
-            background: linear-gradient(180deg, transparent 0%, transparent 60%, rgba(232, 193, 104, 0.15) 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            background: linear-gradient(
+                115deg,
+                transparent 0%,
+                transparent 30%,
+                var(--gold-hi) 45%,
+                var(--gold) 50%,
+                var(--gold-hi) 55%,
+                transparent 70%,
+                transparent 100%
+            );
+            background-size: 300% 300%;
+            background-position: 100% 100%;
+
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            z-index: 5;
+        }
+        .mini-card:hover::before {
+            opacity: 1;
+            animation: borderBeam 2.5s linear infinite;
+        }
+        @keyframes borderBeam {
+            0% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        /* Внутренний тонкий контур всегда */
+        .mini-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+            padding: 1px;
+            background: linear-gradient(
+                180deg, 
+                rgba(232, 193, 104, 0.08) 0%, 
+                transparent 40%, 
+                transparent 60%, 
+                rgba(232, 193, 104, 0.12) 100%
+            );
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
-            z-index: 2;
-            transition: background 0.4s;
+            z-index: 4;
+            transition: opacity 0.4s;
         }
-        .auction-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--line-hi);
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.6),
-                0 0 40px rgba(232, 193, 104, 0.1);
-        }
-        .auction-card:hover::before {
-            background: linear-gradient(180deg, rgba(232, 193, 104, 0.25) 0%, rgba(232, 193, 104, 0.4) 100%);
-        }
-        .auction-card .ac-thumb {
+        .mini-card:hover::after { opacity: 0; }
+
+        /* ============================================
+           ПРЕВЬЮ
+           ============================================ */
+        .mc-thumb {
             position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 10;
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background: radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.35) 0%, transparent 55%),
+                        linear-gradient(135deg, #1a0508, #0a0205);
         }
-        .ac-thumb.bg-1 { background: radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.5) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(90, 20, 40, 0.4) 0%, transparent 55%), linear-gradient(135deg, #1a0508, #0a0205); }
-        .ac-thumb.bg-2 { background: radial-gradient(ellipse at 40% 30%, rgba(232, 193, 104, 0.35) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(140, 100, 0, 0.3) 0%, transparent 55%), linear-gradient(135deg, #1a1505, #0a0802); }
-        .ac-thumb.bg-3 { background: radial-gradient(ellipse at 40% 30%, rgba(120, 60, 160, 0.4) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(60, 20, 90, 0.35) 0%, transparent 55%), linear-gradient(135deg, #15051a, #08020a); }
-        .ac-thumb.bg-4 { background: radial-gradient(ellipse at 40% 30%, rgba(60, 130, 190, 0.4) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(20, 60, 120, 0.35) 0%, transparent 55%), linear-gradient(135deg, #05101a, #02060a); }
-        .ac-thumb::after {
-            font-family: 'Cinzel', serif;
-            font-size: 3.6rem;
-            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .ac-thumb.bg-1::after { content: '♦'; color: rgba(232, 193, 104, 0.12); text-shadow: 0 0 60px rgba(139, 42, 42, 0.7); }
-        .ac-thumb.bg-2::after { content: '♣'; color: rgba(232, 193, 104, 0.15); text-shadow: 0 0 60px rgba(232, 193, 104, 0.6); }
-        .ac-thumb.bg-3::after { content: '♥'; color: rgba(232, 193, 104, 0.12); text-shadow: 0 0 60px rgba(120, 60, 160, 0.7); }
-        .ac-thumb.bg-4::after { content: '♠'; color: rgba(232, 193, 104, 0.12); text-shadow: 0 0 60px rgba(60, 130, 190, 0.7); }
-        .auction-card:hover .ac-thumb::after { transform: scale(1.08); }
+        .mc-thumb.bg-2 { background: radial-gradient(ellipse at 40% 30%, rgba(232, 193, 104, 0.28) 0%, transparent 55%), linear-gradient(135deg, #1a1505, #0a0802); }
+        .mc-thumb.bg-3 { background: radial-gradient(ellipse at 40% 30%, rgba(120, 60, 160, 0.3) 0%, transparent 55%), linear-gradient(135deg, #15051a, #08020a); }
+        .mc-thumb.bg-4 { background: radial-gradient(ellipse at 40% 30%, rgba(60, 130, 190, 0.3) 0%, transparent 55%), linear-gradient(135deg, #05101a, #02060a); }
+        .mc-thumb.bg-5 { background: radial-gradient(ellipse at 40% 30%, rgba(60, 160, 150, 0.3) 0%, transparent 55%), linear-gradient(135deg, #051a18, #020a09); }
+        .mc-thumb.bg-6 { background: radial-gradient(ellipse at 40% 30%, rgba(200, 100, 40, 0.3) 0%, transparent 55%), linear-gradient(135deg, #1a0a05, #0a0402); }
 
-        .ac-thumb .ac-vapor {
+        .mc-thumb .mc-suit {
+            font-family: 'Cinzel', serif;
+            font-size: 3.2rem;
+            color: rgba(232, 193, 104, 0.15);
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), color 0.5s;
+            text-shadow: 0 0 50px rgba(232, 193, 104, 0.4);
+        }
+        .mini-card:hover .mc-thumb .mc-suit {
+            transform: scale(1.15);
+            color: rgba(232, 193, 104, 0.3);
+        }
+
+        /* Плавный градиент-«пар» снизу */
+        .mc-thumb::after {
+            content: '';
             position: absolute;
             bottom: 0; left: 0; right: 0;
             height: 50%;
@@ -457,1047 +234,425 @@
             pointer-events: none;
         }
 
-        .ac-badge-live {
+        /* ============================================
+           ТАЙМЕР и LIVE — крошечные в углах
+           ============================================ */
+        .mc-live {
             position: absolute;
-            top: 12px; left: 12px;
+            top: 8px; left: 8px;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             font-weight: 700;
-            letter-spacing: 1.8px;
+            letter-spacing: 1.5px;
             color: #fff;
-            background: rgba(139, 42, 42, 0.9);
+            background: rgba(139, 42, 42, 0.85);
             backdrop-filter: blur(6px);
-            padding: 4px 9px;
+            padding: 3px 6px;
             border-radius: 3px;
             text-transform: uppercase;
             z-index: 3;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .ac-badge-live::before {
+        .mc-live::before {
             content: '';
-            width: 5px; height: 5px;
+            width: 4px; height: 4px;
             border-radius: 50%;
             background: #fff;
             animation: livePulse 1.2s infinite;
         }
-        .ac-timer {
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.4); }
+        }
+
+        .mc-timer {
             position: absolute;
-            top: 12px; right: 12px;
+            top: 8px; right: 8px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.66rem;
+            font-size: 0.58rem;
             font-weight: 700;
             color: var(--gold);
             background: rgba(7, 8, 12, 0.9);
-            border: 1px solid rgba(232, 193, 104, 0.35);
-            padding: 4px 8px;
+            border: 1px solid rgba(232, 193, 104, 0.3);
+            padding: 3px 6px;
             border-radius: 3px;
-            letter-spacing: 1.2px;
+            letter-spacing: 0.8px;
             z-index: 3;
             backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
-        .ac-timer::before { content: '⏱'; font-size: 0.72rem; }
-
-        .ac-body {
-            padding: 16px 18px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            flex: 1;
-            position: relative;
-            z-index: 3;
-        }
-        .ac-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--ivory);
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .ac-author {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem;
-            font-style: italic;
-            color: var(--text-1);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: -8px;
-        }
-        .ac-author .status {
-            display: inline-block;
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: var(--green);
-            box-shadow: 0 0 6px var(--green-glow);
-        }
-        .ac-author .status.offline { background: var(--text-2); box-shadow: none; }
-
-        .ac-bid-block {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            padding: 12px 14px;
-            background: linear-gradient(135deg, rgba(139, 42, 42, 0.08) 0%, transparent 60%), var(--bg-2);
-            border: 1px solid rgba(139, 42, 42, 0.25);
-            border-radius: 4px;
-            margin-top: auto;
-            position: relative;
-            overflow: hidden;
-        }
-        .ac-bid-block::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 3px; height: 100%;
-            background: linear-gradient(180deg, var(--wine), var(--gold));
-        }
-        .ac-bid-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.52rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: var(--text-2);
-            text-transform: uppercase;
-        }
-        .ac-bid-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 0.4px;
-            line-height: 1;
-            transition: color 0.5s, text-shadow 0.5s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-            text-shadow: 0 0 20px rgba(232, 193, 104, 0.3);
-            transform-origin: left center;
-        }
-        .ac-bid-value .unit { font-size: 0.62rem; color: var(--text-2); font-weight: 500; margin-left: 5px; letter-spacing: 1px; }
-        .ac-bid-value.bump {
-            color: var(--gold-hi);
-            text-shadow: 0 0 30px rgba(232, 193, 104, 0.9), 0 0 60px rgba(232, 193, 104, 0.5);
-            transform: scale(1.04);
-        }
-
-        .ac-meta {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.66rem;
-            color: var(--text-2);
-            display: flex;
-            justify-content: space-between;
-            gap: 8px;
-            padding-top: 2px;
-        }
-        .ac-meta strong { color: var(--text-1); font-weight: 500; }
-        .ac-meta .leader { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-        .ac-btn {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.66rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--ivory);
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-            border: 1px solid var(--line-hi);
-            padding: 11px 16px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 8px 24px rgba(0, 0, 0, 0.4);
-        }
-        .ac-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 60%; height: 100%;
-            background: linear-gradient(105deg, transparent 0%, rgba(232, 193, 104, 0.3) 50%, transparent 100%);
-            transform: skewX(-15deg);
-            transition: left 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .ac-btn:hover {
-            color: var(--gold);
-            border-color: var(--gold);
-            background: linear-gradient(180deg, rgba(232, 193, 104, 0.12) 0%, rgba(232, 193, 104, 0.04) 100%);
-            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 8px 30px rgba(232, 193, 104, 0.3);
-        }
-        .ac-btn:hover::before { left: 130%; }
 
         /* ============================================
-           ЮЧИ
+           ИНФО
            ============================================ */
-        .ych-card {
-            flex: 0 0 240px;
-            scroll-snap-align: start;
+        .mc-info {
+            padding: 12px 14px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            z-index: 3;
             background: var(--bg-1);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-        }
-        .ych-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius-lg);
-            padding: 1px;
-            background: linear-gradient(180deg, transparent 0%, transparent 60%, rgba(232, 193, 104, 0.15) 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 2;
-            transition: background 0.4s;
-        }
-        .ych-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--line-hi);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(232, 193, 104, 0.1);
-        }
-        .ych-card:hover::before {
-            background: linear-gradient(180deg, rgba(232, 193, 104, 0.25) 0%, rgba(232, 193, 104, 0.4) 100%);
-        }
-        .yc-thumb {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .yc-thumb.bg-1 { background: radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.4) 0%, transparent 55%), linear-gradient(135deg, #1a0515, #0a0208); }
-        .yc-thumb.bg-2 { background: radial-gradient(ellipse at 40% 30%, rgba(200, 100, 40, 0.35) 0%, transparent 55%), linear-gradient(135deg, #1a0a05, #0a0402); }
-        .yc-thumb.bg-3 { background: radial-gradient(ellipse at 40% 30%, rgba(60, 160, 150, 0.3) 0%, transparent 55%), linear-gradient(135deg, #051a18, #020a09); }
-        .yc-thumb.bg-4 { background: radial-gradient(ellipse at 40% 30%, rgba(180, 80, 220, 0.35) 0%, transparent 55%), linear-gradient(135deg, #15051a, #08020a); }
-        .yc-thumb::after {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .yc-thumb.bg-1::after { content: '❦'; color: rgba(232, 193, 104, 0.12); text-shadow: 0 0 60px rgba(139, 42, 42, 0.7); }
-        .yc-thumb.bg-2::after { content: '♥'; color: rgba(232, 193, 104, 0.12); text-shadow: 0 0 60px rgba(200, 100, 40, 0.7); }
-        .yc-thumb.bg-3::after { content: '♠'; color: rgba(232, 193, 104, 0.12); text-shadow: 0 0 60px rgba(60, 160, 150, 0.7); }
-        .yc-thumb.bg-4::after { content: '♦'; color: rgba(232, 193, 104, 0.12); text-shadow: 0 0 60px rgba(180, 80, 220, 0.7); }
-        .ych-card:hover .yc-thumb::after { transform: scale(1.08); }
-
-        .yc-badge {
-            position: absolute;
-            top: 12px; left: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.52rem;
-            font-weight: 700;
-            letter-spacing: 1.8px;
-            color: var(--ivory);
-            background: rgba(7, 8, 12, 0.85);
-            border: 1px solid var(--line-hi);
-            backdrop-filter: blur(6px);
-            padding: 4px 8px;
-            border-radius: 3px;
-            text-transform: uppercase;
-            z-index: 3;
         }
 
-        .yc-body {
-            padding: 14px 16px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            flex: 1;
-            position: relative;
-            z-index: 3;
-        }
-        .yc-title {
+        .mc-title {
             font-family: 'Cinzel', serif;
-            font-size: 0.88rem;
+            font-size: 0.72rem;
             font-weight: 500;
-            color: var(--ivory);
-            letter-spacing: 1px;
+            color: var(--text-0);
+            letter-spacing: 0.8px;
             text-transform: uppercase;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .yc-author {
+        .mc-author {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.78rem;
+            font-size: 0.7rem;
             font-style: italic;
-            color: var(--text-1);
+            color: var(--text-2);
             margin-top: -6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .yc-slots {
+        /* ============================================
+           ЦЕНА + ПОДЧЁРКИВАЮЩАЯ ЛИНИЯ
+           ============================================ */
+        .mc-price-wrap {
+            position: relative;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            padding: 10px 12px;
-            background: var(--bg-2);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-        }
-        .yc-slots-top { display: flex; justify-content: space-between; align-items: baseline; }
-        .yc-slots-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.52rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: var(--text-2);
-            text-transform: uppercase;
-        }
-        .yc-slots-num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--gold);
-        }
-        .yc-slot-bar { display: flex; gap: 3px; }
-        .yc-slot {
-            width: 100%;
-            height: 16px;
-            border-radius: 3px;
-            background: rgba(232, 193, 104, 0.06);
-            border: 1px solid rgba(232, 193, 104, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.55rem;
-            font-weight: 700;
-            color: var(--text-2);
-            transition: all 0.4s;
-        }
-        .yc-slot.free {
-            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 50%, var(--gold-deep) 100%);
-            border-color: var(--gold);
-            color: var(--bg-0);
-            box-shadow: 0 0 10px var(--gold-glow), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-        }
-        .yc-slot.taken {
-            background: rgba(139, 42, 42, 0.15);
-            border-color: rgba(139, 42, 42, 0.4);
-            color: var(--wine-hi);
-        }
-        .yc-slot.taken::after { content: '✕'; }
-
-        .yc-bottom {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 10px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border);
+            gap: 4px;
+            padding-top: 8px;
             margin-top: auto;
         }
-        .yc-price-label {
+
+        .mc-price-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.52rem;
+            font-size: 0.45rem;
             font-weight: 600;
-            letter-spacing: 2px;
+            letter-spacing: 1.8px;
             color: var(--text-2);
             text-transform: uppercase;
         }
-        .yc-price {
+
+        .mc-price {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 700;
             color: var(--gold);
             letter-spacing: 0.3px;
-            text-shadow: 0 0 15px rgba(232, 193, 104, 0.3);
+            text-shadow: 0 0 12px rgba(232, 193, 104, 0.25);
+            transition: color 0.4s, text-shadow 0.4s;
+            position: relative;
+            display: inline-block;
+            width: fit-content;
         }
-        .yc-price .unit { font-size: 0.58rem; color: var(--text-2); font-weight: 500; margin-left: 3px; }
+        .mc-price .unit {
+            font-size: 0.5rem;
+            color: var(--text-2);
+            font-weight: 500;
+            margin-left: 3px;
+            letter-spacing: 0.8px;
+        }
 
-        .yc-btn {
+        /* Линия, растущая из центра */
+        .mc-price::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-hi), transparent);
+            box-shadow: 0 0 8px var(--gold-glow);
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            transform-origin: center;
+        }
+        .mini-card:hover .mc-price::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+        .mini-card:hover .mc-price {
+            color: var(--gold-hi);
+            text-shadow: 0 0 20px rgba(232, 193, 104, 0.6);
+        }
+
+        /* ============================================
+           КНОПКА — скрыта, появляется при hover
+           ============================================ */
+        .mc-btn {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
             font-family: 'Inter', sans-serif;
-            font-size: 0.64rem;
+            font-size: 0.6rem;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--ivory);
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-            border: 1px solid var(--line-hi);
-            padding: 10px 14px;
-            border-radius: 3px;
+            color: var(--bg-0);
+            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+            border: none;
+            padding: 12px 10px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 8px 24px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transform: translateY(100%);
+            transition: 
+                opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 
+                0 -4px 20px rgba(232, 193, 104, 0.4),
+                0 1px 0 rgba(255, 255, 255, 0.4) inset;
+            z-index: 10;
         }
-        .yc-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 60%; height: 100%;
-            background: linear-gradient(105deg, transparent 0%, rgba(232, 193, 104, 0.3) 50%, transparent 100%);
-            transform: skewX(-15deg);
-            transition: left 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        .mini-card:hover .mc-btn {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .yc-btn:hover {
-            color: var(--gold);
-            border-color: var(--gold);
-            background: linear-gradient(180deg, rgba(232, 193, 104, 0.12) 0%, rgba(232, 193, 104, 0.04) 100%);
-            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 8px 30px rgba(232, 193, 104, 0.3);
-        }
-        .yc-btn:hover::before { left: 130%; }
-
-        /* ============================================
-           АРТЫ
-           ============================================ */
-        .art-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-            gap: 24px;
-        }
-        .art-tile {
-            background: var(--bg-1);
-            border: 1px solid var(--line);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-        }
-        .art-tile::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius-lg);
-            padding: 1px;
-            background: linear-gradient(180deg, transparent 0%, transparent 60%, rgba(232, 193, 104, 0.2) 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 2;
-            transition: background 0.5s;
-        }
-        .art-tile:hover {
-            transform: translateY(-6px);
-            border-color: var(--line-hi);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.75), 0 0 60px rgba(232, 193, 104, 0.15);
-        }
-        .art-tile:hover::before {
-            background: linear-gradient(180deg, rgba(232, 193, 104, 0.35) 0%, rgba(232, 193, 104, 0.55) 100%);
-        }
-        .at-thumb {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .at-thumb.bg-1 { background: radial-gradient(ellipse at 40% 30%, rgba(232, 193, 104, 0.18) 0%, transparent 55%), linear-gradient(135deg, #1a0e05, #0d0703); }
-        .at-thumb.bg-2 { background: radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.18) 0%, transparent 55%), linear-gradient(135deg, #1a0508, #0d0305); }
-        .at-thumb.bg-3 { background: radial-gradient(ellipse at 40% 30%, rgba(160, 60, 220, 0.18) 0%, transparent 55%), linear-gradient(135deg, #15051a, #08020a); }
-        .at-thumb.bg-4 { background: radial-gradient(ellipse at 40% 30%, rgba(60, 140, 220, 0.18) 0%, transparent 55%), linear-gradient(135deg, #05101a, #02060a); }
-        .at-thumb.bg-5 { background: radial-gradient(ellipse at 40% 30%, rgba(14, 203, 129, 0.18) 0%, transparent 55%), linear-gradient(135deg, #051a10, #020a06); }
-        .at-thumb::after {
-            font-family: 'Cinzel', serif;
-            font-size: 4.5rem;
-            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .at-thumb.bg-1::after { content: '❦'; color: rgba(232, 193, 104, 0.15); text-shadow: 0 0 40px rgba(232, 193, 104, 0.4); }
-        .at-thumb.bg-2::after { content: '♥'; color: rgba(232, 193, 104, 0.15); text-shadow: 0 0 40px rgba(139, 42, 42, 0.5); }
-        .at-thumb.bg-3::after { content: '♦'; color: rgba(232, 193, 104, 0.15); text-shadow: 0 0 40px rgba(160, 60, 220, 0.5); }
-        .at-thumb.bg-4::after { content: '♠'; color: rgba(232, 193, 104, 0.15); text-shadow: 0 0 40px rgba(60, 140, 220, 0.5); }
-        .at-thumb.bg-5::after { content: '♣'; color: rgba(232, 193, 104, 0.15); text-shadow: 0 0 40px rgba(14, 203, 129, 0.5); }
-        .art-tile:hover .at-thumb::after { transform: scale(1.08); }
-
-        .at-badge {
-            position: absolute;
-            top: 14px; left: 14px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.56rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            padding: 5px 10px;
-            background: rgba(7, 8, 12, 0.85);
-            color: var(--gold);
-            border: 1px solid var(--line-hi);
-            backdrop-filter: blur(6px);
-            border-radius: 3px;
-            text-transform: uppercase;
-            z-index: 2;
-        }
-        .at-hot {
-            position: absolute;
-            top: 14px; right: 14px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.56rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            padding: 5px 10px;
-            background: linear-gradient(180deg, var(--wine-hi), var(--wine));
-            color: #fff;
-            border-radius: 3px;
-            text-transform: uppercase;
-            z-index: 2;
-            box-shadow: 0 0 15px var(--wine-glow);
-        }
-        .at-info { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; position: relative; z-index: 3; }
-        .at-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--ivory);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .at-author {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.92rem;
-            font-style: italic;
-            color: var(--text-1);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .at-author .status {
-            display: inline-block;
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: var(--green);
-            box-shadow: 0 0 6px var(--green-glow);
-        }
-        .at-author .status.offline { background: var(--text-2); box-shadow: none; }
-        .at-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 8px;
-            margin-top: auto;
-            padding-top: 14px;
-            border-top: 1px solid var(--border);
-        }
-        .at-stats { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--text-2); display: flex; gap: 12px; }
-        .at-stats .heart { color: var(--wine-hi); }
-
-        /* ============================================
-           ПОДВАЛ
-           ============================================ */
-        .footer {
-            width: 100%;
-            max-width: 1440px;
-            text-align: center;
-            margin-top: 60px;
-            padding: 44px 40px 24px;
-            border-top: 1px solid var(--line);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
+        .mc-btn:hover {
             letter-spacing: 3px;
-            color: var(--text-2);
-            text-transform: uppercase;
-            position: relative;
-            z-index: 5;
+            filter: brightness(1.1);
         }
-        .footer .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            font-style: italic;
-            color: var(--gold);
-            text-decoration: none;
-            letter-spacing: 1px;
-            text-transform: none;
-        }
-        .footer .back-link:hover { color: var(--gold-hi); text-shadow: 0 0 20px var(--gold-glow); }
-        .footer span { color: var(--wine-hi); }
 
         /* ============================================
-           АДАПТИВ
+           ТИП КАРТОЧКИ (бейдж)
            ============================================ */
-        @media (max-width: 1000px) {
-            .topbar-wrap { padding: 0 24px; }
-            .topbar { gap: 24px; }
-            .topbar-nav { gap: 20px; font-size: 0.66rem; }
-            .logo { font-size: 1.3rem; letter-spacing: 8px; }
-            .btn-new-lot { display: none; }
-            .section { padding: 32px 24px 44px; }
-            .section:first-of-type { padding-top: 44px; }
-            .art-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
-            .auction-card { flex: 0 0 260px; }
-            .ych-card { flex: 0 0 220px; }
+        .mc-type {
+            position: absolute;
+            bottom: 8px; left: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.45rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--text-1);
+            background: rgba(7, 8, 12, 0.75);
+            border: 1px solid rgba(232, 193, 104, 0.2);
+            backdrop-filter: blur(6px);
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            z-index: 3;
         }
-        @media (max-width: 768px) {
-            .topbar-wrap { padding: 0 16px; }
-            .topbar {
-                grid-template-columns: 1fr auto;
-                grid-template-areas: "logo user" "nav nav";
-                gap: 10px;
-                padding: 14px 0;
-            }
-            .logo { grid-area: logo; font-size: 1.15rem; letter-spacing: 6px; }
-            .logo .sub { font-size: 0.75rem; }
-            .topbar-nav {
-                grid-area: nav;
-                justify-content: center;
-                gap: 12px;
-                font-size: 0.58rem;
-                letter-spacing: 1.2px;
-                border-top: 1px solid var(--line);
-                padding-top: 12px;
-                flex-wrap: wrap;
-            }
-            .topbar-nav a::after { bottom: -12px; }
-            .topbar-user { grid-area: user; gap: 8px; }
-            .wallet { padding: 5px 10px 5px 5px; gap: 7px; }
-            .wallet .chip-icon { width: 26px; height: 26px; font-size: 0.75rem; }
-            .wallet .chips { font-size: 0.78rem; }
-            .wallet .usdt { font-size: 0.58rem; }
-            .wallet .plus { width: 18px; height: 18px; font-size: 0.8rem; }
-            .topbar-user .avatar { width: 30px; height: 30px; font-size: 0.8rem; }
 
-            .section { padding: 26px 16px 34px; }
-            .section:first-of-type { padding-top: 34px; }
-            .section-head { flex-direction: column; align-items: flex-start; gap: 12px; }
-            .section-title { font-size: 1rem; letter-spacing: 2px; }
-
-            .carousel { gap: 14px; padding: 6px 2px 6px; }
-            .auction-card { flex: 0 0 240px; }
-            .ych-card { flex: 0 0 200px; }
-            .ac-bid-value { font-size: 1.15rem; }
-            .yc-price { font-size: 0.92rem; }
-
-            .art-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .at-info { padding: 12px 14px 14px; }
-            .at-title { font-size: 0.82rem; }
-            .at-stats { font-size: 0.66rem; }
-
-            .footer { margin-top: 40px; padding: 30px 16px 14px; font-size: 0.56rem; }
+        /* ============================================
+           СТАТИСТИКА (лайки / просмотры)
+           ============================================ */
+        .mc-stats {
+            display: flex;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.55rem;
+            color: var(--text-2);
+            padding-top: 4px;
         }
-        @media (max-width: 480px) {
-            .art-grid { grid-template-columns: 1fr; }
-            .auction-card { flex: 0 0 220px; }
-            .ych-card { flex: 0 0 180px; }
+        .mc-stats .heart { color: var(--wine-hi); }
+
+        /* ============================================
+           ДЕМО — блок с переключателем
+           ============================================ */
+        .demo-controls {
+            margin-bottom: 40px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
+        .demo-btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-1);
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 10px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .demo-btn:hover { color: var(--gold); border-color: var(--gold-deep); }
+        .demo-btn.active { color: var(--bg-0); background: var(--gold); border-color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <div class="top-light"></div>
-    <div class="side-light"></div>
-    <div class="dust-bg" id="dustBg"></div>
+    <h1 class="demo-title">✦ Мини-карточки ✦</h1>
+    <p class="demo-sub">Compact · Elegant · Premium Micro-animations</p>
 
-    <!-- ШАПКА -->
-    <div class="topbar-wrap">
-        <header class="topbar">
-            <a href="#" class="logo">FENBO<span class="sub">— рынок</span></a>
-            <nav class="topbar-nav">
-                <a href="#" class="active">Главная</a>
-                <a href="#">Аукционы</a>
-                <a href="#">Ючи</a>
-                <a href="#">Адопты</a>
-                <a href="#">Заказы</a>
-            </nav>
-            <div class="topbar-user">
-                <button class="btn-new-lot" type="button"><span class="plus">+</span> Новый лот</button>
-                <div class="wallet" title="Кошелёк FENBO">
-                    <div class="chip-icon"></div>
-                    <div class="balance">
-                        <div class="chips">1 250<span class="unit">FEN</span></div>
-                        <div class="usdt"><span class="usdt-icon">₮</span>12.50</div>
-                    </div>
-                    <div class="plus">+</div>
-                </div>
-                <div class="avatar" title="Профиль">F</div>
-            </div>
-        </header>
+    <div class="demo-controls">
+        <button class="demo-btn active" onclick="replayAnimations()">⟳ Повторить появление</button>
     </div>
 
-    <!-- АУКЦИОНЫ -->
-    <section class="section" id="auctions">
-        <div class="section-head">
-            <h2 class="section-title">
-                <span class="live-dot"></span>
-                Live аукционы
-                <span class="count">— четыре стола активны</span>
-            </h2>
-            <a href="#" class="section-link">Все аукционы →</a>
-        </div>
+    <div class="mini-grid" id="grid">
 
-        <div class="carousel-wrap">
-            <button class="carousel-nav prev" data-target="auctionCarousel" type="button">‹</button>
-            <div class="carousel" id="auctionCarousel" data-autoscroll="6000">
-
-                <div class="auction-card" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250" data-bids="12" data-leader="Anonymous_01">
-                    <div class="ac-thumb bg-1">
-                        <span class="ac-badge-live">Live</span>
-                        <span class="ac-timer" data-end="2027-12-31T23:59:59">—</span>
-                        <div class="ac-vapor"></div>
-                    </div>
-                    <div class="ac-body">
-                        <div class="ac-title">Сцена · 03:00</div>
-                        <div class="ac-author"><span class="status"></span>MidnightLux</div>
-                        <div class="ac-bid-block">
-                            <span class="ac-bid-label">Текущая ставка</span>
-                            <span class="ac-bid-value" data-bid-el>1 250<span class="unit">FEN</span></span>
-                        </div>
-                        <div class="ac-meta">
-                            <span><strong data-bids-el>12</strong> ставок</span>
-                            <span class="leader">лидер: <span data-leader-el>Anonymous_01</span></span>
-                        </div>
-                        <button class="ac-btn" type="button">Сделать ставку</button>
-                    </div>
-                </div>
-
-                <div class="auction-card" data-title="Золотая клетка" data-author="GoldenCage" data-bid="2400" data-bids="21" data-leader="Noir_Art">
-                    <div class="ac-thumb bg-2">
-                        <span class="ac-badge-live">Live</span>
-                        <span class="ac-timer" data-end="2027-12-30T18:00:00">—</span>
-                        <div class="ac-vapor"></div>
-                    </div>
-                    <div class="ac-body">
-                        <div class="ac-title">Золотая клетка</div>
-                        <div class="ac-author"><span class="status"></span>GoldenCage</div>
-                        <div class="ac-bid-block">
-                            <span class="ac-bid-label">Текущая ставка</span>
-                            <span class="ac-bid-value" data-bid-el>2 400<span class="unit">FEN</span></span>
-                        </div>
-                        <div class="ac-meta">
-                            <span><strong data-bids-el>21</strong> ставка</span>
-                            <span class="leader">лидер: <span data-leader-el>Noir_Art</span></span>
-                        </div>
-                        <button class="ac-btn" type="button">Сделать ставку</button>
-                    </div>
-                </div>
-
-                <div class="auction-card" data-title="Пурпурный дым" data-author="PurpleSmoke" data-bid="890" data-bids="7" data-leader="Velvet_Rose">
-                    <div class="ac-thumb bg-3">
-                        <span class="ac-badge-live">Live</span>
-                        <span class="ac-timer" data-end="2027-12-29T12:30:00">—</span>
-                        <div class="ac-vapor"></div>
-                    </div>
-                    <div class="ac-body">
-                        <div class="ac-title">Пурпурный дым</div>
-                        <div class="ac-author"><span class="status"></span>PurpleSmoke</div>
-                        <div class="ac-bid-block">
-                            <span class="ac-bid-label">Текущая ставка</span>
-                            <span class="ac-bid-value" data-bid-el>890<span class="unit">FEN</span></span>
-                        </div>
-                        <div class="ac-meta">
-                            <span><strong data-bids-el>7</strong> ставок</span>
-                            <span class="leader">лидер: <span data-leader-el>Velvet_Rose</span></span>
-                        </div>
-                        <button class="ac-btn" type="button">Сделать ставку</button>
-                    </div>
-                </div>
-
-                <div class="auction-card" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200" data-bids="34" data-leader="TwinFlame">
-                    <div class="ac-thumb bg-4">
-                        <span class="ac-badge-live">Live</span>
-                        <span class="ac-timer" data-end="2027-12-28T22:00:00">—</span>
-                        <div class="ac-vapor"></div>
-                    </div>
-                    <div class="ac-body">
-                        <div class="ac-title">Алый закат</div>
-                        <div class="ac-author"><span class="status offline"></span>ScarletSunset</div>
-                        <div class="ac-bid-block">
-                            <span class="ac-bid-label">Текущая ставка</span>
-                            <span class="ac-bid-value" data-bid-el>3 200<span class="unit">FEN</span></span>
-                        </div>
-                        <div class="ac-meta">
-                            <span><strong data-bids-el>34</strong> ставки</span>
-                            <span class="leader">лидер: <span data-leader-el>TwinFlame</span></span>
-                        </div>
-                        <button class="ac-btn" type="button">Сделать ставку</button>
-                    </div>
-                </div>
-
+        <!-- КАРТОЧКА 1 -->
+        <div class="mini-card">
+            <div class="mc-thumb bg-1">
+                <span class="mc-live">Live</span>
+                <span class="mc-timer" data-end="2027-12-31T23:59:59">—</span>
+                <span class="mc-suit">♦</span>
+                <span class="mc-type">Аукцион</span>
             </div>
-            <button class="carousel-nav next" data-target="auctionCarousel" type="button">›</button>
-        </div>
-    </section>
-
-    <!-- ЮЧИ -->
-    <section class="section" id="ych">
-        <div class="section-head">
-            <h2 class="section-title">
-                🎟️ Открытые YCH
-                <span class="count">— четыре со свободными слотами</span>
-            </h2>
-            <a href="#" class="section-link">Все YCH →</a>
-        </div>
-
-        <div class="carousel-wrap">
-            <button class="carousel-nav prev" data-target="ychCarousel" type="button">‹</button>
-            <div class="carousel" id="ychCarousel" data-autoscroll="6500">
-
-                <div class="ych-card" data-title="Парный портрет" data-author="TwinFlame" data-slots="2">
-                    <div class="yc-thumb bg-1"><span class="yc-badge">YCH</span></div>
-                    <div class="yc-body">
-                        <div class="yc-title">Парный портрет</div>
-                        <div class="yc-author">by TwinFlame</div>
-                        <div class="yc-slots">
-                            <div class="yc-slots-top">
-                                <span class="yc-slots-label">Слоты</span>
-                                <span class="yc-slots-num">2 / 3</span>
-                            </div>
-                            <div class="yc-slot-bar">
-                                <div class="yc-slot free">1</div>
-                                <div class="yc-slot free">2</div>
-                                <div class="yc-slot taken">3</div>
-                            </div>
-                        </div>
-                        <div class="yc-bottom">
-                            <span class="yc-price-label">Цена</span>
-                            <span class="yc-price">600<span class="unit">FEN</span></span>
-                        </div>
-                        <button class="yc-btn" type="button">Записаться</button>
-                    </div>
+            <div class="mc-info">
+                <div class="mc-title">Сцена · 03:00</div>
+                <div class="mc-author">MidnightLux</div>
+                <div class="mc-price-wrap">
+                    <span class="mc-price-label">Текущая ставка</span>
+                    <span class="mc-price">1 250<span class="unit">FEN</span></span>
                 </div>
-
-                <div class="ych-card" data-title="Шёлковые оковы" data-author="BoundElegance" data-slots="1">
-                    <div class="yc-thumb bg-2"><span class="yc-badge">YCH</span></div>
-                    <div class="yc-body">
-                        <div class="yc-title">Шёлковые оковы</div>
-                        <div class="yc-author">by BoundElegance</div>
-                        <div class="yc-slots">
-                            <div class="yc-slots-top">
-                                <span class="yc-slots-label">Слоты</span>
-                                <span class="yc-slots-num">1 / 3</span>
-                            </div>
-                            <div class="yc-slot-bar">
-                                <div class="yc-slot free">1</div>
-                                <div class="yc-slot taken">2</div>
-                                <div class="yc-slot taken">3</div>
-                            </div>
-                        </div>
-                        <div class="yc-bottom">
-                            <span class="yc-price-label">Цена</span>
-                            <span class="yc-price">450<span class="unit">FEN</span></span>
-                        </div>
-                        <button class="yc-btn" type="button">Записаться</button>
-                    </div>
-                </div>
-
-                <div class="ych-card" data-title="Ночной гость" data-author="Noir_Art" data-slots="3">
-                    <div class="yc-thumb bg-3"><span class="yc-badge">YCH</span></div>
-                    <div class="yc-body">
-                        <div class="yc-title">Ночной гость</div>
-                        <div class="yc-author">by Noir_Art</div>
-                        <div class="yc-slots">
-                            <div class="yc-slots-top">
-                                <span class="yc-slots-label">Слоты</span>
-                                <span class="yc-slots-num">3 / 3</span>
-                            </div>
-                            <div class="yc-slot-bar">
-                                <div class="yc-slot free">1</div>
-                                <div class="yc-slot free">2</div>
-                                <div class="yc-slot free">3</div>
-                            </div>
-                        </div>
-                        <div class="yc-bottom">
-                            <span class="yc-price-label">Цена</span>
-                            <span class="yc-price">800<span class="unit">FEN</span></span>
-                        </div>
-                        <button class="yc-btn" type="button">Записаться</button>
-                    </div>
-                </div>
-
-                <div class="ych-card" data-title="Бархатный вечер" data-author="Velvet_Rose" data-slots="1">
-                    <div class="yc-thumb bg-4"><span class="yc-badge">YCH</span></div>
-                    <div class="yc-body">
-                        <div class="yc-title">Бархатный вечер</div>
-                        <div class="yc-author">by Velvet_Rose</div>
-                        <div class="yc-slots">
-                            <div class="yc-slots-top">
-                                <span class="yc-slots-label">Слоты</span>
-                                <span class="yc-slots-num">1 / 3</span>
-                            </div>
-                            <div class="yc-slot-bar">
-                                <div class="yc-slot taken">1</div>
-                                <div class="yc-slot free">2</div>
-                                <div class="yc-slot taken">3</div>
-                            </div>
-                        </div>
-                        <div class="yc-bottom">
-                            <span class="yc-price-label">Цена</span>
-                            <span class="yc-price">900<span class="unit">FEN</span></span>
-                        </div>
-                        <button class="yc-btn" type="button">Записаться</button>
-                    </div>
-                </div>
-
+                <div class="mc-stats"><span class="heart">♥</span>12 · 👁 1.2k</div>
             </div>
-            <button class="carousel-nav next" data-target="ychCarousel" type="button">›</button>
-        </div>
-    </section>
-
-    <!-- АРТЫ -->
-    <section class="section" id="arts">
-        <div class="section-head">
-            <h2 class="section-title">🎨 Витрина <span class="count">— работы зала</span></h2>
+            <button class="mc-btn">Сделать ставку</button>
         </div>
 
-        <div class="art-grid">
-
-            <a href="#" class="art-tile" data-title="Бархатный вечер" data-author="Velvet_Rose">
-                <div class="at-thumb bg-1"><span class="at-badge">Арт</span><span class="at-hot">HOT</span></div>
-                <div class="at-info">
-                    <div class="at-title">Бархатный вечер</div>
-                    <div class="at-author"><span class="status"></span>Velvet_Rose</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>1.2k · 👁 4.5k</div></div>
+        <!-- КАРТОЧКА 2 -->
+        <div class="mini-card">
+            <div class="mc-thumb bg-2">
+                <span class="mc-live">Live</span>
+                <span class="mc-timer" data-end="2027-12-30T18:00:00">—</span>
+                <span class="mc-suit">♣</span>
+                <span class="mc-type">Аукцион</span>
+            </div>
+            <div class="mc-info">
+                <div class="mc-title">Золотая клетка</div>
+                <div class="mc-author">GoldenCage</div>
+                <div class="mc-price-wrap">
+                    <span class="mc-price-label">Текущая ставка</span>
+                    <span class="mc-price">2 400<span class="unit">FEN</span></span>
                 </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="Ночная смена" data-author="Noir_Art">
-                <div class="at-thumb bg-2"><span class="at-badge">Арт</span></div>
-                <div class="at-info">
-                    <div class="at-title">Ночная смена</div>
-                    <div class="at-author"><span class="status offline"></span>Noir_Art</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>856 · 👁 2.1k</div></div>
-                </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="Красный шёлк" data-author="ScarletDream">
-                <div class="at-thumb bg-3"><span class="at-badge">Арт</span></div>
-                <div class="at-info">
-                    <div class="at-title">Красный шёлк</div>
-                    <div class="at-author"><span class="status"></span>ScarletDream</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>2.4k · 👁 8.9k</div></div>
-                </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="Тёмный бархат" data-author="DarkVelvet">
-                <div class="at-thumb bg-4"><span class="at-badge">Арт</span></div>
-                <div class="at-info">
-                    <div class="at-title">Тёмный бархат</div>
-                    <div class="at-author"><span class="status"></span>DarkVelvet</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>1.4k · 👁 4.1k</div></div>
-                </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="Шёпот в темноте" data-author="WhisperArt">
-                <div class="at-thumb bg-5"><span class="at-badge">Арт</span></div>
-                <div class="at-info">
-                    <div class="at-title">Шёпот в темноте</div>
-                    <div class="at-author"><span class="status"></span>WhisperArt</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>1.9k · 👁 6.3k</div></div>
-                </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="За кулисами" data-author="Backstage_">
-                <div class="at-thumb bg-1"><span class="at-badge">Арт</span></div>
-                <div class="at-info">
-                    <div class="at-title">За кулисами</div>
-                    <div class="at-author"><span class="status"></span>Backstage_</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>921 · 👁 3.4k</div></div>
-                </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="Две свечи" data-author="TwinFlame">
-                <div class="at-thumb bg-2"><span class="at-badge">Арт</span></div>
-                <div class="at-info">
-                    <div class="at-title">Две свечи</div>
-                    <div class="at-author"><span class="status offline"></span>TwinFlame</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>3.1k · 👁 12k</div></div>
-                </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="Шёлковые оковы" data-author="BoundElegance">
-                <div class="at-thumb bg-3"><span class="at-badge">Арт</span></div>
-                <div class="at-info">
-                    <div class="at-title">Шёлковые оковы</div>
-                    <div class="at-author"><span class="status"></span>BoundElegance</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>1.8k · 👁 5.2k</div></div>
-                </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="Сцена · 03:00" data-author="MidnightLux">
-                <div class="at-thumb bg-4"><span class="at-badge">Арт</span></div>
-                <div class="at-info">
-                    <div class="at-title">Сцена · 03:00</div>
-                    <div class="at-author"><span class="status"></span>MidnightLux</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>631 · 👁 1.7k</div></div>
-                </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="Пурпурный дым" data-author="PurpleSmoke">
-                <div class="at-thumb bg-5"><span class="at-badge">Арт</span></div>
-                <div class="at-info">
-                    <div class="at-title">Пурпурный дым</div>
-                    <div class="at-author"><span class="status offline"></span>PurpleSmoke</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>1.1k · 👁 2.9k</div></div>
-                </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="Алый закат" data-author="ScarletSunset">
-                <div class="at-thumb bg-1"><span class="at-badge">Арт</span><span class="at-hot">TOP</span></div>
-                <div class="at-info">
-                    <div class="at-title">Алый закат</div>
-                    <div class="at-author"><span class="status"></span>ScarletSunset</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>3.5k · 👁 15k</div></div>
-                </div>
-            </a>
-
-            <a href="#" class="art-tile" data-title="Золотая клетка" data-author="GoldenCage">
-                <div class="at-thumb bg-2"><span class="at-badge">Арт</span></div>
-                <div class="at-info">
-                    <div class="at-title">Золотая клетка</div>
-                    <div class="at-author"><span class="status"></span>GoldenCage</div>
-                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>2.7k · 👁 9.8k</div></div>
-                </div>
-            </a>
-
+                <div class="mc-stats"><span class="heart">♥</span>21 · 👁 3.4k</div>
+            </div>
+            <button class="mc-btn">Сделать ставку</button>
         </div>
-    </section>
 
-    <!-- ПОДВАЛ -->
-    <footer class="footer">
-        <a href="#" class="back-link">← Вернуться в главное меню</a>
-        <div>✦ FENBO · РЫНОК ✦ 2025 ✦ <span>Только 18+</span> ✦</div>
-    </footer>
+        <!-- КАРТОЧКА 3 -->
+        <div class="mini-card">
+            <div class="mc-thumb bg-3">
+                <span class="mc-live">Live</span>
+                <span class="mc-timer" data-end="2027-12-29T12:30:00">—</span>
+                <span class="mc-suit">♥</span>
+                <span class="mc-type">Аукцион</span>
+            </div>
+            <div class="mc-info">
+                <div class="mc-title">Пурпурный дым</div>
+                <div class="mc-author">PurpleSmoke</div>
+                <div class="mc-price-wrap">
+                    <span class="mc-price-label">Текущая ставка</span>
+                    <span class="mc-price">890<span class="unit">FEN</span></span>
+                </div>
+                <div class="mc-stats"><span class="heart">♥</span>7 · 👁 890</div>
+            </div>
+            <button class="mc-btn">Сделать ставку</button>
+        </div>
+
+        <!-- КАРТОЧКА 4 -->
+        <div class="mini-card">
+            <div class="mc-thumb bg-4">
+                <span class="mc-live">Live</span>
+                <span class="mc-timer" data-end="2027-12-28T22:00:00">—</span>
+                <span class="mc-suit">♠</span>
+                <span class="mc-type">Аукцион</span>
+            </div>
+            <div class="mc-info">
+                <div class="mc-title">Алый закат</div>
+                <div class="mc-author">ScarletSunset</div>
+                <div class="mc-price-wrap">
+                    <span class="mc-price-label">Текущая ставка</span>
+                    <span class="mc-price">3 200<span class="unit">FEN</span></span>
+                </div>
+                <div class="mc-stats"><span class="heart">♥</span>34 · 👁 5.2k</div>
+            </div>
+            <button class="mc-btn">Сделать ставку</button>
+        </div>
+
+        <!-- КАРТОЧКА 5 — YCH -->
+        <div class="mini-card">
+            <div class="mc-thumb bg-5">
+                <span class="mc-timer" style="color: var(--gold);">2/3</span>
+                <span class="mc-suit">❦</span>
+                <span class="mc-type">YCH</span>
+            </div>
+            <div class="mc-info">
+                <div class="mc-title">Парный портрет</div>
+                <div class="mc-author">TwinFlame</div>
+                <div class="mc-price-wrap">
+                    <span class="mc-price-label">Цена</span>
+                    <span class="mc-price">600<span class="unit">FEN</span></span>
+                </div>
+                <div class="mc-stats"><span class="heart">♥</span>14 · 👁 3k</div>
+            </div>
+            <button class="mc-btn">Записаться</button>
+        </div>
+
+        <!-- КАРТОЧКА 6 — YCH -->
+        <div class="mini-card">
+            <div class="mc-thumb bg-6">
+                <span class="mc-timer" style="color: var(--gold);">1/3</span>
+                <span class="mc-suit">♥</span>
+                <span class="mc-type">YCH</span>
+            </div>
+            <div class="mc-info">
+                <div class="mc-title">Шёлковые оковы</div>
+                <div class="mc-author">BoundElegance</div>
+                <div class="mc-price-wrap">
+                    <span class="mc-price-label">Цена</span>
+                    <span class="mc-price">450<span class="unit">FEN</span></span>
+                </div>
+                <div class="mc-stats"><span class="heart">♥</span>9 · 👁 2k</div>
+            </div>
+            <button class="mc-btn">Записаться</button>
+        </div>
+
+        <!-- КАРТОЧКА 7 -->
+        <div class="mini-card">
+            <div class="mc-thumb bg-1">
+                <span class="mc-live">Live</span>
+                <span class="mc-timer" data-end="2027-12-27T15:00:00">—</span>
+                <span class="mc-suit">♦</span>
+                <span class="mc-type">Аукцион</span>
+            </div>
+            <div class="mc-info">
+                <div class="mc-title">Тёмный бархат</div>
+                <div class="mc-author">DarkVelvet</div>
+                <div class="mc-price-wrap">
+                    <span class="mc-price-label">Текущая ставка</span>
+                    <span class="mc-price">550<span class="unit">FEN</span></span>
+                </div>
+                <div class="mc-stats"><span class="heart">♥</span>18 · 👁 2.1k</div>
+            </div>
+            <button class="mc-btn">Сделать ставку</button>
+        </div>
+
+        <!-- КАРТОЧКА 8 -->
+        <div class="mini-card">
+            <div class="mc-thumb bg-3">
+                <span class="mc-timer" style="color: var(--gold);">3/3</span>
+                <span class="mc-suit">♠</span>
+                <span class="mc-type">YCH</span>
+            </div>
+            <div class="mc-info">
+                <div class="mc-title">Ночной гость</div>
+                <div class="mc-author">Noir_Art</div>
+                <div class="mc-price-wrap">
+                    <span class="mc-price-label">Цена</span>
+                    <span class="mc-price">800<span class="unit">FEN</span></span>
+                </div>
+                <div class="mc-stats"><span class="heart">♥</span>27 · 👁 4k</div>
+            </div>
+            <button class="mc-btn">Записаться</button>
+        </div>
+
+    </div>
 
     <script>
-        /* ПЫЛЬ */
-        (function dustBg() {
-            const c = document.getElementById('dustBg');
-            if (!c) return;
-            for (let i = 0; i < 22; i++) {
-                const m = document.createElement('div');
-                m.className = 'mote';
-                const s = Math.random() * 2 + 1;
-                m.style.width = s + 'px';
-                m.style.height = s + 'px';
-                m.style.left = (Math.random() * 100) + '%';
-                m.style.bottom = '-10px';
-                m.style.setProperty('--mx', (Math.random() * 80 - 40) + 'px');
-                m.style.animationDuration = (Math.random() * 14 + 18) + 's';
-                m.style.animationDelay = (Math.random() * 15) + 's';
-                c.appendChild(m);
-            }
-        })();
-
-        /* ТАЙМЕРЫ */
-        (function auctionTimers() {
+        /* ============================================
+           ТАЙМЕРЫ — обновляются каждую секунду
+           ============================================ */
+        (function timers() {
             const timers = document.querySelectorAll('[data-end]');
             if (!timers.length) return;
             function pad(n) { return n < 10 ? '0' + n : n; }
@@ -1508,7 +663,7 @@
                 const h = Math.floor((diff % 86400) / 3600);
                 const m = Math.floor((diff % 3600) / 60);
                 const s = diff % 60;
-                if (d > 0) el.textContent = d + 'д ' + pad(h) + ':' + pad(m);
+                if (d > 0) el.textContent = d + 'д ' + pad(h) + 'ч';
                 else if (h > 0) el.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
                 else el.textContent = pad(m) + ':' + pad(s);
             }
@@ -1516,193 +671,18 @@
             tick(); setInterval(tick, 1000);
         })();
 
-        /* АВТОПРОКРУТКА — ПИНГ-ПОНГ */
-        (function autoScroll() {
-            document.querySelectorAll('.carousel[data-autoscroll]').forEach(carousel => {
-                const interval = parseInt(carousel.dataset.autoscroll, 10) || 6000;
-                let paused = false;
-                let resumeTimer = null;
-                let autoTimer = null;
-                let direction = 1;
-
-                function step() {
-                    if (paused) return;
-                    const firstCard = carousel.querySelector('*');
-                    if (!firstCard) return;
-                    const cardWidth = firstCard.offsetWidth + 20;
-                    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
-                    if (direction === 1 && carousel.scrollLeft >= maxScroll - 5) direction = -1;
-                    else if (direction === -1 && carousel.scrollLeft <= 5) direction = 1;
-
-                    carousel.scrollBy({ left: cardWidth * direction, behavior: 'smooth' });
-                }
-                function start() { stop(); autoTimer = setInterval(step, interval); }
-                function stop() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
-                function pause() { paused = true; if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; } }
-                function resume(delay) {
-                    paused = false;
-                    if (resumeTimer) clearTimeout(resumeTimer);
-                    resumeTimer = setTimeout(start, delay || 3000);
-                }
-
-                carousel.addEventListener('mouseenter', pause);
-                carousel.addEventListener('mouseleave', () => resume(2000));
-                carousel.addEventListener('touchstart', pause, { passive: true });
-                carousel.addEventListener('touchend', () => resume(3000));
-                carousel.addEventListener('wheel', pause, { passive: true });
-                document.querySelectorAll('.carousel-nav[data-target="' + carousel.id + '"]').forEach(btn => {
-                    btn.addEventListener('click', () => { pause(); resume(8000); });
-                });
-                start();
-            });
-        })();
-
-        /* СТРЕЛКИ */
-        (function arrows() {
-            document.querySelectorAll('.carousel-nav').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const carousel = document.getElementById(btn.dataset.target);
-                    if (!carousel) return;
-                    const firstCard = carousel.querySelector('*');
-                    const cardWidth = firstCard ? firstCard.offsetWidth + 20 : 280;
-                    const dir = btn.classList.contains('next') ? 1 : -1;
-                    carousel.scrollBy({ left: cardWidth * dir, behavior: 'smooth' });
-                });
-            });
-            document.querySelectorAll('.carousel').forEach(carousel => {
-                const prev = document.querySelector('.carousel-nav.prev[data-target="' + carousel.id + '"]');
-                const next = document.querySelector('.carousel-nav.next[data-target="' + carousel.id + '"]');
-                function upd() {
-                    if (prev) prev.disabled = carousel.scrollLeft <= 5;
-                    if (next) next.disabled = carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 5;
-                }
-                carousel.addEventListener('scroll', upd);
-                window.addEventListener('resize', upd);
-                upd();
-            });
-        })();
-
-        /* ЖИВЫЕ СТАВКИ */
-        (function liveBids() {
-            const cards = document.querySelectorAll('.auction-card');
-            if (!cards.length) return;
-            const fakeLeaders = ['Anonymous_01', 'Dark_Player', 'NightBidder', 'Anonymous_77', 'RedQueen', 'SilentBid', 'TwinFlame', 'GoldenCage', 'Noir_Art', 'Velvet_Rose', 'Midnight_777', 'Luxuria', 'CrimsonFang', 'SilverFox', 'IronMask'];
-            function formatNum(n) { return n.toLocaleString('ru-RU'); }
-            function updateBid(card) {
-                const bidEl = card.querySelector('[data-bid-el]');
-                const bidsEl = card.querySelector('[data-bids-el]');
-                if (!bidEl) return;
-                let current = parseInt(card.dataset.bid, 10) || 0;
-                const step = Math.floor(Math.random() * 100) + 50;
-                current += step;
-                card.dataset.bid = current;
-                bidEl.innerHTML = formatNum(current) + '<span class="unit">FEN</span>';
-                bidEl.classList.add('bump');
-                setTimeout(() => bidEl.classList.remove('bump'), 1000);
-                if (bidsEl) {
-                    let b = parseInt(bidsEl.textContent, 10) || 0;
-                    b += 1;
-                    bidsEl.textContent = b;
-                }
-            }
-            function changeLeader(card) {
-                const el = card.querySelector('[data-leader-el]');
-                if (!el) return;
-                const cur = el.textContent;
-                let next = cur; let g = 0;
-                while (next === cur && g < 10) {
-                    next = fakeLeaders[Math.floor(Math.random() * fakeLeaders.length)];
-                    g++;
-                }
-                el.textContent = next;
-            }
+        /* ============================================
+           ПОВТОРИТЬ АНИМАЦИЮ ПОЯВЛЕНИЯ
+           ============================================ */
+        function replayAnimations() {
+            const grid = document.getElementById('grid');
+            const cards = grid.querySelectorAll('.mini-card');
             cards.forEach(card => {
-                function schedBid() {
-                    const delay = Math.random() * 3000 + 3000;
-                    setTimeout(() => { updateBid(card); schedBid(); }, delay);
-                }
-                schedBid();
-                function schedLeader() {
-                    const delay = Math.random() * 25000 + 25000;
-                    setTimeout(() => { changeLeader(card); schedLeader(); }, delay);
-                }
-                schedLeader();
+                card.style.animation = 'none';
+                card.offsetHeight; /* форсируем reflow */
+                card.style.animation = '';
             });
-        })();
-
-        /* ЮЧИ — слоты занимаются */
-        (function ychSlots() {
-            const cards = document.querySelectorAll('.ych-card');
-            cards.forEach(card => {
-                function scheduleSlotChange() {
-                    const delay = Math.random() * 20000 + 20000;
-                    setTimeout(() => {
-                        const freeSlots = card.querySelectorAll('.yc-slot.free');
-                        if (freeSlots.length > 1) {
-                            const randomFree = freeSlots[Math.floor(Math.random() * freeSlots.length)];
-                            randomFree.classList.remove('free');
-                            randomFree.classList.add('taken');
-                            randomFree.textContent = '';
-                            const numEl = card.querySelector('.yc-slots-num');
-                            const freeCount = card.querySelectorAll('.yc-slot.free').length;
-                            if (numEl) numEl.textContent = freeCount + ' / 3';
-                        }
-                        scheduleSlotChange();
-                    }, delay);
-                }
-                scheduleSlotChange();
-            });
-        })();
-
-        /* КЛИКИ */
-        (function clicks() {
-            document.querySelectorAll('.auction-card').forEach(card => {
-                card.addEventListener('click', e => {
-                    if (e.target.classList.contains('ac-btn')) return;
-                    alert('🔴 АУКЦИОН\n\nРабота: ' + (card.dataset.title || '—') + '\nАвтор: ' + (card.dataset.author || '—') + '\nТекущая ставка: ' + (card.dataset.bid || '—') + ' FEN\n\n(Здесь будет лайтбокс со ставками)');
-                });
-            });
-            document.querySelectorAll('.ac-btn').forEach(btn => {
-                btn.addEventListener('click', e => {
-                    e.stopPropagation();
-                    const card = btn.closest('.auction-card');
-                    alert('💰 СТАВКА\n\nРабота: ' + (card.dataset.title || '—') + '\nТекущая ставка: ' + (card.dataset.bid || '—') + ' FEN\n\n(Здесь будет форма ставки)');
-                });
-            });
-            document.querySelectorAll('.ych-card').forEach(card => {
-                card.addEventListener('click', e => {
-                    if (e.target.classList.contains('yc-btn')) return;
-                    alert('🎟️ YCH\n\nРабота: ' + (card.dataset.title || '—') + '\nАвтор: ' + (card.dataset.author || '—') + '\nСвободных слотов: ' + (card.dataset.slots || '?') + '\n\n(Здесь будет лайтбокс с записью)');
-                });
-            });
-            document.querySelectorAll('.yc-btn').forEach(btn => {
-                btn.addEventListener('click', e => {
-                    e.stopPropagation();
-                    const card = btn.closest('.ych-card');
-                    alert('✍️ ЗАПИСЬ НА YCH\n\nРабота: ' + (card.dataset.title || '—') + '\n\n(Здесь будет форма записи)');
-                });
-            });
-            document.querySelectorAll('.art-tile').forEach(tile => {
-                tile.addEventListener('click', e => {
-                    e.preventDefault();
-                    alert('🎨 АРТ\n\nРабота: ' + (tile.dataset.title || '—') + '\nАвтор: ' + (tile.dataset.author || '—') + '\n\n(Здесь будет лайтбокс с заказом)');
-                });
-            });
-        })();
-
-        /* НАВИГАЦИЯ */
-        (function nav() {
-            document.querySelectorAll('.topbar-nav a').forEach(a => {
-                a.addEventListener('click', e => {
-                    const href = a.getAttribute('href');
-                    if (href && href !== '#' && !href.startsWith('#')) return;
-                    e.preventDefault();
-                    document.querySelectorAll('.topbar-nav a').forEach(x => x.classList.remove('active'));
-                    a.classList.add('active');
-                });
-            });
-        })();
+        }
     </script>
 
 </body>
