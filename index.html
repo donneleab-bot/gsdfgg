@@ -12,7 +12,7 @@
 
     <style>
         /* ============================================
-           CASINO FLOOR — МАКСИМАЛЬНАЯ АТМОСФЕРА
+           FENBO — CARD TABLE (карты + кролик)
            ============================================ */
         :root {
             --bg: #061410;
@@ -23,6 +23,7 @@
 
             --felt: #0d3323;
             --felt-hi: #124530;
+            --felt-deep: #072015;
 
             --gold: #d4af37;
             --gold-hi: #f0c957;
@@ -52,7 +53,7 @@
             --line-hi: rgba(212, 175, 55, 0.4);
 
             --r: 4px;
-            --r-lg: 10px;
+            --r-card: 14px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
@@ -71,10 +72,10 @@
         }
 
         /* ============================================
-           ФОН — ИГРОВОЙ СТОЛ (многослойный)
+           ФОН — КАРТОЧНЫЙ СТОЛ
            ============================================ */
 
-        /* Слой 1: сукно с текстурой */
+        /* Слой 1: сукно */
         body::before {
             content: '';
             position: fixed;
@@ -83,20 +84,15 @@
             z-index: 0;
             background-color: #081812;
             background-image:
-                /* Тонкая текстура сукна */
                 repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(212, 175, 55, 0.012) 2px, rgba(212, 175, 55, 0.012) 3px),
                 repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(16, 224, 122, 0.008) 2px, rgba(16, 224, 122, 0.008) 3px),
-                /* Пятна сукна */
                 radial-gradient(ellipse 80% 50% at 50% 40%, rgba(16, 60, 40, 0.6) 0%, transparent 70%),
                 radial-gradient(ellipse 60% 40% at 15% 90%, rgba(20, 80, 55, 0.4) 0%, transparent 70%),
                 radial-gradient(ellipse 60% 40% at 85% 90%, rgba(20, 80, 55, 0.4) 0%, transparent 70%),
-                /* Общее затемнение к краям */
-                radial-gradient(ellipse 90% 80% at 50% 50%, transparent 30%, rgba(2, 8, 6, 0.9) 100%),
-                /* Свет софитов сверху */
-                linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, transparent 30%);
+                radial-gradient(ellipse 90% 80% at 50% 50%, transparent 30%, rgba(2, 8, 6, 0.9) 100%);
         }
 
-        /* Слой 2: свет от ламп над столом (3 пятна) */
+        /* Слой 2: свет ламп */
         body::after {
             content: '';
             position: fixed;
@@ -120,13 +116,40 @@
             89% { opacity: 1; }
         }
 
-        /* Слой 3: неоновые отблески по краям */
+        /* Разметка стола — как на покерном столе */
+        .table-markings {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+        }
+        .table-markings::before {
+            content: '';
+            position: absolute;
+            inset: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            border-radius: 40px;
+        }
+        .table-markings::after {
+            content: '♠ ♥ ♦ ♣  FENBO CASINO  ♠ ♥ ♦ ♣';
+            position: absolute;
+            bottom: 30px; left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 0.7rem;
+            letter-spacing: 8px;
+            color: rgba(212, 175, 55, 0.25);
+            white-space: nowrap;
+        }
+
+        /* Неоновые отблески */
         .neon-left, .neon-right {
             position: fixed;
             pointer-events: none;
             z-index: 1;
             filter: blur(80px);
-            opacity: 0.6;
+            opacity: 0.5;
         }
         .neon-left {
             top: 20%; left: -15%;
@@ -141,15 +164,15 @@
             animation: neonPulseR 9s ease-in-out infinite;
         }
         @keyframes neonPulseL {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
         }
         @keyframes neonPulseR {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 0.4; }
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 0.3; }
         }
 
-        /* Слой 4: дым сигары / пар */
+        /* Дым */
         .smoke-1, .smoke-2 {
             position: fixed;
             pointer-events: none;
@@ -179,7 +202,7 @@
             to { transform: translate(-30px, 20px) scale(1); }
         }
 
-        /* Слой 5: золотая пыль — плавающие частицы */
+        /* Золотая пыль */
         .dust-layer {
             position: fixed;
             inset: 0;
@@ -191,64 +214,24 @@
             position: absolute;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(255, 230, 150, 1) 0%, rgba(212, 175, 55, 0.7) 40%, transparent 100%);
-            box-shadow:
-                0 0 6px rgba(212, 175, 55, 0.9),
-                0 0 12px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.9), 0 0 12px rgba(212, 175, 55, 0.4);
             opacity: 0;
             animation: dustFloat linear infinite;
         }
         @keyframes dustFloat {
-            0% {
-                opacity: 0;
-                transform: translate3d(0, 0, 0) scale(0.5);
-            }
+            0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.5); }
             15% { opacity: 1; }
-            50% {
-                opacity: 0.7;
-                transform: translate3d(var(--dx, 20px), var(--dy, -50vh), 0) scale(1);
-            }
+            50% { opacity: 0.7; transform: translate3d(var(--dx, 20px), var(--dy, -50vh), 0) scale(1); }
             85% { opacity: 0.5; }
-            100% {
-                opacity: 0;
-                transform: translate3d(var(--dx2, -10px), var(--dy2, -110vh), 0) scale(0.4);
-            }
-        }
-
-        /* Слой 6: разметка стола — тонкие золотые линии по краям */
-        .table-markings {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.35;
-        }
-        .table-markings::before {
-            content: '';
-            position: absolute;
-            inset: 60px;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 20px;
-        }
-        .table-markings::after {
-            content: '';
-            position: absolute;
-            inset: 80px;
-            border: 1px dashed rgba(212, 175, 55, 0.1);
-            border-radius: 15px;
+            100% { opacity: 0; transform: translate3d(var(--dx2, -10px), var(--dy2, -110vh), 0) scale(0.4); }
         }
 
         /* ============================================
-           ОСНОВНАЯ ОБЁРТКА
+           ОБЁРТКА
            ============================================ */
-        .app {
-            position: relative;
-            z-index: 10;
-            min-height: 100vh;
-        }
+        .app { position: relative; z-index: 10; min-height: 100vh; }
 
-        /* ============================================
-           ШАПКА
-           ============================================ */
+        /* ШАПКА */
         .header {
             position: sticky;
             top: 0;
@@ -278,28 +261,37 @@
             margin: 0 auto;
         }
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-rabbit {
+            width: 38px; height: 38px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 0 12px var(--gold-glow));
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            gap: 3px;
+        }
+        .logo-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.45rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--gold);
-            text-decoration: none;
             letter-spacing: 6px;
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-            text-shadow:
-                0 0 25px var(--gold-glow),
-                0 0 50px rgba(212, 175, 55, 0.3),
-                0 2px 0 rgba(80, 50, 0, 0.8);
+            text-shadow: 0 0 25px var(--gold-glow), 0 2px 0 rgba(80, 50, 0, 0.8);
         }
-        .logo .sub {
+        .logo-sub {
             font-family: 'Caveat', cursive;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: var(--ivory);
             letter-spacing: 0;
-            margin-left: 4px;
             font-weight: 500;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            margin-top: -2px;
         }
 
         .nav {
@@ -319,8 +311,7 @@
             position: relative;
             transition: color 0.25s, text-shadow 0.25s;
         }
-        .nav a:hover,
-        .nav a.active {
+        .nav a:hover, .nav a.active {
             color: var(--gold);
             text-shadow: 0 0 15px var(--gold-glow);
         }
@@ -331,7 +322,7 @@
             transform: translateX(-50%) rotate(45deg);
             width: 5px; height: 5px;
             background: var(--gold);
-            box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold-glow);
+            box-shadow: 0 0 10px var(--gold);
         }
 
         .user { display: flex; align-items: center; gap: 14px; }
@@ -345,7 +336,6 @@
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.25s;
-            position: relative;
             box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.1);
         }
         .balance:hover {
@@ -355,17 +345,13 @@
         .balance-chip {
             width: 24px; height: 24px;
             border-radius: 50%;
-            background:
-                radial-gradient(circle at 30% 25%, #fff6c8 0%, var(--gold) 40%, var(--gold-deep) 100%);
+            background: radial-gradient(circle at 30% 25%, #fff6c8 0%, var(--gold) 40%, var(--gold-deep) 100%);
             border: 1.5px solid var(--gold-hi);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow:
-                inset 0 -3px 5px rgba(0, 0, 0, 0.5),
-                inset 0 2px 3px rgba(255, 255, 255, 0.4),
-                0 0 10px var(--gold-glow);
+            box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.5), inset 0 2px 3px rgba(255, 255, 255, 0.4), 0 0 10px var(--gold-glow);
             position: relative;
         }
         .balance-chip::before {
@@ -424,26 +410,25 @@
             box-shadow: 0 0 8px var(--neon-emerald);
         }
 
-        /* ============================================
-           ОСНОВНОЙ КОНТЕНТ
-           ============================================ */
+        /* ОСНОВНОЙ КОНТЕНТ */
         .wrap {
             max-width: 1760px;
             margin: 0 auto;
             padding: 50px 40px 60px;
         }
 
-        /* HERO — компактный */
+        /* ============================================
+           HERO С КРОЛИКОМ-ДИЛЕРОМ
+           ============================================ */
         .hero {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
             gap: 40px;
-            padding-bottom: 28px;
+            padding-bottom: 32px;
             margin-bottom: 40px;
             border-bottom: 1px solid var(--line);
             position: relative;
-            flex-wrap: wrap;
         }
         .hero::after {
             content: '';
@@ -453,11 +438,16 @@
             background: linear-gradient(90deg, var(--gold), transparent);
             box-shadow: 0 0 15px var(--gold-glow);
         }
-        .hero-left {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        .hero-rabbit {
+            width: 120px; height: 120px;
+            filter: drop-shadow(0 0 30px var(--gold-glow));
+            animation: rabbitFloat 5s ease-in-out infinite;
         }
+        @keyframes rabbitFloat {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-8px) rotate(3deg); }
+        }
+        .hero-content { display: flex; flex-direction: column; gap: 10px; }
         .hero-eyebrow {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.62rem;
@@ -474,12 +464,6 @@
             content: '♠';
             font-size: 0.9rem;
         }
-        .hero-eyebrow::after {
-            content: '♥ ♦ ♣';
-            font-size: 0.9rem;
-            letter-spacing: 4px;
-            color: var(--gold);
-        }
         .hero-title {
             font-family: 'Playfair Display', serif;
             font-size: 2.8rem;
@@ -495,9 +479,16 @@
             font-weight: 500;
             text-shadow: 0 0 30px var(--gold-glow);
         }
+        .hero-sub {
+            font-family: 'Caveat', cursive;
+            font-size: 1.25rem;
+            color: var(--ivory-soft);
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
         .hero-board {
             display: flex;
-            gap: 26px;
+            gap: 14px;
             padding-bottom: 6px;
         }
         .board-item {
@@ -526,25 +517,12 @@
             color: var(--ivory);
             letter-spacing: -0.3px;
         }
-        .board-value.gold {
-            color: var(--gold);
-            text-shadow: 0 0 15px var(--gold-glow);
-        }
-        .board-value.emerald {
-            color: var(--neon-emerald);
-            text-shadow: 0 0 15px var(--neon-emerald-soft);
-        }
-        .board-value.wine {
-            color: var(--neon-wine);
-            text-shadow: 0 0 15px var(--neon-wine-soft);
-        }
+        .board-value.gold { color: var(--gold); text-shadow: 0 0 15px var(--gold-glow); }
+        .board-value.emerald { color: var(--neon-emerald); text-shadow: 0 0 15px var(--neon-emerald-soft); }
+        .board-value.wine { color: var(--neon-wine); text-shadow: 0 0 15px var(--neon-wine-soft); }
 
-        /* ============================================
-           КАРУСЕЛИ
-           ============================================ */
-        .carousel-section {
-            margin-bottom: 44px;
-        }
+        /* КАРУСЕЛИ */
+        .carousel-section { margin-bottom: 44px; }
         .carousel-head {
             display: flex;
             align-items: baseline;
@@ -554,11 +532,7 @@
             padding-bottom: 12px;
             border-bottom: 1px solid var(--line);
         }
-        .carousel-title {
-            display: flex;
-            align-items: baseline;
-            gap: 14px;
-        }
+        .carousel-title { display: flex; align-items: baseline; gap: 14px; }
         .carousel-icon {
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
@@ -602,14 +576,9 @@
             background: var(--gold);
             color: var(--bg);
             border-color: var(--gold);
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.4),
-                0 0 20px var(--gold-glow);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 20px var(--gold-glow);
         }
-        .carousel-arrow:disabled {
-            opacity: 0.25;
-            cursor: not-allowed;
-        }
+        .carousel-arrow:disabled { opacity: 0.25; cursor: not-allowed; }
         .carousel-arrow:disabled:hover {
             background: var(--bg-1);
             color: var(--gold);
@@ -623,242 +592,212 @@
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
-            padding: 6px 0 14px;
+            padding: 12px 0 16px;
             scrollbar-width: none;
         }
         .carousel-track::-webkit-scrollbar { display: none; }
 
         /* ============================================
-           MINI CARD — с неоновой аурой
+           КАРТОЧКА-КАРТА (игральная карта)
            ============================================ */
-        .mini-card {
-            flex: 0 0 270px;
+        .playing-card {
+            flex: 0 0 240px;
             scroll-snap-align: start;
             position: relative;
-            background: linear-gradient(180deg, var(--felt) 0%, var(--bg-1) 100%);
-            border: 1px solid var(--line-mid);
-            border-radius: var(--r-lg);
+            aspect-ratio: 2 / 3;
+            background: linear-gradient(165deg, #1a0e0a 0%, #0d0503 40%, #14080a 100%);
+            border-radius: var(--r-card);
             overflow: hidden;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
             opacity: 0;
             transform: translateY(18px);
             filter: blur(3px);
             animation: cardRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s, box-shadow 0.4s;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
             box-shadow:
-                0 8px 30px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(212, 175, 55, 0.08);
+                0 12px 40px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(212, 175, 55, 0.2),
+                inset 0 0 60px rgba(0, 0, 0, 0.5);
         }
-        .mini-card:nth-child(1) { animation-delay: 0.05s; }
-        .mini-card:nth-child(2) { animation-delay: 0.10s; }
-        .mini-card:nth-child(3) { animation-delay: 0.15s; }
-        .mini-card:nth-child(4) { animation-delay: 0.20s; }
-        .mini-card:nth-child(5) { animation-delay: 0.25s; }
-        .mini-card:nth-child(6) { animation-delay: 0.30s; }
+        .playing-card:nth-child(1) { animation-delay: 0.05s; }
+        .playing-card:nth-child(2) { animation-delay: 0.10s; }
+        .playing-card:nth-child(3) { animation-delay: 0.15s; }
+        .playing-card:nth-child(4) { animation-delay: 0.20s; }
+        .playing-card:nth-child(5) { animation-delay: 0.25s; }
+        .playing-card:nth-child(6) { animation-delay: 0.30s; }
 
         @keyframes cardRise {
             to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        .mini-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--gold-soft);
+        .playing-card:hover {
+            transform: translateY(-8px) rotate(-1deg);
             box-shadow:
-                0 24px 50px rgba(0, 0, 0, 0.6),
+                0 24px 50px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(212, 175, 55, 0.6),
                 0 0 60px var(--gold-aura),
-                0 0 100px rgba(212, 175, 55, 0.1),
-                inset 0 1px 0 rgba(212, 175, 55, 0.2);
+                inset 0 0 60px rgba(0, 0, 0, 0.5);
         }
 
-        /* Неоновая аура */
-        .mini-card::before {
-            content: '';
+        /* Внутренняя декоративная рамка (двойная тонкая) */
+        .playing-card .card-frame {
             position: absolute;
-            inset: -1px;
-            border-radius: var(--r-lg);
-            padding: 1px;
-            background: conic-gradient(
-                from var(--angle, 0deg),
-                transparent 0deg,
-                transparent 340deg,
-                var(--gold-bright) 350deg,
-                var(--gold-hi) 355deg,
-                var(--gold-bright) 360deg
-            );
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
+            inset: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 8px;
             pointer-events: none;
-            transition: opacity 0.3s;
-            z-index: 5;
-        }
-        .mini-card:hover::before {
-            opacity: 1;
-            animation: beamRotate 3s linear infinite;
-        }
-        @property --angle {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
-        }
-        @keyframes beamRotate {
-            to { --angle: 360deg; }
-        }
-
-        /* «Рулетка» сверху */
-        .mini-card .roulette {
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: rgba(212, 175, 55, 0.15);
             z-index: 3;
-            overflow: hidden;
+            transition: border-color 0.4s;
         }
-        .mini-card .roulette-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-hi) 50%, var(--gold-bright) 100%);
-            box-shadow:
-                0 0 8px var(--gold),
-                0 0 15px var(--gold-glow);
-            transition: width 0.6s ease;
-            position: relative;
-        }
-        .mini-card .roulette-fill::after {
+        .playing-card .card-frame::before {
             content: '';
             position: absolute;
-            top: 0; right: 0;
-            width: 8px; height: 100%;
-            background: white;
-            filter: blur(2px);
-            opacity: 0.7;
-            animation: rouletteShine 2s ease-in-out infinite;
+            inset: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 5px;
         }
-        @keyframes rouletteShine {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
+        .playing-card:hover .card-frame {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px var(--gold-aura);
         }
 
-        /* Превью */
-        .mini-thumb {
-            position: relative;
-            aspect-ratio: 5 / 4;
+        /* Ранг карты — верхний левый угол */
+        .card-rank {
+            position: absolute;
+            top: 16px; left: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            z-index: 5;
+            line-height: 1;
+        }
+        .card-rank .rank-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 12px var(--gold-glow);
+        }
+        .card-rank .rank-suit {
+            font-size: 1rem;
+            color: var(--gold);
+            text-shadow: 0 0 12px var(--gold-glow);
+        }
+        .card-rank .rank-suit.red { color: var(--neon-wine); text-shadow: 0 0 12px var(--neon-wine-soft); }
+
+        /* Ранг снизу — перевёрнутый */
+        .card-rank-bottom {
+            position: absolute;
+            bottom: 16px; right: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            transform: rotate(180deg);
+            z-index: 5;
+            line-height: 1;
+        }
+
+        /* Превью-зона — сам арт */
+        .card-art {
+            position: absolute;
+            inset: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            border-radius: 6px;
             background:
-                radial-gradient(ellipse at 30% 30%, rgba(230, 57, 128, 0.15) 0%, transparent 55%),
-                radial-gradient(ellipse at 75% 80%, rgba(16, 224, 122, 0.1) 0%, transparent 55%),
-                linear-gradient(140deg, #0a2016 0%, #04120b 100%);
+                radial-gradient(ellipse at 50% 40%, rgba(122, 30, 44, 0.2) 0%, transparent 60%),
+                linear-gradient(140deg, #0a0204 0%, #04080a 100%);
+            z-index: 2;
         }
-        .mini-thumb .suit {
+        .card-art .suit-big {
             font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
+            font-size: 5rem;
             font-style: italic;
             font-weight: 500;
             color: rgba(212, 175, 55, 0.2);
-            text-shadow:
-                0 0 40px rgba(212, 175, 55, 0.4),
-                0 0 80px rgba(212, 175, 55, 0.2);
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.4), 0 0 80px rgba(212, 175, 55, 0.2);
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), color 0.5s, text-shadow 0.5s;
+            z-index: 2;
         }
-        .mini-card:hover .mini-thumb .suit {
+        .card-art .suit-big.red {
+            color: rgba(230, 57, 128, 0.25);
+            text-shadow: 0 0 40px var(--neon-wine-soft), 0 0 80px rgba(230, 57, 128, 0.15);
+        }
+        .playing-card:hover .suit-big {
             transform: scale(1.1);
             color: rgba(212, 175, 55, 0.4);
-            text-shadow:
-                0 0 60px rgba(212, 175, 55, 0.7),
-                0 0 120px rgba(212, 175, 55, 0.4);
+            text-shadow: 0 0 60px rgba(212, 175, 55, 0.7), 0 0 120px rgba(212, 175, 55, 0.4);
+        }
+        .playing-card:hover .suit-big.red {
+            color: rgba(230, 57, 128, 0.5);
+            text-shadow: 0 0 60px var(--neon-wine-soft), 0 0 120px rgba(230, 57, 128, 0.3);
         }
 
-        /* Блеск при hover */
-        .mini-thumb::before {
-            content: '';
+        /* Водяной знак */
+        .card-art .wm {
             position: absolute;
-            top: 0; left: -80%;
-            width: 60%; height: 100%;
-            background: linear-gradient(105deg, transparent 0%, rgba(255, 240, 200, 0.15) 50%, transparent 100%);
-            transform: skewX(-20deg);
-            z-index: 4;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s;
             pointer-events: none;
-            transition: left 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 3;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(212, 175, 55, 0.06) 14px, rgba(212, 175, 55, 0.06) 15px);
         }
-        .mini-card:hover .mini-thumb::before { left: 130%; }
-
-        /* Номер */
-        .mini-number {
-            position: absolute;
-            top: 12px; left: 12px;
+        .card-art .wm::after {
+            content: 'FENBO';
             font-family: 'Playfair Display', serif;
             font-size: 0.7rem;
             font-weight: 700;
-            color: var(--gold);
-            background: rgba(2, 8, 6, 0.9);
-            border: 1px solid var(--gold-soft);
-            padding: 3px 8px;
-            border-radius: 20px;
-            letter-spacing: 1px;
-            z-index: 3;
-            backdrop-filter: blur(6px);
-            box-shadow: 0 0 10px var(--gold-aura);
+            font-style: italic;
+            letter-spacing: 4px;
+            color: rgba(212, 175, 55, 0.3);
+            transform: rotate(-22deg);
         }
+        .playing-card:hover .wm { opacity: 1; }
 
-        /* Статус */
-        .mini-status {
+        /* Кролик-миниатюра в углу карты */
+        .card-rabbit {
             position: absolute;
-            top: 12px; right: 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.5rem;
-            font-weight: 700;
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-            padding: 3px 8px;
-            border-radius: 3px;
-            z-index: 3;
-            backdrop-filter: blur(6px);
-            color: var(--neon-emerald);
-            background: rgba(2, 8, 6, 0.9);
-            border: 1px solid rgba(16, 224, 122, 0.4);
-            box-shadow: 0 0 12px var(--neon-emerald-aura);
+            bottom: 18px; left: 18px;
+            width: 22px; height: 22px;
+            opacity: 0.4;
+            z-index: 5;
+            transition: opacity 0.4s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .mini-status::before {
-            content: '';
-            width: 4px; height: 4px;
-            border-radius: 50%;
-            background: var(--neon-emerald);
-            box-shadow: 0 0 8px var(--neon-emerald);
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
-        }
-        .mini-status.ych {
-            color: var(--gold);
-            border-color: var(--gold-soft);
-            box-shadow: 0 0 12px var(--gold-aura);
-        }
-        .mini-status.ych::before {
-            background: var(--gold);
-            box-shadow: 0 0 8px var(--gold);
-            animation: none;
+        .playing-card:hover .card-rabbit {
+            opacity: 0.8;
+            transform: scale(1.15);
         }
 
-        /* Инфо */
-        .mini-info {
-            padding: 14px 16px 16px;
+        /* Инфо-оверлей снизу — выезжает при hover */
+        .card-info {
+            position: absolute;
+            left: 20px; right: 20px; bottom: 20px;
+            padding: 10px 12px;
+            background: linear-gradient(180deg, transparent 0%, rgba(2, 8, 6, 0.95) 45%);
+            border-radius: 6px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
+            z-index: 6;
+            transform: translateY(30%);
+            opacity: 0.6;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s;
         }
-        .mini-title {
+        .playing-card:hover .card-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .card-title {
             font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             color: var(--ivory);
             letter-spacing: -0.1px;
@@ -866,36 +805,35 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
         }
-        .mini-author {
+        .card-author {
             font-family: 'Caveat', cursive;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--gold);
             font-weight: 500;
             line-height: 1;
-            margin-top: -2px;
-            text-shadow: 0 0 15px var(--gold-glow);
+            text-shadow: 0 0 12px var(--gold-glow);
         }
-        .mini-bottom {
+        .card-bottom {
             display: flex;
             align-items: baseline;
             justify-content: space-between;
             gap: 8px;
-            padding-top: 12px;
-            margin-top: 8px;
-            border-top: 1px solid var(--line);
+            padding-top: 6px;
+            margin-top: 4px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
-        .mini-price {
+        .card-price {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: var(--gold);
             letter-spacing: -0.3px;
             white-space: nowrap;
-            text-shadow: 0 0 15px var(--gold-glow);
+            text-shadow: 0 0 12px var(--gold-glow);
         }
-        .mini-price .unit {
+        .card-price .unit {
             font-family: 'Inter', sans-serif;
             font-size: 0.5rem;
             color: var(--text-2);
@@ -903,22 +841,22 @@
             margin-left: 3px;
             font-weight: 500;
         }
-        .mini-price.bump {
+        .card-price.bump {
             animation: priceBump 1s cubic-bezier(0.22, 1, 0.36, 1);
         }
         @keyframes priceBump {
             0% { color: var(--gold); }
             30% { color: var(--gold-bright); text-shadow: 0 0 25px var(--gold); transform: scale(1.05); }
-            100% { color: var(--gold); text-shadow: 0 0 15px var(--gold-glow); transform: scale(1); }
+            100% { color: var(--gold); text-shadow: 0 0 12px var(--gold-glow); transform: scale(1); }
         }
-        .mini-timer {
+        .card-timer {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
+            font-size: 0.62rem;
             font-weight: 600;
             color: var(--text-1);
             letter-spacing: 0;
         }
-        .mini-card.ending .mini-timer {
+        .playing-card.ending .card-timer {
             color: var(--neon-wine);
             animation: timerBlink 1.4s infinite;
             text-shadow: 0 0 12px var(--neon-wine-soft);
@@ -928,29 +866,69 @@
             50% { opacity: 0.4; }
         }
 
-        /* Слоты YCH */
-        .mini-slots {
-            display: flex;
+        /* Статус LIVE в верхней части карты */
+        .card-live {
+            position: absolute;
+            top: 16px; right: 18px;
+            display: inline-flex;
+            align-items: center;
             gap: 4px;
-            padding-top: 4px;
-        }
-        .mini-slot {
-            flex: 1;
-            height: 3px;
-            background: rgba(212, 175, 55, 0.15);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.45rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 2px 6px;
             border-radius: 2px;
+            z-index: 6;
+            color: var(--neon-emerald);
+            background: rgba(2, 8, 6, 0.9);
+            border: 1px solid rgba(16, 224, 122, 0.4);
+            box-shadow: 0 0 10px var(--neon-emerald-aura);
         }
-        .mini-slot.free {
+        .card-live::before {
+            content: '';
+            width: 3px; height: 3px;
+            border-radius: 50%;
+            background: var(--neon-emerald);
+            box-shadow: 0 0 6px var(--neon-emerald);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+        .card-live.ych {
+            color: var(--gold);
+            border-color: var(--gold-soft);
+        }
+        .card-live.ych::before {
+            background: var(--gold);
+            box-shadow: 0 0 6px var(--gold);
+            animation: none;
+        }
+
+        /* Слоты YCH */
+        .card-slots {
+            display: flex;
+            gap: 3px;
+            padding-top: 3px;
+        }
+        .card-slot {
+            flex: 1;
+            height: 2px;
+            background: rgba(212, 175, 55, 0.15);
+            border-radius: 1px;
+        }
+        .card-slot.free {
             background: linear-gradient(90deg, var(--gold) 0%, var(--gold-hi) 100%);
-            box-shadow: 0 0 8px var(--gold-glow);
+            box-shadow: 0 0 6px var(--gold-glow);
         }
 
         /* ============================================
-           ГЛАВНАЯ ГАЛЕРЕЯ
+           ГАЛЕРЕЯ — ТОЖЕ КАРТЫ
            ============================================ */
-        .gallery-section {
-            position: relative;
-        }
+        .gallery-section { position: relative; }
         .gallery-head {
             display: flex;
             align-items: baseline;
@@ -969,11 +947,7 @@
             background: linear-gradient(90deg, var(--gold), transparent);
             box-shadow: 0 0 12px var(--gold-glow);
         }
-        .gallery-title {
-            display: flex;
-            align-items: baseline;
-            gap: 16px;
-        }
+        .gallery-title { display: flex; align-items: baseline; gap: 16px; }
         .gallery-mark {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
@@ -998,11 +972,7 @@
             color: var(--text-2);
             letter-spacing: 0.5px;
         }
-        .gallery-filters {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
+        .gallery-filters { display: flex; gap: 6px; flex-wrap: wrap; }
         .g-chip {
             font-family: 'Inter', sans-serif;
             font-size: 0.62rem;
@@ -1041,12 +1011,12 @@
         @media (max-width: 1000px) { .gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 50px; gap: 12px; } }
         @media (max-width: 600px) { .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 40px; gap: 8px; } }
 
-        .art {
+        /* Карта в галерее — упрощённая */
+        .art-card {
             position: relative;
             overflow: hidden;
-            border-radius: var(--r);
-            background: linear-gradient(140deg, var(--felt) 0%, var(--bg-1) 100%);
-            border: 1px solid var(--line);
+            border-radius: var(--r-card);
+            background: linear-gradient(165deg, #1a0e0a 0%, #0d0503 40%, #14080a 100%);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -1054,67 +1024,100 @@
             opacity: 0;
             transform: translateY(16px);
             animation: cardRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s, box-shadow 0.4s;
-            box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.05);
-        }
-        .art:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold-soft);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
             box-shadow:
-                0 24px 50px rgba(0, 0, 0, 0.6),
-                0 0 60px var(--gold-aura),
-                inset 0 1px 0 rgba(212, 175, 55, 0.2);
+                0 8px 24px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(212, 175, 55, 0.15),
+                inset 0 0 40px rgba(0, 0, 0, 0.4);
+        }
+        .art-card:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 20px 45px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(212, 175, 55, 0.6),
+                0 0 50px var(--gold-aura),
+                inset 0 0 40px rgba(0, 0, 0, 0.4);
             z-index: 5;
         }
 
-        /* Золотая полоска при hover */
-        .art::before {
-            content: '';
+        /* Внутренняя рамка */
+        .art-card .card-frame {
             position: absolute;
-            bottom: 0; left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 60%; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            box-shadow: 0 0 12px var(--gold);
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: 5;
+            inset: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 3;
+            transition: border-color 0.4s;
         }
-        .art:hover::before { transform: translateX(-50%) scaleX(1); }
+        .art-card:hover .card-frame { border-color: var(--gold); }
 
-        .art .suit {
+        .art-card .suit-big {
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-weight: 500;
             font-size: 4.5rem;
-            color: rgba(212, 175, 55, 0.18);
-            text-shadow:
-                0 0 50px rgba(212, 175, 55, 0.3),
-                0 0 100px rgba(212, 175, 55, 0.1);
+            color: rgba(212, 175, 55, 0.2);
+            text-shadow: 0 0 50px rgba(212, 175, 55, 0.35), 0 0 100px rgba(212, 175, 55, 0.15);
             transition: color 0.4s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.5s;
+            z-index: 2;
         }
-        .art:hover .suit {
+        .art-card .suit-big.red {
+            color: rgba(230, 57, 128, 0.22);
+            text-shadow: 0 0 50px var(--neon-wine-soft), 0 0 100px rgba(230, 57, 128, 0.12);
+        }
+        .art-card:hover .suit-big {
             color: rgba(212, 175, 55, 0.4);
             transform: scale(1.1);
-            text-shadow:
-                0 0 70px rgba(212, 175, 55, 0.6),
-                0 0 140px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 0 70px rgba(212, 175, 55, 0.6), 0 0 140px rgba(212, 175, 55, 0.3);
         }
 
-        /* Блеск при hover */
-        .art::after {
-            content: '';
+        /* Ранг в углах галереи */
+        .art-card .rank-tl,
+        .art-card .rank-br {
             position: absolute;
-            top: 0; left: -80%;
-            width: 60%; height: 100%;
-            background: linear-gradient(105deg, transparent 0%, rgba(255, 240, 200, 0.12) 50%, transparent 100%);
-            transform: skewX(-20deg);
-            z-index: 4;
-            pointer-events: none;
-            transition: left 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+            z-index: 5;
+            line-height: 1;
         }
-        .art:hover::after { left: 130%; }
+        .art-card .rank-tl { top: 12px; left: 14px; }
+        .art-card .rank-br { bottom: 12px; right: 14px; transform: rotate(180deg); }
+        .art-card .rank-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+        .art-card .rank-suit {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+        .art-card .rank-suit.red {
+            color: var(--neon-wine);
+            text-shadow: 0 0 10px var(--neon-wine-soft);
+        }
 
-        .art .wm {
+        /* Кролик в углу */
+        .art-card .card-rabbit {
+            position: absolute;
+            bottom: 10px; left: 12px;
+            width: 16px; height: 16px;
+            opacity: 0.35;
+            z-index: 5;
+            transition: opacity 0.4s, transform 0.4s;
+        }
+        .art-card:hover .card-rabbit {
+            opacity: 0.75;
+            transform: scale(1.2);
+        }
+
+        /* Водяной знак */
+        .art-card .wm {
             position: absolute;
             inset: 0;
             display: flex;
@@ -1123,49 +1126,41 @@
             opacity: 0;
             transition: opacity 0.4s;
             pointer-events: none;
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(212, 175, 55, 0.05) 22px, rgba(212, 175, 55, 0.05) 23px);
+            z-index: 4;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(212, 175, 55, 0.05) 18px, rgba(212, 175, 55, 0.05) 19px);
         }
-        .art .wm::after {
+        .art-card .wm::after {
             content: 'FENBO';
             font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             font-style: italic;
-            letter-spacing: 6px;
-            color: rgba(212, 175, 55, 0.25);
+            letter-spacing: 5px;
+            color: rgba(212, 175, 55, 0.28);
             transform: rotate(-22deg);
         }
-        .art:hover .wm { opacity: 1; }
+        .art-card:hover .wm { opacity: 1; }
 
-        .art .num {
+        /* Инфо снизу — выезжает */
+        .art-card .art-info {
             position: absolute;
-            top: 10px; left: 10px;
-            font-family: 'Playfair Display', serif;
-            font-size: 0.62rem;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 1px;
-            z-index: 3;
-            opacity: 0.7;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-        }
-        .art:hover .num { opacity: 1; }
-
-        .art .info {
-            position: absolute;
-            left: 0; right: 0; bottom: 0;
-            padding: 14px 14px 12px;
-            background: linear-gradient(180deg, transparent 0%, rgba(2, 8, 6, 0.95) 55%);
+            left: 12px; right: 12px; bottom: 12px;
             display: flex;
             flex-direction: column;
             gap: 2px;
+            padding: 6px 0 0;
             transform: translateY(20%);
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            opacity: 0.7;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s;
+            z-index: 6;
         }
-        .art:hover .info { transform: translateY(0); }
-        .art .t {
+        .art-card:hover .art-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .art-card .art-title {
             font-family: 'Playfair Display', serif;
-            font-size: 0.88rem;
+            font-size: 0.78rem;
             font-weight: 500;
             color: var(--ivory);
             letter-spacing: -0.1px;
@@ -1173,78 +1168,92 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
         }
-        .art .a {
+        .art-card .art-author {
             font-family: 'Caveat', cursive;
-            font-size: 0.92rem;
+            font-size: 0.78rem;
             color: var(--gold);
             font-weight: 500;
             line-height: 1;
-            text-shadow: 0 0 12px var(--gold-glow);
+            text-shadow: 0 0 10px var(--gold-glow);
         }
 
-        /* Формы */
-        .art.a-1  { grid-column: span 1; grid-row: span 5; animation-delay: 0.02s; }
-        .art.a-2  { grid-column: span 1; grid-row: span 4; animation-delay: 0.04s; }
-        .art.a-3  { grid-column: span 1; grid-row: span 6; animation-delay: 0.06s; }
-        .art.a-4  { grid-column: span 2; grid-row: span 5; animation-delay: 0.08s; }
-        .art.a-5  { grid-column: span 1; grid-row: span 4; animation-delay: 0.10s; }
-        .art.a-6  { grid-column: span 1; grid-row: span 5; animation-delay: 0.12s; }
-        .art.a-7  { grid-column: span 1; grid-row: span 3; animation-delay: 0.14s; }
-        .art.a-8  { grid-column: span 1; grid-row: span 5; animation-delay: 0.16s; }
-        .art.a-9  { grid-column: span 2; grid-row: span 4; animation-delay: 0.18s; }
-        .art.a-10 { grid-column: span 1; grid-row: span 6; animation-delay: 0.20s; }
-        .art.a-11 { grid-column: span 1; grid-row: span 4; animation-delay: 0.22s; }
-        .art.a-12 { grid-column: span 1; grid-row: span 5; animation-delay: 0.24s; }
-        .art.a-13 { grid-column: span 1; grid-row: span 4; animation-delay: 0.26s; }
-        .art.a-14 { grid-column: span 2; grid-row: span 6; animation-delay: 0.28s; }
-        .art.a-15 { grid-column: span 1; grid-row: span 4; animation-delay: 0.30s; }
-        .art.a-16 { grid-column: span 1; grid-row: span 5; animation-delay: 0.32s; }
-        .art.a-17 { grid-column: span 1; grid-row: span 4; animation-delay: 0.34s; }
-        .art.a-18 { grid-column: span 1; grid-row: span 5; animation-delay: 0.36s; }
-        .art.a-19 { grid-column: span 2; grid-row: span 5; animation-delay: 0.38s; }
-        .art.a-20 { grid-column: span 1; grid-row: span 4; animation-delay: 0.40s; }
+        /* Формы карт в галерее */
+        .art-card.a-1  { grid-column: span 1; grid-row: span 5; animation-delay: 0.02s; }
+        .art-card.a-2  { grid-column: span 1; grid-row: span 4; animation-delay: 0.04s; }
+        .art-card.a-3  { grid-column: span 1; grid-row: span 6; animation-delay: 0.06s; }
+        .art-card.a-4  { grid-column: span 2; grid-row: span 5; animation-delay: 0.08s; }
+        .art-card.a-5  { grid-column: span 1; grid-row: span 4; animation-delay: 0.10s; }
+        .art-card.a-6  { grid-column: span 1; grid-row: span 5; animation-delay: 0.12s; }
+        .art-card.a-7  { grid-column: span 1; grid-row: span 3; animation-delay: 0.14s; }
+        .art-card.a-8  { grid-column: span 1; grid-row: span 5; animation-delay: 0.16s; }
+        .art-card.a-9  { grid-column: span 2; grid-row: span 4; animation-delay: 0.18s; }
+        .art-card.a-10 { grid-column: span 1; grid-row: span 6; animation-delay: 0.20s; }
+        .art-card.a-11 { grid-column: span 1; grid-row: span 4; animation-delay: 0.22s; }
+        .art-card.a-12 { grid-column: span 1; grid-row: span 5; animation-delay: 0.24s; }
+        .art-card.a-13 { grid-column: span 1; grid-row: span 4; animation-delay: 0.26s; }
+        .art-card.a-14 { grid-column: span 2; grid-row: span 6; animation-delay: 0.28s; }
+        .art-card.a-15 { grid-column: span 1; grid-row: span 4; animation-delay: 0.30s; }
+        .art-card.a-16 { grid-column: span 1; grid-row: span 5; animation-delay: 0.32s; }
+        .art-card.a-17 { grid-column: span 1; grid-row: span 4; animation-delay: 0.34s; }
+        .art-card.a-18 { grid-column: span 1; grid-row: span 5; animation-delay: 0.36s; }
+        .art-card.a-19 { grid-column: span 2; grid-row: span 5; animation-delay: 0.38s; }
+        .art-card.a-20 { grid-column: span 1; grid-row: span 4; animation-delay: 0.40s; }
 
-        .art.a-4 .suit, .art.a-9 .suit, .art.a-14 .suit, .art.a-19 .suit {
+        .art-card.a-4 .suit-big, .art-card.a-9 .suit-big,
+        .art-card.a-14 .suit-big, .art-card.a-19 .suit-big {
             font-size: 6.5rem;
         }
 
         @media (max-width: 1000px) {
-            .art.a-1, .art.a-2, .art.a-3, .art.a-5, .art.a-6, .art.a-7, .art.a-8,
-            .art.a-10, .art.a-11, .art.a-12, .art.a-13, .art.a-15, .art.a-16,
-            .art.a-17, .art.a-18, .art.a-20 {
+            .art-card.a-1, .art-card.a-2, .art-card.a-3, .art-card.a-5, .art-card.a-6,
+            .art-card.a-7, .art-card.a-8, .art-card.a-10, .art-card.a-11, .art-card.a-12,
+            .art-card.a-13, .art-card.a-15, .art-card.a-16, .art-card.a-17, .art-card.a-18,
+            .art-card.a-20 {
                 grid-column: span 1;
                 grid-row: span 4;
             }
-            .art.a-4, .art.a-9, .art.a-14, .art.a-19 {
+            .art-card.a-4, .art-card.a-9, .art-card.a-14, .art-card.a-19 {
                 grid-column: span 2;
                 grid-row: span 5;
             }
         }
         @media (max-width: 600px) {
-            .art { grid-column: span 1 !important; grid-row: span 3 !important; }
-            .art.a-4, .art.a-9, .art.a-14, .art.a-19 { grid-row: span 4 !important; }
-            .art .suit { font-size: 2.5rem; }
-            .art.a-4 .suit, .art.a-9 .suit, .art.a-14 .suit, .art.a-19 .suit { font-size: 3rem; }
-            .art .t { font-size: 0.72rem; }
-            .art .a { font-size: 0.75rem; }
+            .art-card { grid-column: span 1 !important; grid-row: span 3 !important; }
+            .art-card.a-4, .art-card.a-9, .art-card.a-14, .art-card.a-19 { grid-row: span 4 !important; }
+            .art-card .suit-big { font-size: 2.5rem; }
+            .art-card.a-4 .suit-big, .art-card.a-9 .suit-big,
+            .art-card.a-14 .suit-big, .art-card.a-19 .suit-big { font-size: 3rem; }
+            .art-card .art-title { font-size: 0.68rem; }
+            .art-card .art-author { font-size: 0.68rem; }
         }
 
         /* ============================================
-           ПОДВАЛ
+           ПОДВАЛ С ПЕЧАТЬЮ КРОЛИКА
            ============================================ */
         .footer {
             margin-top: 70px;
             padding-top: 30px;
             border-top: 1px solid var(--line);
-            display: flex;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 30px;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 24px;
         }
-        .footer-links { display: flex; gap: 26px; flex-wrap: wrap; }
-        .footer-links a {
+        .footer-rabbit {
+            width: 70px; height: 70px;
+            filter: drop-shadow(0 0 20px var(--gold-glow));
+            opacity: 0.7;
+            transform: rotate(-8deg);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            gap: 26px;
+            flex-wrap: wrap;
+        }
+        .footer-content a {
             font-family: 'Inter', sans-serif;
             font-size: 0.65rem;
             font-weight: 500;
@@ -1254,71 +1263,91 @@
             text-decoration: none;
             transition: all 0.2s;
         }
-        .footer-links a:hover {
+        .footer-content a:hover {
             color: var(--gold);
             text-shadow: 0 0 15px var(--gold-glow);
         }
         .footer-brand {
-            font-family: 'Caveat', cursive;
-            font-size: 1.15rem;
-            color: var(--text-2);
-            font-weight: 500;
+            text-align: right;
         }
-        .footer-brand span {
+        .footer-brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
             color: var(--gold);
-            text-shadow: 0 0 12px var(--gold-glow);
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px var(--gold-glow);
         }
+        .footer-brand-sub {
+            font-family: 'Caveat', cursive;
+            font-size: 0.9rem;
+            color: var(--text-2);
+            margin-top: 2px;
+        }
+        .footer-brand-sub span { color: var(--gold); }
 
-        /* ============================================
-           АДАПТИВ
-           ============================================ */
+        /* АДАПТИВ */
         @media (max-width: 1200px) {
             .header { padding: 0 24px; }
             .wrap { padding: 40px 24px 50px; }
             .nav { gap: 22px; font-size: 0.66rem; }
             .hero-title { font-size: 2.2rem; }
+            .hero-rabbit { width: 100px; height: 100px; }
             .gallery-name { font-size: 1.4rem; }
         }
         @media (max-width: 900px) {
             .header-inner { grid-template-columns: auto auto; gap: 16px; }
             .nav { display: none; }
-            .hero { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .hero-board { padding-bottom: 0; gap: 14px; }
-            .board-value { font-size: 0.95rem; }
-            .mini-card { flex: 0 0 230px; }
+            .hero { grid-template-columns: auto 1fr; gap: 20px; }
+            .hero-board { grid-column: 1 / -1; padding-bottom: 0; gap: 12px; }
+            .hero-rabbit { width: 80px; height: 80px; }
+            .playing-card { flex: 0 0 200px; }
             .gallery-head { flex-direction: column; align-items: flex-start; gap: 12px; }
-            .table-markings { display: none; }
+            .footer { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+            .footer-rabbit { margin: 0 auto; }
+            .footer-brand { text-align: center; }
+            .table-markings::after { font-size: 0.55rem; letter-spacing: 4px; }
         }
         @media (max-width: 600px) {
             .header { padding: 0 14px; }
             .wrap { padding: 30px 14px 40px; }
             .header-inner { padding: 12px 0; }
-            .logo { font-size: 1.1rem; letter-spacing: 3px; }
-            .logo .sub { font-size: 0.85rem; }
+            .logo-name { font-size: 1.05rem; letter-spacing: 3px; }
+            .logo-sub { font-size: 0.8rem; }
+            .logo-rabbit { width: 30px; height: 30px; }
             .balance { padding: 5px 10px 5px 6px; }
             .balance-value { font-size: 0.72rem; }
             .avatar { width: 28px; height: 28px; font-size: 0.8rem; }
 
-            .hero-title { font-size: 1.7rem; }
-            .hero-eyebrow { font-size: 0.52rem; letter-spacing: 2px; }
+            .hero { grid-template-columns: auto 1fr; }
+            .hero-rabbit { width: 60px; height: 60px; }
+            .hero-title { font-size: 1.5rem; }
+            .hero-eyebrow { font-size: 0.5rem; letter-spacing: 2px; }
             .board-item { padding: 8px 10px; }
             .board-label { font-size: 0.48rem; letter-spacing: 1.5px; }
             .board-value { font-size: 0.85rem; }
 
             .carousel-section { margin-bottom: 30px; }
-            .carousel-name { font-size: 0.92rem; letter-spacing: 1.5px; }
-            .mini-card { flex: 0 0 210px; }
-            .mini-title { font-size: 0.82rem; }
-            .mini-author { font-size: 0.85rem; }
+            .carousel-name { font-size: 0.9rem; letter-spacing: 1.5px; }
+            .playing-card { flex: 0 0 180px; }
+            .card-rank .rank-num { font-size: 0.7rem; }
+            .card-rank .rank-suit { font-size: 0.8rem; }
+            .card-rank-bottom .rank-num { font-size: 0.7rem; }
+            .card-rank-bottom .rank-suit { font-size: 0.8rem; }
+            .card-rabbit { width: 16px; height: 16px; }
+            .card-title { font-size: 0.75rem; }
+            .card-author { font-size: 0.78rem; }
 
-            .gallery-name { font-size: 1.1rem; letter-spacing: 1.5px; }
-            .gallery-mark { font-size: 1.2rem; }
+            .gallery-name { font-size: 1.05rem; letter-spacing: 1.5px; }
+            .gallery-mark { font-size: 1.15rem; }
             .g-chip { padding: 5px 10px; font-size: 0.55rem; }
+            .footer-rabbit { width: 55px; height: 55px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
             .dust-layer { display: none; }
+            .hero-rabbit { animation: none; }
         }
     </style>
 </head>
@@ -1338,8 +1367,26 @@
         <header class="header">
             <div class="header-inner">
                 <a href="#" class="logo">
-                    FENBO
-                    <span class="sub">рынок</span>
+                    <svg class="logo-rabbit" viewBox="0 0 100 100" fill="none">
+                        <!-- Уши -->
+                        <ellipse cx="35" cy="30" rx="6" ry="20" transform="rotate(-15 35 30)" fill="currentColor"/>
+                        <ellipse cx="65" cy="30" rx="6" ry="20" transform="rotate(15 65 30)" fill="currentColor"/>
+                        <ellipse cx="35" cy="32" rx="2.5" ry="14" transform="rotate(-15 35 32)" fill="#0a1410"/>
+                        <ellipse cx="65" cy="32" rx="2.5" ry="14" transform="rotate(15 65 32)" fill="#0a1410"/>
+                        <!-- Голова -->
+                        <circle cx="50" cy="65" r="22" fill="currentColor"/>
+                        <!-- Глаза -->
+                        <circle cx="43" cy="62" r="2.5" fill="#0a1410"/>
+                        <circle cx="57" cy="62" r="2.5" fill="#0a1410"/>
+                        <!-- Нос -->
+                        <path d="M50 70 l-3 3 h6 z" fill="#0a1410"/>
+                        <!-- Усы -->
+                        <path d="M47 74 q-4 3 -8 1 M53 74 q4 3 8 1" stroke="#0a1410" stroke-width="1" fill="none" stroke-linecap="round"/>
+                    </svg>
+                    <div class="logo-text">
+                        <div class="logo-name">FENBO</div>
+                        <div class="logo-sub">рынок</div>
+                    </div>
                 </a>
 
                 <nav class="nav">
@@ -1362,11 +1409,30 @@
 
         <div class="wrap">
 
-            <!-- HERO -->
+            <!-- HERO С КРОЛИКОМ -->
             <section class="hero">
-                <div class="hero-left">
-                    <div class="hero-eyebrow">Художественный рынок</div>
+                <svg class="hero-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                    <!-- Уши -->
+                    <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                    <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                    <ellipse cx="35" cy="30" rx="3" ry="16" transform="rotate(-15 35 30)" fill="#0a1410"/>
+                    <ellipse cx="65" cy="30" rx="3" ry="16" transform="rotate(15 65 30)" fill="#0a1410"/>
+                    <!-- Голова -->
+                    <circle cx="50" cy="65" r="24"/>
+                    <!-- Глаза -->
+                    <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                    <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                    <circle cx="44" cy="61" r="1" fill="#d4af37"/>
+                    <circle cx="58" cy="61" r="1" fill="#d4af37"/>
+                    <!-- Нос -->
+                    <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                    <!-- Усы -->
+                    <path d="M46 75 q-5 4 -10 1 M54 75 q5 4 10 1" stroke="#0a1410" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="hero-content">
+                    <div class="hero-eyebrow">Художественный рынок · клуб FENBO</div>
                     <h1 class="hero-title">Только арт. <em>Только ставки.</em></h1>
+                    <div class="hero-sub">— и кролик уже тасует колоду</div>
                 </div>
                 <div class="hero-board">
                     <div class="board-item">
@@ -1399,104 +1465,206 @@
                 </div>
                 <div class="carousel-track" id="aucTrack">
 
-                    <div class="mini-card" data-title="Золотая клетка" data-author="GoldenCage" data-bid="4200">
-                        <div class="roulette"><div class="roulette-fill" style="width: 75%"></div></div>
-                        <div class="mini-thumb">
-                            <span class="mini-number">№01</span>
-                            <span class="mini-status">Live</span>
-                            <span class="suit">✦</span>
+                    <!-- КАРТА 1 -->
+                    <div class="playing-card" data-title="Золотая клетка" data-author="GoldenCage" data-bid="4200">
+                        <div class="card-frame"></div>
+                        <div class="card-rank">
+                            <span class="rank-num">XVIII</span>
+                            <span class="rank-suit">✦</span>
                         </div>
-                        <div class="mini-info">
-                            <div class="mini-title">Золотая клетка</div>
-                            <div class="mini-author">GoldenCage</div>
-                            <div class="mini-bottom">
-                                <span class="mini-price" data-bid-el>4 200<span class="unit">FEN</span></span>
-                                <span class="mini-timer" data-end="2027-12-30T18:00:00">—</span>
+                        <div class="card-rank-bottom">
+                            <span class="rank-num">XVIII</span>
+                            <span class="rank-suit">✦</span>
+                        </div>
+                        <span class="card-live">Live</span>
+                        <div class="card-art">
+                            <span class="suit-big">✦</span>
+                            <div class="wm"></div>
+                        </div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                            <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                        </svg>
+                        <div class="card-info">
+                            <div class="card-title">Золотая клетка</div>
+                            <div class="card-author">GoldenCage</div>
+                            <div class="card-bottom">
+                                <span class="card-price" data-bid-el>4 200<span class="unit">FEN</span></span>
+                                <span class="card-timer" data-end="2027-12-30T18:00:00">—</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mini-card" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250">
-                        <div class="roulette"><div class="roulette-fill" style="width: 45%"></div></div>
-                        <div class="mini-thumb">
-                            <span class="mini-number">№02</span>
-                            <span class="mini-status">Live</span>
-                            <span class="suit">♦</span>
+                    <!-- КАРТА 2 -->
+                    <div class="playing-card" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250">
+                        <div class="card-frame"></div>
+                        <div class="card-rank">
+                            <span class="rank-num">XVII</span>
+                            <span class="rank-suit red">♦</span>
                         </div>
-                        <div class="mini-info">
-                            <div class="mini-title">Сцена · 03:00</div>
-                            <div class="mini-author">MidnightLux</div>
-                            <div class="mini-bottom">
-                                <span class="mini-price" data-bid-el>1 250<span class="unit">FEN</span></span>
-                                <span class="mini-timer" data-end="2027-12-31T23:59:59">—</span>
+                        <div class="card-rank-bottom">
+                            <span class="rank-num">XVII</span>
+                            <span class="rank-suit red">♦</span>
+                        </div>
+                        <span class="card-live">Live</span>
+                        <div class="card-art">
+                            <span class="suit-big red">♦</span>
+                            <div class="wm"></div>
+                        </div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                            <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                        </svg>
+                        <div class="card-info">
+                            <div class="card-title">Сцена · 03:00</div>
+                            <div class="card-author">MidnightLux</div>
+                            <div class="card-bottom">
+                                <span class="card-price" data-bid-el>1 250<span class="unit">FEN</span></span>
+                                <span class="card-timer" data-end="2027-12-31T23:59:59">—</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mini-card" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200">
-                        <div class="roulette"><div class="roulette-fill" style="width: 85%"></div></div>
-                        <div class="mini-thumb">
-                            <span class="mini-number">№03</span>
-                            <span class="mini-status">Live</span>
-                            <span class="suit">♠</span>
+                    <!-- КАРТА 3 -->
+                    <div class="playing-card" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200">
+                        <div class="card-frame"></div>
+                        <div class="card-rank">
+                            <span class="rank-num">XVI</span>
+                            <span class="rank-suit">♠</span>
                         </div>
-                        <div class="mini-info">
-                            <div class="mini-title">Алый закат</div>
-                            <div class="mini-author">ScarletSunset</div>
-                            <div class="mini-bottom">
-                                <span class="mini-price" data-bid-el>3 200<span class="unit">FEN</span></span>
-                                <span class="mini-timer" data-end="2027-12-28T22:00:00">—</span>
+                        <div class="card-rank-bottom">
+                            <span class="rank-num">XVI</span>
+                            <span class="rank-suit">♠</span>
+                        </div>
+                        <span class="card-live">Live</span>
+                        <div class="card-art">
+                            <span class="suit-big">♠</span>
+                            <div class="wm"></div>
+                        </div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                            <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                        </svg>
+                        <div class="card-info">
+                            <div class="card-title">Алый закат</div>
+                            <div class="card-author">ScarletSunset</div>
+                            <div class="card-bottom">
+                                <span class="card-price" data-bid-el>3 200<span class="unit">FEN</span></span>
+                                <span class="card-timer" data-end="2027-12-28T22:00:00">—</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mini-card" data-title="Красный шёлк" data-author="ScarletDream" data-bid="2400">
-                        <div class="roulette"><div class="roulette-fill" style="width: 60%"></div></div>
-                        <div class="mini-thumb">
-                            <span class="mini-number">№04</span>
-                            <span class="mini-status">Live</span>
-                            <span class="suit">♥</span>
+                    <!-- КАРТА 4 -->
+                    <div class="playing-card" data-title="Красный шёлк" data-author="ScarletDream" data-bid="2400">
+                        <div class="card-frame"></div>
+                        <div class="card-rank">
+                            <span class="rank-num">XV</span>
+                            <span class="rank-suit red">♥</span>
                         </div>
-                        <div class="mini-info">
-                            <div class="mini-title">Красный шёлк</div>
-                            <div class="mini-author">ScarletDream</div>
-                            <div class="mini-bottom">
-                                <span class="mini-price" data-bid-el>2 400<span class="unit">FEN</span></span>
-                                <span class="mini-timer" data-end="2027-12-29T12:30:00">—</span>
+                        <div class="card-rank-bottom">
+                            <span class="rank-num">XV</span>
+                            <span class="rank-suit red">♥</span>
+                        </div>
+                        <span class="card-live">Live</span>
+                        <div class="card-art">
+                            <span class="suit-big red">♥</span>
+                            <div class="wm"></div>
+                        </div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                            <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                        </svg>
+                        <div class="card-info">
+                            <div class="card-title">Красный шёлк</div>
+                            <div class="card-author">ScarletDream</div>
+                            <div class="card-bottom">
+                                <span class="card-price" data-bid-el>2 400<span class="unit">FEN</span></span>
+                                <span class="card-timer" data-end="2027-12-29T12:30:00">—</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mini-card" data-title="Тёмный бархат" data-author="DarkVelvet" data-bid="1550">
-                        <div class="roulette"><div class="roulette-fill" style="width: 30%"></div></div>
-                        <div class="mini-thumb">
-                            <span class="mini-number">№05</span>
-                            <span class="mini-status">Live</span>
-                            <span class="suit">♣</span>
+                    <!-- КАРТА 5 -->
+                    <div class="playing-card" data-title="Тёмный бархат" data-author="DarkVelvet" data-bid="1550">
+                        <div class="card-frame"></div>
+                        <div class="card-rank">
+                            <span class="rank-num">XIV</span>
+                            <span class="rank-suit">♣</span>
                         </div>
-                        <div class="mini-info">
-                            <div class="mini-title">Тёмный бархат</div>
-                            <div class="mini-author">DarkVelvet</div>
-                            <div class="mini-bottom">
-                                <span class="mini-price" data-bid-el>1 550<span class="unit">FEN</span></span>
-                                <span class="mini-timer" data-end="2027-12-30T15:00:00">—</span>
+                        <div class="card-rank-bottom">
+                            <span class="rank-num">XIV</span>
+                            <span class="rank-suit">♣</span>
+                        </div>
+                        <span class="card-live">Live</span>
+                        <div class="card-art">
+                            <span class="suit-big">♣</span>
+                            <div class="wm"></div>
+                        </div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                            <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                        </svg>
+                        <div class="card-info">
+                            <div class="card-title">Тёмный бархат</div>
+                            <div class="card-author">DarkVelvet</div>
+                            <div class="card-bottom">
+                                <span class="card-price" data-bid-el>1 550<span class="unit">FEN</span></span>
+                                <span class="card-timer" data-end="2027-12-30T15:00:00">—</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mini-card" data-title="Пурпурный дым" data-author="PurpleSmoke" data-bid="890">
-                        <div class="roulette"><div class="roulette-fill" style="width: 55%"></div></div>
-                        <div class="mini-thumb">
-                            <span class="mini-number">№06</span>
-                            <span class="mini-status">Live</span>
-                            <span class="suit">✦</span>
+                    <!-- КАРТА 6 -->
+                    <div class="playing-card" data-title="Пурпурный дым" data-author="PurpleSmoke" data-bid="890">
+                        <div class="card-frame"></div>
+                        <div class="card-rank">
+                            <span class="rank-num">XIII</span>
+                            <span class="rank-suit">✦</span>
                         </div>
-                        <div class="mini-info">
-                            <div class="mini-title">Пурпурный дым</div>
-                            <div class="mini-author">PurpleSmoke</div>
-                            <div class="mini-bottom">
-                                <span class="mini-price" data-bid-el>890<span class="unit">FEN</span></span>
-                                <span class="mini-timer" data-end="2027-12-27T18:00:00">—</span>
+                        <div class="card-rank-bottom">
+                            <span class="rank-num">XIII</span>
+                            <span class="rank-suit">✦</span>
+                        </div>
+                        <span class="card-live">Live</span>
+                        <div class="card-art">
+                            <span class="suit-big">✦</span>
+                            <div class="wm"></div>
+                        </div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                            <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                        </svg>
+                        <div class="card-info">
+                            <div class="card-title">Пурпурный дым</div>
+                            <div class="card-author">PurpleSmoke</div>
+                            <div class="card-bottom">
+                                <span class="card-price" data-bid-el>890<span class="unit">FEN</span></span>
+                                <span class="card-timer" data-end="2027-12-27T18:00:00">—</span>
                             </div>
                         </div>
                     </div>
@@ -1519,86 +1687,154 @@
                 </div>
                 <div class="carousel-track" id="ychTrack">
 
-                    <div class="mini-card" data-title="Парный портрет" data-author="TwinFlame">
-                        <div class="mini-thumb">
-                            <span class="mini-number">№01</span>
-                            <span class="mini-status ych">YCH</span>
-                            <span class="suit">❦</span>
+                    <div class="playing-card" data-title="Парный портрет" data-author="TwinFlame">
+                        <div class="card-frame"></div>
+                        <div class="card-rank">
+                            <span class="rank-num">III</span>
+                            <span class="rank-suit red">♥</span>
                         </div>
-                        <div class="mini-info">
-                            <div class="mini-title">Парный портрет</div>
-                            <div class="mini-author">TwinFlame</div>
-                            <div class="mini-slots">
-                                <span class="mini-slot free"></span>
-                                <span class="mini-slot free"></span>
-                                <span class="mini-slot"></span>
-                            </div>
-                            <div class="mini-bottom">
-                                <span class="mini-price">600<span class="unit">FEN</span></span>
-                                <span class="mini-timer">2 / 3</span>
-                            </div>
+                        <div class="card-rank-bottom">
+                            <span class="rank-num">III</span>
+                            <span class="rank-suit red">♥</span>
                         </div>
-                    </div>
-
-                    <div class="mini-card" data-title="Шёлковые оковы" data-author="BoundElegance">
-                        <div class="mini-thumb">
-                            <span class="mini-number">№02</span>
-                            <span class="mini-status ych">YCH</span>
-                            <span class="suit">♥</span>
+                        <span class="card-live ych">YCH</span>
+                        <div class="card-art">
+                            <span class="suit-big red">❦</span>
+                            <div class="wm"></div>
                         </div>
-                        <div class="mini-info">
-                            <div class="mini-title">Шёлковые оковы</div>
-                            <div class="mini-author">BoundElegance</div>
-                            <div class="mini-slots">
-                                <span class="mini-slot free"></span>
-                                <span class="mini-slot"></span>
-                                <span class="mini-slot"></span>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                            <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                        </svg>
+                        <div class="card-info">
+                            <div class="card-title">Парный портрет</div>
+                            <div class="card-author">TwinFlame</div>
+                            <div class="card-slots">
+                                <span class="card-slot free"></span>
+                                <span class="card-slot free"></span>
+                                <span class="card-slot"></span>
                             </div>
-                            <div class="mini-bottom">
-                                <span class="mini-price">450<span class="unit">FEN</span></span>
-                                <span class="mini-timer">1 / 3</span>
+                            <div class="card-bottom">
+                                <span class="card-price">600<span class="unit">FEN</span></span>
+                                <span class="card-timer">2/3</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mini-card" data-title="Ночной гость" data-author="Noir_Art">
-                        <div class="mini-thumb">
-                            <span class="mini-number">№03</span>
-                            <span class="mini-status ych">YCH</span>
-                            <span class="suit">♠</span>
+                    <div class="playing-card" data-title="Шёлковые оковы" data-author="BoundElegance">
+                        <div class="card-frame"></div>
+                        <div class="card-rank">
+                            <span class="rank-num">IV</span>
+                            <span class="rank-suit red">♥</span>
                         </div>
-                        <div class="mini-info">
-                            <div class="mini-title">Ночной гость</div>
-                            <div class="mini-author">Noir_Art</div>
-                            <div class="mini-slots">
-                                <span class="mini-slot free"></span>
-                                <span class="mini-slot free"></span>
-                                <span class="mini-slot free"></span>
+                        <div class="card-rank-bottom">
+                            <span class="rank-num">IV</span>
+                            <span class="rank-suit red">♥</span>
+                        </div>
+                        <span class="card-live ych">YCH</span>
+                        <div class="card-art">
+                            <span class="suit-big red">♥</span>
+                            <div class="wm"></div>
+                        </div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                            <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                        </svg>
+                        <div class="card-info">
+                            <div class="card-title">Шёлковые оковы</div>
+                            <div class="card-author">BoundElegance</div>
+                            <div class="card-slots">
+                                <span class="card-slot free"></span>
+                                <span class="card-slot"></span>
+                                <span class="card-slot"></span>
                             </div>
-                            <div class="mini-bottom">
-                                <span class="mini-price">800<span class="unit">FEN</span></span>
-                                <span class="mini-timer">3 / 3</span>
+                            <div class="card-bottom">
+                                <span class="card-price">450<span class="unit">FEN</span></span>
+                                <span class="card-timer">1/3</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mini-card" data-title="Бархатный вечер" data-author="Velvet_Rose">
-                        <div class="mini-thumb">
-                            <span class="mini-number">№04</span>
-                            <span class="mini-status ych">YCH</span>
-                            <span class="suit">♦</span>
+                    <div class="playing-card" data-title="Ночной гость" data-author="Noir_Art">
+                        <div class="card-frame"></div>
+                        <div class="card-rank">
+                            <span class="rank-num">V</span>
+                            <span class="rank-suit">♠</span>
                         </div>
-                        <div class="mini-info">
-                            <div class="mini-title">Бархатный вечер</div>
-                            <div class="mini-author">Velvet_Rose</div>
-                            <div class="mini-slots">
-                                <span class="mini-slot free"></span>
-                                <span class="mini-slot"></span>
-                                <span class="mini-slot"></span>
+                        <div class="card-rank-bottom">
+                            <span class="rank-num">V</span>
+                            <span class="rank-suit">♠</span>
+                        </div>
+                        <span class="card-live ych">YCH</span>
+                        <div class="card-art">
+                            <span class="suit-big">♠</span>
+                            <div class="wm"></div>
+                        </div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                            <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                        </svg>
+                        <div class="card-info">
+                            <div class="card-title">Ночной гость</div>
+                            <div class="card-author">Noir_Art</div>
+                            <div class="card-slots">
+                                <span class="card-slot free"></span>
+                                <span class="card-slot free"></span>
+                                <span class="card-slot free"></span>
                             </div>
-                            <div class="mini-bottom">
-                                <span class="mini-price">900<span class="unit">FEN</span></span>
-                                <span class="mini-timer">1 / 3</span>
+                            <div class="card-bottom">
+                                <span class="card-price">800<span class="unit">FEN</span></span>
+                                <span class="card-timer">3/3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="playing-card" data-title="Бархатный вечер" data-author="Velvet_Rose">
+                        <div class="card-frame"></div>
+                        <div class="card-rank">
+                            <span class="rank-num">VI</span>
+                            <span class="rank-suit red">♦</span>
+                        </div>
+                        <div class="card-rank-bottom">
+                            <span class="rank-num">VI</span>
+                            <span class="rank-suit red">♦</span>
+                        </div>
+                        <span class="card-live ych">YCH</span>
+                        <div class="card-art">
+                            <span class="suit-big red">♦</span>
+                            <div class="wm"></div>
+                        </div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                            <path d="M50 71 l-3.5 3.5 h7 z" fill="#0a1410"/>
+                        </svg>
+                        <div class="card-info">
+                            <div class="card-title">Бархатный вечер</div>
+                            <div class="card-author">Velvet_Rose</div>
+                            <div class="card-slots">
+                                <span class="card-slot free"></span>
+                                <span class="card-slot"></span>
+                                <span class="card-slot"></span>
+                            </div>
+                            <div class="card-bottom">
+                                <span class="card-price">900<span class="unit">FEN</span></span>
+                                <span class="card-timer">1/3</span>
                             </div>
                         </div>
                     </div>
@@ -1612,7 +1848,7 @@
                     <div class="gallery-title">
                         <span class="gallery-mark">✦</span>
                         <span class="gallery-name">Галерея</span>
-                        <span class="gallery-count">· 2 480 работ · показаны 20</span>
+                        <span class="gallery-count">· 2 480 работ</span>
                     </div>
                     <div class="gallery-filters">
                         <button class="g-chip active" type="button">Всё</button>
@@ -1626,39 +1862,337 @@
 
                 <div class="gallery">
 
-                    <div class="art a-1"><span class="num">№001</span><span class="suit">❦</span><div class="wm"></div><div class="info"><div class="t">Бархатный вечер</div><div class="a">Velvet_Rose</div></div></div>
-                    <div class="art a-2"><span class="num">№002</span><span class="suit">♠</span><div class="wm"></div><div class="info"><div class="t">Ночная смена</div><div class="a">Noir_Art</div></div></div>
-                    <div class="art a-3"><span class="num">№003</span><span class="suit">♥</span><div class="wm"></div><div class="info"><div class="t">Красный шёлк</div><div class="a">ScarletDream</div></div></div>
-                    <div class="art a-4"><span class="num">№004</span><span class="suit">♦</span><div class="wm"></div><div class="info"><div class="t">Тёмный бархат</div><div class="a">DarkVelvet</div></div></div>
-                    <div class="art a-5"><span class="num">№005</span><span class="suit">♣</span><div class="wm"></div><div class="info"><div class="t">За кулисами</div><div class="a">Backstage_</div></div></div>
-                    <div class="art a-6"><span class="num">№006</span><span class="suit">✦</span><div class="wm"></div><div class="info"><div class="t">Золотая клетка</div><div class="a">GoldenCage</div></div></div>
-                    <div class="art a-7"><span class="num">№007</span><span class="suit">◇</span><div class="wm"></div><div class="info"><div class="t">Шёпот в темноте</div><div class="a">WhisperArt</div></div></div>
-                    <div class="art a-8"><span class="num">№008</span><span class="suit">♥</span><div class="wm"></div><div class="info"><div class="t">Пурпурный дым</div><div class="a">PurpleSmoke</div></div></div>
-                    <div class="art a-9"><span class="num">№009</span><span class="suit">♠</span><div class="wm"></div><div class="info"><div class="t">Две свечи</div><div class="a">TwinFlame</div></div></div>
-                    <div class="art a-10"><span class="num">№010</span><span class="suit">♦</span><div class="wm"></div><div class="info"><div class="t">Шёлковые оковы</div><div class="a">BoundElegance</div></div></div>
-                    <div class="art a-11"><span class="num">№011</span><span class="suit">❦</span><div class="wm"></div><div class="info"><div class="t">Сцена · 03:00</div><div class="a">MidnightLux</div></div></div>
-                    <div class="art a-12"><span class="num">№012</span><span class="suit">♣</span><div class="wm"></div><div class="info"><div class="t">Алый закат</div><div class="a">ScarletSunset</div></div></div>
-                    <div class="art a-13"><span class="num">№013</span><span class="suit">♠</span><div class="wm"></div><div class="info"><div class="t">Шёлковая нить</div><div class="a">SilkThread</div></div></div>
-                    <div class="art a-14"><span class="num">№014</span><span class="suit">✦</span><div class="wm"></div><div class="info"><div class="t">Изумрудный зал</div><div class="a">EmeraldHall</div></div></div>
-                    <div class="art a-15"><span class="num">№015</span><span class="suit">♥</span><div class="wm"></div><div class="info"><div class="t">Вишнёвый сад</div><div class="a">CherryGarden</div></div></div>
-                    <div class="art a-16"><span class="num">№016</span><span class="suit">♦</span><div class="wm"></div><div class="info"><div class="t">Мраморный пол</div><div class="a">MarbleFloor</div></div></div>
-                    <div class="art a-17"><span class="num">№017</span><span class="suit">♣</span><div class="wm"></div><div class="info"><div class="t">Дым сигары</div><div class="a">SmokeCigar</div></div></div>
-                    <div class="art a-18"><span class="num">№018</span><span class="suit">❦</span><div class="wm"></div><div class="info"><div class="t">Ночной гость</div><div class="a">NightGuest</div></div></div>
-                    <div class="art a-19"><span class="num">№019</span><span class="suit">♠</span><div class="wm"></div><div class="info"><div class="t">Фарфоровый лик</div><div class="a">PorcelainFace</div></div></div>
-                    <div class="art a-20"><span class="num">№020</span><span class="suit">♦</span><div class="wm"></div><div class="info"><div class="t">Последняя ставка</div><div class="a">LastBet</div></div></div>
+                    <div class="art-card a-1">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">XIV</span><span class="rank-suit">♠</span></div>
+                        <div class="rank-br"><span class="rank-num">XIV</span><span class="rank-suit">♠</span></div>
+                        <span class="suit-big">❦</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Бархатный вечер</div><div class="art-author">Velvet_Rose</div></div>
+                    </div>
+
+                    <div class="art-card a-2">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">XV</span><span class="rank-suit">♠</span></div>
+                        <span class="suit-big">♠</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Ночная смена</div><div class="art-author">Noir_Art</div></div>
+                    </div>
+
+                    <div class="art-card a-3">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">XVI</span><span class="rank-suit red">♥</span></div>
+                        <span class="suit-big red">♥</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Красный шёлк</div><div class="art-author">ScarletDream</div></div>
+                    </div>
+
+                    <div class="art-card a-4">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">XVII</span><span class="rank-suit red">♦</span></div>
+                        <div class="rank-br"><span class="rank-num">XVII</span><span class="rank-suit red">♦</span></div>
+                        <span class="suit-big red">♦</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Тёмный бархат</div><div class="art-author">DarkVelvet</div></div>
+                    </div>
+
+                    <div class="art-card a-5">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">XVIII</span><span class="rank-suit">♣</span></div>
+                        <span class="suit-big">♣</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">За кулисами</div><div class="art-author">Backstage_</div></div>
+                    </div>
+
+                    <div class="art-card a-6">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">XIX</span><span class="rank-suit">✦</span></div>
+                        <span class="suit-big">✦</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Золотая клетка</div><div class="art-author">GoldenCage</div></div>
+                    </div>
+
+                    <div class="art-card a-7">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">XX</span><span class="rank-suit">◇</span></div>
+                        <span class="suit-big">◇</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Шёпот в темноте</div><div class="art-author">WhisperArt</div></div>
+                    </div>
+
+                    <div class="art-card a-8">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">XXI</span><span class="rank-suit red">♥</span></div>
+                        <span class="suit-big red">♥</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Пурпурный дым</div><div class="art-author">PurpleSmoke</div></div>
+                    </div>
+
+                    <div class="art-card a-9">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">XXII</span><span class="rank-suit">♠</span></div>
+                        <div class="rank-br"><span class="rank-num">XXII</span><span class="rank-suit">♠</span></div>
+                        <span class="suit-big">♠</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Две свечи</div><div class="art-author">TwinFlame</div></div>
+                    </div>
+
+                    <div class="art-card a-10">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">I</span><span class="rank-suit red">♦</span></div>
+                        <span class="suit-big red">♦</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Шёлковые оковы</div><div class="art-author">BoundElegance</div></div>
+                    </div>
+
+                    <div class="art-card a-11">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">II</span><span class="rank-suit">❦</span></div>
+                        <span class="suit-big">❦</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Сцена · 03:00</div><div class="art-author">MidnightLux</div></div>
+                    </div>
+
+                    <div class="art-card a-12">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">III</span><span class="rank-suit">♣</span></div>
+                        <span class="suit-big">♣</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Алый закат</div><div class="art-author">ScarletSunset</div></div>
+                    </div>
+
+                    <div class="art-card a-13">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">IV</span><span class="rank-suit">♠</span></div>
+                        <span class="suit-big">♠</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Шёлковая нить</div><div class="art-author">SilkThread</div></div>
+                    </div>
+
+                    <div class="art-card a-14">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">V</span><span class="rank-suit">✦</span></div>
+                        <div class="rank-br"><span class="rank-num">V</span><span class="rank-suit">✦</span></div>
+                        <span class="suit-big">✦</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Изумрудный зал</div><div class="art-author">EmeraldHall</div></div>
+                    </div>
+
+                    <div class="art-card a-15">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">VI</span><span class="rank-suit red">♥</span></div>
+                        <span class="suit-big red">♥</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Вишнёвый сад</div><div class="art-author">CherryGarden</div></div>
+                    </div>
+
+                    <div class="art-card a-16">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">VII</span><span class="rank-suit red">♦</span></div>
+                        <span class="suit-big red">♦</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Мраморный пол</div><div class="art-author">MarbleFloor</div></div>
+                    </div>
+
+                    <div class="art-card a-17">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">VIII</span><span class="rank-suit">♣</span></div>
+                        <span class="suit-big">♣</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Дым сигары</div><div class="art-author">SmokeCigar</div></div>
+                    </div>
+
+                    <div class="art-card a-18">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">IX</span><span class="rank-suit">❦</span></div>
+                        <span class="suit-big">❦</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Ночной гость</div><div class="art-author">NightGuest</div></div>
+                    </div>
+
+                    <div class="art-card a-19">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">X</span><span class="rank-suit">♠</span></div>
+                        <div class="rank-br"><span class="rank-num">X</span><span class="rank-suit">♠</span></div>
+                        <span class="suit-big">♠</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Фарфоровый лик</div><div class="art-author">PorcelainFace</div></div>
+                    </div>
+
+                    <div class="art-card a-20">
+                        <div class="card-frame"></div>
+                        <div class="rank-tl"><span class="rank-num">XI</span><span class="rank-suit red">♦</span></div>
+                        <span class="suit-big red">♦</span>
+                        <div class="wm"></div>
+                        <svg class="card-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                            <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                            <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                            <circle cx="50" cy="65" r="24"/>
+                            <circle cx="43" cy="62" r="3" fill="#0a1410"/>
+                            <circle cx="57" cy="62" r="3" fill="#0a1410"/>
+                        </svg>
+                        <div class="art-info"><div class="art-title">Последняя ставка</div><div class="art-author">LastBet</div></div>
+                    </div>
 
                 </div>
             </section>
 
-            <!-- ПОДВАЛ -->
+            <!-- ПОДВАЛ С ПЕЧАТЬЮ -->
             <footer class="footer">
-                <div class="footer-links">
+                <svg class="footer-rabbit" viewBox="0 0 100 100" fill="#d4af37">
+                    <ellipse cx="35" cy="28" rx="7" ry="22" transform="rotate(-15 35 28)"/>
+                    <ellipse cx="65" cy="28" rx="7" ry="22" transform="rotate(15 65 28)"/>
+                    <ellipse cx="35" cy="30" rx="3" ry="16" transform="rotate(-15 35 30)" fill="#061410"/>
+                    <ellipse cx="65" cy="30" rx="3" ry="16" transform="rotate(15 65 30)" fill="#061410"/>
+                    <circle cx="50" cy="65" r="24"/>
+                    <circle cx="43" cy="62" r="3" fill="#061410"/>
+                    <circle cx="57" cy="62" r="3" fill="#061410"/>
+                    <path d="M50 71 l-3.5 3.5 h7 z" fill="#061410"/>
+                    <path d="M46 75 q-5 4 -10 1 M54 75 q5 4 10 1" stroke="#061410" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="footer-content">
                     <a href="#">Правила</a>
                     <a href="#">Безопасные сделки</a>
                     <a href="#">Дилер</a>
                     <a href="#">T.O.S.</a>
                 </div>
-                <div class="footer-brand">FENBO · <span>2025</span></div>
+                <div class="footer-brand">
+                    <div class="footer-brand-name">FENBO</div>
+                    <div class="footer-brand-sub">следуй за <span>белым кроликом</span></div>
+                </div>
             </footer>
 
         </div>
@@ -1694,7 +2228,7 @@
             function pad(n) { return n < 10 ? '0' + n : n; }
             function update(el) {
                 const diff = Math.floor((new Date(el.dataset.end).getTime() - Date.now()) / 1000);
-                const card = el.closest('.mini-card');
+                const card = el.closest('.playing-card');
                 if (diff <= 0) {
                     el.textContent = 'END';
                     el.style.color = 'var(--text-3)';
@@ -1719,7 +2253,7 @@
 
         /* ЖИВЫЕ СТАВКИ */
         (function liveBids() {
-            const cards = document.querySelectorAll('.mini-card[data-bid]');
+            const cards = document.querySelectorAll('.playing-card[data-bid]');
             if (!cards.length) return;
             function fmt(n) { return n.toLocaleString('ru-RU'); }
             function update(card) {
@@ -1732,11 +2266,6 @@
                 priceEl.classList.remove('bump');
                 void priceEl.offsetWidth;
                 priceEl.classList.add('bump');
-                const fill = card.querySelector('.roulette-fill');
-                if (fill) {
-                    const pct = Math.min(95, (current / 6000) * 100);
-                    fill.style.width = pct + '%';
-                }
             }
             cards.forEach(card => {
                 function sched() {
@@ -1746,15 +2275,15 @@
             });
         })();
 
-        /* СТРЕЛКИ КАРУСЕЛИ */
+        /* СТРЕЛКИ */
         (function arrows() {
             document.querySelectorAll('.carousel-arrow').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const target = document.getElementById(btn.dataset.target);
                     if (!target) return;
                     const dir = parseInt(btn.dataset.dir, 10) || 1;
-                    const card = target.querySelector('.mini-card');
-                    const w = card ? card.offsetWidth + 18 : 270;
+                    const card = target.querySelector('.playing-card');
+                    const w = card ? card.offsetWidth + 18 : 240;
                     target.scrollBy({ left: w * dir * 2, behavior: 'smooth' });
                 });
             });
@@ -1803,9 +2332,9 @@
 
         /* КЛИКИ */
         (function clicks() {
-            document.querySelectorAll('.mini-card, .art').forEach(c => {
+            document.querySelectorAll('.playing-card, .art-card').forEach(c => {
                 c.addEventListener('click', () => {
-                    alert('✦ ' + (c.dataset.title || c.querySelector('.t')?.textContent || 'Лот'));
+                    alert('✦ ' + (c.dataset.title || c.querySelector('.card-title, .art-title')?.textContent || 'Лот'));
                 });
             });
         })();
