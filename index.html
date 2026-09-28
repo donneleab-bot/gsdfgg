@@ -12,7 +12,7 @@
 
     <style>
         /* ============================================
-           ПЕРЕМЕННЫЕ — SOTHEBY'S PALETTE
+           ПЕРЕМЕННЫЕ
            ============================================ */
         :root {
             --bg-0: #07080c;
@@ -87,8 +87,7 @@
             width: 100%; height: 60vh;
             pointer-events: none;
             z-index: 1;
-            background: 
-                radial-gradient(ellipse 40% 50% at 50% 0%, rgba(232, 193, 104, 0.14) 0%, transparent 70%);
+            background: radial-gradient(ellipse 40% 50% at 50% 0%, rgba(232, 193, 104, 0.14) 0%, transparent 70%);
         }
         .side-light {
             position: fixed;
@@ -272,242 +271,10 @@
         .topbar-user .avatar:hover { border-color: var(--gold); box-shadow: 0 0 20px var(--gold-glow); }
 
         /* ============================================
-           HERO
-           ============================================ */
-        .market-hero {
-            width: 100%;
-            max-width: 1440px;
-            padding: 64px 40px 40px;
-            position: relative;
-            z-index: 5;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-        .market-hero .hero-left { flex: 1; min-width: 280px; }
-        .market-hero .hero-eyebrow {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.66rem;
-            font-weight: 600;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .market-hero .hero-eyebrow::before {
-            content: '';
-            width: 32px; height: 1px;
-            background: var(--gold);
-            box-shadow: 0 0 8px var(--gold-glow);
-        }
-        .market-hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 3.8rem;
-            font-weight: 500;
-            color: var(--ivory);
-            letter-spacing: 4px;
-            line-height: 1.05;
-            text-transform: uppercase;
-        }
-        .market-hero h1 .gold {
-            color: var(--gold);
-            display: block;
-            font-weight: 600;
-            letter-spacing: 6px;
-            text-shadow: 0 0 50px rgba(232, 193, 104, 0.4);
-        }
-        .market-hero .hero-tagline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
-            font-style: italic;
-            color: var(--text-1);
-            margin-top: 22px;
-            line-height: 1.7;
-            max-width: 560px;
-        }
-        .market-hero .hero-tagline strong {
-            color: var(--gold);
-            font-weight: 500;
-            font-style: normal;
-        }
-        .market-hero .hero-right { display: flex; gap: 12px; flex-wrap: wrap; }
-        .btn-hero {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 16px 26px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            white-space: nowrap;
-            border: none;
-        }
-        .btn-hero.primary {
-            color: var(--bg-0);
-            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 50%, var(--gold-deep) 100%);
-            box-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.5) inset,
-                0 -1px 0 rgba(0, 0, 0, 0.2) inset,
-                0 4px 24px rgba(232, 193, 104, 0.3);
-        }
-        .btn-hero.primary:hover {
-            box-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.6) inset,
-                0 -1px 0 rgba(0, 0, 0, 0.2) inset,
-                0 8px 36px rgba(232, 193, 104, 0.55);
-            transform: translateY(-2px);
-        }
-        .btn-hero.ghost {
-            background: transparent;
-            color: var(--ivory);
-            border: 1px solid var(--border-hi);
-        }
-        .btn-hero.ghost:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-            background: rgba(232, 193, 104, 0.04);
-        }
-
-        /* ============================================
-           ТОП-СТОЛ
-           ============================================ */
-        .top-table { width: 100%; max-width: 1440px; padding: 20px 40px 50px; position: relative; z-index: 5; }
-        .top-table-inner {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 28px;
-            align-items: center;
-            padding: 28px 32px;
-            background: 
-                linear-gradient(135deg, rgba(232, 193, 104, 0.05) 0%, transparent 50%),
-                var(--bg-1);
-            border: 1px solid var(--line-hi);
-            border-radius: var(--radius-lg);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 
-                0 2px 0 rgba(232, 193, 104, 0.1) inset,
-                0 20px 50px rgba(0, 0, 0, 0.5);
-        }
-        .top-table-inner::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            opacity: 0.5;
-        }
-        .top-table-inner::after {
-            content: '✦ ТОП-СТОЛ НЕДЕЛИ ✦';
-            position: absolute;
-            top: 12px; right: 20px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.5rem;
-            font-weight: 600;
-            letter-spacing: 4px;
-            color: var(--gold);
-            opacity: 0.75;
-        }
-        .top-table .tt-avatar {
-            width: 76px; height: 76px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #4a3208, #1a1205);
-            border: 2px solid var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cinzel', serif;
-            font-size: 1.9rem;
-            font-weight: 600;
-            color: var(--gold);
-            flex-shrink: 0;
-            box-shadow: 0 0 32px var(--gold-glow);
-            position: relative;
-        }
-        .top-table .tt-avatar::after {
-            content: '';
-            position: absolute;
-            bottom: -3px; right: -3px;
-            width: 16px; height: 16px;
-            border-radius: 50%;
-            background: var(--green);
-            border: 3px solid var(--bg-1);
-            box-shadow: 0 0 10px var(--green-glow);
-        }
-        .top-table .tt-body { min-width: 0; }
-        .top-table .tt-name {
-            font-family: 'Cinzel', serif;
-            font-size: 1.35rem;
-            font-weight: 600;
-            color: var(--ivory);
-            letter-spacing: 2px;
-        }
-        .top-table .tt-sub {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            font-style: italic;
-            color: var(--text-1);
-            margin-top: 6px;
-        }
-        .top-table .tt-stats { display: flex; gap: 32px; margin-top: 14px; flex-wrap: wrap; }
-        .top-table .tt-stat { display: flex; flex-direction: column; gap: 3px; }
-        .top-table .tt-stat-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.6rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-2);
-        }
-        .top-table .tt-stat-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 0.5px;
-        }
-        .top-table .tt-go {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--bg-0);
-            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 50%, var(--gold-deep) 100%);
-            border: none;
-            padding: 15px 26px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-            box-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.5) inset,
-                0 -1px 0 rgba(0, 0, 0, 0.2) inset,
-                0 4px 24px rgba(232, 193, 104, 0.3);
-        }
-        .top-table .tt-go:hover {
-            box-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.6) inset,
-                0 -1px 0 rgba(0, 0, 0, 0.2) inset,
-                0 8px 36px rgba(232, 193, 104, 0.55);
-            transform: translateY(-2px);
-        }
-
-        /* ============================================
            СЕКЦИИ
            ============================================ */
-        .section { width: 100%; max-width: 1440px; padding: 30px 40px 55px; position: relative; z-index: 5; }
+        .section { width: 100%; max-width: 1440px; padding: 40px 40px 55px; position: relative; z-index: 5; }
+        .section:first-of-type { padding-top: 56px; }
         .section-head {
             display: flex;
             align-items: center;
@@ -574,7 +341,7 @@
         .section-link:hover { color: var(--gold); border-color: var(--gold-deep); background: rgba(232, 193, 104, 0.03); }
 
         /* ============================================
-           КАРУСЕЛЬ (без полосы скролла)
+           КАРУСЕЛЬ
            ============================================ */
         .carousel-wrap { position: relative; }
         .carousel {
@@ -585,7 +352,6 @@
             scroll-behavior: smooth;
             padding: 8px 4px 8px;
             -webkit-overflow-scrolling: touch;
-            /* Убираем полосу скролла полностью */
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
@@ -610,11 +376,7 @@
             backdrop-filter: blur(10px);
             user-select: none;
         }
-        .carousel-nav:hover {
-            background: var(--bg-2);
-            border-color: var(--gold);
-            box-shadow: 0 0 24px var(--gold-glow);
-        }
+        .carousel-nav:hover { background: var(--bg-2); border-color: var(--gold); box-shadow: 0 0 24px var(--gold-glow); }
         .carousel-nav.prev { left: -20px; }
         .carousel-nav.next { right: -20px; }
         .carousel-nav:disabled { opacity: 0.25; cursor: not-allowed; }
@@ -623,7 +385,7 @@
         @media (max-width: 900px) { .carousel-nav { display: none; } }
 
         /* ============================================
-           АУКЦИОНЫ — УМЕНЬШЕНЫ
+           АУКЦИОНЫ
            ============================================ */
         .auction-card {
             flex: 0 0 280px;
@@ -672,30 +434,10 @@
             justify-content: center;
             overflow: hidden;
         }
-        .ac-thumb.bg-1 {
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.5) 0%, transparent 55%),
-                radial-gradient(ellipse at 70% 80%, rgba(90, 20, 40, 0.4) 0%, transparent 55%),
-                linear-gradient(135deg, #1a0508, #0a0205);
-        }
-        .ac-thumb.bg-2 {
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(232, 193, 104, 0.35) 0%, transparent 55%),
-                radial-gradient(ellipse at 70% 80%, rgba(140, 100, 0, 0.3) 0%, transparent 55%),
-                linear-gradient(135deg, #1a1505, #0a0802);
-        }
-        .ac-thumb.bg-3 {
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(120, 60, 160, 0.4) 0%, transparent 55%),
-                radial-gradient(ellipse at 70% 80%, rgba(60, 20, 90, 0.35) 0%, transparent 55%),
-                linear-gradient(135deg, #15051a, #08020a);
-        }
-        .ac-thumb.bg-4 {
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(60, 130, 190, 0.4) 0%, transparent 55%),
-                radial-gradient(ellipse at 70% 80%, rgba(20, 60, 120, 0.35) 0%, transparent 55%),
-                linear-gradient(135deg, #05101a, #02060a);
-        }
+        .ac-thumb.bg-1 { background: radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.5) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(90, 20, 40, 0.4) 0%, transparent 55%), linear-gradient(135deg, #1a0508, #0a0205); }
+        .ac-thumb.bg-2 { background: radial-gradient(ellipse at 40% 30%, rgba(232, 193, 104, 0.35) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(140, 100, 0, 0.3) 0%, transparent 55%), linear-gradient(135deg, #1a1505, #0a0802); }
+        .ac-thumb.bg-3 { background: radial-gradient(ellipse at 40% 30%, rgba(120, 60, 160, 0.4) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(60, 20, 90, 0.35) 0%, transparent 55%), linear-gradient(135deg, #15051a, #08020a); }
+        .ac-thumb.bg-4 { background: radial-gradient(ellipse at 40% 30%, rgba(60, 130, 190, 0.4) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(20, 60, 120, 0.35) 0%, transparent 55%), linear-gradient(135deg, #05101a, #02060a); }
         .ac-thumb::after {
             font-family: 'Cinzel', serif;
             font-size: 3.6rem;
@@ -805,9 +547,7 @@
             flex-direction: column;
             gap: 6px;
             padding: 12px 14px;
-            background: 
-                linear-gradient(135deg, rgba(139, 42, 42, 0.08) 0%, transparent 60%),
-                var(--bg-2);
+            background: linear-gradient(135deg, rgba(139, 42, 42, 0.08) 0%, transparent 60%), var(--bg-2);
             border: 1px solid rgba(139, 42, 42, 0.25);
             border-radius: 4px;
             margin-top: auto;
@@ -840,13 +580,7 @@
             text-shadow: 0 0 20px rgba(232, 193, 104, 0.3);
             transform-origin: left center;
         }
-        .ac-bid-value .unit {
-            font-size: 0.62rem;
-            color: var(--text-2);
-            font-weight: 500;
-            margin-left: 5px;
-            letter-spacing: 1px;
-        }
+        .ac-bid-value .unit { font-size: 0.62rem; color: var(--text-2); font-weight: 500; margin-left: 5px; letter-spacing: 1px; }
         .ac-bid-value.bump {
             color: var(--gold-hi);
             text-shadow: 0 0 30px rgba(232, 193, 104, 0.9), 0 0 60px rgba(232, 193, 104, 0.5);
@@ -881,9 +615,7 @@
             width: 100%;
             position: relative;
             overflow: hidden;
-            box-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.1) inset,
-                0 8px 24px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 8px 24px rgba(0, 0, 0, 0.4);
         }
         .ac-btn::before {
             content: '';
@@ -898,14 +630,12 @@
             color: var(--gold);
             border-color: var(--gold);
             background: linear-gradient(180deg, rgba(232, 193, 104, 0.12) 0%, rgba(232, 193, 104, 0.04) 100%);
-            box-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.2) inset,
-                0 8px 30px rgba(232, 193, 104, 0.3);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 8px 30px rgba(232, 193, 104, 0.3);
         }
         .ac-btn:hover::before { left: 130%; }
 
         /* ============================================
-           ЮЧИ — УМЕНЬШЕНЫ
+           ЮЧИ
            ============================================ */
         .ych-card {
             flex: 0 0 240px;
@@ -938,9 +668,7 @@
         .ych-card:hover {
             transform: translateY(-4px);
             border-color: var(--line-hi);
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.6),
-                0 0 40px rgba(232, 193, 104, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(232, 193, 104, 0.1);
         }
         .ych-card:hover::before {
             background: linear-gradient(180deg, rgba(232, 193, 104, 0.25) 0%, rgba(232, 193, 104, 0.4) 100%);
@@ -954,26 +682,10 @@
             justify-content: center;
             overflow: hidden;
         }
-        .yc-thumb.bg-1 {
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.4) 0%, transparent 55%),
-                linear-gradient(135deg, #1a0515, #0a0208);
-        }
-        .yc-thumb.bg-2 {
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(200, 100, 40, 0.35) 0%, transparent 55%),
-                linear-gradient(135deg, #1a0a05, #0a0402);
-        }
-        .yc-thumb.bg-3 {
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(60, 160, 150, 0.3) 0%, transparent 55%),
-                linear-gradient(135deg, #051a18, #020a09);
-        }
-        .yc-thumb.bg-4 {
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(180, 80, 220, 0.35) 0%, transparent 55%),
-                linear-gradient(135deg, #15051a, #08020a);
-        }
+        .yc-thumb.bg-1 { background: radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.4) 0%, transparent 55%), linear-gradient(135deg, #1a0515, #0a0208); }
+        .yc-thumb.bg-2 { background: radial-gradient(ellipse at 40% 30%, rgba(200, 100, 40, 0.35) 0%, transparent 55%), linear-gradient(135deg, #1a0a05, #0a0402); }
+        .yc-thumb.bg-3 { background: radial-gradient(ellipse at 40% 30%, rgba(60, 160, 150, 0.3) 0%, transparent 55%), linear-gradient(135deg, #051a18, #020a09); }
+        .yc-thumb.bg-4 { background: radial-gradient(ellipse at 40% 30%, rgba(180, 80, 220, 0.35) 0%, transparent 55%), linear-gradient(135deg, #15051a, #08020a); }
         .yc-thumb::after {
             font-family: 'Cinzel', serif;
             font-size: 3rem;
@@ -1039,11 +751,7 @@
             border: 1px solid var(--border);
             border-radius: 4px;
         }
-        .yc-slots-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-        }
+        .yc-slots-top { display: flex; justify-content: space-between; align-items: baseline; }
         .yc-slots-label {
             font-family: 'Inter', sans-serif;
             font-size: 0.52rem;
@@ -1130,9 +838,7 @@
             width: 100%;
             position: relative;
             overflow: hidden;
-            box-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.1) inset,
-                0 8px 24px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 8px 24px rgba(0, 0, 0, 0.4);
         }
         .yc-btn::before {
             content: '';
@@ -1147,14 +853,12 @@
             color: var(--gold);
             border-color: var(--gold);
             background: linear-gradient(180deg, rgba(232, 193, 104, 0.12) 0%, rgba(232, 193, 104, 0.04) 100%);
-            box-shadow: 
-                0 1px 0 rgba(255, 255, 255, 0.2) inset,
-                0 8px 30px rgba(232, 193, 104, 0.3);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 8px 30px rgba(232, 193, 104, 0.3);
         }
         .yc-btn:hover::before { left: 130%; }
 
         /* ============================================
-           АРТЫ — ФОКУС, КРУПНЫЕ, БЕЗ ЦЕН
+           АРТЫ
            ============================================ */
         .art-grid {
             display: grid;
@@ -1192,9 +896,7 @@
         .art-tile:hover {
             transform: translateY(-6px);
             border-color: var(--line-hi);
-            box-shadow: 
-                0 30px 70px rgba(0, 0, 0, 0.75),
-                0 0 60px rgba(232, 193, 104, 0.15);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.75), 0 0 60px rgba(232, 193, 104, 0.15);
         }
         .art-tile:hover::before {
             background: linear-gradient(180deg, rgba(232, 193, 104, 0.35) 0%, rgba(232, 193, 104, 0.55) 100%);
@@ -1294,7 +996,6 @@
             padding-top: 14px;
             border-top: 1px solid var(--border);
         }
-        /* Цена убрана — только лайки/просмотры */
         .at-stats { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--text-2); display: flex; gap: 12px; }
         .at-stats .heart { color: var(--wine-hi); }
 
@@ -1339,10 +1040,8 @@
             .topbar-nav { gap: 20px; font-size: 0.66rem; }
             .logo { font-size: 1.3rem; letter-spacing: 8px; }
             .btn-new-lot { display: none; }
-            .market-hero { padding: 48px 24px 28px; }
-            .market-hero h1 { font-size: 2.8rem; letter-spacing: 3px; }
-            .top-table { padding: 20px 24px 40px; }
-            .section { padding: 26px 24px 44px; }
+            .section { padding: 32px 24px 44px; }
+            .section:first-of-type { padding-top: 44px; }
             .art-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
             .auction-card { flex: 0 0 260px; }
             .ych-card { flex: 0 0 220px; }
@@ -1376,20 +1075,8 @@
             .wallet .plus { width: 18px; height: 18px; font-size: 0.8rem; }
             .topbar-user .avatar { width: 30px; height: 30px; font-size: 0.8rem; }
 
-            .market-hero { padding: 32px 16px 18px; flex-direction: column; align-items: flex-start; }
-            .market-hero h1 { font-size: 2rem; letter-spacing: 2px; }
-            .market-hero .hero-tagline { font-size: 0.95rem; }
-            .market-hero .hero-right { width: 100%; }
-            .btn-hero { flex: 1; justify-content: center; padding: 14px 20px; font-size: 0.68rem; }
-
-            .top-table { padding: 10px 16px 30px; }
-            .top-table-inner { grid-template-columns: auto 1fr; gap: 16px; padding: 20px; }
-            .top-table-inner::after { display: none; }
-            .top-table .tt-avatar { width: 56px; height: 56px; font-size: 1.4rem; }
-            .top-table .tt-name { font-size: 1.05rem; }
-            .top-table .tt-go { grid-column: 1 / -1; width: 100%; }
-
-            .section { padding: 22px 16px 34px; }
+            .section { padding: 26px 16px 34px; }
+            .section:first-of-type { padding-top: 34px; }
             .section-head { flex-direction: column; align-items: flex-start; gap: 12px; }
             .section-title { font-size: 1rem; letter-spacing: 2px; }
 
@@ -1407,7 +1094,6 @@
             .footer { margin-top: 40px; padding: 30px 16px 14px; font-size: 0.56rem; }
         }
         @media (max-width: 480px) {
-            .market-hero h1 { font-size: 1.55rem; letter-spacing: 1px; }
             .art-grid { grid-template-columns: 1fr; }
             .auction-card { flex: 0 0 220px; }
             .ych-card { flex: 0 0 180px; }
@@ -1444,45 +1130,6 @@
                 <div class="avatar" title="Профиль">F</div>
             </div>
         </header>
-    </div>
-
-    <!-- HERO -->
-    <section class="market-hero">
-        <div class="hero-left">
-            <div class="hero-eyebrow">Художественный дом · с 2025</div>
-            <h1>Ставь на <span class="gold">талант</span></h1>
-            <p class="hero-tagline">Дом, где художники <strong>получают признание</strong>, а коллекционеры — редкие работы. Аукционы, ючи и заказы в одном зале.</p>
-        </div>
-        <div class="hero-right">
-            <a href="#auctions" class="btn-hero primary">Живые аукционы</a>
-            <a href="#" class="btn-hero ghost">Стать художником</a>
-        </div>
-    </section>
-
-    <!-- ТОП-СТОЛ -->
-    <div class="top-table">
-        <div class="top-table-inner">
-            <div class="tt-avatar">V</div>
-            <div class="tt-body">
-                <div class="tt-name">Velvet_Rose</div>
-                <div class="tt-sub">Живопись · бархат · интим · пять лет в доме</div>
-                <div class="tt-stats">
-                    <div class="tt-stat">
-                        <span class="tt-stat-label">Заказов</span>
-                        <span class="tt-stat-value">342</span>
-                    </div>
-                    <div class="tt-stat">
-                        <span class="tt-stat-label">Рейтинг</span>
-                        <span class="tt-stat-value">4.9</span>
-                    </div>
-                    <div class="tt-stat">
-                        <span class="tt-stat-label">Свободных слотов</span>
-                        <span class="tt-stat-value">2</span>
-                    </div>
-                </div>
-            </div>
-            <button class="tt-go" type="button">Занять стол</button>
-        </div>
     </div>
 
     <!-- АУКЦИОНЫ -->
@@ -1704,7 +1351,7 @@
         </div>
     </section>
 
-    <!-- АРТЫ — ФОКУС -->
+    <!-- АРТЫ -->
     <section class="section" id="arts">
         <div class="section-head">
             <h2 class="section-title">🎨 Витрина <span class="count">— работы зала</span></h2>
@@ -1869,14 +1516,14 @@
             tick(); setInterval(tick, 1000);
         })();
 
-        /* АВТОПРОКРУТКА — МЕДЛЕННАЯ, ПИНГ-ПОНГ (туда-обратно) */
+        /* АВТОПРОКРУТКА — ПИНГ-ПОНГ */
         (function autoScroll() {
             document.querySelectorAll('.carousel[data-autoscroll]').forEach(carousel => {
                 const interval = parseInt(carousel.dataset.autoscroll, 10) || 6000;
                 let paused = false;
                 let resumeTimer = null;
                 let autoTimer = null;
-                let direction = 1; /* 1 = вправо, -1 = влево */
+                let direction = 1;
 
                 function step() {
                     if (paused) return;
@@ -1885,12 +1532,8 @@
                     const cardWidth = firstCard.offsetWidth + 20;
                     const maxScroll = carousel.scrollWidth - carousel.clientWidth;
 
-                    /* Пинг-понг: дошли до конца — едем обратно */
-                    if (direction === 1 && carousel.scrollLeft >= maxScroll - 5) {
-                        direction = -1;
-                    } else if (direction === -1 && carousel.scrollLeft <= 5) {
-                        direction = 1;
-                    }
+                    if (direction === 1 && carousel.scrollLeft >= maxScroll - 5) direction = -1;
+                    else if (direction === -1 && carousel.scrollLeft <= 5) direction = 1;
 
                     carousel.scrollBy({ left: cardWidth * direction, behavior: 'smooth' });
                 }
@@ -1940,14 +1583,12 @@
             });
         })();
 
-        /* ЖИВЫЕ СТАВКИ — 3-6 сек */
+        /* ЖИВЫЕ СТАВКИ */
         (function liveBids() {
             const cards = document.querySelectorAll('.auction-card');
             if (!cards.length) return;
             const fakeLeaders = ['Anonymous_01', 'Dark_Player', 'NightBidder', 'Anonymous_77', 'RedQueen', 'SilentBid', 'TwinFlame', 'GoldenCage', 'Noir_Art', 'Velvet_Rose', 'Midnight_777', 'Luxuria', 'CrimsonFang', 'SilverFox', 'IronMask'];
-
             function formatNum(n) { return n.toLocaleString('ru-RU'); }
-
             function updateBid(card) {
                 const bidEl = card.querySelector('[data-bid-el]');
                 const bidsEl = card.querySelector('[data-bids-el]');
@@ -1976,7 +1617,6 @@
                 }
                 el.textContent = next;
             }
-
             cards.forEach(card => {
                 function schedBid() {
                     const delay = Math.random() * 3000 + 3000;
@@ -1991,7 +1631,7 @@
             });
         })();
 
-        /* ЮЧИ — иногда слот занимается */
+        /* ЮЧИ — слоты занимаются */
         (function ychSlots() {
             const cards = document.querySelectorAll('.ych-card');
             cards.forEach(card => {
