@@ -3,120 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#1a1613">
+    <meta name="theme-color" content="#0f0c0a">
     <title>✦ FENBO · РЫНОК ✦</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Serif+Display:ital@0;1&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 
     <style>
         /* ============================================
-           GALLERY WINDOW — СВЕТЛАЯ ВИТРИНА
+           AUCTION HOUSE — ГЛУБОКИЙ ГРАФИТ + АЛЫЙ
            ============================================ */
         :root {
-            --paper: #f0ebe0;         /* тёплая бумага */
-            --paper-warm: #ebe4d5;
-            --paper-deep: #e0d8c6;
-            --ink: #1a1613;           /* чёрные чернила */
-            --ink-soft: #4a4340;
-            --ink-mute: #8b847d;
-            --ink-faint: #b8b0a3;
+            --bg: #0f0c0a;                 /* тёмный обсидиан */
+            --bg-1: #171310;
+            --bg-2: #201a15;
+            --bg-3: #2a221b;
+            --bg-hi: #382c22;
 
-            --gold: #b8860b;          /* тёмное золото */
-            --gold-hi: #d4a017;
-            --emerald: #2d6b4f;       /* глубокий изумруд */
-            --crimson: #a0323d;
-            --cobalt: #2d4a7c;
+            --paper: #ebe4d6;              /* костяной для акцентов */
+            --paper-soft: #c9c0ae;
 
-            --line: rgba(26, 22, 19, 0.08);
-            --line-mid: rgba(26, 22, 19, 0.16);
+            --scarlet: #c94442;            /* яркий алый — как сургуч */
+            --scarlet-hi: #e05b59;
+            --scarlet-soft: rgba(201, 68, 66, 0.35);
 
-            --r: 4px;
+            --amber: #d99541;              /* янтарь */
+            --amber-hi: #f0ad55;
+            --amber-soft: rgba(217, 149, 65, 0.35);
+
+            --plum: #4a1e2e;               /* сливовый */
+            --emerald: #4a7a5c;            /* приглушённый изумруд */
+            --ice: #7d9cb8;                /* пыльный голубой */
+
+            --text-0: #ebe4d6;
+            --text-1: #9a8f7f;
+            --text-2: #6a6055;
+            --text-3: #40382f;
+
+            --line: rgba(235, 228, 214, 0.06);
+            --line-mid: rgba(235, 228, 214, 0.12);
+            --line-hi: rgba(235, 228, 214, 0.2);
+
+            --r: 3px;
+            --r-lg: 8px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
         html { scroll-behavior: smooth; }
 
         body {
-            background: #1a1613;    /* тёмный переулок снаружи */
-            font-family: 'Inter', sans-serif;
-            color: var(--ink);
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse 80% 40% at 50% -10%, rgba(201, 68, 66, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 100% 50%, rgba(217, 149, 65, 0.04) 0%, transparent 60%);
+            background-attachment: fixed;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            color: var(--text-0);
             min-height: 100vh;
-            padding: 40px 0;
             font-size: 14px;
             line-height: 1.5;
+            letter-spacing: 0.1px;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        /* Внутренняя "витрина" — светлая */
-        .gallery {
-            background: var(--paper);
-            background-image:
-                radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212, 160, 23, 0.05) 0%, transparent 60%),
-                radial-gradient(circle at 20% 80%, rgba(45, 107, 79, 0.03) 0%, transparent 40%),
-                radial-gradient(circle at 90% 40%, rgba(45, 74, 124, 0.02) 0%, transparent 40%);
-            max-width: 1440px;
-            margin: 0 auto;
-            border-radius: 6px;
-            box-shadow:
-                0 0 0 1px rgba(240, 235, 224, 0.15),
-                0 60px 120px rgba(0, 0, 0, 0.7),
-                0 0 200px rgba(212, 160, 23, 0.06);
-            overflow: hidden;
-            position: relative;
-            padding-bottom: 60px;
-        }
-
-        /* Тонкая текстура бумаги */
-        .gallery::before {
+        /* Лёгкая текстура — ворсовый бархат */
+        body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             inset: 0;
             pointer-events: none;
-            opacity: 0.5;
+            z-index: 0;
+            opacity: 0.3;
             background-image:
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(26, 22, 19, 0.012) 2px, rgba(26, 22, 19, 0.012) 3px),
-                repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(26, 22, 19, 0.008) 3px, rgba(26, 22, 19, 0.008) 4px);
-            z-index: 1;
+                repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(235, 228, 214, 0.008) 1px, rgba(235, 228, 214, 0.008) 2px);
         }
 
         /* ============================================
            ШАПКА
            ============================================ */
         .header {
-            position: relative;
-            z-index: 10;
-            padding: 32px 60px 24px;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 0 40px;
+            background: linear-gradient(180deg, rgba(15, 12, 10, 0.98) 0%, rgba(15, 12, 10, 0.85) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--line);
+        }
+        .header-inner {
             display: grid;
             grid-template-columns: auto 1fr auto;
             align-items: center;
-            gap: 48px;
+            gap: 40px;
+            padding: 16px 0;
+            max-width: 1680px;
+            margin: 0 auto;
         }
         .logo {
-            font-family: 'Fraunces', serif;
-            font-size: 1.6rem;
-            font-weight: 500;
-            font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
-            color: var(--ink);
-            text-decoration: none;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--paper);
             letter-spacing: -0.5px;
+            text-decoration: none;
             display: flex;
             align-items: baseline;
             gap: 8px;
-            line-height: 1;
-        }
-        .logo .star {
-            font-family: 'Fraunces', serif;
-            color: var(--gold);
-            font-size: 1.1rem;
-            font-style: italic;
         }
         .logo .sub {
             font-family: 'Caveat', cursive;
             font-size: 1.15rem;
-            color: var(--emerald);
+            color: var(--scarlet);
             letter-spacing: 0;
             margin-left: 4px;
         }
@@ -124,190 +124,176 @@
         .nav {
             display: flex;
             justify-content: center;
-            gap: 36px;
-            font-family: 'Inter', sans-serif;
+            gap: 32px;
+            font-family: 'Bricolage Grotesque', sans-serif;
             font-size: 0.72rem;
             font-weight: 500;
             letter-spacing: 2.5px;
             text-transform: uppercase;
         }
         .nav a {
-            color: var(--ink-soft);
+            color: var(--text-1);
             text-decoration: none;
+            padding: 6px 0;
             position: relative;
-            padding: 4px 0;
             transition: color 0.25s;
         }
         .nav a:hover,
-        .nav a.active {
-            color: var(--ink);
-        }
+        .nav a.active { color: var(--paper); }
         .nav a.active::after {
             content: '';
             position: absolute;
-            bottom: -8px; left: 0; right: 0;
-            height: 1px;
-            background: var(--gold);
+            bottom: -8px; left: 50%;
+            transform: translateX(-50%);
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: var(--scarlet);
         }
 
-        .user { display: flex; align-items: center; gap: 14px; }
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
         .balance {
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            padding-right: 14px;
-            border-right: 1px solid var(--line-mid);
+            align-items: center;
+            gap: 8px;
+            padding: 7px 14px;
+            background: var(--bg-2);
+            border: 1px solid var(--line-mid);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.25s;
         }
-        .balance-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.55rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: var(--ink-mute);
-            text-transform: uppercase;
+        .balance:hover {
+            border-color: var(--amber);
         }
         .balance-value {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--ink);
-            letter-spacing: -0.3px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--amber);
+            letter-spacing: 0.3px;
         }
         .balance-value .unit {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Bricolage Grotesque', sans-serif;
             font-size: 0.55rem;
-            color: var(--ink-mute);
-            letter-spacing: 1px;
-            margin-left: 2px;
+            color: var(--text-2);
+            letter-spacing: 1.2px;
+            margin-left: 3px;
             font-weight: 500;
         }
         .avatar {
-            width: 38px; height: 38px;
+            width: 34px; height: 34px;
             border-radius: 50%;
-            background: var(--ink);
+            background: linear-gradient(135deg, var(--scarlet), var(--plum));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Fraunces', serif;
-            font-size: 1rem;
+            font-family: 'DM Serif Display', serif;
+            font-size: 0.95rem;
             color: var(--paper);
             cursor: pointer;
-            transition: transform 0.25s;
         }
-        .avatar:hover { transform: scale(1.05); }
 
         /* ============================================
            HERO
            ============================================ */
         .hero {
-            position: relative;
-            z-index: 5;
-            padding: 60px 60px 40px;
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 100px 40px 40px;
             display: grid;
             grid-template-columns: 1fr auto;
             align-items: end;
             gap: 40px;
         }
         .hero-title {
-            font-family: 'Fraunces', serif;
-            font-size: 5.5rem;
+            font-family: 'DM Serif Display', serif;
+            font-size: 4.5rem;
             font-weight: 400;
-            font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 0;
-            color: var(--ink);
+            color: var(--paper);
             line-height: 0.95;
-            letter-spacing: -2.5px;
+            letter-spacing: -2px;
         }
         .hero-title em {
             font-style: italic;
-            color: var(--gold);
-            font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+            color: var(--scarlet);
         }
-        .hero-title .sub-line {
+        .hero-title .caveat {
             display: block;
             font-family: 'Caveat', cursive;
-            font-size: 1.8rem;
-            color: var(--emerald);
+            font-size: 1.6rem;
+            color: var(--amber);
             letter-spacing: 0;
-            margin-top: 12px;
+            margin-top: 8px;
             font-weight: 500;
         }
         .hero-meta {
+            text-align: right;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            text-align: right;
-            padding-bottom: 12px;
+            gap: 6px;
+            padding-bottom: 10px;
         }
-        .hero-meta .row {
-            font-family: 'Inter', sans-serif;
+        .hero-row {
+            font-family: 'Bricolage Grotesque', sans-serif;
             font-size: 0.72rem;
             font-weight: 500;
             letter-spacing: 2px;
-            color: var(--ink-mute);
+            color: var(--text-2);
             text-transform: uppercase;
         }
-        .hero-meta .row strong {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--ink);
-            letter-spacing: -0.3px;
-            margin-left: 10px;
+        .hero-row strong {
+            font-family: 'DM Mono', monospace;
+            color: var(--paper);
+            font-weight: 500;
+            margin-left: 8px;
+            letter-spacing: 0;
             text-transform: none;
+            font-size: 0.82rem;
         }
-        .hero-meta .row.gold strong { color: var(--gold); }
-        .hero-meta .row.emerald strong { color: var(--emerald); }
+        .hero-row.amber strong { color: var(--amber); }
+        .hero-row.emerald strong { color: var(--emerald); }
 
         /* ============================================
-           ФИЛЬТР-СТРОКА
+           ФИЛЬТРЫ
            ============================================ */
         .filters {
-            padding: 0 60px 32px;
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 0 40px 30px;
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
-            border-bottom: 1px solid var(--line);
-            position: relative;
-            z-index: 5;
         }
-        .filter-chip {
-            font-family: 'Inter', sans-serif;
+        .chip {
+            font-family: 'Bricolage Grotesque', sans-serif;
             font-size: 0.68rem;
             font-weight: 500;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--ink-soft);
+            color: var(--text-1);
             background: transparent;
             border: 1px solid var(--line-mid);
             padding: 8px 16px;
-            border-radius: 30px;
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.25s;
         }
-        .filter-chip:hover {
-            border-color: var(--ink);
-            color: var(--ink);
-        }
-        .filter-chip.active {
-            background: var(--ink);
-            color: var(--paper);
-            border-color: var(--ink);
-        }
-        .filter-chip.live { color: var(--crimson); border-color: rgba(160, 50, 61, 0.3); }
-        .filter-chip.live.active {
-            background: var(--crimson);
-            border-color: var(--crimson);
-            color: var(--paper);
-        }
+        .chip:hover { border-color: var(--paper-soft); color: var(--paper); }
+        .chip.active { background: var(--paper); color: var(--bg); border-color: var(--paper); }
+        .chip.live { color: var(--scarlet); border-color: rgba(201, 68, 66, 0.35); }
+        .chip.live.active { background: var(--scarlet); border-color: var(--scarlet); color: var(--paper); }
 
         /* ============================================
            СЕКЦИЯ
            ============================================ */
         .section {
-            padding: 48px 60px 20px;
-            position: relative;
-            z-index: 5;
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 40px 40px 60px;
         }
         .section-head {
             display: flex;
@@ -321,147 +307,120 @@
         .section-title {
             display: flex;
             align-items: baseline;
-            gap: 16px;
+            gap: 18px;
         }
-        .section-number {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--gold);
+        .section-num {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--scarlet);
             letter-spacing: 0;
         }
         .section-name {
-            font-family: 'Fraunces', serif;
+            font-family: 'DM Serif Display', serif;
             font-size: 1.8rem;
             font-weight: 400;
-            font-variation-settings: 'opsz' 144, 'SOFT' 50;
-            color: var(--ink);
+            color: var(--paper);
             letter-spacing: -0.5px;
         }
         .section-count {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.66rem;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--ink-mute);
+            color: var(--text-2);
         }
         .section-more {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Bricolage Grotesque', sans-serif;
             font-size: 0.68rem;
             font-weight: 500;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--ink);
+            color: var(--paper);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             transition: gap 0.25s;
         }
-        .section-more:hover { gap: 14px; color: var(--gold); }
-        .section-more::after {
-            content: '→';
-            color: var(--gold);
-        }
+        .section-more:hover { gap: 14px; color: var(--amber); }
+        .section-more::after { content: '→'; color: var(--amber); }
 
         /* ============================================
-           СЕТКА ПАННО — 4 В РЯД
+           АУКЦИОНЫ — БОЛЬШИЕ ГОРИЗОНТАЛЬНЫЕ БАННЕРЫ
+           Каждая строка — отдельный баннер с разными пропорциями
            ============================================ */
-        .panels {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-        }
-        @media (max-width: 1200px) { .panels { gap: 24px; } }
-        @media (max-width: 900px) { .panels { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
-        @media (max-width: 520px) { .panels { grid-template-columns: 1fr; gap: 20px; } }
-
-        /* ============================================
-           ПАННО — БОЛЬШАЯ КАРТОЧКА
-           ============================================ */
-        .panel {
-            position: relative;
+        .auctions-stage {
             display: flex;
             flex-direction: column;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(30px);
-            filter: blur(4px);
-            animation: panelRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            gap: 20px;
         }
-        .panel:nth-child(1) { animation-delay: 0.06s; }
-        .panel:nth-child(2) { animation-delay: 0.12s; }
-        .panel:nth-child(3) { animation-delay: 0.18s; }
-        .panel:nth-child(4) { animation-delay: 0.24s; }
-        .panel:nth-child(5) { animation-delay: 0.30s; }
-        .panel:nth-child(6) { animation-delay: 0.36s; }
-        .panel:nth-child(7) { animation-delay: 0.42s; }
-        .panel:nth-child(8) { animation-delay: 0.48s; }
-        .panel:nth-child(9) { animation-delay: 0.54s; }
-        .panel:nth-child(10) { animation-delay: 0.60s; }
-        .panel:nth-child(11) { animation-delay: 0.66s; }
-        .panel:nth-child(12) { animation-delay: 0.72s; }
 
-        @keyframes panelRise {
+        .auc {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--bg-1);
+            border: 1px solid var(--line);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            cursor: pointer;
+            min-height: 240px;
+            opacity: 0;
+            transform: translateY(24px);
+            filter: blur(4px);
+            animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transition: border-color 0.4s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .auc:nth-child(1) { animation-delay: 0.05s; }
+        .auc:nth-child(2) { animation-delay: 0.12s; }
+        .auc:nth-child(3) { animation-delay: 0.19s; }
+        .auc:nth-child(4) { animation-delay: 0.26s; }
+
+        @keyframes rise {
             to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        .panel:hover { transform: translateY(-6px); }
+        .auc:hover {
+            border-color: var(--amber-soft);
+            transform: translateY(-3px);
+        }
 
-        /* Арт — большая часть панно */
-        .panel-art {
+        /* Чередование: чётные — арт справа, нечётные — арт слева */
+        .auc:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+        }
+        .auc:nth-child(even) .auc-art { order: 2; }
+        .auc:nth-child(even) .auc-info { order: 1; }
+
+        /* Арт-панель */
+        .auc-art {
             position: relative;
-            width: 100%;
-            aspect-ratio: 3 / 4;
-            background:
-                radial-gradient(ellipse at 30% 25%, rgba(184, 134, 11, 0.08) 0%, transparent 55%),
-                radial-gradient(ellipse at 75% 80%, rgba(45, 107, 79, 0.08) 0%, transparent 55%),
-                linear-gradient(140deg, var(--paper-warm) 0%, var(--paper-deep) 100%);
-            border: 1px solid var(--line);
-            overflow: hidden;
-            transition: border-color 0.4s;
-        }
-        .panel:hover .panel-art {
-            border-color: var(--gold);
-        }
-
-        /* Внутренняя тонкая рамка */
-        .panel-art::before {
-            content: '';
-            position: absolute;
-            inset: 12px;
-            border: 1px solid transparent;
-            transition: border-color 0.5s;
-            pointer-events: none;
-            z-index: 3;
-        }
-        .panel:hover .panel-art::before {
-            border-color: rgba(184, 134, 11, 0.35);
-        }
-
-        /* Символ-арт */
-        .panel-art .art {
-            position: absolute;
-            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Fraunces', serif;
-            font-size: 7rem;
-            font-weight: 300;
-            font-variation-settings: 'opsz' 144, 'SOFT' 100;
-            color: rgba(26, 22, 19, 0.08);
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 30% 30%, rgba(201, 68, 66, 0.2) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 80%, rgba(74, 30, 46, 0.5) 0%, transparent 60%),
+                linear-gradient(140deg, #1c0d12 0%, #0a0508 100%);
+        }
+        .auc-art .art {
+            font-family: 'DM Serif Display', serif;
+            font-size: 8rem;
+            font-style: italic;
+            color: rgba(235, 228, 214, 0.08);
+            text-shadow: 0 0 60px rgba(201, 68, 66, 0.4);
             transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), color 0.5s;
         }
-        .panel:hover .panel-art .art {
+        .auc:hover .auc-art .art {
             transform: scale(1.05);
-            color: rgba(26, 22, 19, 0.16);
+            color: rgba(235, 228, 214, 0.16);
         }
 
         /* Водяной знак */
-        .panel-art .wm {
+        .auc-art .wm {
             position: absolute;
             inset: 0;
             display: flex;
@@ -470,233 +429,244 @@
             opacity: 0;
             transition: opacity 0.5s;
             pointer-events: none;
-            z-index: 2;
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 24px, rgba(26, 22, 19, 0.04) 24px, rgba(26, 22, 19, 0.04) 25px);
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 26px, rgba(235, 228, 214, 0.03) 26px, rgba(235, 228, 214, 0.03) 27px);
         }
-        .panel-art .wm::after {
+        .auc-art .wm::after {
             content: 'FENBO';
-            font-family: 'Fraunces', serif;
-            font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 8px;
-            color: rgba(26, 22, 19, 0.15);
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            letter-spacing: 6px;
+            color: rgba(235, 228, 214, 0.18);
             transform: rotate(-22deg);
         }
-        .panel:hover .panel-art .wm { opacity: 1; }
+        .auc:hover .auc-art .wm { opacity: 1; }
 
-        /* Метка в верхнем углу */
-        .panel-tag {
-            position: absolute;
-            top: 18px; left: 18px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.5rem;
-            font-weight: 700;
+        /* Инфо-панель */
+        .auc-info {
+            padding: 32px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+        }
+        .auc-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
             letter-spacing: 2.5px;
             text-transform: uppercase;
-            padding: 4px 0;
-            z-index: 4;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--ink);
         }
-        .panel-tag::before {
-            content: '';
-            width: 20px; height: 1px;
-            background: var(--ink);
-        }
-        .panel-tag.live { color: var(--crimson); }
-        .panel-tag.live::before { background: var(--crimson); }
-        .panel-tag.ych { color: var(--emerald); }
-        .panel-tag.ych::before { background: var(--emerald); }
-
-        /* Таймер в верхнем правом */
-        .panel-timer {
-            position: absolute;
-            top: 18px; right: 18px;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.68rem;
-            font-weight: 700;
-            color: var(--ink);
-            letter-spacing: 0;
-            z-index: 4;
-            padding: 3px 6px;
-            background: rgba(240, 235, 224, 0.85);
-            backdrop-filter: blur(6px);
-        }
-        .panel.ending .panel-timer {
-            color: var(--crimson);
-            animation: timerBlink 1.6s ease-in-out infinite;
-        }
-        @keyframes timerBlink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        /* Прогресс-слоты (YCH) — снизу арта */
-        .panel-slots {
-            position: absolute;
-            left: 18px; right: 18px; bottom: 18px;
-            display: flex;
-            gap: 3px;
-            z-index: 4;
-        }
-        .panel-slot {
-            flex: 1;
-            height: 2px;
-            background: rgba(26, 22, 19, 0.15);
-        }
-        .panel-slot.free {
-            background: var(--gold);
-        }
-
-        /* Инфо внизу — тонкая полоска */
-        .panel-info {
-            padding: 16px 0 0;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: baseline;
-            gap: 12px;
-            border-top: 1px solid transparent;
-            transition: border-color 0.3s;
-        }
-        .panel:hover .panel-info {
-            border-top-color: var(--line-mid);
-        }
-        .panel-title {
-            font-family: 'Fraunces', serif;
-            font-size: 1.05rem;
-            font-weight: 500;
-            font-variation-settings: 'opsz' 144;
-            color: var(--ink);
-            letter-spacing: -0.2px;
-            line-height: 1.15;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .panel-author {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 400;
-            color: var(--ink-mute);
-            margin-top: 3px;
-            letter-spacing: 0.3px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .panel-price {
-            font-family: 'Space Mono', monospace;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--ink);
-            letter-spacing: -0.5px;
-            text-align: right;
-            white-space: nowrap;
-        }
-        .panel-price .unit {
-            display: block;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.5rem;
-            font-weight: 500;
-            color: var(--ink-mute);
-            letter-spacing: 1.5px;
-            margin-top: 2px;
-        }
-        .panel-price.bump {
-            animation: priceBump 1s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        @keyframes priceBump {
-            0% { color: var(--ink); }
-            30% { color: var(--gold); }
-            100% { color: var(--ink); }
-        }
-
-        /* Кнопка — как тонкая ссылка внизу */
-        .panel-cta {
-            margin-top: 14px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--ink);
+        .auc-meta .live-badge {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            opacity: 0;
-            transform: translateY(-4px);
-            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-            height: 0;
-            overflow: hidden;
+            gap: 6px;
+            color: var(--scarlet);
         }
-        .panel-cta::after {
+        .auc-meta .live-badge::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--scarlet);
+            box-shadow: 0 0 8px var(--scarlet-soft);
+            animation: pulse 1.6s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        .auc-meta .n {
+            color: var(--text-2);
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0;
+        }
+
+        .auc-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--paper);
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+        .auc-author {
+            font-family: 'Caveat', cursive;
+            font-size: 1.35rem;
+            color: var(--amber);
+            font-weight: 500;
+            margin-top: -8px;
+        }
+
+        .auc-bid {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+        }
+        .auc-bid-label {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            color: var(--text-2);
+            text-transform: uppercase;
+        }
+        .auc-bid-value {
+            font-family: 'DM Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--scarlet);
+            letter-spacing: -0.5px;
+            line-height: 1;
+            transition: color 0.3s;
+        }
+        .auc-bid-value .unit {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.7rem;
+            color: var(--text-2);
+            letter-spacing: 1.5px;
+            margin-left: 4px;
+            font-weight: 500;
+        }
+        .auc-bid-value.bump {
+            animation: bidBump 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        @keyframes bidBump {
+            0% { color: var(--scarlet); }
+            25% { color: var(--amber-hi); text-shadow: 0 0 20px var(--amber); }
+            100% { color: var(--scarlet); text-shadow: none; }
+        }
+
+        .auc-timer {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-1);
+            letter-spacing: 0.3px;
+            margin-left: auto;
+        }
+        .auc.ending .auc-timer {
+            color: var(--scarlet);
+            animation: timerPulse 1.4s ease-in-out infinite;
+        }
+        @keyframes timerPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .auc-cta {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--paper);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 6px;
+            transition: gap 0.3s;
+        }
+        .auc:hover .auc-cta { gap: 18px; }
+        .auc-cta::after {
             content: '→';
-            color: var(--gold);
-            font-size: 0.85rem;
+            color: var(--amber);
+            font-size: 1rem;
         }
-        .panel:hover .panel-cta {
-            opacity: 1;
-            transform: translateY(0);
-            height: auto;
-            margin-top: 14px;
+
+        /* Первая карточка — КРУПНЕЕ (feature) */
+        .auc.feature {
+            grid-template-columns: 1.4fr 1fr;
+            min-height: 320px;
+        }
+        .auc.feature .auc-art .art {
+            font-size: 11rem;
+        }
+        .auc.feature .auc-title {
+            font-size: 2.6rem;
+        }
+        .auc.feature .auc-bid-value {
+            font-size: 2.4rem;
+        }
+        .auc.feature::before {
+            content: '✦ FEATURED';
+            position: absolute;
+            top: 20px; left: 20px;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--amber);
+            padding: 5px 12px;
+            background: rgba(15, 12, 10, 0.85);
+            border: 1px solid var(--amber-soft);
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            z-index: 10;
         }
 
         /* ============================================
-           ГАЛЕРЕЯ-СЕТКА — РАЗНАЯ ВЫСОТА
+           ЮЧИ — ВЕРТИКАЛЬНЫЕ ВЫТЯНУТЫЕ КАРТЫ
+           С сеткой слотов в правой колонке
            ============================================ */
-        .collection {
+        .ych-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
-            grid-auto-rows: 60px;
         }
-        @media (max-width: 1200px) { .collection { grid-template-columns: repeat(4, 1fr); } }
-        @media (max-width: 768px) { .collection { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 40px; gap: 12px; } }
 
-        .col-item {
+        .ych {
             position: relative;
-            border-radius: var(--r);
+            background: var(--bg-1);
+            border: 1px solid var(--line);
+            border-radius: var(--r-lg);
             overflow: hidden;
             cursor: pointer;
-            background: linear-gradient(140deg, var(--paper-warm) 0%, var(--paper-deep) 100%);
-            border: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            min-height: 260px;
             opacity: 0;
-            transform: translateY(16px);
-            animation: panelRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s;
+            transform: translateY(20px);
+            animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transition: border-color 0.4s, transform 0.4s;
         }
-        .col-item:nth-child(1) { animation-delay: 0.06s; grid-column: span 2; grid-row: span 5; }
-        .col-item:nth-child(2) { animation-delay: 0.10s; grid-column: span 2; grid-row: span 7; }
-        .col-item:nth-child(3) { animation-delay: 0.14s; grid-column: span 2; grid-row: span 4; }
-        .col-item:nth-child(4) { animation-delay: 0.18s; grid-column: span 2; grid-row: span 6; }
-        .col-item:nth-child(5) { animation-delay: 0.22s; grid-column: span 2; grid-row: span 4; }
-        .col-item:nth-child(6) { animation-delay: 0.26s; grid-column: span 2; grid-row: span 6; }
-        .col-item:nth-child(7) { animation-delay: 0.30s; grid-column: span 3; grid-row: span 5; }
-        .col-item:nth-child(8) { animation-delay: 0.34s; grid-column: span 3; grid-row: span 7; }
+        .ych:nth-child(1) { animation-delay: 0.05s; }
+        .ych:nth-child(2) { animation-delay: 0.12s; }
+        .ych:nth-child(3) { animation-delay: 0.19s; }
+        .ych:nth-child(4) { animation-delay: 0.26s; }
 
-        .col-item:hover {
-            transform: translateY(-4px);
-            border-color: var(--gold);
+        .ych:hover {
+            border-color: var(--emerald);
+            transform: translateY(-3px);
         }
-        .col-item .art {
-            position: absolute;
-            inset: 0;
+
+        /* Арт-часть */
+        .ych-art {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Fraunces', serif;
-            font-size: 3.5rem;
-            font-weight: 300;
-            color: rgba(26, 22, 19, 0.08);
-            transition: color 0.4s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 40% 30%, rgba(74, 122, 92, 0.25) 0%, transparent 60%),
+                linear-gradient(140deg, #0e1a14 0%, #060b09 100%);
         }
-        .col-item:hover .art {
-            color: rgba(26, 22, 19, 0.16);
+        .ych-art .art {
+            font-family: 'DM Serif Display', serif;
+            font-size: 5.5rem;
+            font-style: italic;
+            color: rgba(235, 228, 214, 0.1);
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s;
+        }
+        .ych:hover .ych-art .art {
             transform: scale(1.06);
+            color: rgba(235, 228, 214, 0.18);
         }
-        .col-item .wm {
+        .ych-art .wm {
             position: absolute;
             inset: 0;
             display: flex;
@@ -705,146 +675,387 @@
             opacity: 0;
             transition: opacity 0.4s;
             pointer-events: none;
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(26, 22, 19, 0.04) 20px, rgba(26, 22, 19, 0.04) 21px);
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(235, 228, 214, 0.03) 22px, rgba(235, 228, 214, 0.03) 23px);
         }
-        .col-item .wm::after {
+        .ych-art .wm::after {
             content: 'FENBO';
-            font-family: 'Fraunces', serif;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 5px;
-            color: rgba(26, 22, 19, 0.18);
+            font-family: 'DM Serif Display', serif;
+            font-size: 0.85rem;
+            font-style: italic;
+            letter-spacing: 4px;
+            color: rgba(235, 228, 214, 0.18);
             transform: rotate(-22deg);
         }
-        .col-item:hover .wm { opacity: 1; }
-        .col-item .info {
-            position: absolute;
-            left: 0; right: 0; bottom: 0;
-            padding: 14px 16px;
-            background: linear-gradient(180deg, transparent 0%, rgba(240, 235, 224, 0.95) 60%);
+        .ych:hover .ych-art .wm { opacity: 1; }
+
+        /* Правая колонка — слоты */
+        .ych-side {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            justify-content: space-between;
+            padding: 18px 16px;
+            background: var(--bg-2);
+            border-left: 1px solid var(--line);
+            min-width: 90px;
         }
-        .col-item .t {
-            font-family: 'Fraunces', serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--ink);
-            letter-spacing: -0.2px;
+        .ych-slots-label {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--text-2);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .ych-slots {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .ych-slot {
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            background: var(--bg-3);
+            border: 1px solid var(--line-mid);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-3);
+            transition: all 0.3s;
+        }
+        .ych-slot.free {
+            background: linear-gradient(135deg, var(--emerald), #2d4f3a);
+            border-color: #6a9b7a;
+            color: var(--paper);
+            box-shadow: 0 0 12px rgba(74, 122, 92, 0.5);
+        }
+        .ych-slot.taken {
+            background: var(--bg);
+            border-color: var(--line);
+            color: var(--text-3);
+            opacity: 0.5;
+        }
+
+        /* Инфо внизу */
+        .ych-info {
+            grid-column: 1 / -1;
+            padding: 18px 20px 20px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: baseline;
+            gap: 12px;
+            border-top: 1px solid var(--line);
+            background: var(--bg-1);
+        }
+        .ych-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--paper);
+            letter-spacing: -0.3px;
+            line-height: 1.15;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .col-item .a {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.66rem;
-            color: var(--ink-mute);
-            letter-spacing: 0.3px;
+        .ych-author {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: var(--amber);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+        .ych-price {
+            font-family: 'DM Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--paper);
+            text-align: right;
+            white-space: nowrap;
+        }
+        .ych-price .unit {
+            display: block;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.5rem;
+            color: var(--text-2);
+            letter-spacing: 1.5px;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        /* ============================================
+           ГАЛЕРЕЯ — АСИММЕТРИЧНЫЙ КОЛЛАЖ
+           ============================================ */
+        .collage {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 70px;
+            gap: 16px;
+        }
+
+        .col-piece {
+            position: relative;
+            border-radius: var(--r);
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--bg-1);
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transition: transform 0.4s, border-color 0.3s;
+        }
+        .col-piece:hover {
+            border-color: var(--amber-soft);
+            transform: translateY(-3px);
+        }
+
+        /* КАЖДАЯ ПЛИТКА — СВОЯ ФОРМА */
+        .col-piece.p1 { grid-column: span 5; grid-row: span 6; animation-delay: 0.04s; }
+        .col-piece.p2 { grid-column: span 3; grid-row: span 4; animation-delay: 0.08s; }
+        .col-piece.p3 { grid-column: span 4; grid-row: span 5; animation-delay: 0.12s; }
+        .col-piece.p4 { grid-column: span 4; grid-row: span 4; animation-delay: 0.16s; }
+        .col-piece.p5 { grid-column: span 3; grid-row: span 5; animation-delay: 0.20s; }
+        .col-piece.p6 { grid-column: span 5; grid-row: span 4; animation-delay: 0.24s; }
+        .col-piece.p7 { grid-column: span 4; grid-row: span 6; animation-delay: 0.28s; }
+        .col-piece.p8 { grid-column: span 3; grid-row: span 4; animation-delay: 0.32s; }
+        .col-piece.p9 { grid-column: span 5; grid-row: span 5; animation-delay: 0.36s; }
+        .col-piece.p10 { grid-column: span 4; grid-row: span 4; animation-delay: 0.40s; }
+
+        .col-piece .art {
+            font-family: 'DM Serif Display', serif;
+            font-size: 4rem;
+            font-style: italic;
+            color: rgba(235, 228, 214, 0.08);
+            transition: color 0.4s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .col-piece:hover .art {
+            color: rgba(235, 228, 214, 0.16);
+            transform: scale(1.06);
+        }
+
+        .col-piece .wm {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(235, 228, 214, 0.03) 20px, rgba(235, 228, 214, 0.03) 21px);
+        }
+        .col-piece .wm::after {
+            content: 'FENBO';
+            font-family: 'DM Serif Display', serif;
+            font-size: 0.75rem;
+            font-style: italic;
+            letter-spacing: 5px;
+            color: rgba(235, 228, 214, 0.2);
+            transform: rotate(-22deg);
+        }
+        .col-piece:hover .wm { opacity: 1; }
+
+        .col-piece .info {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            padding: 12px 14px;
+            background: linear-gradient(180deg, transparent 0%, rgba(15, 12, 10, 0.95) 60%);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .col-piece .t {
+            font-family: 'DM Serif Display', serif;
+            font-size: 0.88rem;
+            font-weight: 400;
+            color: var(--paper);
+            letter-spacing: -0.2px;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .col-piece .a {
+            font-family: 'Caveat', cursive;
+            font-size: 0.85rem;
+            color: var(--amber);
+            font-weight: 500;
         }
 
         /* ============================================
            ПОДВАЛ
            ============================================ */
         .footer {
-            padding: 40px 60px 20px;
-            margin-top: 20px;
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 40px 40px 30px;
             border-top: 1px solid var(--line);
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 20px;
-            position: relative;
-            z-index: 5;
+            gap: 24px;
         }
-        .footer-links { display: flex; gap: 26px; flex-wrap: wrap; }
+        .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
         .footer-links a {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.66rem;
             font-weight: 500;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.8px;
             text-transform: uppercase;
-            color: var(--ink-soft);
+            color: var(--text-1);
             text-decoration: none;
             transition: color 0.25s;
         }
-        .footer-links a:hover { color: var(--gold); }
-        .footer-mark {
+        .footer-links a:hover { color: var(--amber); }
+        .footer-brand {
             font-family: 'Caveat', cursive;
-            font-size: 1.1rem;
-            color: var(--ink-soft);
-            letter-spacing: 0.5px;
+            font-size: 1.2rem;
+            color: var(--text-2);
+            font-weight: 500;
         }
-        .footer-mark span { color: var(--gold); }
+        .footer-brand span { color: var(--scarlet); }
 
         /* ============================================
            АДАПТИВ
            ============================================ */
         @media (max-width: 1200px) {
-            .header { padding: 26px 40px 20px; gap: 30px; }
-            .hero { padding: 44px 40px 32px; }
-            .hero-title { font-size: 4rem; letter-spacing: -1.5px; }
-            .filters { padding: 0 40px 26px; }
-            .section { padding: 36px 40px 16px; }
-            .footer { padding: 32px 40px 16px; }
-            .nav { gap: 24px; font-size: 0.66rem; }
+            .header { padding: 0 24px; }
+            .hero { padding: 90px 24px 32px; }
+            .hero-title { font-size: 3.4rem; letter-spacing: -1.5px; }
+            .filters { padding: 0 24px 24px; }
+            .section { padding: 32px 24px 48px; }
+            .footer { padding: 32px 24px 20px; }
+            .nav { gap: 20px; font-size: 0.68rem; }
         }
+
         @media (max-width: 900px) {
-            body { padding: 20px 0; }
-            .gallery { border-radius: 0; max-width: 100%; }
-            .header {
-                grid-template-columns: auto auto;
-                gap: 20px;
-                padding: 20px 24px 16px;
-            }
+            .header-inner { grid-template-columns: auto auto; gap: 20px; }
             .nav { display: none; }
             .hero {
                 grid-template-columns: 1fr;
-                padding: 32px 24px 24px;
-                gap: 20px;
+                padding: 70px 20px 24px;
+                gap: 16px;
             }
-            .hero-title { font-size: 3rem; letter-spacing: -1px; }
-            .hero-title .sub-line { font-size: 1.4rem; }
+            .hero-title { font-size: 2.6rem; }
+            .hero-title .caveat { font-size: 1.2rem; }
             .hero-meta { text-align: left; padding-bottom: 0; }
-            .filters { padding: 0 24px 20px; gap: 6px; }
-            .filter-chip { padding: 6px 12px; font-size: 0.62rem; }
-            .section { padding: 28px 24px 12px; }
+            .filters { padding: 0 20px 20px; }
+            .section { padding: 28px 20px 40px; }
             .section-name { font-size: 1.4rem; }
-            .footer { padding: 28px 24px 12px; }
+
+            /* Аукционы — вертикальный layout */
+            .auc,
+            .auc.feature {
+                grid-template-columns: 1fr;
+                min-height: 0;
+            }
+            .auc:nth-child(even) .auc-art { order: 0; }
+            .auc:nth-child(even) .auc-info { order: 0; }
+            .auc-art {
+                aspect-ratio: 16 / 9;
+                min-height: 200px;
+            }
+            .auc-info { padding: 24px 22px 26px; }
+            .auc-title { font-size: 1.5rem; }
+            .auc.feature .auc-title { font-size: 1.8rem; }
+            .auc-bid-value { font-size: 1.4rem; }
+            .auc.feature .auc-bid-value { font-size: 1.7rem; }
+            .auc-art .art { font-size: 5rem; }
+            .auc.feature .auc-art .art { font-size: 7rem; }
+
+            /* YCH */
+            .ych-grid { grid-template-columns: 1fr; }
+            .ych { min-height: 220px; }
+
+            /* Коллаж — упрощаем */
+            .collage {
+                grid-template-columns: repeat(6, 1fr);
+                grid-auto-rows: 50px;
+                gap: 12px;
+            }
+            .col-piece.p1 { grid-column: span 3; grid-row: span 5; }
+            .col-piece.p2 { grid-column: span 3; grid-row: span 3; }
+            .col-piece.p3 { grid-column: span 3; grid-row: span 4; }
+            .col-piece.p4 { grid-column: span 3; grid-row: span 3; }
+            .col-piece.p5 { grid-column: span 3; grid-row: span 4; }
+            .col-piece.p6 { grid-column: span 3; grid-row: span 3; }
+            .col-piece.p7 { grid-column: span 3; grid-row: span 4; }
+            .col-piece.p8 { grid-column: span 3; grid-row: span 3; }
+            .col-piece.p9 { grid-column: span 3; grid-row: span 4; }
+            .col-piece.p10 { grid-column: span 3; grid-row: span 3; }
         }
+
         @media (max-width: 600px) {
-            .header { padding: 16px 18px 12px; gap: 12px; }
-            .logo { font-size: 1.3rem; }
-            .logo .sub { font-size: 0.95rem; }
-            .balance-label { display: none; }
-            .balance { padding-right: 10px; }
-            .balance-value { font-size: 0.78rem; }
-            .avatar { width: 32px; height: 32px; }
+            .header { padding: 0 14px; }
+            .header-inner { padding: 12px 0; }
+            .logo { font-size: 1.15rem; }
+            .logo .sub { font-size: 0.9rem; }
+            .balance { padding: 5px 10px; }
+            .balance-value { font-size: 0.72rem; }
+            .avatar { width: 28px; height: 28px; font-size: 0.8rem; }
 
-            .hero { padding: 24px 18px 20px; }
-            .hero-title { font-size: 2.4rem; }
-            .hero-title .sub-line { font-size: 1.15rem; }
-            .hero-meta .row { font-size: 0.6rem; letter-spacing: 1.5px; }
-            .hero-meta .row strong { font-size: 0.78rem; }
+            .hero { padding: 60px 14px 20px; }
+            .hero-title { font-size: 2rem; letter-spacing: -1px; }
+            .hero-title .caveat { font-size: 1rem; }
+            .hero-row { font-size: 0.6rem; letter-spacing: 1.5px; }
+            .hero-row strong { font-size: 0.72rem; }
 
-            .filters { padding: 0 18px 16px; }
-            .section { padding: 24px 18px 10px; }
+            .filters { padding: 0 14px 16px; gap: 6px; }
+            .chip { padding: 6px 12px; font-size: 0.6rem; }
+
+            .section { padding: 24px 14px 32px; }
             .section-head { margin-bottom: 20px; padding-bottom: 12px; }
-            .section-name { font-size: 1.2rem; }
-            .section-number { font-size: 0.6rem; }
-            .section-count { font-size: 0.6rem; }
+            .section-name { font-size: 1.15rem; }
+            .section-num { font-size: 0.62rem; }
+            .section-count { font-size: 0.56rem; }
 
-            .panels { gap: 16px; }
-            .panel-title { font-size: 0.92rem; }
-            .panel-price { font-size: 0.88rem; }
+            .auctions-stage { gap: 14px; }
+            .auc-info { padding: 20px 18px 22px; gap: 12px; }
+            .auc-meta { font-size: 0.55rem; letter-spacing: 1.8px; }
+            .auc-title { font-size: 1.25rem; }
+            .auc-author { font-size: 1rem; }
+            .auc-bid-value { font-size: 1.2rem; }
+            .auc-bid-value .unit { font-size: 0.55rem; }
+            .auc-bid-label { font-size: 0.52rem; letter-spacing: 1.5px; }
+            .auc-timer { font-size: 0.75rem; }
+            .auc-cta { font-size: 0.6rem; letter-spacing: 1.8px; }
 
-            .collection { gap: 10px; grid-auto-rows: 32px; }
-            .col-item .info { padding: 10px 12px; }
-            .col-item .t { font-size: 0.78rem; }
-            .col-item .a { font-size: 0.58rem; }
+            .ych-grid { gap: 12px; }
+            .ych { grid-template-columns: 1fr; }
+            .ych-side {
+                flex-direction: row;
+                align-items: center;
+                border-left: none;
+                border-top: 1px solid var(--line);
+                min-width: 0;
+                padding: 12px 14px;
+            }
+            .ych-slots-label { margin-bottom: 0; margin-right: 12px; }
+            .ych-slots { flex-direction: row; gap: 4px; }
+            .ych-slot { width: 26px; height: 26px; font-size: 0.62rem; }
+            .ych-info { padding: 14px 16px 16px; }
+            .ych-title { font-size: 1rem; }
+            .ych-price { font-size: 0.95rem; }
 
-            .footer { padding: 20px 18px 10px; }
+            .collage { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 60px; gap: 10px; }
+            .col-piece.p1, .col-piece.p2, .col-piece.p3, .col-piece.p4, .col-piece.p5,
+            .col-piece.p6, .col-piece.p7, .col-piece.p8, .col-piece.p9, .col-piece.p10 {
+                grid-column: span 1;
+                grid-row: span 4;
+            }
+            .col-piece.p1, .col-piece.p6, .col-piece.p9 { grid-row: span 5; }
+            .col-piece .t { font-size: 0.72rem; }
+            .col-piece .a { font-size: 0.72rem; }
+
+            .footer { padding: 24px 14px 16px; }
             .footer-links { gap: 16px; }
         }
 
@@ -855,12 +1066,10 @@
 </head>
 <body>
 
-    <div class="gallery">
-
-        <!-- ШАПКА -->
-        <header class="header">
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="header-inner">
             <a href="#" class="logo">
-                <span class="star">✦</span>
                 FENBO
                 <span class="sub">рынок</span>
             </a>
@@ -868,303 +1077,290 @@
             <nav class="nav">
                 <a href="#auctions" class="active">Аукционы</a>
                 <a href="#ych">Ючи</a>
-                <a href="#collection">Галерея</a>
+                <a href="#collection">Коллекция</a>
                 <a href="#">Категории</a>
                 <a href="#">Мастера</a>
             </nav>
 
             <div class="user">
                 <div class="balance">
-                    <span class="balance-label">Кошелёк</span>
                     <span class="balance-value">1 250<span class="unit">FEN</span></span>
                 </div>
                 <div class="avatar">F</div>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- HERO -->
-        <section class="hero">
-            <h1 class="hero-title">
-                Вещи, что<br>
-                живут в <em>тишине</em>
-                <span class="sub-line">— и продаются здесь</span>
-            </h1>
-            <div class="hero-meta">
-                <div class="row">Активных лотов <strong>42</strong></div>
-                <div class="row emerald">Ставок сегодня <strong>318</strong></div>
-                <div class="row gold">Оборот за сутки <strong>124 500 FEN</strong></div>
+    <!-- HERO -->
+    <section class="hero">
+        <h1 class="hero-title">
+            Тихо. Только <em>ставки</em>
+            <span class="caveat">— и мы здесь до рассвета</span>
+        </h1>
+        <div class="hero-meta">
+            <div class="hero-row">Активных лотов <strong>42</strong></div>
+            <div class="hero-row amber">Ставок сегодня <strong>318</strong></div>
+            <div class="hero-row emerald">Оборот за сутки <strong>124 500 FEN</strong></div>
+        </div>
+    </section>
+
+    <!-- ФИЛЬТРЫ -->
+    <div class="filters">
+        <button class="chip active" type="button">Всё</button>
+        <button class="chip live" type="button">Аукционы</button>
+        <button class="chip" type="button">Ючи</button>
+        <button class="chip" type="button">Адопты</button>
+        <button class="chip" type="button">Галерея</button>
+    </div>
+
+    <!-- АУКЦИОНЫ -->
+    <section class="section" id="auctions">
+        <div class="section-head">
+            <div class="section-title">
+                <span class="section-num">01</span>
+                <span class="section-name">Аукционы</span>
+                <span class="section-count">· 4 лота</span>
             </div>
-        </section>
-
-        <!-- ФИЛЬТРЫ -->
-        <div class="filters">
-            <button class="filter-chip active" type="button">Всё</button>
-            <button class="filter-chip live" type="button">Аукционы</button>
-            <button class="filter-chip" type="button">Ючи</button>
-            <button class="filter-chip" type="button">Адопты</button>
-            <button class="filter-chip" type="button">Галерея</button>
-            <button class="filter-chip" type="button">Мастера</button>
+            <a href="#" class="section-more">Все</a>
         </div>
 
-        <!-- АУКЦИОНЫ -->
-        <section class="section" id="auctions">
-            <div class="section-head">
-                <div class="section-title">
-                    <span class="section-number">01</span>
-                    <span class="section-name">Живые аукционы</span>
-                    <span class="section-count">· 6 столов</span>
+        <div class="auctions-stage">
+
+            <div class="auc feature" data-title="Золотая клетка" data-author="GoldenCage" data-bid="4200">
+                <div class="auc-art">
+                    <span class="art">✦</span>
+                    <div class="wm"></div>
                 </div>
-                <a href="#" class="section-more">Смотреть все</a>
+                <div class="auc-info">
+                    <div class="auc-meta">
+                        <span class="live-badge">Live</span>
+                        <span class="n">· 34 ставки</span>
+                    </div>
+                    <h3 class="auc-title">Золотая клетка</h3>
+                    <div class="auc-author">GoldenCage</div>
+                    <div class="auc-bid">
+                        <div>
+                            <div class="auc-bid-label">Текущая ставка</div>
+                            <div class="auc-bid-value" data-bid-el>4 200<span class="unit">FEN</span></div>
+                        </div>
+                        <span class="auc-timer" data-end="2027-12-30T18:00:00">—</span>
+                    </div>
+                    <span class="auc-cta">Сделать ставку</span>
+                </div>
             </div>
 
-            <div class="panels">
-
-                <div class="panel" data-title="Золотая клетка" data-author="GoldenCage" data-bid="4200">
-                    <div class="panel-art">
-                        <span class="panel-tag live">Live</span>
-                        <span class="panel-timer" data-end="2027-12-30T18:00:00">—</span>
-                        <span class="art">✦</span>
-                        <div class="wm"></div>
+            <div class="auc" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250">
+                <div class="auc-art">
+                    <span class="art">♦</span>
+                    <div class="wm"></div>
+                </div>
+                <div class="auc-info">
+                    <div class="auc-meta">
+                        <span class="live-badge">Live</span>
+                        <span class="n">· 12 ставок</span>
                     </div>
-                    <div class="panel-info">
+                    <h3 class="auc-title">Сцена · 03:00</h3>
+                    <div class="auc-author">MidnightLux</div>
+                    <div class="auc-bid">
                         <div>
-                            <div class="panel-title">Золотая клетка</div>
-                            <div class="panel-author">GoldenCage</div>
+                            <div class="auc-bid-label">Текущая ставка</div>
+                            <div class="auc-bid-value" data-bid-el>1 250<span class="unit">FEN</span></div>
                         </div>
-                        <div class="panel-price" data-bid-el>4 200<span class="unit">FEN</span></div>
+                        <span class="auc-timer" data-end="2027-12-31T23:59:59">—</span>
                     </div>
-                    <span class="panel-cta">Сделать ставку</span>
+                    <span class="auc-cta">Сделать ставку</span>
                 </div>
-
-                <div class="panel" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250">
-                    <div class="panel-art">
-                        <span class="panel-tag live">Live</span>
-                        <span class="panel-timer" data-end="2027-12-31T23:59:59">—</span>
-                        <span class="art">♦</span>
-                        <div class="wm"></div>
-                    </div>
-                    <div class="panel-info">
-                        <div>
-                            <div class="panel-title">Сцена · 03:00</div>
-                            <div class="panel-author">MidnightLux</div>
-                        </div>
-                        <div class="panel-price" data-bid-el>1 250<span class="unit">FEN</span></div>
-                    </div>
-                    <span class="panel-cta">Сделать ставку</span>
-                </div>
-
-                <div class="panel" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200">
-                    <div class="panel-art">
-                        <span class="panel-tag live">Live</span>
-                        <span class="panel-timer" data-end="2027-12-28T22:00:00">—</span>
-                        <span class="art">♠</span>
-                        <div class="wm"></div>
-                    </div>
-                    <div class="panel-info">
-                        <div>
-                            <div class="panel-title">Алый закат</div>
-                            <div class="panel-author">ScarletSunset</div>
-                        </div>
-                        <div class="panel-price" data-bid-el>3 200<span class="unit">FEN</span></div>
-                    </div>
-                    <span class="panel-cta">Сделать ставку</span>
-                </div>
-
-                <div class="panel" data-title="Красный шёлк" data-author="ScarletDream" data-bid="2400">
-                    <div class="panel-art">
-                        <span class="panel-tag live">Live</span>
-                        <span class="panel-timer" data-end="2027-12-29T12:30:00">—</span>
-                        <span class="art">♥</span>
-                        <div class="wm"></div>
-                    </div>
-                    <div class="panel-info">
-                        <div>
-                            <div class="panel-title">Красный шёлк</div>
-                            <div class="panel-author">ScarletDream</div>
-                        </div>
-                        <div class="panel-price" data-bid-el>2 400<span class="unit">FEN</span></div>
-                    </div>
-                    <span class="panel-cta">Сделать ставку</span>
-                </div>
-
-                <div class="panel" data-title="Тёмный бархат" data-author="DarkVelvet" data-bid="1550">
-                    <div class="panel-art">
-                        <span class="panel-tag live">Live</span>
-                        <span class="panel-timer" data-end="2027-12-30T15:00:00">—</span>
-                        <span class="art">♣</span>
-                        <div class="wm"></div>
-                    </div>
-                    <div class="panel-info">
-                        <div>
-                            <div class="panel-title">Тёмный бархат</div>
-                            <div class="panel-author">DarkVelvet</div>
-                        </div>
-                        <div class="panel-price" data-bid-el>1 550<span class="unit">FEN</span></div>
-                    </div>
-                    <span class="panel-cta">Сделать ставку</span>
-                </div>
-
-                <div class="panel" data-title="Пурпурный дым" data-author="PurpleSmoke" data-bid="890">
-                    <div class="panel-art">
-                        <span class="panel-tag live">Live</span>
-                        <span class="panel-timer" data-end="2027-12-27T18:00:00">—</span>
-                        <span class="art">✦</span>
-                        <div class="wm"></div>
-                    </div>
-                    <div class="panel-info">
-                        <div>
-                            <div class="panel-title">Пурпурный дым</div>
-                            <div class="panel-author">PurpleSmoke</div>
-                        </div>
-                        <div class="panel-price" data-bid-el>890<span class="unit">FEN</span></div>
-                    </div>
-                    <span class="panel-cta">Сделать ставку</span>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ЮЧИ -->
-        <section class="section" id="ych">
-            <div class="section-head">
-                <div class="section-title">
-                    <span class="section-number">02</span>
-                    <span class="section-name">Открытые ючи</span>
-                    <span class="section-count">· 4 лота</span>
-                </div>
-                <a href="#" class="section-more">Смотреть все</a>
             </div>
 
-            <div class="panels">
-
-                <div class="panel" data-title="Парный портрет" data-author="TwinFlame">
-                    <div class="panel-art">
-                        <span class="panel-tag ych">YCH</span>
-                        <span class="panel-timer">2 / 3</span>
-                        <span class="art">❦</span>
-                        <div class="wm"></div>
-                        <div class="panel-slots">
-                            <span class="panel-slot free"></span>
-                            <span class="panel-slot free"></span>
-                            <span class="panel-slot"></span>
-                        </div>
+            <div class="auc" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200">
+                <div class="auc-art">
+                    <span class="art">♠</span>
+                    <div class="wm"></div>
+                </div>
+                <div class="auc-info">
+                    <div class="auc-meta">
+                        <span class="live-badge">Live</span>
+                        <span class="n">· 21 ставка</span>
                     </div>
-                    <div class="panel-info">
+                    <h3 class="auc-title">Алый закат</h3>
+                    <div class="auc-author">ScarletSunset</div>
+                    <div class="auc-bid">
                         <div>
-                            <div class="panel-title">Парный портрет</div>
-                            <div class="panel-author">TwinFlame</div>
+                            <div class="auc-bid-label">Текущая ставка</div>
+                            <div class="auc-bid-value" data-bid-el>3 200<span class="unit">FEN</span></div>
                         </div>
-                        <div class="panel-price">600<span class="unit">FEN</span></div>
+                        <span class="auc-timer" data-end="2027-12-28T22:00:00">—</span>
                     </div>
-                    <span class="panel-cta">Записаться</span>
+                    <span class="auc-cta">Сделать ставку</span>
                 </div>
-
-                <div class="panel" data-title="Шёлковые оковы" data-author="BoundElegance">
-                    <div class="panel-art">
-                        <span class="panel-tag ych">YCH</span>
-                        <span class="panel-timer">1 / 3</span>
-                        <span class="art">♥</span>
-                        <div class="wm"></div>
-                        <div class="panel-slots">
-                            <span class="panel-slot free"></span>
-                            <span class="panel-slot"></span>
-                            <span class="panel-slot"></span>
-                        </div>
-                    </div>
-                    <div class="panel-info">
-                        <div>
-                            <div class="panel-title">Шёлковые оковы</div>
-                            <div class="panel-author">BoundElegance</div>
-                        </div>
-                        <div class="panel-price">450<span class="unit">FEN</span></div>
-                    </div>
-                    <span class="panel-cta">Записаться</span>
-                </div>
-
-                <div class="panel" data-title="Ночной гость" data-author="Noir_Art">
-                    <div class="panel-art">
-                        <span class="panel-tag ych">YCH</span>
-                        <span class="panel-timer">3 / 3</span>
-                        <span class="art">♠</span>
-                        <div class="wm"></div>
-                        <div class="panel-slots">
-                            <span class="panel-slot free"></span>
-                            <span class="panel-slot free"></span>
-                            <span class="panel-slot free"></span>
-                        </div>
-                    </div>
-                    <div class="panel-info">
-                        <div>
-                            <div class="panel-title">Ночной гость</div>
-                            <div class="panel-author">Noir_Art</div>
-                        </div>
-                        <div class="panel-price">800<span class="unit">FEN</span></div>
-                    </div>
-                    <span class="panel-cta">Записаться</span>
-                </div>
-
-                <div class="panel" data-title="Бархатный вечер" data-author="Velvet_Rose">
-                    <div class="panel-art">
-                        <span class="panel-tag ych">YCH</span>
-                        <span class="panel-timer">1 / 3</span>
-                        <span class="art">♦</span>
-                        <div class="wm"></div>
-                        <div class="panel-slots">
-                            <span class="panel-slot free"></span>
-                            <span class="panel-slot"></span>
-                            <span class="panel-slot"></span>
-                        </div>
-                    </div>
-                    <div class="panel-info">
-                        <div>
-                            <div class="panel-title">Бархатный вечер</div>
-                            <div class="panel-author">Velvet_Rose</div>
-                        </div>
-                        <div class="panel-price">900<span class="unit">FEN</span></div>
-                    </div>
-                    <span class="panel-cta">Записаться</span>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- КОЛЛЕКЦИЯ -->
-        <section class="section" id="collection">
-            <div class="section-head">
-                <div class="section-title">
-                    <span class="section-number">03</span>
-                    <span class="section-name">Коллекция</span>
-                    <span class="section-count">· работы зала</span>
-                </div>
-                <a href="#" class="section-more">Смотреть все</a>
             </div>
 
-            <div class="collection">
-
-                <div class="col-item"><div class="art">❦</div><div class="wm"></div><div class="info"><div class="t">Бархатный вечер</div><div class="a">Velvet_Rose</div></div></div>
-                <div class="col-item"><div class="art">♠</div><div class="wm"></div><div class="info"><div class="t">Ночная смена</div><div class="a">Noir_Art</div></div></div>
-                <div class="col-item"><div class="art">♥</div><div class="wm"></div><div class="info"><div class="t">Красный шёлк</div><div class="a">ScarletDream</div></div></div>
-                <div class="col-item"><div class="art">♦</div><div class="wm"></div><div class="info"><div class="t">Тёмный бархат</div><div class="a">DarkVelvet</div></div></div>
-                <div class="col-item"><div class="art">♣</div><div class="wm"></div><div class="info"><div class="t">За кулисами</div><div class="a">Backstage_</div></div></div>
-                <div class="col-item"><div class="art">✦</div><div class="wm"></div><div class="info"><div class="t">Золотая клетка</div><div class="a">GoldenCage</div></div></div>
-                <div class="col-item"><div class="art">◇</div><div class="wm"></div><div class="info"><div class="t">Шёпот в темноте</div><div class="a">WhisperArt</div></div></div>
-                <div class="col-item"><div class="art">♥</div><div class="wm"></div><div class="info"><div class="t">Пурпурный дым</div><div class="a">PurpleSmoke</div></div></div>
-
+            <div class="auc" data-title="Тёмный бархат" data-author="DarkVelvet" data-bid="1550">
+                <div class="auc-art">
+                    <span class="art">♣</span>
+                    <div class="wm"></div>
+                </div>
+                <div class="auc-info">
+                    <div class="auc-meta">
+                        <span class="live-badge">Live</span>
+                        <span class="n">· 9 ставок</span>
+                    </div>
+                    <h3 class="auc-title">Тёмный бархат</h3>
+                    <div class="auc-author">DarkVelvet</div>
+                    <div class="auc-bid">
+                        <div>
+                            <div class="auc-bid-label">Текущая ставка</div>
+                            <div class="auc-bid-value" data-bid-el>1 550<span class="unit">FEN</span></div>
+                        </div>
+                        <span class="auc-timer" data-end="2027-12-30T15:00:00">—</span>
+                    </div>
+                    <span class="auc-cta">Сделать ставку</span>
+                </div>
             </div>
-        </section>
 
-        <!-- ПОДВАЛ -->
-        <footer class="footer">
-            <div class="footer-links">
-                <a href="#">Правила</a>
-                <a href="#">Безопасные сделки</a>
-                <a href="#">Связаться с дилером</a>
-                <a href="#">Что нового</a>
+        </div>
+    </section>
+
+    <!-- ЮЧИ -->
+    <section class="section" id="ych">
+        <div class="section-head">
+            <div class="section-title">
+                <span class="section-num">02</span>
+                <span class="section-name">Ючи</span>
+                <span class="section-count">· 4 лота</span>
             </div>
-            <div class="footer-mark">FENBO · <span>2025</span></div>
-        </footer>
+            <a href="#" class="section-more">Все</a>
+        </div>
 
-    </div>
+        <div class="ych-grid">
+
+            <div class="ych" data-title="Парный портрет" data-author="TwinFlame">
+                <div class="ych-art">
+                    <span class="art">❦</span>
+                    <div class="wm"></div>
+                </div>
+                <div class="ych-side">
+                    <div class="ych-slots-label">Слоты</div>
+                    <div class="ych-slots">
+                        <div class="ych-slot free">1</div>
+                        <div class="ych-slot free">2</div>
+                        <div class="ych-slot taken">3</div>
+                    </div>
+                </div>
+                <div class="ych-info">
+                    <div>
+                        <div class="ych-title">Парный портрет</div>
+                        <div class="ych-author">TwinFlame</div>
+                    </div>
+                    <div class="ych-price">600<span class="unit">FEN</span></div>
+                </div>
+            </div>
+
+            <div class="ych" data-title="Шёлковые оковы" data-author="BoundElegance">
+                <div class="ych-art">
+                    <span class="art">♥</span>
+                    <div class="wm"></div>
+                </div>
+                <div class="ych-side">
+                    <div class="ych-slots-label">Слоты</div>
+                    <div class="ych-slots">
+                        <div class="ych-slot free">1</div>
+                        <div class="ych-slot taken">2</div>
+                        <div class="ych-slot taken">3</div>
+                    </div>
+                </div>
+                <div class="ych-info">
+                    <div>
+                        <div class="ych-title">Шёлковые оковы</div>
+                        <div class="ych-author">BoundElegance</div>
+                    </div>
+                    <div class="ych-price">450<span class="unit">FEN</span></div>
+                </div>
+            </div>
+
+            <div class="ych" data-title="Ночной гость" data-author="Noir_Art">
+                <div class="ych-art">
+                    <span class="art">♠</span>
+                    <div class="wm"></div>
+                </div>
+                <div class="ych-side">
+                    <div class="ych-slots-label">Слоты</div>
+                    <div class="ych-slots">
+                        <div class="ych-slot free">1</div>
+                        <div class="ych-slot free">2</div>
+                        <div class="ych-slot free">3</div>
+                    </div>
+                </div>
+                <div class="ych-info">
+                    <div>
+                        <div class="ych-title">Ночной гость</div>
+                        <div class="ych-author">Noir_Art</div>
+                    </div>
+                    <div class="ych-price">800<span class="unit">FEN</span></div>
+                </div>
+            </div>
+
+            <div class="ych" data-title="Бархатный вечер" data-author="Velvet_Rose">
+                <div class="ych-art">
+                    <span class="art">♦</span>
+                    <div class="wm"></div>
+                </div>
+                <div class="ych-side">
+                    <div class="ych-slots-label">Слоты</div>
+                    <div class="ych-slots">
+                        <div class="ych-slot taken">1</div>
+                        <div class="ych-slot free">2</div>
+                        <div class="ych-slot taken">3</div>
+                    </div>
+                </div>
+                <div class="ych-info">
+                    <div>
+                        <div class="ych-title">Бархатный вечер</div>
+                        <div class="ych-author">Velvet_Rose</div>
+                    </div>
+                    <div class="ych-price">900<span class="unit">FEN</span></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- КОЛЛЕКЦИЯ -->
+    <section class="section" id="collection">
+        <div class="section-head">
+            <div class="section-title">
+                <span class="section-num">03</span>
+                <span class="section-name">Коллекция</span>
+                <span class="section-count">· 10 работ</span>
+            </div>
+            <a href="#" class="section-more">Все</a>
+        </div>
+
+        <div class="collage">
+
+            <div class="col-piece p1"><span class="art">❦</span><div class="wm"></div><div class="info"><div class="t">Бархатный вечер</div><div class="a">Velvet_Rose</div></div></div>
+            <div class="col-piece p2"><span class="art">♠</span><div class="wm"></div><div class="info"><div class="t">Ночная смена</div><div class="a">Noir_Art</div></div></div>
+            <div class="col-piece p3"><span class="art">♥</span><div class="wm"></div><div class="info"><div class="t">Красный шёлк</div><div class="a">ScarletDream</div></div></div>
+            <div class="col-piece p4"><span class="art">♦</span><div class="wm"></div><div class="info"><div class="t">Тёмный бархат</div><div class="a">DarkVelvet</div></div></div>
+            <div class="col-piece p5"><span class="art">♣</span><div class="wm"></div><div class="info"><div class="t">За кулисами</div><div class="a">Backstage_</div></div></div>
+            <div class="col-piece p6"><span class="art">✦</span><div class="wm"></div><div class="info"><div class="t">Золотая клетка</div><div class="a">GoldenCage</div></div></div>
+            <div class="col-piece p7"><span class="art">◇</span><div class="wm"></div><div class="info"><div class="t">Шёпот в темноте</div><div class="a">WhisperArt</div></div></div>
+            <div class="col-piece p8"><span class="art">♥</span><div class="wm"></div><div class="info"><div class="t">Пурпурный дым</div><div class="a">PurpleSmoke</div></div></div>
+            <div class="col-piece p9"><span class="art">♠</span><div class="wm"></div><div class="info"><div class="t">Две свечи</div><div class="a">TwinFlame</div></div></div>
+            <div class="col-piece p10"><span class="art">♦</span><div class="wm"></div><div class="info"><div class="t">Шёлковые оковы</div><div class="a">BoundElegance</div></div></div>
+
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Правила</a>
+            <a href="#">Безопасные сделки</a>
+            <a href="#">Связаться с дилером</a>
+        </div>
+        <div class="footer-brand">FENBO · <span>2025</span></div>
+    </footer>
 
     <script>
         /* ТАЙМЕРЫ */
@@ -1174,16 +1370,16 @@
             function pad(n) { return n < 10 ? '0' + n : n; }
             function update(el) {
                 const diff = Math.floor((new Date(el.dataset.end).getTime() - Date.now()) / 1000);
-                const panel = el.closest('.panel');
+                const lot = el.closest('.auc');
                 if (diff <= 0) {
                     el.textContent = 'Завершён';
-                    el.style.color = 'var(--ink-mute)';
-                    if (panel) panel.classList.remove('ending');
+                    el.style.color = 'var(--text-3)';
+                    if (lot) lot.classList.remove('ending');
                     return;
                 }
-                if (panel) {
-                    if (diff < 600) panel.classList.add('ending');
-                    else panel.classList.remove('ending');
+                if (lot) {
+                    if (diff < 600) lot.classList.add('ending');
+                    else lot.classList.remove('ending');
                 }
                 const d = Math.floor(diff / 86400);
                 const h = Math.floor((diff % 86400) / 3600);
@@ -1199,23 +1395,23 @@
 
         /* ЖИВЫЕ СТАВКИ */
         (function liveBids() {
-            const panels = document.querySelectorAll('.panel[data-bid]');
-            if (!panels.length) return;
+            const lots = document.querySelectorAll('.auc[data-bid]');
+            if (!lots.length) return;
             function fmt(n) { return n.toLocaleString('ru-RU'); }
-            function update(panel) {
-                const priceEl = panel.querySelector('[data-bid-el]');
+            function update(lot) {
+                const priceEl = lot.querySelector('[data-bid-el]');
                 if (!priceEl) return;
-                let current = parseInt(panel.dataset.bid, 10) || 0;
+                let current = parseInt(lot.dataset.bid, 10) || 0;
                 current += Math.floor(Math.random() * 100) + 50;
-                panel.dataset.bid = current;
+                lot.dataset.bid = current;
                 priceEl.innerHTML = fmt(current) + '<span class="unit">FEN</span>';
                 priceEl.classList.remove('bump');
                 void priceEl.offsetWidth;
                 priceEl.classList.add('bump');
             }
-            panels.forEach(panel => {
+            lots.forEach(lot => {
                 function sched() {
-                    setTimeout(() => { update(panel); sched(); }, Math.random() * 6000 + 7000);
+                    setTimeout(() => { update(lot); sched(); }, Math.random() * 6000 + 7000);
                 }
                 sched();
             });
@@ -1223,9 +1419,9 @@
 
         /* ФИЛЬТРЫ */
         (function filters() {
-            document.querySelectorAll('.filter-chip').forEach(chip => {
+            document.querySelectorAll('.chip').forEach(chip => {
                 chip.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
                     chip.classList.add('active');
                 });
             });
@@ -1242,7 +1438,7 @@
                         a.classList.add('active');
                         const t = document.getElementById(href.slice(1));
                         if (t) {
-                            const y = t.getBoundingClientRect().top + window.scrollY - 40;
+                            const y = t.getBoundingClientRect().top + window.scrollY - 60;
                             window.scrollTo({ top: y, behavior: 'smooth' });
                         }
                     }
@@ -1252,7 +1448,7 @@
 
         /* КЛИКИ */
         (function clicks() {
-            document.querySelectorAll('.panel, .col-item').forEach(c => {
+            document.querySelectorAll('.auc, .ych, .col-piece').forEach(c => {
                 c.addEventListener('click', () => {
                     alert('✦ ' + (c.dataset.title || c.querySelector('.t')?.textContent || 'Лот'));
                 });
