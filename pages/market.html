@@ -628,4 +628,599 @@
             background: linear-gradient(165deg, #1A0505 0%, #0D0202 100%);
             border: 1px solid rgba(212, 175, 55, 0.28);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.05);
-            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.55s, border-color 0.4s;
+            cursor: pointer;
+        }
+        .work-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: #FFD700;
+            box-shadow: 0 30px 70px rgba(180, 0, 0, 0.9), 0 0 0 2px rgba(255, 215, 0, 0.7), 0 0 50px rgba(255, 215, 0, 0.5);
+        }
+        .work-card .thumb {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: #0A0000;
+        }
+        .work-card .thumb .placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            color: rgba(255, 215, 0, 0.18);
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(180, 0, 0, 0.55) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(120, 0, 60, 0.45) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255, 215, 0, 0.03) 20px, rgba(255, 215, 0, 0.03) 21px),
+                linear-gradient(165deg, #2B0A0A 0%, #0D0202 100%);
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+        .work-card:hover .thumb .placeholder { transform: scale(1.08); }
+        .work-card .thumb .placeholder::after {
+            content: '❦';
+            position: absolute;
+            bottom: 20px; right: 20px;
+            font-size: 2rem;
+            color: rgba(255, 215, 0, 0.3);
+        }
+        .work-card .thumb::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -80%;
+            width: 60%; height: 100%;
+            background: linear-gradient(105deg, transparent 0%, rgba(255, 240, 200, 0.15) 50%, transparent 100%);
+            transform: skewX(-18deg);
+            z-index: 2;
+            pointer-events: none;
+            transition: left 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .work-card:hover .thumb::before { left: 130%; }
+
+        /* Разная высота для Pinterest-эффекта */
+        .work-card[data-h="1"] .thumb { aspect-ratio: 3 / 4; }
+        .work-card[data-h="2"] .thumb { aspect-ratio: 1 / 1; }
+        .work-card[data-h="3"] .thumb { aspect-ratio: 4 / 5; }
+        .work-card[data-h="4"] .thumb { aspect-ratio: 3 / 5; }
+        .work-card[data-h="5"] .thumb { aspect-ratio: 2 / 3; }
+
+        .work-card .badge-type {
+            position: absolute;
+            top: 12px; left: 12px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 2.5px;
+            padding: 5px 10px;
+            background: rgba(0, 0, 0, 0.85);
+            color: #FFD700;
+            border: 1px solid rgba(255, 215, 0, 0.6);
+            border-radius: 3px;
+            text-transform: uppercase;
+            z-index: 3;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+        .work-card .badge-type.adopt {
+            background: rgba(180, 0, 0, 0.9);
+            color: #FFF;
+            border-color: #FF4444;
+        }
+        .work-card .badge-type.ych {
+            background: rgba(80, 0, 60, 0.9);
+            color: #FF88DD;
+            border-color: #FF44AA;
+        }
+        .work-card .badge-hot {
+            position: absolute;
+            top: 12px; right: 12px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 2px;
+            padding: 5px 10px;
+            background: linear-gradient(135deg, #FF0000, #8B0000);
+            color: #FFF;
+            border-radius: 3px;
+            text-transform: uppercase;
+            z-index: 3;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            animation: hotPulse 2s ease-in-out infinite;
+        }
+        @keyframes hotPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); }
+            50% { box-shadow: 0 0 25px rgba(255, 0, 0, 1), 0 0 40px rgba(255, 0, 0, 0.6); }
+        }
+
+        .work-card .info { padding: 14px 16px 16px; }
+        .work-card .info .title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.92rem;
+            color: #FFD700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.45);
+        }
+        .work-card .info .author {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: #C5A059;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .work-card .info .author .status {
+            display: inline-block;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #1F7A4D;
+            box-shadow: 0 0 8px rgba(31, 122, 77, 0.9);
+        }
+        .work-card .info .author .status.offline {
+            background: #555;
+            box-shadow: 0 0 6px rgba(0,0,0,0.6);
+        }
+        .work-card .info .meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82rem;
+            color: rgba(232, 216, 200, 0.75);
+        }
+        .work-card .info .meta .price {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: #FFD700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .work-card .info .meta .price::before {
+            content: '♠';
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+        .work-card .info .meta .price.auction {
+            color: #FF4444;
+            text-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
+        }
+        .work-card .info .meta .price.auction::before { content: '🔨'; font-size: 0.8rem; }
+        .work-card .info .stats {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .work-card .info .stats .heart { color: #FF4444; }
+
+        /* ============================================
+           ПОДВАЛ
+           ============================================ */
+        .footer {
+            width: 100%;
+            max-width: 1600px;
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 45px 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.18);
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 6px;
+            color: rgba(197, 160, 89, 0.45);
+            text-transform: uppercase;
+            position: relative;
+            z-index: 5;
+        }
+        .footer .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: #FFD700;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: none;
+        }
+        .footer .back-link:hover { color: #FFF; text-shadow: 0 0 25px rgba(255, 215, 0, 0.9); }
+        .footer span { color: #FF4444; }
+
+        /* ============================================
+           АДАПТИВ
+           ============================================ */
+        @media (max-width: 1024px) {
+            .topbar-wrap { padding: 0 25px; }
+            .topbar { gap: 24px; }
+            .topbar-nav { gap: 22px; font-size: 0.65rem; }
+            .logo { font-size: 1.5rem; letter-spacing: 7px; }
+            .market-hero { padding: 50px 25px 30px; }
+            .market-hero h1 { font-size: 3.6rem; letter-spacing: 14px; }
+            .market-hero h1 span { font-size: 2.4rem; }
+            .casino-stats { grid-template-columns: repeat(2, 1fr); padding: 25px; }
+            .activity-feed { padding: 0 25px; }
+            .market-controls { padding: 25px; }
+            .works-feed { padding: 20px 25px 30px; }
+        }
+        @media (max-width: 768px) {
+            .topbar-wrap { padding: 0 16px; }
+            .topbar {
+                grid-template-columns: 1fr auto;
+                grid-template-areas: "logo user" "nav nav";
+                gap: 12px;
+                padding: 14px 0;
+            }
+            .logo { grid-area: logo; font-size: 1.3rem; letter-spacing: 5px; }
+            .logo .sub { font-size: 0.8rem; }
+            .topbar-nav {
+                grid-area: nav;
+                justify-content: center;
+                gap: 14px;
+                font-size: 0.6rem;
+                letter-spacing: 2px;
+                border-top: 1px solid rgba(212, 175, 55, 0.12);
+                padding-top: 12px;
+            }
+            .topbar-user { grid-area: user; }
+            .wallet { padding: 5px 10px 5px 5px; gap: 8px; }
+            .wallet .chip-icon { width: 32px; height: 32px; font-size: 0.9rem; }
+            .wallet .balance { min-width: 60px; }
+            .wallet .chips { font-size: 0.85rem; }
+            .wallet .usdt { font-size: 0.7rem; }
+            .wallet .plus { width: 22px; height: 22px; }
+            .topbar-user .avatar { width: 36px; height: 36px; }
+
+            .market-hero { padding: 32px 16px 20px; }
+            .market-hero h1 { font-size: 2.2rem; letter-spacing: 6px; }
+            .market-hero h1 span { font-size: 1.5rem; display: block; margin: 8px 0 0; }
+            .market-hero p { font-size: 0.88rem; letter-spacing: 2.5px; }
+            .btn-hero { padding: 13px 24px; font-size: 0.65rem; letter-spacing: 3px; }
+
+            .casino-stats { grid-template-columns: 1fr 1fr; gap: 10px; padding: 18px 16px 0; }
+            .casino-stat { padding: 12px 14px; gap: 10px; }
+            .casino-stat .stat-icon { width: 36px; height: 36px; font-size: 1.1rem; }
+            .casino-stat .stat-value { font-size: 0.95rem; }
+            .casino-stat .stat-label { font-size: 0.62rem; }
+
+            .activity-feed { padding: 0 16px; margin-top: 14px; }
+            .activity-inner { padding: 12px 16px; gap: 14px; }
+            .activity-label { font-size: 0.6rem; letter-spacing: 2.5px; padding-right: 14px; }
+            .activity-item { font-size: 0.82rem; }
+
+            .market-controls { padding: 18px 16px 5px; }
+            .search-input-wrap { min-width: 100%; }
+            .search-input { padding: 12px 18px 12px 44px; font-size: 0.9rem; }
+            .sort-select { width: 100%; }
+            .filter-chip { font-size: 0.58rem; letter-spacing: 2px; padding: 7px 14px; }
+
+            .works-feed { padding: 14px 16px 20px; }
+
+            .footer { margin-top: 40px; padding: 30px 16px 15px; font-size: 0.6rem; }
+        }
+        @media (max-width: 480px) {
+            .market-hero h1 { font-size: 1.8rem; letter-spacing: 4px; }
+            .market-hero h1 span { font-size: 1.2rem; }
+            .works-feed { padding: 10px 10px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="spotlight"></div>
+    <div class="neon-left"></div>
+    <div class="neon-right"></div>
+    <div class="smoke"></div>
+    <div class="dust-bg" id="dustBg"></div>
+
+    <!-- ШАПКА -->
+    <div class="topbar-wrap">
+        <header class="topbar">
+            <a href="../index.html" class="logo">FENBO<span class="sub">рынок</span></a>
+
+            <nav class="topbar-nav">
+                <a href="#" class="active">Лента</a>
+                <a href="#">Заказы</a>
+                <a href="#">Ючи</a>
+                <a href="#">Адопты</a>
+                <a href="#">Художники</a>
+            </nav>
+
+            <div class="topbar-user">
+                <div class="wallet" title="Кошелёк FENBO">
+                    <div class="chip-icon"></div>
+                    <div class="balance">
+                        <div class="chips">1 250<span class="unit">FEN</span></div>
+                        <div class="usdt"><span class="usdt-icon">₮</span>12.50</div>
+                    </div>
+                    <div class="plus">+</div>
+                </div>
+                <div class="avatar" title="Профиль">F</div>
+            </div>
+        </header>
+    </div>
+
+    <!-- HERO -->
+    <section class="market-hero">
+        <div class="hero-topline">
+            <div class="line-s"></div>
+            <div class="suits">♠ ♥ ♦ ♣</div>
+            <div class="line-s r"></div>
+        </div>
+        <div class="hero-badge">Художественный Рынок · Клуб FENBO</div>
+        <h1>Рынок<span>искусства</span></h1>
+        <p>Где художники делают <span class="accent">ставки</span>. Заказы · Ючи · Адопты.</p>
+        <div class="hero-cta">
+            <a href="#" class="btn-hero primary">✦ Смотреть ленту</a>
+            <a href="#" class="btn-hero ghost">Стать художником</a>
+        </div>
+    </section>
+
+    <!-- КАЗИНО-СТАТИСТИКА -->
+    <div class="casino-stats">
+        <div class="casino-stat"><div class="stat-icon">♠</div><div class="stat-body"><div class="stat-value">2 480</div><div class="stat-label">Работ на витрине</div></div></div>
+        <div class="casino-stat"><div class="stat-icon">♥</div><div class="stat-body"><div class="stat-value">320</div><div class="stat-label">Художников за столом</div></div></div>
+        <div class="casino-stat"><div class="stat-icon">♦</div><div class="stat-body"><div class="stat-value">145</div><div class="stat-label">Заказов сегодня</div></div></div>
+        <div class="casino-stat"><div class="stat-icon">♣</div><div class="stat-body"><div class="stat-value">24/7</div><div class="stat-label">Зал открыт</div></div></div>
+    </div>
+
+    <!-- ЛЕНТА АКТИВНОСТИ -->
+    <div class="activity-feed">
+        <div class="activity-inner">
+            <div class="activity-label"><span class="dot"></span>Смена крупье</div>
+            <div class="activity-track">
+                <div class="activity-item"><span class="suit">♥</span> <span class="who">Velvet_Rose</span> приняла <span class="what">3 заказа</span> подряд</div>
+                <div class="activity-item"><span class="suit">♠</span> <span class="who">Noir_Art</span> выставил <span class="what">новый YCH</span></div>
+                <div class="activity-item"><span class="suit">♦</span> <span class="who">ScarletDream</span> продала <span class="what">адопт</span> за 800 FEN</div>
+                <div class="activity-item"><span class="suit">♣</span> <span class="who">MidnightLux</span> открыл <span class="what">аукцион</span> на «Сцену · 03:00»</div>
+                <div class="activity-item"><span class="suit">♥</span> <span class="who">Velvet_Rose</span> приняла <span class="what">3 заказа</span> подряд</div>
+                <div class="activity-item"><span class="suit">♠</span> <span class="who">Noir_Art</span> выставил <span class="what">новый YCH</span></div>
+                <div class="activity-item"><span class="suit">♦</span> <span class="who">ScarletDream</span> продала <span class="what">адопт</span> за 800 FEN</div>
+                <div class="activity-item"><span class="suit">♣</span> <span class="who">MidnightLux</span> открыл <span class="what">аукцион</span> на «Сцену · 03:00»</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ФИЛЬТРЫ И ПОИСК -->
+    <div class="market-controls">
+        <div class="search-row">
+            <div class="search-input-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Поиск: художник, стиль, тег...">
+            </div>
+            <select class="sort-select">
+                <option>✦ Сначала новые</option>
+                <option>✦ По популярности</option>
+                <option>✦ По цене ↑</option>
+                <option>✦ По цене ↓</option>
+                <option>✦ Джекпот дня</option>
+            </select>
+        </div>
+        <div class="filter-row">
+            <a href="#" class="filter-chip active">Все</a>
+            <a href="#" class="filter-chip">Заказы</a>
+            <a href="#" class="filter-chip">Ючи</a>
+            <a href="#" class="filter-chip">Адопты</a>
+            <a href="#" class="filter-chip">Живопись</a>
+            <a href="#" class="filter-chip">Аниме</a>
+            <a href="#" class="filter-chip">Диджитал</a>
+            <a href="#" class="filter-chip adult">Экстрим 18+</a>
+        </div>
+    </div>
+
+    <!-- ЛЕНТА РАБОТ (Pinterest-стиль) -->
+    <main class="works-feed" id="worksFeed">
+
+        <a href="#" class="work-card" data-h="1" data-type="order" data-title="Бархатный вечер" data-author="Velvet_Rose" data-status="online" data-price="500" data-likes="1245" data-views="4520">
+            <div class="thumb"><div class="placeholder">❦</div><span class="badge-type">Заказ</span><span class="badge-hot">HOT</span></div>
+            <div class="info">
+                <div class="title">Бархатный вечер</div>
+                <div class="author"><span class="status"></span>Velvet_Rose</div>
+                <div class="meta">
+                    <div class="price">500 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>1.2k · 👁 4.5k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="3" data-type="adopt" data-title="Алый закат" data-author="ScarletDream" data-status="online" data-price="800" data-likes="2415" data-views="8930">
+            <div class="thumb"><div class="placeholder">♥</div><span class="badge-type adopt">Адопт</span></div>
+            <div class="info">
+                <div class="title">Алый закат</div>
+                <div class="author"><span class="status"></span>ScarletDream</div>
+                <div class="meta">
+                    <div class="price">800 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>2.4k · 👁 8.9k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="2" data-type="order" data-title="Ночная смена" data-author="Noir_Art" data-status="offline" data-price="400" data-likes="856" data-views="2140">
+            <div class="thumb"><div class="placeholder">♠</div><span class="badge-type">Заказ</span></div>
+            <div class="info">
+                <div class="title">Ночная смена</div>
+                <div class="author"><span class="status offline"></span>Noir_Art</div>
+                <div class="meta">
+                    <div class="price">400 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>856 · 👁 2.1k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="5" data-type="ych" data-title="Сцена · 03:00" data-author="MidnightLux" data-status="online" data-price="аукцион" data-auction="true" data-likes="631" data-views="1720">
+            <div class="thumb"><div class="placeholder">♦</div><span class="badge-type ych">YCH</span><span class="badge-hot">AUCTION</span></div>
+            <div class="info">
+                <div class="title">Сцена · 03:00</div>
+                <div class="author"><span class="status"></span>MidnightLux</div>
+                <div class="meta">
+                    <div class="price auction">Аукцион</div>
+                    <div class="stats"><span class="heart">♥</span>631 · 👁 1.7k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="1" data-type="order" data-title="Шёлковые оковы" data-author="BoundElegance" data-status="online" data-price="1200" data-likes="1830" data-views="5210">
+            <div class="thumb"><div class="placeholder">♣</div><span class="badge-type">Заказ</span></div>
+            <div class="info">
+                <div class="title">Шёлковые оковы</div>
+                <div class="author"><span class="status"></span>BoundElegance</div>
+                <div class="meta">
+                    <div class="price">1 200 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>1.8k · 👁 5.2k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="4" data-type="adopt" data-title="Две свечи" data-author="TwinFlame" data-status="offline" data-price="650" data-likes="3120" data-views="12040">
+            <div class="thumb"><div class="placeholder">❦</div><span class="badge-type adopt">Адопт</span></div>
+            <div class="info">
+                <div class="title">Две свечи</div>
+                <div class="author"><span class="status offline"></span>TwinFlame</div>
+                <div class="meta">
+                    <div class="price">650 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>3.1k · 👁 12k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="3" data-type="order" data-title="За кулисами" data-author="Backstage_" data-status="online" data-price="700" data-likes="921" data-views="3420">
+            <div class="thumb"><div class="placeholder">♥</div><span class="badge-type">Заказ</span></div>
+            <div class="info">
+                <div class="title">За кулисами</div>
+                <div class="author"><span class="status"></span>Backstage_</div>
+                <div class="meta">
+                    <div class="price">700 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>921 · 👁 3.4k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="1" data-type="order" data-title="Тёмный бархат" data-author="DarkVelvet" data-status="online" data-price="550" data-likes="1410" data-views="4120">
+            <div class="thumb"><div class="placeholder">♠</div><span class="badge-type">Заказ</span></div>
+            <div class="info">
+                <div class="title">Тёмный бархат</div>
+                <div class="author"><span class="status"></span>DarkVelvet</div>
+                <div class="meta">
+                    <div class="price">550 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>1.4k · 👁 4.1k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="5" data-type="adopt" data-title="Золотая клетка" data-author="GoldenCage" data-status="online" data-price="1500" data-likes="2740" data-views="9840">
+            <div class="thumb"><div class="placeholder">♦</div><span class="badge-type adopt">Адопт</span><span class="badge-hot">TOP</span></div>
+            <div class="info">
+                <div class="title">Золотая клетка</div>
+                <div class="author"><span class="status"></span>GoldenCage</div>
+                <div class="meta">
+                    <div class="price">1 500 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>2.7k · 👁 9.8k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="2" data-type="ych" data-title="Пурпурный дым" data-author="PurpleSmoke" data-status="offline" data-price="400" data-likes="1120" data-views="2960">
+            <div class="thumb"><div class="placeholder">♣</div><span class="badge-type ych">YCH</span></div>
+            <div class="info">
+                <div class="title">Пурпурный дым</div>
+                <div class="author"><span class="status offline"></span>PurpleSmoke</div>
+                <div class="meta">
+                    <div class="price">400 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>1.1k · 👁 2.9k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="4" data-type="order" data-title="Шёпот в темноте" data-author="WhisperArt" data-status="online" data-price="900" data-likes="1940" data-views="6340">
+            <div class="thumb"><div class="placeholder">❦</div><span class="badge-type">Заказ</span></div>
+            <div class="info">
+                <div class="title">Шёпот в темноте</div>
+                <div class="author"><span class="status"></span>WhisperArt</div>
+                <div class="meta">
+                    <div class="price">900 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>1.9k · 👁 6.3k</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#" class="work-card" data-h="1" data-type="adopt" data-title="Алый закат II" data-author="ScarletSunset" data-status="online" data-price="1800" data-likes="3520" data-views="15100">
+            <div class="thumb"><div class="placeholder">♥</div><span class="badge-type adopt">Адопт</span><span class="badge-hot">TOP</span></div>
+            <div class="info">
+                <div class="title">Алый закат II</div>
+                <div class="author"><span class="status"></span>ScarletSunset</div>
+                <div class="meta">
+                    <div class="price">1 800 FEN</div>
+                    <div class="stats"><span class="heart">♥</span>3.5k · 👁 15k</div>
+                </div>
+            </div>
+        </a>
+
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <a href="../index.html" class="back-link">← Вернуться в главное меню</a>
+        <div>✦ FENBO · РЫНОК ✦ 2025 ✦ <span>Только 18+</span> ✦</div>
+    </footer>
+
+    <script>
+        /* Пыль */
+        (function dustBg() {
+            const c = document.getElementById('dustBg');
+            if (!c) return;
+            for (let i = 0; i < 25; i++) {
+                const m = document.createElement('div');
+                m.className = 'mote';
+                const s = Math.random() * 2.5 + 1;
+                m.style.width = s + 'px';
+                m.style.height = s + 'px';
+                m.style.left = (Math.random() * 100) + '%';
+                m.style.bottom = '-10px';
+                m.style.setProperty('--mx', (Math.random() * 80 - 40) + 'px');
+                m.style.animationDuration = (Math.random() * 12 + 15) + 's';
+                m.style.animationDelay = (Math.random() * 15) + 's';
+                c.appendChild(m);
+            }
+        })();
+
+        /* Клики по карточкам — пока заглушка */
+        document.querySelectorAll('.work-card').forEach(card => {
+            card.addEventListener('click', e => {
+                e.preventDefault();
+                const title = card.dataset.title;
+                const author = card.dataset.author;
+                const type = card.dataset.type;
+                const price = card.dataset.price;
+                alert(`Работа: ${title}\nАвтор: ${author}\nТип: ${type}\nЦена: ${price} FEN\n\n(Здесь будет лайтбокс с заказом)`);
+            });
+        });
+
+        /* Клики по фильтрам — пока переключение активного */
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+            });
+        });
+
+        /* Клики по навигации */
+        document.querySelectorAll('.topbar-nav a').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelectorAll('.topbar-nav a').forEach(x => x.classList.remove('active'));
+                a.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
