@@ -3,46 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0a0a0c">
+    <meta name="theme-color" content="#0a1410">
     <title>✦ FENBO · РЫНОК ✦</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Azeret+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 
     <style>
         /* ============================================
-           OBSIDIAN + EMERALD NEON
+           CASINO ROYALE — ИЗУМРУД + ЗОЛОТО + ВИНО
            ============================================ */
         :root {
-            --bg: #0a0a0c;
-            --bg-1: #0f0f12;
-            --bg-2: #15151a;
-            --bg-3: #1c1c22;
-            --bg-hi: #24242c;
+            --bg: #0a1410;                 /* глубокий изумруд-чёрный */
+            --bg-1: #0e1a15;
+            --bg-2: #13241c;
+            --bg-3: #1a2e24;
+            --bg-4: #223a2e;
 
-            --emerald: #10d97a;         /* неоновый изумруд */
-            --emerald-hi: #2df095;
-            --emerald-soft: rgba(16, 217, 122, 0.2);
+            --felt: #143124;               /* сукно */
+            --felt-hi: #1a4030;
 
-            --amber: #f5a623;           /* янтарь */
-            --amber-hi: #ffc44d;
+            --gold: #c9a44c;               /* сусальное золото */
+            --gold-hi: #e0bd63;
+            --gold-deep: #7a6228;
+            --gold-soft: rgba(201, 164, 76, 0.3);
+            --gold-glow: rgba(201, 164, 76, 0.25);
 
-            --magenta: #e63980;         /* маджента */
-            --magenta-soft: rgba(230, 57, 128, 0.25);
+            --wine: #7a1e2c;               /* вин. бархат */
+            --wine-hi: #a32838;
 
-            --violet: #8b5cf6;
+            --ivory: #f0e8d6;              /* слоновая кость */
+            --ivory-soft: #c9bfa8;
 
-            --text-0: #f4f4f5;
-            --text-1: #9a9aa5;
-            --text-2: #5f5f6a;
-            --text-3: #35353d;
+            --emerald: #4a9d6a;            /* неоновый изумруд для LIVE */
 
-            --line: rgba(244, 244, 245, 0.05);
-            --line-mid: rgba(244, 244, 245, 0.1);
-            --line-hi: rgba(244, 244, 245, 0.18);
+            --text-0: #f0e8d6;
+            --text-1: #a89d82;
+            --text-2: #6e6553;
+            --text-3: #3d3728;
+
+            --line: rgba(201, 164, 76, 0.1);
+            --line-mid: rgba(201, 164, 76, 0.2);
+            --line-hi: rgba(201, 164, 76, 0.35);
 
             --r: 4px;
+            --r-lg: 8px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
@@ -50,6 +56,12 @@
 
         body {
             background: var(--bg);
+            background-image:
+                radial-gradient(ellipse 70% 40% at 50% -5%, rgba(201, 164, 76, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 30% at 10% 100%, rgba(122, 30, 44, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 30% at 90% 100%, rgba(20, 49, 36, 0.4) 0%, transparent 60%),
+                linear-gradient(180deg, #0a1410 0%, #060c09 100%);
+            background-attachment: fixed;
             font-family: 'Inter', sans-serif;
             color: var(--text-0);
             min-height: 100vh;
@@ -59,187 +71,158 @@
             overflow-x: hidden;
         }
 
-        /* Тонкая сетка-фон как в терминале */
+        /* Тонкая текстура мрамора/сукна */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
             pointer-events: none;
             z-index: 0;
+            opacity: 0.35;
             background-image:
-                linear-gradient(rgba(16, 217, 122, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(16, 217, 122, 0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+                repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(201, 164, 76, 0.012) 3px, rgba(201, 164, 76, 0.012) 4px),
+                repeating-linear-gradient(-45deg, transparent, transparent 3px, rgba(20, 49, 36, 0.02) 3px, rgba(20, 49, 36, 0.02) 4px);
         }
 
-        /* Свечение сверху */
+        /* Золотая пыль — плавающие частицы */
         body::after {
             content: '';
             position: fixed;
-            top: -20%; left: 50%;
-            transform: translateX(-50%);
-            width: 80%; height: 60vh;
+            inset: 0;
             pointer-events: none;
             z-index: 0;
-            background: radial-gradient(ellipse at center, rgba(16, 217, 122, 0.1) 0%, transparent 60%);
-            filter: blur(60px);
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(201, 164, 76, 0.4) 0.5px, transparent 1.5px),
+                radial-gradient(circle at 78% 12%, rgba(201, 164, 76, 0.3) 0.5px, transparent 1.5px),
+                radial-gradient(circle at 45% 88%, rgba(201, 164, 76, 0.35) 0.5px, transparent 1.5px),
+                radial-gradient(circle at 88% 62%, rgba(201, 164, 76, 0.3) 0.5px, transparent 1.5px),
+                radial-gradient(circle at 25% 65%, rgba(201, 164, 76, 0.25) 0.5px, transparent 1.5px),
+                radial-gradient(circle at 62% 35%, rgba(201, 164, 76, 0.3) 0.5px, transparent 1.5px),
+                radial-gradient(circle at 92% 45%, rgba(201, 164, 76, 0.3) 0.5px, transparent 1.5px),
+                radial-gradient(circle at 8% 82%, rgba(201, 164, 76, 0.25) 0.5px, transparent 1.5px);
         }
-
-        /* ============================================
-           СТАТУС-БАР СВЕРХУ (как в терминале)
-           ============================================ */
-        .statusbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 110;
-            height: 28px;
-            padding: 0 20px;
-            background: #000;
-            border-bottom: 1px solid var(--line);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.6rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            color: var(--text-2);
-        }
-        .statusbar-left {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        .statusbar-left .live {
-            color: var(--emerald);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .statusbar-left .live::before {
-            content: '';
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: var(--emerald);
-            box-shadow: 0 0 8px var(--emerald);
-            animation: pulse 1.6s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-        .statusbar-right {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        .statusbar-right .gold { color: var(--amber); }
-        .statusbar-right .emerald { color: var(--emerald); }
 
         /* ============================================
            ШАПКА
            ============================================ */
         .header {
             position: fixed;
-            top: 28px; left: 0; right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
             padding: 0 40px;
-            background: rgba(10, 10, 12, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(10, 20, 16, 0.98) 0%, rgba(10, 20, 16, 0.8) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--line-mid);
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 20%; right: 20%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.6;
         }
         .header-inner {
             display: grid;
             grid-template-columns: auto 1fr auto;
             align-items: center;
-            gap: 48px;
-            padding: 14px 0;
+            gap: 40px;
+            padding: 16px 0;
             max-width: 1760px;
             margin: 0 auto;
         }
         .logo {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.35rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--text-0);
+            color: var(--gold);
             text-decoration: none;
-            letter-spacing: -0.5px;
+            letter-spacing: 6px;
             display: flex;
             align-items: baseline;
             gap: 6px;
-        }
-        .logo .dot {
-            color: var(--emerald);
-            font-size: 1.6rem;
-            line-height: 0.7;
+            text-shadow: 0 0 25px var(--gold-glow);
         }
         .logo .sub {
-            font-family: 'Instrument Serif', serif;
-            font-style: italic;
-            font-size: 1rem;
-            color: var(--text-2);
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            color: var(--ivory);
             letter-spacing: 0;
-            font-weight: 400;
+            margin-left: 4px;
+            font-weight: 500;
         }
 
         .nav {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            font-family: 'Syne', sans-serif;
-            font-size: 0.72rem;
+            gap: 34px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
         }
         .nav a {
             color: var(--text-1);
             text-decoration: none;
             padding: 6px 0;
-            transition: color 0.2s;
             position: relative;
+            transition: color 0.25s;
         }
         .nav a:hover,
-        .nav a.active {
-            color: var(--emerald);
-        }
-        .nav a.active::before {
-            content: '[';
-            position: absolute;
-            left: -8px;
-            color: var(--emerald);
-        }
+        .nav a.active { color: var(--gold); }
         .nav a.active::after {
-            content: ']';
+            content: '';
             position: absolute;
-            right: -8px;
-            color: var(--emerald);
+            bottom: -8px; left: 50%;
+            transform: translateX(-50%);
+            width: 5px; height: 5px;
+            background: var(--gold);
+            transform: translateX(-50%) rotate(45deg);
+            box-shadow: 0 0 8px var(--gold);
         }
 
         .user { display: flex; align-items: center; gap: 14px; }
         .balance {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: var(--bg-2);
+            gap: 10px;
+            padding: 6px 14px 6px 8px;
+            background: linear-gradient(135deg, rgba(20, 49, 36, 0.8) 0%, rgba(10, 20, 16, 0.6) 100%);
             border: 1px solid var(--line-mid);
-            border-radius: 3px;
+            border-radius: 30px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s;
         }
-        .balance:hover { border-color: var(--emerald); }
+        .balance:hover { border-color: var(--gold-soft); }
+        .balance-chip {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 25%, #fff6c8 0%, var(--gold) 40%, var(--gold-deep) 100%);
+            border: 1px solid var(--gold-hi);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+        }
+        .balance-chip::after {
+            content: '♠';
+            font-family: 'Playfair Display', serif;
+            font-size: 0.7rem;
+            color: var(--bg);
+            font-weight: 700;
+        }
         .balance-value {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
             font-weight: 600;
-            color: var(--emerald);
+            color: var(--gold);
+            letter-spacing: 0.3px;
         }
         .balance-value .unit {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 0.55rem;
             color: var(--text-2);
             letter-spacing: 1.2px;
@@ -247,611 +230,566 @@
             font-weight: 500;
         }
         .avatar {
-            width: 30px; height: 30px;
+            width: 32px; height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--emerald), #0a7a45);
+            background: linear-gradient(135deg, var(--wine) 0%, var(--wine-hi) 100%);
+            border: 1px solid var(--gold-soft);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Syne', sans-serif;
-            font-size: 0.8rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
             font-weight: 700;
-            color: var(--bg);
+            color: var(--ivory);
         }
 
         /* ============================================
-           ОСНОВНОЙ КОНТЕНТ
+           ОБЁРТКА
            ============================================ */
         .wrap {
             max-width: 1760px;
             margin: 0 auto;
-            padding: 140px 40px 60px;
+            padding: 100px 40px 60px;
         }
 
         /* ============================================
-           HERO
+           HERO — КОМПАКТНАЯ ЗАГОЛОВОЧНАЯ СТРОКА
            ============================================ */
         .hero {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: end;
-            gap: 60px;
-            padding-bottom: 40px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 40px;
+            padding-bottom: 24px;
+            margin-bottom: 32px;
             border-bottom: 1px solid var(--line);
-            margin-bottom: 40px;
+            flex-wrap: wrap;
         }
-        .hero-left { max-width: 800px; }
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
         .hero-eyebrow {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.62rem;
-            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--emerald);
-            margin-bottom: 20px;
+            color: var(--gold);
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .hero-eyebrow::before {
-            content: '▶';
+        .hero-eyebrow::before,
+        .hero-eyebrow::after {
+            content: '◆';
             font-size: 0.5rem;
+            color: var(--gold);
         }
         .hero-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 4.2rem;
-            font-weight: 800;
-            line-height: 0.95;
-            letter-spacing: -2.5px;
-            color: var(--text-0);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: -1px;
+            color: var(--ivory);
         }
         .hero-title em {
-            font-family: 'Instrument Serif', serif;
             font-style: italic;
-            font-weight: 400;
-            color: var(--emerald);
-            letter-spacing: -1px;
+            color: var(--gold);
+            font-weight: 500;
         }
-        .hero-sub {
-            font-family: 'Instrument Serif', serif;
-            font-style: italic;
-            font-size: 1.15rem;
-            color: var(--text-1);
-            margin-top: 20px;
-            max-width: 500px;
-            line-height: 1.5;
-        }
-
-        /* Биг-борд цифры справа — как табло в трейдинг-руме */
         .hero-board {
             display: flex;
+            gap: 26px;
+            padding-bottom: 6px;
+        }
+        .board-item {
+            display: flex;
             flex-direction: column;
-            gap: 12px;
-            min-width: 280px;
+            gap: 3px;
+            text-align: right;
         }
-        .board-row {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: baseline;
-            gap: 20px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--line);
-        }
-        .board-row:last-child { border-bottom: none; }
         .board-label {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.6rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.55rem;
             font-weight: 500;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--text-2);
         }
         .board-value {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-0);
-            letter-spacing: -0.5px;
-            text-align: right;
-        }
-        .board-value.emerald { color: var(--emerald); }
-        .board-value.amber { color: var(--amber); }
-        .board-value.magenta { color: var(--magenta); }
-
-        /* ============================================
-           ФИЛЬТРЫ
-           ============================================ */
-        .filters {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--line);
-        }
-        .chip {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.68rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
             font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--text-1);
-            background: transparent;
-            border: 1px solid var(--line-mid);
-            padding: 7px 14px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.2s;
+            color: var(--ivory);
+            letter-spacing: -0.3px;
         }
-        .chip:hover { color: var(--text-0); border-color: var(--text-2); }
-        .chip.active {
-            background: var(--emerald);
-            color: var(--bg);
-            border-color: var(--emerald);
-        }
-        .chip.live { color: var(--magenta); border-color: var(--magenta-soft); }
-        .chip.live.active { background: var(--magenta); color: #fff; border-color: var(--magenta); }
+        .board-value.gold { color: var(--gold); }
+        .board-value.emerald { color: var(--emerald); }
+        .board-value.wine { color: var(--wine-hi); }
 
         /* ============================================
-           СЕКЦИЯ
+           СЕКЦИЯ КАРУСЕЛИ (компактная)
            ============================================ */
-        .section {
-            margin-bottom: 60px;
+        .carousel-section {
+            margin-bottom: 40px;
         }
-        .section-head {
+        .carousel-head {
             display: flex;
             align-items: baseline;
             justify-content: space-between;
-            gap: 24px;
-            margin-bottom: 20px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--line-mid);
+            gap: 20px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
         }
-        .section-title {
+        .carousel-title {
             display: flex;
             align-items: baseline;
             gap: 14px;
         }
-        .section-marker {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.62rem;
-            font-weight: 700;
-            color: var(--emerald);
-            padding: 3px 8px;
-            border: 1px solid var(--emerald-soft);
-            border-radius: 2px;
-            letter-spacing: 0.5px;
+        .carousel-icon {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            font-style: italic;
         }
-        .section-name {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-0);
-            letter-spacing: -0.8px;
+        .carousel-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ivory);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
-        .section-count {
-            font-family: 'Azeret Mono', monospace;
+        .carousel-count {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
             color: var(--text-2);
+            letter-spacing: 0.5px;
         }
-        .section-more {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--text-1);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
+        .carousel-nav {
+            display: flex;
             gap: 6px;
-            transition: all 0.2s;
         }
-        .section-more:hover { color: var(--emerald); gap: 10px; }
-        .section-more::after { content: '→'; }
+        .carousel-arrow {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: var(--bg-2);
+            border: 1px solid var(--line-mid);
+            color: var(--gold);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-family: 'Playfair Display', serif;
+        }
+        .carousel-arrow:hover {
+            background: var(--gold);
+            color: var(--bg);
+            border-color: var(--gold);
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+        .carousel-arrow:disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+        }
+        .carousel-arrow:disabled:hover {
+            background: var(--bg-2);
+            color: var(--gold);
+            border-color: var(--line-mid);
+            box-shadow: none;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 4px 0 12px;
+            scrollbar-width: none;
+        }
+        .carousel-track::-webkit-scrollbar { display: none; }
 
         /* ============================================
-           АУКЦИОНЫ — СТРОКИ ВО ВСЮ ШИРИНУ
-           Каждая строка — самостоятельная композиция
+           КОМПАКТНАЯ КАРТОЧКА В КАРУСЕЛИ
            ============================================ */
-        .rows {
+        .mini-card {
+            flex: 0 0 260px;
+            scroll-snap-align: start;
+            position: relative;
+            background: linear-gradient(180deg, var(--felt) 0%, var(--bg) 100%);
+            border: 1px solid var(--line-mid);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
-            gap: 14px;
-        }
-
-        .row-lot {
-            position: relative;
-            display: grid;
-            gap: 24px;
-            align-items: center;
-            padding: 24px 28px;
-            background: var(--bg-1);
-            border: 1px solid var(--line);
-            border-radius: 4px;
-            cursor: pointer;
             opacity: 0;
             transform: translateY(16px);
-            animation: rowRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            transition: border-color 0.3s, background 0.3s, transform 0.3s;
-            overflow: hidden;
+            filter: blur(3px);
+            animation: cardRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s, box-shadow 0.3s;
         }
-        .row-lot:nth-child(1) { animation-delay: 0.05s; }
-        .row-lot:nth-child(2) { animation-delay: 0.12s; }
-        .row-lot:nth-child(3) { animation-delay: 0.19s; }
-        .row-lot:nth-child(4) { animation-delay: 0.26s; }
+        .mini-card:nth-child(1) { animation-delay: 0.05s; }
+        .mini-card:nth-child(2) { animation-delay: 0.10s; }
+        .mini-card:nth-child(3) { animation-delay: 0.15s; }
+        .mini-card:nth-child(4) { animation-delay: 0.20s; }
+        .mini-card:nth-child(5) { animation-delay: 0.25s; }
+        .mini-card:nth-child(6) { animation-delay: 0.30s; }
 
-        @keyframes rowRise {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .row-lot:hover {
-            border-color: var(--line-hi);
-            background: var(--bg-2);
+        @keyframes cardRise {
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        /* Полоска слева — растёт при hover */
-        .row-lot::before {
-            content: '';
+        .mini-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold-soft);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(201, 164, 76, 0.1);
+        }
+
+        /* Тонкая золотая полоска-«рулетка» сверху */
+        .mini-card .roulette {
             position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 3px;
-            background: var(--emerald);
-            transform: scaleY(0);
-            transform-origin: center;
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: rgba(201, 164, 76, 0.15);
+            z-index: 3;
         }
-        .row-lot:hover::before { transform: scaleY(1); }
-
-        /* ЖИВОЙ фон — градиент с левого края */
-        .row-lot.live::after {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 120px;
-            background: linear-gradient(90deg, rgba(230, 57, 128, 0.08) 0%, transparent 100%);
-            pointer-events: none;
-        }
-
-        /* КОМПОЗИЦИЯ 1 — Стандартный аукцион: превью | инфо | цена | таймер | кнопка */
-        .row-lot.style-classic {
-            grid-template-columns: 72px 1fr auto auto auto;
-        }
-
-        /* КОМПОЗИЦИЯ 2 — Feature: большая левая панель, детальная инфа, стопка метрик */
-        .row-lot.style-feature {
-            grid-template-columns: 180px 1fr auto;
-            padding: 32px 32px;
-            background: linear-gradient(90deg, var(--bg-2) 0%, var(--bg-1) 60%);
-        }
-        .row-lot.style-feature::before {
-            background: linear-gradient(180deg, var(--amber) 0%, var(--magenta) 100%);
-            width: 4px;
-        }
-
-        /* КОМПОЗИЦИЯ 3 — Compact: всё в одну строку, только важное */
-        .row-lot.style-compact {
-            grid-template-columns: 56px 1fr auto auto auto;
-            padding: 16px 22px;
+        .mini-card .roulette-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-hi) 100%);
+            box-shadow: 0 0 8px var(--gold);
+            transition: width 0.6s ease;
         }
 
         /* Превью */
-        .lot-thumb {
+        .mini-thumb {
             position: relative;
-            width: 72px;
-            height: 72px;
-            border-radius: 3px;
-            background: var(--bg-3);
-            border: 1px solid var(--line-mid);
+            aspect-ratio: 5 / 4;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            flex-shrink: 0;
+            background:
+                radial-gradient(ellipse at 30% 30%, rgba(122, 30, 44, 0.3) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 80%, rgba(20, 49, 36, 0.6) 0%, transparent 55%),
+                linear-gradient(140deg, #142418 0%, #0a1410 100%);
         }
-        .row-lot.style-compact .lot-thumb {
-            width: 56px;
-            height: 56px;
-        }
-        .row-lot.style-feature .lot-thumb {
-            width: 180px;
-            height: 180px;
-        }
-        .lot-thumb .art {
-            font-family: 'Instrument Serif', serif;
-            font-size: 2.4rem;
+        .mini-thumb .suit {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
             font-style: italic;
-            color: rgba(16, 217, 122, 0.2);
-            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s;
+            font-weight: 500;
+            color: rgba(201, 164, 76, 0.15);
+            text-shadow: 0 0 40px rgba(201, 164, 76, 0.25);
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s;
         }
-        .row-lot.style-feature .lot-thumb .art {
-            font-size: 6rem;
-        }
-        .row-lot:hover .lot-thumb .art {
+        .mini-card:hover .mini-thumb .suit {
             transform: scale(1.08);
-            color: rgba(16, 217, 122, 0.4);
+            color: rgba(201, 164, 76, 0.28);
         }
 
-        /* Водяной знак при hover */
-        .lot-thumb .wm {
+        /* Номер лота — угол */
+        .mini-number {
             position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.4s;
-            pointer-events: none;
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(16, 217, 122, 0.08) 14px, rgba(16, 217, 122, 0.08) 15px);
-        }
-        .lot-thumb .wm::after {
-            content: 'FENBO';
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.5rem;
+            top: 12px; left: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.7rem;
             font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--emerald);
-            transform: rotate(-22deg);
+            color: var(--gold);
+            background: rgba(10, 20, 16, 0.85);
+            border: 1px solid var(--gold-soft);
+            padding: 3px 8px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            z-index: 3;
+            backdrop-filter: blur(6px);
         }
-        .row-lot:hover .lot-thumb .wm { opacity: 1; }
 
-        /* ИНФО */
-        .lot-info { min-width: 0; }
-        .lot-tag {
+        /* Статус — верх. правый */
+        .mini-status {
+            position: absolute;
+            top: 12px; right: 12px;
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.55rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.5rem;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.8px;
             text-transform: uppercase;
             padding: 3px 8px;
-            border-radius: 2px;
-            margin-bottom: 10px;
-            width: fit-content;
+            border-radius: 3px;
+            z-index: 3;
+            backdrop-filter: blur(6px);
+            color: var(--emerald);
+            background: rgba(10, 20, 16, 0.85);
+            border: 1px solid rgba(74, 157, 106, 0.35);
         }
-        .lot-tag.live {
-            color: var(--magenta);
-            border: 1px solid var(--magenta-soft);
-            background: rgba(230, 57, 128, 0.08);
-        }
-        .lot-tag.live::before {
+        .mini-status::before {
             content: '';
             width: 4px; height: 4px;
             border-radius: 50%;
-            background: var(--magenta);
-            box-shadow: 0 0 6px var(--magenta);
-            animation: pulse 1.4s infinite;
+            background: var(--emerald);
+            box-shadow: 0 0 6px var(--emerald);
+            animation: pulse 1.5s infinite;
         }
-        .lot-tag.ych {
-            color: var(--emerald);
-            border: 1px solid var(--emerald-soft);
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
-        .lot-tag.ych::before { content: '✦'; font-size: 0.65rem; }
+        .mini-status.ych {
+            color: var(--gold);
+            border-color: var(--gold-soft);
+        }
+        .mini-status.ych::before {
+            background: var(--gold);
+            box-shadow: 0 0 6px var(--gold);
+            animation: none;
+        }
 
-        .lot-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-0);
-            letter-spacing: -0.3px;
+        /* Инфо */
+        .mini-info {
+            padding: 12px 14px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .mini-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--ivory);
+            letter-spacing: -0.1px;
             line-height: 1.2;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            margin-bottom: 4px;
         }
-        .row-lot.style-feature .lot-title {
-            font-size: 1.8rem;
-            letter-spacing: -0.8px;
-            margin-bottom: 8px;
-        }
-        .lot-author {
-            font-family: 'Instrument Serif', serif;
-            font-style: italic;
-            font-size: 0.88rem;
-            color: var(--text-2);
-        }
-        .row-lot.style-feature .lot-author {
-            font-size: 1.05rem;
-        }
-
-        /* МЕТРИКИ */
-        .lot-metric {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 3px;
-            text-align: right;
-            white-space: nowrap;
-        }
-        .lot-metric-label {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.52rem;
+        .mini-author {
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            color: var(--gold);
             font-weight: 500;
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-            color: var(--text-2);
-        }
-        .lot-metric-value {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: var(--text-0);
-            letter-spacing: -0.3px;
-        }
-        .lot-metric-value.emerald { color: var(--emerald); }
-        .lot-metric-value.amber { color: var(--amber); }
-        .lot-metric-value.magenta { color: var(--magenta); }
-        .lot-metric-value.price {
-            font-size: 1.15rem;
-        }
-        .row-lot.style-feature .lot-metric-value.price {
-            font-size: 1.8rem;
-            color: var(--amber);
-        }
-        .lot-metric-value.bump {
-            animation: metricBump 1s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        @keyframes metricBump {
-            0% { color: inherit; }
-            30% { color: var(--emerald-hi); text-shadow: 0 0 15px var(--emerald); }
-            100% { color: inherit; text-shadow: none; }
+            line-height: 1;
+            margin-top: -2px;
         }
 
-        /* YCH — слоты */
-        .lot-slots {
+        .mini-bottom {
             display: flex;
-            gap: 4px;
-            align-items: center;
-            padding: 0 4px;
-        }
-        .lot-slot {
-            width: 22px;
-            height: 22px;
-            border-radius: 3px;
-            background: var(--bg-3);
-            border: 1px solid var(--line-mid);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.55rem;
-            font-weight: 700;
-            color: var(--text-3);
-        }
-        .lot-slot.free {
-            background: linear-gradient(135deg, var(--emerald), #0a7a45);
-            border-color: var(--emerald-hi);
-            color: var(--bg);
-            box-shadow: 0 0 10px var(--emerald-soft);
-        }
-
-        /* Кнопка */
-        .lot-btn {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--bg);
-            background: var(--emerald);
-            border: none;
-            padding: 10px 16px;
-            border-radius: 3px;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.2s;
-            opacity: 0;
-            transform: translateX(6px);
-        }
-        .row-lot:hover .lot-btn {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .lot-btn:hover {
-            background: var(--emerald-hi);
-            letter-spacing: 2px;
-        }
-
-        /* Таймер */
-        .lot-timer {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text-1);
-            letter-spacing: -0.3px;
-            white-space: nowrap;
-        }
-        .row-lot.ending .lot-timer {
-            color: var(--magenta);
-            animation: timerPulse 1.4s infinite;
-        }
-        @keyframes timerPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* FEATURE-лот — доп. элементы */
-        .feature-extras {
-            display: flex;
-            gap: 20px;
-            margin-top: 14px;
-            padding-top: 14px;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+            padding-top: 10px;
+            margin-top: 8px;
             border-top: 1px solid var(--line);
         }
-        .feature-extras .extra {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.65rem;
+        .mini-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: -0.3px;
+            white-space: nowrap;
+        }
+        .mini-price .unit {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.5rem;
             color: var(--text-2);
-            letter-spacing: 0.5px;
+            letter-spacing: 1.2px;
+            margin-left: 3px;
+            font-weight: 500;
         }
-        .feature-extras .extra strong {
-            color: var(--emerald);
-            font-weight: 700;
+        .mini-price.bump {
+            animation: priceBump 1s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .feature-extras .extra.amber strong {
-            color: var(--amber);
+        @keyframes priceBump {
+            0% { color: var(--gold); }
+            30% { color: var(--gold-hi); text-shadow: 0 0 15px var(--gold); }
+            100% { color: var(--gold); text-shadow: none; }
+        }
+        .mini-timer {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--text-1);
+            letter-spacing: 0;
+        }
+        .mini-card.ending .mini-timer {
+            color: var(--wine-hi);
+            animation: timerBlink 1.4s infinite;
+        }
+        @keyframes timerBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Слоты YCH */
+        .mini-slots {
+            display: flex;
+            gap: 4px;
+            padding-top: 4px;
+        }
+        .mini-slot {
+            flex: 1;
+            height: 3px;
+            background: rgba(201, 164, 76, 0.15);
+            border-radius: 2px;
+        }
+        .mini-slot.free {
+            background: var(--gold);
+            box-shadow: 0 0 6px var(--gold-glow);
         }
 
         /* ============================================
-           ГАЛЕРЕЯ — СЛОЖНАЯ АСИММЕТРИЧНАЯ СЕТКА
+           ГЛАВНАЯ ГАЛЕРЕЯ — ЗАНИМАЕТ ВСЁ
            ============================================ */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            grid-auto-rows: 60px;
-            gap: 12px;
+        .gallery-section {
+            position: relative;
+        }
+        .gallery-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--line-mid);
+            position: relative;
+        }
+        .gallery-head::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0;
+            width: 80px; height: 1px;
+            background: var(--gold);
+            box-shadow: 0 0 12px var(--gold);
+        }
+        .gallery-title {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+        }
+        .gallery-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            font-style: italic;
+        }
+        .gallery-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--ivory);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .gallery-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-2);
+            letter-spacing: 0.5px;
+        }
+        .gallery-filters {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .g-chip {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            background: transparent;
+            border: 1px solid var(--line-mid);
+            color: var(--text-1);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .g-chip:hover { color: var(--ivory); border-color: var(--text-1); }
+        .g-chip.active {
+            background: var(--gold);
+            color: var(--bg);
+            border-color: var(--gold);
         }
 
-        .g-piece {
+        /* MASONRY-ГАЛЕРЕЯ */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-auto-rows: 60px;
+            gap: 14px;
+        }
+        @media (max-width: 1400px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 1000px) { .gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 50px; gap: 10px; } }
+        @media (max-width: 600px) { .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 40px; gap: 8px; } }
+
+        /* 20 карточек с уникальными формами */
+        .art {
             position: relative;
             overflow: hidden;
-            border-radius: 3px;
-            background: var(--bg-1);
+            border-radius: var(--r);
+            background: linear-gradient(140deg, var(--felt) 0%, var(--bg-1) 100%);
             border: 1px solid var(--line);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transform: translateY(12px);
-            animation: rowRise 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            transition: transform 0.35s, border-color 0.3s;
+            transform: translateY(14px);
+            animation: cardRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s, box-shadow 0.3s;
         }
-        .g-piece:hover {
-            transform: translateY(-3px);
-            border-color: var(--emerald-soft);
+        .art:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold-soft);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(201, 164, 76, 0.1);
+            z-index: 5;
         }
 
-        /* Разные формы для плиток */
-        .g-piece.g1 { grid-column: span 3; grid-row: span 6; animation-delay: 0.03s; }
-        .g-piece.g2 { grid-column: span 2; grid-row: span 4; animation-delay: 0.06s; }
-        .g-piece.g3 { grid-column: span 3; grid-row: span 5; animation-delay: 0.09s; }
-        .g-piece.g4 { grid-column: span 2; grid-row: span 5; animation-delay: 0.12s; }
-        .g-piece.g5 { grid-column: span 3; grid-row: span 4; animation-delay: 0.15s; }
-        .g-piece.g6 { grid-column: span 2; grid-row: span 6; animation-delay: 0.18s; }
-        .g-piece.g7 { grid-column: span 3; grid-row: span 4; animation-delay: 0.21s; }
-        .g-piece.g8 { grid-column: span 2; grid-row: span 5; animation-delay: 0.24s; }
-        .g-piece.g9 { grid-column: span 3; grid-row: span 5; animation-delay: 0.27s; }
-        .g-piece.g10 { grid-column: span 2; grid-row: span 4; animation-delay: 0.30s; }
+        /* Тонкая золотая полоска — рулетка по низу при hover */
+        .art::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 60%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            box-shadow: 0 0 12px var(--gold);
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 5;
+        }
+        .art:hover::before { transform: translateX(-50%) scaleX(1); }
 
-        .g-piece .art {
-            font-family: 'Instrument Serif', serif;
+        /* Символ-арт */
+        .art .suit {
+            font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 3rem;
-            color: rgba(16, 217, 122, 0.15);
-            transition: color 0.4s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            font-weight: 500;
+            font-size: 4rem;
+            color: rgba(201, 164, 76, 0.13);
+            text-shadow: 0 0 50px rgba(201, 164, 76, 0.25);
+            transition: color 0.4s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .g-piece:hover .art {
-            color: rgba(16, 217, 122, 0.3);
-            transform: scale(1.06);
+        .art:hover .suit {
+            color: rgba(201, 164, 76, 0.28);
+            transform: scale(1.08);
         }
 
-        .g-piece .wm {
+        /* Водяной знак */
+        .art .wm {
             position: absolute;
             inset: 0;
             display: flex;
@@ -860,237 +798,189 @@
             opacity: 0;
             transition: opacity 0.4s;
             pointer-events: none;
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(16, 217, 122, 0.06) 14px, rgba(16, 217, 122, 0.06) 15px);
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(201, 164, 76, 0.04) 22px, rgba(201, 164, 76, 0.04) 23px);
         }
-        .g-piece .wm::after {
+        .art .wm::after {
             content: 'FENBO';
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.55rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--emerald);
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: 6px;
+            color: rgba(201, 164, 76, 0.2);
             transform: rotate(-22deg);
         }
-        .g-piece:hover .wm { opacity: 1; }
+        .art:hover .wm { opacity: 1; }
 
-        .g-piece .g-info {
+        /* Номер лота */
+        .art .num {
+            position: absolute;
+            top: 10px; left: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1px;
+            z-index: 3;
+            opacity: 0.8;
+        }
+        .art:hover .num { opacity: 1; }
+
+        /* Инфо снизу */
+        .art .info {
             position: absolute;
             left: 0; right: 0; bottom: 0;
-            padding: 10px 12px;
-            background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 12, 0.95) 60%);
+            padding: 14px 14px 12px;
+            background: linear-gradient(180deg, transparent 0%, rgba(10, 20, 16, 0.95) 55%);
             display: flex;
             flex-direction: column;
-            gap: 1px;
+            gap: 2px;
+            transform: translateY(20%);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .g-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-0);
-            letter-spacing: -0.2px;
+        .art:hover .info { transform: translateY(0); }
+        .art .t {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--ivory);
+            letter-spacing: -0.1px;
+            line-height: 1.2;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .g-author {
-            font-family: 'Instrument Serif', serif;
-            font-style: italic;
-            font-size: 0.68rem;
-            color: var(--emerald);
+        .art .a {
+            font-family: 'Caveat', cursive;
+            font-size: 0.9rem;
+            color: var(--gold);
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        /* Формы карточек (высоты и ширины) */
+        .art.a-1  { grid-column: span 1; grid-row: span 5; animation-delay: 0.02s; }
+        .art.a-2  { grid-column: span 1; grid-row: span 4; animation-delay: 0.04s; }
+        .art.a-3  { grid-column: span 1; grid-row: span 6; animation-delay: 0.06s; }
+        .art.a-4  { grid-column: span 2; grid-row: span 5; animation-delay: 0.08s; }
+        .art.a-5  { grid-column: span 1; grid-row: span 4; animation-delay: 0.10s; }
+        .art.a-6  { grid-column: span 1; grid-row: span 5; animation-delay: 0.12s; }
+        .art.a-7  { grid-column: span 1; grid-row: span 3; animation-delay: 0.14s; }
+        .art.a-8  { grid-column: span 1; grid-row: span 5; animation-delay: 0.16s; }
+        .art.a-9  { grid-column: span 2; grid-row: span 4; animation-delay: 0.18s; }
+        .art.a-10 { grid-column: span 1; grid-row: span 6; animation-delay: 0.20s; }
+        .art.a-11 { grid-column: span 1; grid-row: span 4; animation-delay: 0.22s; }
+        .art.a-12 { grid-column: span 1; grid-row: span 5; animation-delay: 0.24s; }
+        .art.a-13 { grid-column: span 1; grid-row: span 4; animation-delay: 0.26s; }
+        .art.a-14 { grid-column: span 2; grid-row: span 6; animation-delay: 0.28s; }
+        .art.a-15 { grid-column: span 1; grid-row: span 4; animation-delay: 0.30s; }
+        .art.a-16 { grid-column: span 1; grid-row: span 5; animation-delay: 0.32s; }
+        .art.a-17 { grid-column: span 1; grid-row: span 4; animation-delay: 0.34s; }
+        .art.a-18 { grid-column: span 1; grid-row: span 5; animation-delay: 0.36s; }
+        .art.a-19 { grid-column: span 2; grid-row: span 5; animation-delay: 0.38s; }
+        .art.a-20 { grid-column: span 1; grid-row: span 4; animation-delay: 0.40s; }
+
+        /* Размер шрифта внутри от размера */
+        .art.a-4 .suit, .art.a-9 .suit, .art.a-14 .suit, .art.a-19 .suit {
+            font-size: 6rem;
+        }
+
+        @media (max-width: 1000px) {
+            .art.a-1, .art.a-2, .art.a-3, .art.a-5, .art.a-6, .art.a-7, .art.a-8,
+            .art.a-10, .art.a-11, .art.a-12, .art.a-13, .art.a-15, .art.a-16,
+            .art.a-17, .art.a-18, .art.a-20 {
+                grid-column: span 1;
+                grid-row: span 4;
+            }
+            .art.a-4, .art.a-9, .art.a-14, .art.a-19 {
+                grid-column: span 2;
+                grid-row: span 5;
+            }
+        }
+        @media (max-width: 600px) {
+            .art { grid-column: span 1 !important; grid-row: span 3 !important; }
+            .art.a-4, .art.a-9, .art.a-14, .art.a-19 { grid-row: span 4 !important; }
+            .art .suit { font-size: 2.5rem; }
+            .art.a-4 .suit, .art.a-9 .suit, .art.a-14 .suit, .art.a-19 .suit { font-size: 3rem; }
+            .art .t { font-size: 0.72rem; }
+            .art .a { font-size: 0.75rem; }
         }
 
         /* ============================================
            ПОДВАЛ
            ============================================ */
         .footer {
+            margin-top: 60px;
             padding-top: 30px;
             border-top: 1px solid var(--line);
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 24px;
         }
-        .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+        .footer-links { display: flex; gap: 26px; flex-wrap: wrap; }
         .footer-links a {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.6rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
             font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--text-2);
+            color: var(--text-1);
             text-decoration: none;
             transition: color 0.2s;
         }
-        .footer-links a:hover { color: var(--emerald); }
+        .footer-links a:hover { color: var(--gold); }
         .footer-brand {
-            font-family: 'Azeret Mono', monospace;
-            font-size: 0.6rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
             color: var(--text-2);
-            letter-spacing: 1.5px;
+            font-weight: 500;
         }
-        .footer-brand span { color: var(--emerald); }
+        .footer-brand span { color: var(--gold); }
 
         /* ============================================
            АДАПТИВ
            ============================================ */
         @media (max-width: 1200px) {
             .header { padding: 0 24px; }
-            .wrap { padding: 130px 24px 50px; }
-            .hero-title { font-size: 3.2rem; letter-spacing: -1.5px; }
-            .nav { gap: 20px; font-size: 0.66rem; }
-            .row-lot.style-feature { grid-template-columns: 140px 1fr auto; }
-            .row-lot.style-feature .lot-thumb { width: 140px; height: 140px; }
+            .wrap { padding: 90px 24px 50px; }
+            .nav { gap: 22px; font-size: 0.66rem; }
+            .hero-title { font-size: 2rem; }
+            .gallery-name { font-size: 1.3rem; }
         }
-
         @media (max-width: 900px) {
-            .statusbar { font-size: 0.55rem; padding: 0 14px; }
-            .header-inner { grid-template-columns: auto auto; gap: 20px; }
+            .header-inner { grid-template-columns: auto auto; gap: 16px; }
             .nav { display: none; }
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .hero-title { font-size: 2.6rem; letter-spacing: -1px; }
-            .hero-board { min-width: 0; width: 100%; }
-            .board-row { grid-template-columns: 1fr auto; }
-
-            /* Строки — компактный вид */
-            .row-lot,
-            .row-lot.style-classic,
-            .row-lot.style-feature,
-            .row-lot.style-compact {
-                grid-template-columns: 56px 1fr auto;
-                padding: 16px 18px;
-                gap: 14px;
-            }
-            .row-lot.style-feature {
-                grid-template-columns: 56px 1fr auto;
-                padding: 18px 20px;
-            }
-            .row-lot .lot-thumb,
-            .row-lot.style-feature .lot-thumb {
-                width: 56px;
-                height: 56px;
-            }
-            .row-lot .lot-thumb .art,
-            .row-lot.style-feature .lot-thumb .art {
-                font-size: 2rem;
-            }
-            .lot-title,
-            .row-lot.style-feature .lot-title {
-                font-size: 0.95rem;
-                letter-spacing: -0.2px;
-            }
-            .lot-author,
-            .row-lot.style-feature .lot-author {
-                font-size: 0.78rem;
-            }
-
-            .row-lot .lot-metric:not(.keep),
-            .row-lot.style-feature .feature-extras {
-                display: none;
-            }
-            .row-lot .lot-timer { display: none; }
-            .row-lot .lot-slots {
-                grid-column: 3;
-                grid-row: 1;
-                align-self: center;
-            }
-            .row-lot .lot-btn {
-                grid-column: 3;
-                grid-row: 1;
-                align-self: center;
-                opacity: 1;
-                transform: none;
-            }
-            .row-lot .lot-metric.keep {
-                grid-column: 3;
-                grid-row: 1;
-                align-self: center;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(4, 1fr);
-                grid-auto-rows: 50px;
-                gap: 10px;
-            }
-            .g-piece.g1 { grid-column: span 2; grid-row: span 5; }
-            .g-piece.g2 { grid-column: span 2; grid-row: span 3; }
-            .g-piece.g3 { grid-column: span 2; grid-row: span 4; }
-            .g-piece.g4 { grid-column: span 2; grid-row: span 4; }
-            .g-piece.g5 { grid-column: span 2; grid-row: span 3; }
-            .g-piece.g6 { grid-column: span 2; grid-row: span 5; }
-            .g-piece.g7 { grid-column: span 2; grid-row: span 3; }
-            .g-piece.g8 { grid-column: span 2; grid-row: span 4; }
-            .g-piece.g9 { grid-column: span 2; grid-row: span 4; }
-            .g-piece.g10 { grid-column: span 2; grid-row: span 3; }
+            .hero { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .hero-board { padding-bottom: 0; }
+            .board-value { font-size: 0.9rem; }
+            .mini-card { flex: 0 0 220px; }
+            .gallery-head { flex-direction: column; align-items: flex-start; gap: 12px; }
         }
-
         @media (max-width: 600px) {
-            .statusbar { height: 24px; font-size: 0.5rem; gap: 8px; padding: 0 10px; }
-            .header { top: 24px; padding: 0 14px; }
-            .header-inner { padding: 10px 0; }
-            .logo { font-size: 1.1rem; }
-            .logo .sub { font-size: 0.8rem; }
-            .balance { padding: 5px 8px; }
-            .balance-value { font-size: 0.7rem; }
-            .avatar { width: 26px; height: 26px; }
+            .header { padding: 0 14px; }
+            .wrap { padding: 80px 14px 40px; }
+            .header-inner { padding: 12px 0; }
+            .logo { font-size: 1.1rem; letter-spacing: 3px; }
+            .logo .sub { font-size: 0.85rem; }
+            .balance { padding: 5px 10px 5px 6px; }
+            .balance-value { font-size: 0.72rem; }
+            .avatar { width: 28px; height: 28px; font-size: 0.8rem; }
 
-            .wrap { padding: 110px 14px 40px; }
-            .hero-title { font-size: 1.9rem; letter-spacing: -0.8px; }
-            .hero-sub { font-size: 0.95rem; }
+            .hero-title { font-size: 1.6rem; }
             .hero-eyebrow { font-size: 0.55rem; letter-spacing: 2px; }
-            .board-value { font-size: 1.1rem; }
-            .board-label { font-size: 0.52rem; }
+            .hero-board { gap: 16px; }
+            .board-label { font-size: 0.5rem; letter-spacing: 1.5px; }
+            .board-value { font-size: 0.82rem; }
 
-            .filters { gap: 4px; margin-bottom: 28px; }
-            .chip { padding: 5px 10px; font-size: 0.58rem; letter-spacing: 1px; }
+            .carousel-section { margin-bottom: 28px; }
+            .carousel-name { font-size: 0.9rem; }
+            .mini-card { flex: 0 0 200px; }
+            .mini-title { font-size: 0.82rem; }
 
-            .section { margin-bottom: 40px; }
-            .section-name { font-size: 1.1rem; }
-            .section-marker { font-size: 0.55rem; }
-
-            .row-lot,
-            .row-lot.style-classic,
-            .row-lot.style-feature,
-            .row-lot.style-compact {
-                grid-template-columns: 48px 1fr auto;
-                padding: 12px 14px;
-                gap: 10px;
-            }
-            .row-lot .lot-thumb,
-            .row-lot.style-feature .lot-thumb {
-                width: 48px;
-                height: 48px;
-            }
-            .row-lot .lot-thumb .art,
-            .row-lot.style-feature .lot-thumb .art {
-                font-size: 1.6rem;
-            }
-            .lot-title,
-            .row-lot.style-feature .lot-title {
-                font-size: 0.85rem;
-            }
-            .lot-author,
-            .row-lot.style-feature .lot-author {
-                font-size: 0.7rem;
-            }
-            .lot-tag { font-size: 0.48rem; padding: 2px 6px; margin-bottom: 6px; }
-            .lot-metric-value.price { font-size: 0.9rem; }
-            .lot-metric-value { font-size: 0.78rem; }
-            .lot-metric-label { font-size: 0.48rem; }
-            .lot-btn { padding: 7px 10px; font-size: 0.55rem; letter-spacing: 1px; }
-
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 60px; gap: 8px; }
-            .g-piece.g1, .g-piece.g2, .g-piece.g3, .g-piece.g4, .g-piece.g5,
-            .g-piece.g6, .g-piece.g7, .g-piece.g8, .g-piece.g9, .g-piece.g10 {
-                grid-column: span 1;
-                grid-row: span 3;
-            }
-            .g-piece.g1, .g-piece.g6, .g-piece.g9 { grid-row: span 4; }
-            .g-title { font-size: 0.72rem; }
-            .g-author { font-size: 0.6rem; }
+            .gallery-name { font-size: 1.1rem; letter-spacing: 1.5px; }
+            .gallery-mark { font-size: 1.2rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1100,38 +990,25 @@
 </head>
 <body>
 
-    <!-- СТАТУС-БАР -->
-    <div class="statusbar">
-        <div class="statusbar-left">
-            <span class="live">LIVE · FENBO MARKET</span>
-            <span>UTC 03:47:12</span>
-            <span class="statusbar-right-inner" style="display:none">·</span>
-        </div>
-        <div class="statusbar-right">
-            <span class="emerald">▲ 318 ставок сегодня</span>
-            <span class="gold">◆ 124 500 FEN оборот</span>
-            <span>v2.5.1</span>
-        </div>
-    </div>
-
     <!-- ШАПКА -->
     <header class="header">
         <div class="header-inner">
             <a href="#" class="logo">
-                FENBO<span class="dot">.</span>
+                FENBO
                 <span class="sub">рынок</span>
             </a>
 
             <nav class="nav">
                 <a href="#auctions" class="active">Аукционы</a>
                 <a href="#ych">Ючи</a>
-                <a href="#collection">Коллекция</a>
+                <a href="#gallery">Галерея</a>
                 <a href="#">Категории</a>
                 <a href="#">Мастера</a>
             </nav>
 
             <div class="user">
                 <div class="balance">
+                    <div class="balance-chip"></div>
                     <span class="balance-value">1 250<span class="unit">FEN</span></span>
                 </div>
                 <div class="avatar">F</div>
@@ -1139,269 +1016,292 @@
         </div>
     </header>
 
-    <!-- КОНТЕНТ -->
     <div class="wrap">
 
         <!-- HERO -->
         <section class="hero">
             <div class="hero-left">
-                <div class="hero-eyebrow">рынок · 18+ · только арт</div>
-                <h1 class="hero-title">Тихая <em>ставка</em> —<br>громкий результат</h1>
-                <p class="hero-sub">Художники выставляют лоты. Коллекционеры следят за цифрами. Здесь решает не громкость, а вес.</p>
+                <div class="hero-eyebrow">Художественный рынок</div>
+                <h1 class="hero-title">Только арт. <em>Только ставки.</em></h1>
             </div>
             <div class="hero-board">
-                <div class="board-row">
-                    <span class="board-label">Активных лотов</span>
+                <div class="board-item">
+                    <span class="board-label">Лотов</span>
                     <span class="board-value emerald">42</span>
                 </div>
-                <div class="board-row">
-                    <span class="board-label">Ставок сегодня</span>
-                    <span class="board-value amber">318</span>
+                <div class="board-item">
+                    <span class="board-label">Ставок</span>
+                    <span class="board-value gold">318</span>
                 </div>
-                <div class="board-row">
-                    <span class="board-label">Оборот, FEN</span>
-                    <span class="board-value magenta">124 500</span>
-                </div>
-                <div class="board-row">
-                    <span class="board-label">Художников онлайн</span>
-                    <span class="board-value">27</span>
+                <div class="board-item">
+                    <span class="board-label">Оборот</span>
+                    <span class="board-value wine">124k</span>
                 </div>
             </div>
         </section>
 
-        <!-- ФИЛЬТРЫ -->
-        <div class="filters">
-            <button class="chip active" type="button">Всё</button>
-            <button class="chip live" type="button">Live аукционы</button>
-            <button class="chip" type="button">Ючи</button>
-            <button class="chip" type="button">Адопты</button>
-            <button class="chip" type="button">Галерея</button>
-            <button class="chip" type="button">Мастера</button>
-        </div>
-
-        <!-- АУКЦИОНЫ -->
-        <section class="section" id="auctions">
-            <div class="section-head">
-                <div class="section-title">
-                    <span class="section-marker">01</span>
-                    <span class="section-name">Аукционы</span>
-                    <span class="section-count">· 4 лота</span>
+        <!-- КАРУСЕЛЬ АУКЦИОНОВ -->
+        <section class="carousel-section" id="auctions">
+            <div class="carousel-head">
+                <div class="carousel-title">
+                    <span class="carousel-icon">◆</span>
+                    <span class="carousel-name">Аукционы</span>
+                    <span class="carousel-count">· 4 стола</span>
                 </div>
-                <a href="#" class="section-more">Все</a>
+                <div class="carousel-nav">
+                    <button class="carousel-arrow" data-dir="-1" data-target="aucTrack" type="button">‹</button>
+                    <button class="carousel-arrow" data-dir="1" data-target="aucTrack" type="button">›</button>
+                </div>
             </div>
+            <div class="carousel-track" id="aucTrack">
 
-            <div class="rows">
-
-                <!-- FEATURE -->
-                <div class="row-lot style-feature live" data-title="Золотая клетка" data-author="GoldenCage" data-bid="4200">
-                    <div class="lot-thumb">
-                        <span class="art">✦</span>
-                        <div class="wm"></div>
+                <div class="mini-card" data-title="Золотая клетка" data-author="GoldenCage" data-bid="4200">
+                    <div class="roulette"><div class="roulette-fill" style="width: 75%"></div></div>
+                    <div class="mini-thumb">
+                        <span class="mini-number">№01</span>
+                        <span class="mini-status">Live</span>
+                        <span class="suit">✦</span>
                     </div>
-                    <div class="lot-info">
-                        <span class="lot-tag live">Live · Featured</span>
-                        <h3 class="lot-title">Золотая клетка</h3>
-                        <div class="lot-author">GoldenCage</div>
-                        <div class="feature-extras">
-                            <div class="extra">34 ставки</div>
-                            <div class="extra">лидер: <strong>Noir_Art</strong></div>
-                            <div class="extra amber">старт: <strong>1 000 FEN</strong></div>
-                            <div class="extra">шаг: <strong>100 FEN</strong></div>
+                    <div class="mini-info">
+                        <div class="mini-title">Золотая клетка</div>
+                        <div class="mini-author">GoldenCage</div>
+                        <div class="mini-bottom">
+                            <span class="mini-price" data-bid-el>4 200<span class="unit">FEN</span></span>
+                            <span class="mini-timer" data-end="2027-12-30T18:00:00">—</span>
                         </div>
                     </div>
-                    <div class="lot-metric keep">
-                        <span class="lot-metric-label">Текущая ставка</span>
-                        <span class="lot-metric-value price" data-bid-el>4 200 FEN</span>
-                        <span class="lot-timer" data-end="2027-12-30T18:00:00" style="margin-top:8px;">—</span>
-                    </div>
-                    <button class="lot-btn" type="button">Ставка</button>
                 </div>
 
-                <!-- CLASSIC -->
-                <div class="row-lot style-classic live" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250">
-                    <div class="lot-thumb">
-                        <span class="art">♦</span>
-                        <div class="wm"></div>
+                <div class="mini-card" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250">
+                    <div class="roulette"><div class="roulette-fill" style="width: 45%"></div></div>
+                    <div class="mini-thumb">
+                        <span class="mini-number">№02</span>
+                        <span class="mini-status">Live</span>
+                        <span class="suit">♦</span>
                     </div>
-                    <div class="lot-info">
-                        <span class="lot-tag live">Live</span>
-                        <h3 class="lot-title">Сцена · 03:00</h3>
-                        <div class="lot-author">MidnightLux</div>
+                    <div class="mini-info">
+                        <div class="mini-title">Сцена · 03:00</div>
+                        <div class="mini-author">MidnightLux</div>
+                        <div class="mini-bottom">
+                            <span class="mini-price" data-bid-el>1 250<span class="unit">FEN</span></span>
+                            <span class="mini-timer" data-end="2027-12-31T23:59:59">—</span>
+                        </div>
                     </div>
-                    <div class="lot-metric">
-                        <span class="lot-metric-label">Ставок</span>
-                        <span class="lot-metric-value">12</span>
-                    </div>
-                    <div class="lot-metric keep">
-                        <span class="lot-metric-label">Текущая</span>
-                        <span class="lot-metric-value price emerald" data-bid-el>1 250 FEN</span>
-                    </div>
-                    <div class="lot-timer" data-end="2027-12-31T23:59:59">—</div>
-                    <button class="lot-btn" type="button">Ставка</button>
                 </div>
 
-                <!-- CLASSIC -->
-                <div class="row-lot style-classic live" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200">
-                    <div class="lot-thumb">
-                        <span class="art">♠</span>
-                        <div class="wm"></div>
+                <div class="mini-card" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200">
+                    <div class="roulette"><div class="roulette-fill" style="width: 85%"></div></div>
+                    <div class="mini-thumb">
+                        <span class="mini-number">№03</span>
+                        <span class="mini-status">Live</span>
+                        <span class="suit">♠</span>
                     </div>
-                    <div class="lot-info">
-                        <span class="lot-tag live">Live</span>
-                        <h3 class="lot-title">Алый закат</h3>
-                        <div class="lot-author">ScarletSunset</div>
+                    <div class="mini-info">
+                        <div class="mini-title">Алый закат</div>
+                        <div class="mini-author">ScarletSunset</div>
+                        <div class="mini-bottom">
+                            <span class="mini-price" data-bid-el>3 200<span class="unit">FEN</span></span>
+                            <span class="mini-timer" data-end="2027-12-28T22:00:00">—</span>
+                        </div>
                     </div>
-                    <div class="lot-metric">
-                        <span class="lot-metric-label">Ставок</span>
-                        <span class="lot-metric-value">21</span>
-                    </div>
-                    <div class="lot-metric keep">
-                        <span class="lot-metric-label">Текущая</span>
-                        <span class="lot-metric-value price emerald" data-bid-el>3 200 FEN</span>
-                    </div>
-                    <div class="lot-timer" data-end="2027-12-28T22:00:00">—</div>
-                    <button class="lot-btn" type="button">Ставка</button>
                 </div>
 
-                <!-- COMPACT -->
-                <div class="row-lot style-compact live" data-title="Тёмный бархат" data-author="DarkVelvet" data-bid="1550">
-                    <div class="lot-thumb">
-                        <span class="art">♣</span>
-                        <div class="wm"></div>
+                <div class="mini-card" data-title="Красный шёлк" data-author="ScarletDream" data-bid="2400">
+                    <div class="roulette"><div class="roulette-fill" style="width: 60%"></div></div>
+                    <div class="mini-thumb">
+                        <span class="mini-number">№04</span>
+                        <span class="mini-status">Live</span>
+                        <span class="suit">♥</span>
                     </div>
-                    <div class="lot-info">
-                        <span class="lot-tag live">Live</span>
-                        <h3 class="lot-title">Тёмный бархат</h3>
-                        <div class="lot-author">DarkVelvet</div>
+                    <div class="mini-info">
+                        <div class="mini-title">Красный шёлк</div>
+                        <div class="mini-author">ScarletDream</div>
+                        <div class="mini-bottom">
+                            <span class="mini-price" data-bid-el>2 400<span class="unit">FEN</span></span>
+                            <span class="mini-timer" data-end="2027-12-29T12:30:00">—</span>
+                        </div>
                     </div>
-                    <div class="lot-metric">
-                        <span class="lot-metric-label">9 ставок</span>
-                    </div>
-                    <div class="lot-metric keep">
-                        <span class="lot-metric-value price amber" data-bid-el>1 550 FEN</span>
-                    </div>
-                    <div class="lot-timer" data-end="2027-12-30T15:00:00">—</div>
-                    <button class="lot-btn" type="button">Ставка</button>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- ЮЧИ -->
-        <section class="section" id="ych">
-            <div class="section-head">
-                <div class="section-title">
-                    <span class="section-marker">02</span>
-                    <span class="section-name">Ючи — открытые слоты</span>
-                    <span class="section-count">· 4 лота</span>
-                </div>
-                <a href="#" class="section-more">Все</a>
-            </div>
-
-            <div class="rows">
-
-                <div class="row-lot style-classic" data-title="Парный портрет" data-author="TwinFlame">
-                    <div class="lot-thumb"><span class="art">❦</span><div class="wm"></div></div>
-                    <div class="lot-info">
-                        <span class="lot-tag ych">YCH</span>
-                        <h3 class="lot-title">Парный портрет</h3>
-                        <div class="lot-author">TwinFlame</div>
+                <div class="mini-card" data-title="Тёмный бархат" data-author="DarkVelvet" data-bid="1550">
+                    <div class="roulette"><div class="roulette-fill" style="width: 30%"></div></div>
+                    <div class="mini-thumb">
+                        <span class="mini-number">№05</span>
+                        <span class="mini-status">Live</span>
+                        <span class="suit">♣</span>
                     </div>
-                    <div class="lot-slots">
-                        <span class="lot-slot free">1</span>
-                        <span class="lot-slot free">2</span>
-                        <span class="lot-slot">3</span>
+                    <div class="mini-info">
+                        <div class="mini-title">Тёмный бархат</div>
+                        <div class="mini-author">DarkVelvet</div>
+                        <div class="mini-bottom">
+                            <span class="mini-price" data-bid-el>1 550<span class="unit">FEN</span></span>
+                            <span class="mini-timer" data-end="2027-12-30T15:00:00">—</span>
+                        </div>
                     </div>
-                    <div class="lot-metric keep">
-                        <span class="lot-metric-label">Слот</span>
-                        <span class="lot-metric-value price emerald">600 FEN</span>
-                    </div>
-                    <button class="lot-btn" type="button">Записаться</button>
                 </div>
 
-                <div class="row-lot style-classic" data-title="Шёлковые оковы" data-author="BoundElegance">
-                    <div class="lot-thumb"><span class="art">♥</span><div class="wm"></div></div>
-                    <div class="lot-info">
-                        <span class="lot-tag ych">YCH</span>
-                        <h3 class="lot-title">Шёлковые оковы</h3>
-                        <div class="lot-author">BoundElegance</div>
+                <div class="mini-card" data-title="Пурпурный дым" data-author="PurpleSmoke" data-bid="890">
+                    <div class="roulette"><div class="roulette-fill" style="width: 55%"></div></div>
+                    <div class="mini-thumb">
+                        <span class="mini-number">№06</span>
+                        <span class="mini-status">Live</span>
+                        <span class="suit">✦</span>
                     </div>
-                    <div class="lot-slots">
-                        <span class="lot-slot free">1</span>
-                        <span class="lot-slot">2</span>
-                        <span class="lot-slot">3</span>
+                    <div class="mini-info">
+                        <div class="mini-title">Пурпурный дым</div>
+                        <div class="mini-author">PurpleSmoke</div>
+                        <div class="mini-bottom">
+                            <span class="mini-price" data-bid-el>890<span class="unit">FEN</span></span>
+                            <span class="mini-timer" data-end="2027-12-27T18:00:00">—</span>
+                        </div>
                     </div>
-                    <div class="lot-metric keep">
-                        <span class="lot-metric-label">Слот</span>
-                        <span class="lot-metric-value price emerald">450 FEN</span>
-                    </div>
-                    <button class="lot-btn" type="button">Записаться</button>
-                </div>
-
-                <div class="row-lot style-classic" data-title="Ночной гость" data-author="Noir_Art">
-                    <div class="lot-thumb"><span class="art">♠</span><div class="wm"></div></div>
-                    <div class="lot-info">
-                        <span class="lot-tag ych">YCH</span>
-                        <h3 class="lot-title">Ночной гость</h3>
-                        <div class="lot-author">Noir_Art</div>
-                    </div>
-                    <div class="lot-slots">
-                        <span class="lot-slot free">1</span>
-                        <span class="lot-slot free">2</span>
-                        <span class="lot-slot free">3</span>
-                    </div>
-                    <div class="lot-metric keep">
-                        <span class="lot-metric-label">Слот</span>
-                        <span class="lot-metric-value price emerald">800 FEN</span>
-                    </div>
-                    <button class="lot-btn" type="button">Записаться</button>
-                </div>
-
-                <div class="row-lot style-classic" data-title="Бархатный вечер" data-author="Velvet_Rose">
-                    <div class="lot-thumb"><span class="art">♦</span><div class="wm"></div></div>
-                    <div class="lot-info">
-                        <span class="lot-tag ych">YCH</span>
-                        <h3 class="lot-title">Бархатный вечер</h3>
-                        <div class="lot-author">Velvet_Rose</div>
-                    </div>
-                    <div class="lot-slots">
-                        <span class="lot-slot">1</span>
-                        <span class="lot-slot free">2</span>
-                        <span class="lot-slot">3</span>
-                    </div>
-                    <div class="lot-metric keep">
-                        <span class="lot-metric-label">Слот</span>
-                        <span class="lot-metric-value price emerald">900 FEN</span>
-                    </div>
-                    <button class="lot-btn" type="button">Записаться</button>
                 </div>
 
             </div>
         </section>
 
-        <!-- КОЛЛЕКЦИЯ -->
-        <section class="section" id="collection">
-            <div class="section-head">
-                <div class="section-title">
-                    <span class="section-marker">03</span>
-                    <span class="section-name">Коллекция</span>
-                    <span class="section-count">· 10 работ</span>
+        <!-- КАРУСЕЛЬ ЮЧИ -->
+        <section class="carousel-section" id="ych">
+            <div class="carousel-head">
+                <div class="carousel-title">
+                    <span class="carousel-icon">❦</span>
+                    <span class="carousel-name">Ючи</span>
+                    <span class="carousel-count">· 4 лота</span>
                 </div>
-                <a href="#" class="section-more">Все</a>
+                <div class="carousel-nav">
+                    <button class="carousel-arrow" data-dir="-1" data-target="ychTrack" type="button">‹</button>
+                    <button class="carousel-arrow" data-dir="1" data-target="ychTrack" type="button">›</button>
+                </div>
+            </div>
+            <div class="carousel-track" id="ychTrack">
+
+                <div class="mini-card" data-title="Парный портрет" data-author="TwinFlame">
+                    <div class="mini-thumb">
+                        <span class="mini-number">№01</span>
+                        <span class="mini-status ych">YCH</span>
+                        <span class="suit">❦</span>
+                    </div>
+                    <div class="mini-info">
+                        <div class="mini-title">Парный портрет</div>
+                        <div class="mini-author">TwinFlame</div>
+                        <div class="mini-slots">
+                            <span class="mini-slot free"></span>
+                            <span class="mini-slot free"></span>
+                            <span class="mini-slot"></span>
+                        </div>
+                        <div class="mini-bottom">
+                            <span class="mini-price">600<span class="unit">FEN</span></span>
+                            <span class="mini-timer">2 / 3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mini-card" data-title="Шёлковые оковы" data-author="BoundElegance">
+                    <div class="mini-thumb">
+                        <span class="mini-number">№02</span>
+                        <span class="mini-status ych">YCH</span>
+                        <span class="suit">♥</span>
+                    </div>
+                    <div class="mini-info">
+                        <div class="mini-title">Шёлковые оковы</div>
+                        <div class="mini-author">BoundElegance</div>
+                        <div class="mini-slots">
+                            <span class="mini-slot free"></span>
+                            <span class="mini-slot"></span>
+                            <span class="mini-slot"></span>
+                        </div>
+                        <div class="mini-bottom">
+                            <span class="mini-price">450<span class="unit">FEN</span></span>
+                            <span class="mini-timer">1 / 3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mini-card" data-title="Ночной гость" data-author="Noir_Art">
+                    <div class="mini-thumb">
+                        <span class="mini-number">№03</span>
+                        <span class="mini-status ych">YCH</span>
+                        <span class="suit">♠</span>
+                    </div>
+                    <div class="mini-info">
+                        <div class="mini-title">Ночной гость</div>
+                        <div class="mini-author">Noir_Art</div>
+                        <div class="mini-slots">
+                            <span class="mini-slot free"></span>
+                            <span class="mini-slot free"></span>
+                            <span class="mini-slot free"></span>
+                        </div>
+                        <div class="mini-bottom">
+                            <span class="mini-price">800<span class="unit">FEN</span></span>
+                            <span class="mini-timer">3 / 3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mini-card" data-title="Бархатный вечер" data-author="Velvet_Rose">
+                    <div class="mini-thumb">
+                        <span class="mini-number">№04</span>
+                        <span class="mini-status ych">YCH</span>
+                        <span class="suit">♦</span>
+                    </div>
+                    <div class="mini-info">
+                        <div class="mini-title">Бархатный вечер</div>
+                        <div class="mini-author">Velvet_Rose</div>
+                        <div class="mini-slots">
+                            <span class="mini-slot free"></span>
+                            <span class="mini-slot"></span>
+                            <span class="mini-slot"></span>
+                        </div>
+                        <div class="mini-bottom">
+                            <span class="mini-price">900<span class="unit">FEN</span></span>
+                            <span class="mini-timer">1 / 3</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ГЛАВНАЯ ГАЛЕРЕЯ -->
+        <section class="gallery-section" id="gallery">
+            <div class="gallery-head">
+                <div class="gallery-title">
+                    <span class="gallery-mark">✦</span>
+                    <span class="gallery-name">Галерея</span>
+                    <span class="gallery-count">· 2 480 работ · показаны 20</span>
+                </div>
+                <div class="gallery-filters">
+                    <button class="g-chip active" type="button">Всё</button>
+                    <button class="g-chip" type="button">Живопись</button>
+                    <button class="g-chip" type="button">Диджитал</button>
+                    <button class="g-chip" type="button">Аниме</button>
+                    <button class="g-chip" type="button">Фетиш</button>
+                    <button class="g-chip" type="button">БДСМ</button>
+                </div>
             </div>
 
-            <div class="gallery-grid">
+            <div class="gallery">
 
-                <div class="g-piece g1"><span class="art">❦</span><div class="wm"></div><div class="g-info"><div class="g-title">Бархатный вечер</div><div class="g-author">Velvet_Rose</div></div></div>
-                <div class="g-piece g2"><span class="art">♠</span><div class="wm"></div><div class="g-info"><div class="g-title">Ночная смена</div><div class="g-author">Noir_Art</div></div></div>
-                <div class="g-piece g3"><span class="art">♥</span><div class="wm"></div><div class="g-info"><div class="g-title">Красный шёлк</div><div class="g-author">ScarletDream</div></div></div>
-                <div class="g-piece g4"><span class="art">♦</span><div class="wm"></div><div class="g-info"><div class="g-title">Тёмный бархат</div><div class="g-author">DarkVelvet</div></div></div>
-                <div class="g-piece g5"><span class="art">♣</span><div class="wm"></div><div class="g-info"><div class="g-title">За кулисами</div><div class="g-author">Backstage_</div></div></div>
-                <div class="g-piece g6"><span class="art">✦</span><div class="wm"></div><div class="g-info"><div class="g-title">Золотая клетка</div><div class="g-author">GoldenCage</div></div></div>
-                <div class="g-piece g7"><span class="art">◇</span><div class="wm"></div><div class="g-info"><div class="g-title">Шёпот в темноте</div><div class="g-author">WhisperArt</div></div></div>
-                <div class="g-piece g8"><span class="art">♥</span><div class="wm"></div><div class="g-info"><div class="g-title">Пурпурный дым</div><div class="g-author">PurpleSmoke</div></div></div>
-                <div class="g-piece g9"><span class="art">♠</span><div class="wm"></div><div class="g-info"><div class="g-title">Две свечи</div><div class="g-author">TwinFlame</div></div></div>
-                <div class="g-piece g10"><span class="art">♦</span><div class="wm"></div><div class="g-info"><div class="g-title">Шёлковые оковы</div><div class="g-author">BoundElegance</div></div></div>
+                <div class="art a-1"><span class="num">№001</span><span class="suit">❦</span><div class="wm"></div><div class="info"><div class="t">Бархатный вечер</div><div class="a">Velvet_Rose</div></div></div>
+                <div class="art a-2"><span class="num">№002</span><span class="suit">♠</span><div class="wm"></div><div class="info"><div class="t">Ночная смена</div><div class="a">Noir_Art</div></div></div>
+                <div class="art a-3"><span class="num">№003</span><span class="suit">♥</span><div class="wm"></div><div class="info"><div class="t">Красный шёлк</div><div class="a">ScarletDream</div></div></div>
+                <div class="art a-4"><span class="num">№004</span><span class="suit">♦</span><div class="wm"></div><div class="info"><div class="t">Тёмный бархат</div><div class="a">DarkVelvet</div></div></div>
+                <div class="art a-5"><span class="num">№005</span><span class="suit">♣</span><div class="wm"></div><div class="info"><div class="t">За кулисами</div><div class="a">Backstage_</div></div></div>
+                <div class="art a-6"><span class="num">№006</span><span class="suit">✦</span><div class="wm"></div><div class="info"><div class="t">Золотая клетка</div><div class="a">GoldenCage</div></div></div>
+                <div class="art a-7"><span class="num">№007</span><span class="suit">◇</span><div class="wm"></div><div class="info"><div class="t">Шёпот в темноте</div><div class="a">WhisperArt</div></div></div>
+                <div class="art a-8"><span class="num">№008</span><span class="suit">♥</span><div class="wm"></div><div class="info"><div class="t">Пурпурный дым</div><div class="a">PurpleSmoke</div></div></div>
+                <div class="art a-9"><span class="num">№009</span><span class="suit">♠</span><div class="wm"></div><div class="info"><div class="t">Две свечи</div><div class="a">TwinFlame</div></div></div>
+                <div class="art a-10"><span class="num">№010</span><span class="suit">♦</span><div class="wm"></div><div class="info"><div class="t">Шёлковые оковы</div><div class="a">BoundElegance</div></div></div>
+                <div class="art a-11"><span class="num">№011</span><span class="suit">❦</span><div class="wm"></div><div class="info"><div class="t">Сцена · 03:00</div><div class="a">MidnightLux</div></div></div>
+                <div class="art a-12"><span class="num">№012</span><span class="suit">♣</span><div class="wm"></div><div class="info"><div class="t">Алый закат</div><div class="a">ScarletSunset</div></div></div>
+                <div class="art a-13"><span class="num">№013</span><span class="suit">♠</span><div class="wm"></div><div class="info"><div class="t">Шёлковая нить</div><div class="a">SilkThread</div></div></div>
+                <div class="art a-14"><span class="num">№014</span><span class="suit">✦</span><div class="wm"></div><div class="info"><div class="t">Изумрудный зал</div><div class="a">EmeraldHall</div></div></div>
+                <div class="art a-15"><span class="num">№015</span><span class="suit">♥</span><div class="wm"></div><div class="info"><div class="t">Вишнёвый сад</div><div class="a">CherryGarden</div></div></div>
+                <div class="art a-16"><span class="num">№016</span><span class="suit">♦</span><div class="wm"></div><div class="info"><div class="t">Мраморный пол</div><div class="a">MarbleFloor</div></div></div>
+                <div class="art a-17"><span class="num">№017</span><span class="suit">♣</span><div class="wm"></div><div class="info"><div class="t">Дым сигары</div><div class="a">SmokeCigar</div></div></div>
+                <div class="art a-18"><span class="num">№018</span><span class="suit">❦</span><div class="wm"></div><div class="info"><div class="t">Ночной гость</div><div class="a">NightGuest</div></div></div>
+                <div class="art a-19"><span class="num">№019</span><span class="suit">♠</span><div class="wm"></div><div class="info"><div class="t">Фарфоровый лик</div><div class="a">PorcelainFace</div></div></div>
+                <div class="art a-20"><span class="num">№020</span><span class="suit">♦</span><div class="wm"></div><div class="info"><div class="t">Последняя ставка</div><div class="a">LastBet</div></div></div>
 
             </div>
         </section>
@@ -1409,12 +1309,12 @@
         <!-- ПОДВАЛ -->
         <footer class="footer">
             <div class="footer-links">
-                <a href="#">T.O.S.</a>
+                <a href="#">Правила</a>
                 <a href="#">Безопасные сделки</a>
                 <a href="#">Дилер</a>
-                <a href="#">Статус системы</a>
+                <a href="#">T.O.S.</a>
             </div>
-            <div class="footer-brand">FENBO · <span>2025</span> · 18+</div>
+            <div class="footer-brand">FENBO · <span>2025</span></div>
         </footer>
 
     </div>
@@ -1427,16 +1327,16 @@
             function pad(n) { return n < 10 ? '0' + n : n; }
             function update(el) {
                 const diff = Math.floor((new Date(el.dataset.end).getTime() - Date.now()) / 1000);
-                const lot = el.closest('.row-lot');
+                const card = el.closest('.mini-card');
                 if (diff <= 0) {
                     el.textContent = 'END';
                     el.style.color = 'var(--text-3)';
-                    if (lot) lot.classList.remove('ending');
+                    if (card) card.classList.remove('ending');
                     return;
                 }
-                if (lot) {
-                    if (diff < 600) lot.classList.add('ending');
-                    else lot.classList.remove('ending');
+                if (card) {
+                    if (diff < 600) card.classList.add('ending');
+                    else card.classList.remove('ending');
                 }
                 const d = Math.floor(diff / 86400);
                 const h = Math.floor((diff % 86400) / 3600);
@@ -1452,33 +1352,65 @@
 
         /* ЖИВЫЕ СТАВКИ */
         (function liveBids() {
-            const lots = document.querySelectorAll('.row-lot[data-bid]');
-            if (!lots.length) return;
+            const cards = document.querySelectorAll('.mini-card[data-bid]');
+            if (!cards.length) return;
             function fmt(n) { return n.toLocaleString('ru-RU'); }
-            function update(lot) {
-                const priceEl = lot.querySelector('[data-bid-el]');
+            function update(card) {
+                const priceEl = card.querySelector('[data-bid-el]');
                 if (!priceEl) return;
-                let current = parseInt(lot.dataset.bid, 10) || 0;
+                let current = parseInt(card.dataset.bid, 10) || 0;
                 current += Math.floor(Math.random() * 100) + 50;
-                lot.dataset.bid = current;
-                priceEl.textContent = fmt(current) + ' FEN';
+                card.dataset.bid = current;
+                priceEl.innerHTML = fmt(current) + '<span class="unit">FEN</span>';
                 priceEl.classList.remove('bump');
                 void priceEl.offsetWidth;
                 priceEl.classList.add('bump');
+                /* Обновляем рулетку */
+                const fill = card.querySelector('.roulette-fill');
+                if (fill) {
+                    const pct = Math.min(95, (current / 6000) * 100);
+                    fill.style.width = pct + '%';
+                }
             }
-            lots.forEach(lot => {
+            cards.forEach(card => {
                 function sched() {
-                    setTimeout(() => { update(lot); sched(); }, Math.random() * 6000 + 7000);
+                    setTimeout(() => { update(card); sched(); }, Math.random() * 6000 + 7000);
                 }
                 sched();
             });
         })();
 
-        /* ФИЛЬТРЫ */
+        /* СТРЕЛКИ КАРУСЕЛИ */
+        (function arrows() {
+            document.querySelectorAll('.carousel-arrow').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = document.getElementById(btn.dataset.target);
+                    if (!target) return;
+                    const dir = parseInt(btn.dataset.dir, 10) || 1;
+                    const card = target.querySelector('.mini-card');
+                    const w = card ? card.offsetWidth + 16 : 260;
+                    target.scrollBy({ left: w * dir * 2, behavior: 'smooth' });
+                });
+            });
+            document.querySelectorAll('.carousel-track').forEach(track => {
+                const id = track.id;
+                const prev = document.querySelector('.carousel-arrow[data-target="' + id + '"][data-dir="-1"]');
+                const next = document.querySelector('.carousel-arrow[data-target="' + id + '"][data-dir="1"]');
+                function upd() {
+                    if (prev) prev.disabled = track.scrollLeft <= 5;
+                    if (next) next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 5;
+                }
+                track.addEventListener('scroll', upd);
+                window.addEventListener('resize', upd);
+                upd();
+            });
+        })();
+
+        /* ФИЛЬТРЫ ГАЛЕРЕИ */
         (function filters() {
-            document.querySelectorAll('.chip').forEach(chip => {
+            document.querySelectorAll('.g-chip').forEach(chip => {
                 chip.addEventListener('click', () => {
-                    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+                    document.querySelectorAll('.g-chip').forEach(c => c.classList.remove('active'));
                     chip.classList.add('active');
                 });
             });
@@ -1495,7 +1427,7 @@
                         a.classList.add('active');
                         const t = document.getElementById(href.slice(1));
                         if (t) {
-                            const y = t.getBoundingClientRect().top + window.scrollY - 100;
+                            const y = t.getBoundingClientRect().top + window.scrollY - 70;
                             window.scrollTo({ top: y, behavior: 'smooth' });
                         }
                     }
@@ -1505,17 +1437,9 @@
 
         /* КЛИКИ */
         (function clicks() {
-            document.querySelectorAll('.row-lot, .g-piece').forEach(c => {
-                c.addEventListener('click', e => {
-                    if (e.target.classList.contains('lot-btn')) return;
-                    alert('✦ ' + (c.dataset.title || c.querySelector('.g-title')?.textContent || 'Лот'));
-                });
-            });
-            document.querySelectorAll('.lot-btn').forEach(btn => {
-                btn.addEventListener('click', e => {
-                    e.stopPropagation();
-                    const lot = btn.closest('.row-lot');
-                    alert('✦ ' + (lot.dataset.title || 'Лот'));
+            document.querySelectorAll('.mini-card, .art').forEach(c => {
+                c.addEventListener('click', () => {
+                    alert('✦ ' + (c.dataset.title || c.querySelector('.t')?.textContent || 'Лот'));
                 });
             });
         })();
