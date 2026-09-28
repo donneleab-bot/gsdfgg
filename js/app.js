@@ -1,5 +1,5 @@
 /* ============================================
-   FENBO · РЫНОК · ОБЩИЙ СКРИПТ
+   FENBO · РЫНОК · ОБЩИЙ СКРИПТ (новый)
    ============================================ */
 
 /* ============================================
@@ -25,7 +25,7 @@
 
 /* ============================================
    ТАЙМЕРЫ АУКЦИОНОВ
-   Формат: data-end="2025-12-31T23:59:59" (или timestamp)
+   Работают у любых элементов с data-end
    ============================================ */
 (function auctionTimers() {
     const timers = document.querySelectorAll('[data-end]');
@@ -41,15 +41,18 @@
 
         if (diff <= 0) {
             el.textContent = 'ЗАВЕРШЁН';
-            el.style.color = '#888';
+            el.style.color = '#767e8b';
             return;
         }
 
-        const hours = Math.floor(diff / 3600);
+        const days = Math.floor(diff / 86400);
+        const hours = Math.floor((diff % 86400) / 3600);
         const minutes = Math.floor((diff % 3600) / 60);
         const seconds = diff % 60;
 
-        if (hours > 0) {
+        if (days > 0) {
+            el.textContent = days + 'д ' + pad(hours) + ':' + pad(minutes);
+        } else if (hours > 0) {
             el.textContent = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
         } else {
             el.textContent = pad(minutes) + ':' + pad(seconds);
@@ -65,39 +68,39 @@
 })();
 
 /* ============================================
-   КЛИКИ ПО КАРТОЧКАМ (заглушка)
+   КЛИКИ ПО КАРТОЧКАМ (заглушка до лайтбоксов)
    ============================================ */
 (function cardClicks() {
-    /* Аукционы */
-    document.querySelectorAll('.auction-card').forEach(card => {
-        card.addEventListener('click', e => {
+    /* Аукционы — полосы */
+    document.querySelectorAll('.auction-row').forEach(row => {
+        row.addEventListener('click', e => {
             e.preventDefault();
-            const title = card.dataset.title || 'Работа';
-            const author = card.dataset.author || 'Аноним';
-            const bid = card.dataset.bid || '—';
-            alert(`🔴 АУКЦИОН\n\nРабота: ${title}\nАвтор: ${author}\nТекущая ставка: ${bid} FEN\n\n(Здесь будет лайтбокс с торгами)`);
+            const title = row.dataset.title || 'Работа';
+            const author = row.dataset.author || 'Аноним';
+            const bid = row.dataset.bid || '—';
+            alert('🔴 АУКЦИОН\n\nРабота: ' + title + '\nАвтор: ' + author + '\nТекущая ставка: ' + bid + ' FEN\n\n(Здесь будет лайтбокс со ставками)');
         });
     });
 
-    /* Ючи */
-    document.querySelectorAll('.ych-card').forEach(card => {
-        card.addEventListener('click', e => {
+    /* Ючи — строки таблицы */
+    document.querySelectorAll('.ych-row').forEach(row => {
+        row.addEventListener('click', e => {
             e.preventDefault();
-            const title = card.dataset.title || 'YCH';
-            const author = card.dataset.author || 'Аноним';
-            const slots = card.dataset.slots || '?';
-            alert(`🎟️ YCH\n\nРабота: ${title}\nАвтор: ${author}\nСвободных слотов: ${slots}\n\n(Здесь будет лайтбокс с записью)`);
+            const title = row.dataset.title || 'YCH';
+            const author = row.dataset.author || 'Аноним';
+            const slots = row.dataset.slots || '?';
+            alert('🎟️ YCH\n\nРабота: ' + title + '\nАвтор: ' + author + '\nСвободных слотов: ' + slots + '\n\n(Здесь будет лайтбокс с записью на слот)');
         });
     });
 
-    /* Арты */
-    document.querySelectorAll('.art-card').forEach(card => {
-        card.addEventListener('click', e => {
+    /* Арты — плитки */
+    document.querySelectorAll('.art-tile').forEach(tile => {
+        tile.addEventListener('click', e => {
             e.preventDefault();
-            const title = card.dataset.title || 'Работа';
-            const author = card.dataset.author || 'Аноним';
-            const price = card.dataset.price || '—';
-            alert(`🎨 АРТ\n\nРабота: ${title}\nАвтор: ${author}\nЦена: ${price} FEN\n\n(Здесь будет лайтбокс с заказом)`);
+            const title = tile.dataset.title || 'Работа';
+            const author = tile.dataset.author || 'Аноним';
+            const price = tile.dataset.price || '—';
+            alert('🎨 АРТ\n\nРабота: ' + title + '\nАвтор: ' + author + '\nЦена: ' + price + ' FEN\n\n(Здесь будет лайтбокс с заказом)');
         });
     });
 })();
@@ -109,7 +112,6 @@
     /* Пункты навигации */
     document.querySelectorAll('.topbar-nav a').forEach(a => {
         a.addEventListener('click', e => {
-            /* Если ссылка ведёт на реальный href — оставляем переход */
             const href = a.getAttribute('href');
             if (href && href !== '#' && !href.startsWith('#')) return;
             e.preventDefault();
@@ -118,50 +120,12 @@
         });
     });
 
-    /* Фильтры (если есть) */
+    /* Фильтры (если есть на странице) */
     document.querySelectorAll('.filter-chip').forEach(chip => {
         chip.addEventListener('click', e => {
             e.preventDefault();
             document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
             chip.classList.add('active');
         });
-    });
-})();
-
-/* ============================================
-   ПРОКРУТКА КАРУСЕЛИ КОЛЕСОМ (по горизонтали)
-   ============================================ */
-(function horizontalScroll() {
-    document.querySelectorAll('.auction-carousel').forEach(carousel => {
-        carousel.addEventListener('wheel', e => {
-            if (e.deltaY === 0) return;
-            e.preventDefault();
-            carousel.scrollLeft += e.deltaY;
-        }, { passive: false });
-    });
-})();
-
-/* ============================================
-   СЧЁТЧИК В ТАБЛО (анимация цифр при загрузке)
-   ============================================ */
-(function animateCounters() {
-    const counters = document.querySelectorAll('[data-count-to]');
-    if (!counters.length) return;
-
-    counters.forEach(el => {
-        const target = parseInt(el.dataset.countTo, 10);
-        const duration = 1500;
-        const start = performance.now();
-        const startVal = 0;
-
-        function step(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const val = Math.floor(startVal + (target - startVal) * eased);
-            el.textContent = val.toLocaleString('ru-RU');
-            if (progress < 1) requestAnimationFrame(step);
-            else el.textContent = target.toLocaleString('ru-RU');
-        }
-        requestAnimationFrame(step);
     });
 })();
