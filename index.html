@@ -3,668 +3,694 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0A2E1D">
+    <meta name="theme-color" content="#0a1f18">
     <title>✦ FENBO · РЫНОК ✦</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* ============================================
-           ROYAL VELVET — ПАЛИТРА
+           MIDNIGHT EMERALD · LIQUID GOLD
            ============================================ */
         :root {
-            --emerald-deep: #0A2E1D;
-            --velvet-black: #121212;
-            --emerald-soft: #0E3A26;
-            --emerald-hover: #14432C;
-            --emerald-line: rgba(212, 175, 55, 0.1);
+            --bg-deep: #0a1f18;
+            --bg-panel: #0f2a20;
+            --bg-card: #123527;
+            --bg-hover: #17402f;
 
-            --gold: #D4AF37;
-            --gold-hi: #E6C757;
-            --gold-deep: #8B7228;
+            --line: rgba(212, 175, 55, 0.08);
+            --line-hi: rgba(212, 175, 55, 0.22);
+            --line-mid: rgba(212, 175, 55, 0.14);
+
+            --gold: #d4af37;
+            --gold-hi: #f0d57a;
+            --gold-deep: #8b7228;
             --gold-soft: rgba(212, 175, 55, 0.35);
-            --gold-glow: rgba(212, 175, 55, 0.25);
 
-            --neon-emerald: #4ADE80;
-            --neon-emerald-glow: rgba(74, 222, 128, 0.4);
+            --emerald: #1a4a35;
+            --emerald-bright: #4ade80;
+            --emerald-glow: rgba(74, 222, 128, 0.35);
 
-            --danger: #B84C4C;
-            --danger-glow: rgba(184, 76, 76, 0.4);
+            --danger: #c85450;
+            --danger-glow: rgba(200, 84, 80, 0.35);
 
-            --text-0: #EDE9E0;
-            --text-1: #A8A89E;
-            --text-2: #6B6B62;
+            --platinum: #cfcfc4;
+            --platinum-soft: rgba(207, 207, 196, 0.6);
 
-            --radius: 6px;
+            --text-0: #f2ede2;
+            --text-1: #b3ada0;
+            --text-2: #6e6a60;
+
+            --radius-sm: 4px;
+            --radius: 8px;
+            --radius-lg: 14px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
         html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--emerald-deep);
-            background-image:
-                radial-gradient(ellipse 80% 40% at 50% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 55%),
-                radial-gradient(ellipse 50% 30% at 15% 100%, rgba(74, 222, 128, 0.04) 0%, transparent 60%),
-                linear-gradient(180deg, #0A2E1D 0%, #061612 100%);
-            background-attachment: fixed;
+            background: var(--bg-deep);
             font-family: 'Inter', sans-serif;
             color: var(--text-0);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 0 60px;
+            display: grid;
+            grid-template-columns: 260px 1fr;
             position: relative;
-            overflow-x: hidden;
             font-size: 14px;
             line-height: 1.55;
             letter-spacing: 0.1px;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        /* Покерное сукно — текстура */
+        /* Атмосфера фона */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
-            background-image:
-                repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(212, 175, 55, 0.008) 3px, rgba(212, 175, 55, 0.008) 4px),
-                repeating-linear-gradient(-45deg, transparent, transparent 3px, rgba(74, 222, 128, 0.006) 3px, rgba(74, 222, 128, 0.006) 4px);
             pointer-events: none;
+            background:
+                radial-gradient(ellipse 40% 30% at 20% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 100% 100%, rgba(26, 74, 53, 0.4) 0%, transparent 60%);
             z-index: 0;
         }
 
         /* ============================================
-           ШАПКА — UPPER DECK
+           САЙДБАР — ФИКСИРОВАННЫЙ
            ============================================ */
-        .topbar-wrap {
+        .sidebar {
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 260px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--line);
+            padding: 28px 22px;
+            display: flex;
+            flex-direction: column;
             z-index: 100;
-            display: flex;
-            justify-content: center;
-            padding: 0;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: linear-gradient(180deg, rgba(10, 46, 29, 0.9) 0%, rgba(10, 46, 29, 0.75) 100%);
-            border-bottom: 1px solid var(--gold-soft);
-        }
-        .topbar {
-            width: 100%;
-            max-width: 1560px;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            align-items: center;
-            gap: 40px;
-            padding: 14px 40px;
-        }
-        .logo {
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--gold);
-            letter-spacing: 12px;
-            text-decoration: none;
-            display: flex;
-            align-items: baseline;
-            white-space: nowrap;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
-        }
-        .logo .sub {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 0.95rem;
-            color: var(--text-2);
-            letter-spacing: 1px;
-            margin-left: 8px;
-            font-weight: 400;
+            overflow-y: auto;
         }
 
-        /* ПУЛ ПЛАТФОРМЫ — бегущие цифры */
-        .pool-counter {
+        /* Лого */
+        .side-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 8px;
+            text-decoration: none;
+            margin-bottom: 4px;
+        }
+        .side-logo-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--text-2);
+            letter-spacing: 1.5px;
+            margin-bottom: 36px;
+        }
+
+        /* Навигация */
+        .side-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-bottom: 32px;
+        }
+        .side-nav-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            color: var(--text-2);
+            text-transform: uppercase;
+            padding: 0 12px;
+            margin-bottom: 10px;
+        }
+        .side-nav a {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 14px;
-            padding: 6px 18px;
-            background: rgba(18, 18, 18, 0.5);
-            border: 1px solid var(--gold-soft);
-            border-radius: 30px;
-            max-width: fit-content;
-            margin: 0 auto;
-        }
-        .pool-label {
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
             font-family: 'Inter', sans-serif;
-            font-size: 0.58rem;
+            font-size: 0.82rem;
             font-weight: 500;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--text-2);
-            white-space: nowrap;
+            color: var(--text-1);
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
         }
-        .pool-value {
+        .side-nav a::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 50%;
+            transform: translateY(-50%) scaleY(0);
+            width: 2px; height: 18px;
+            background: var(--gold);
+            border-radius: 1px;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .side-nav a:hover {
+            background: rgba(212, 175, 55, 0.04);
+            color: var(--text-0);
+        }
+        .side-nav a.active {
+            background: rgba(212, 175, 55, 0.08);
+            color: var(--gold);
+        }
+        .side-nav a.active::before {
+            transform: translateY(-50%) scaleY(1);
+        }
+        .side-nav a .nav-icon {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            width: 20px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        .side-nav a.active .nav-icon { opacity: 1; }
+        .side-nav a .nav-count {
+            margin-left: auto;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.92rem;
-            font-weight: 600;
-            color: var(--neon-emerald);
+            font-size: 0.65rem;
+            color: var(--text-2);
             letter-spacing: 0.5px;
-            text-shadow: 0 0 12px var(--neon-emerald-glow);
+        }
+        .side-nav a.active .nav-count { color: var(--gold); }
+
+        /* Виджет кошелька в сайдбаре */
+        .side-wallet {
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.06) 0%, rgba(26, 74, 53, 0.4) 100%);
+            border: 1px solid var(--line-mid);
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .side-wallet::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 20%; right: 20%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.5;
+        }
+        .side-wallet-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.52rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            color: var(--text-2);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .side-wallet-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 1px;
             display: flex;
             align-items: baseline;
-            gap: 4px;
-            min-width: 110px;
+            gap: 6px;
+            line-height: 1;
         }
-        .pool-value .unit {
-            font-size: 0.6rem;
+        .side-wallet-value .unit {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.62rem;
             color: var(--text-2);
             letter-spacing: 1.5px;
             font-weight: 500;
         }
-
-        /* Кошелёк Vault */
-        .topbar-user { display: flex; align-items: center; gap: 12px; justify-content: flex-end; }
-        .wallet {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px 12px 6px 6px;
-            background: rgba(18, 18, 18, 0.6);
-            border: 1px solid var(--gold-soft);
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .wallet:hover { border-color: var(--gold); }
-        .wallet .vault-icon {
-            width: 28px; height: 28px;
-            border-radius: 5px;
-            background: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4);
-        }
-        .wallet .vault-icon::after {
-            content: '♦';
-            color: var(--velvet-black);
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-        .wallet .balance { display: flex; flex-direction: column; line-height: 1.15; }
-        .wallet .chips {
+        .side-wallet-usd {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--gold);
+            font-size: 0.7rem;
+            color: var(--text-1);
+            margin-top: 6px;
             letter-spacing: 0.3px;
         }
-        .wallet .chips .unit {
-            font-size: 0.55rem;
-            color: var(--text-2);
-            letter-spacing: 1.2px;
-            margin-left: 3px;
-            font-weight: 500;
-        }
-        .wallet .usdt {
+        .side-wallet-btn {
+            margin-top: 12px;
+            width: 100%;
+            padding: 9px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.6rem;
-            color: var(--text-2);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 1px;
-        }
-        .wallet .usdt-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 10px; height: 10px;
-            background: #26A17B;
-            border-radius: 50%;
-            color: #fff;
-            font-size: 0.5rem;
-            font-weight: 700;
-        }
-
-        /* Аватар с кольцом */
-        .avatar-ring {
-            position: relative;
-            width: 34px; height: 34px;
-            border-radius: 50%;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--neon-emerald), transparent 60%);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--bg-deep);
+            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 100%);
+            border: none;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all 0.3s;
         }
-        .avatar-ring.gold {
-            background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+        .side-wallet-btn:hover {
+            filter: brightness(1.08);
+            letter-spacing: 2px;
         }
-        .avatar-ring::after {
+
+        /* Джекпот-счётчик в сайдбаре */
+        .side-jackpot {
+            padding: 14px 16px;
+            background: rgba(26, 74, 53, 0.3);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+        }
+        .side-jackpot-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.52rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            color: var(--text-2);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .side-jackpot-label::before {
             content: '';
-            position: absolute;
-            inset: 2px;
+            width: 4px; height: 4px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--velvet-black), var(--emerald-soft));
+            background: var(--emerald-bright);
+            box-shadow: 0 0 6px var(--emerald-glow);
+            animation: pulse 2s ease-in-out infinite;
         }
-        .avatar-ring .avatar-letter {
-            position: absolute;
-            inset: 0;
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .side-jackpot-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--emerald-bright);
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 12px var(--emerald-glow);
+        }
+
+        /* Профиль в сайдбаре */
+        .side-user {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-top: 1px solid var(--line);
+            padding-top: 20px;
+        }
+        .side-user-avatar {
+            position: relative;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-panel));
+            border: 1.5px solid var(--gold);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
             color: var(--gold);
-            z-index: 1;
+            flex-shrink: 0;
+        }
+        .side-user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+        .side-user-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-0);
+        }
+        .side-user-status {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.72rem;
+            color: var(--text-2);
         }
 
         /* ============================================
            ОСНОВНОЙ КОНТЕНТ
            ============================================ */
-        .main-wrap {
-            width: 100%;
-            max-width: 1560px;
-            padding: 100px 40px 40px;
+        .main {
+            grid-column: 2;
+            padding: 40px 48px 80px;
+            max-width: 1600px;
             position: relative;
             z-index: 5;
         }
 
         /* ============================================
-           HIGH ROLLERS TABLE — топ-лот недели
+           ВЕРХНЯЯ СТРОКА — ЗАГОЛОВОК + ФИЛЬТРЫ
            ============================================ */
-        .high-roller {
-            position: relative;
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 0;
-            background: var(--velvet-black);
-            border: 1px solid var(--gold-soft);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 32px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            min-height: 340px;
+        .page-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 36px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--line);
+        }
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: var(--text-0);
+            letter-spacing: 1px;
+            line-height: 1.1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .page-title .sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-2);
+            letter-spacing: 0.5px;
+        }
+        .page-filters {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            background: transparent;
+            border: 1px solid var(--line-mid);
+            color: var(--text-1);
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .filter-btn:hover {
+            color: var(--gold);
+            border-color: var(--gold-soft);
+        }
+        .filter-btn.active {
+            background: var(--gold);
+            color: var(--bg-deep);
+            border-color: var(--gold);
+            font-weight: 600;
+        }
+        .search-btn {
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid var(--line-mid);
+            color: var(--text-1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+            font-size: 0.85rem;
+        }
+        .search-btn:hover {
+            color: var(--gold);
+            border-color: var(--gold-soft);
         }
 
-        .hr-art {
+        /* ============================================
+           FEATURED — ГЛАВНЫЙ ЛОТ
+           ============================================ */
+        .featured {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 0;
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-panel) 100%);
+            border: 1px solid var(--line-mid);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 40px;
+            min-height: 380px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .featured:hover {
+            border-color: var(--gold-soft);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(212, 175, 55, 0.08);
+        }
+
+        /* Тонкая золотая линия по верху */
+        .featured::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 15%; right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.5;
+            z-index: 5;
+        }
+
+        .feat-art {
             position: relative;
             background:
-                radial-gradient(ellipse at 40% 30%, rgba(184, 76, 76, 0.25) 0%, transparent 55%),
-                radial-gradient(ellipse at 70% 80%, rgba(120, 30, 30, 0.3) 0%, transparent 55%),
-                linear-gradient(135deg, #1a0508, #0a0205);
+                radial-gradient(ellipse at 35% 25%, rgba(212, 175, 55, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 80%, rgba(26, 74, 53, 0.8) 0%, transparent 60%),
+                linear-gradient(135deg, #143527, #0a1f18);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            cursor: pointer;
         }
-        .hr-art::before {
-            content: '♠';
-            font-family: 'Cinzel', serif;
-            font-size: 9rem;
-            color: rgba(212, 175, 55, 0.08);
-            text-shadow: 0 0 100px rgba(212, 175, 55, 0.25);
+        .feat-art-icon {
+            font-family: 'Playfair Display', serif;
+            font-size: 11rem;
+            color: rgba(212, 175, 55, 0.1);
+            text-shadow: 0 0 100px rgba(212, 175, 55, 0.3);
             transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .high-roller:hover .hr-art::before {
-            transform: scale(1.06);
+        .featured:hover .feat-art-icon {
+            transform: scale(1.05);
         }
-
-        /* Золотая рама-тиснение */
-        .hr-art::after {
-            content: '';
-            position: absolute;
-            inset: 16px;
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 4px;
-            pointer-events: none;
-        }
-
-        /* Хайлайт-бейдж */
-        .hr-badge {
+        .feat-badge {
             position: absolute;
             top: 24px; left: 24px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.55rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
             font-weight: 600;
-            letter-spacing: 3px;
+            letter-spacing: 2.5px;
             color: var(--gold);
             text-transform: uppercase;
-            padding: 6px 14px;
-            background: rgba(10, 46, 29, 0.85);
+            padding: 7px 14px;
+            background: rgba(10, 31, 24, 0.85);
             border: 1px solid var(--gold-soft);
-            backdrop-filter: blur(8px);
-            border-radius: 4px;
-            z-index: 3;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
         }
-        .hr-badge::before {
-            content: '✦';
-            color: var(--gold);
-            font-size: 0.7rem;
+        .feat-badge::before {
+            content: '';
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 8px var(--gold);
         }
 
-        .hr-info {
-            padding: 40px 44px;
+        .feat-info {
+            padding: 44px 46px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 22px;
-            position: relative;
+            gap: 20px;
         }
-
-        .hr-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
+        .feat-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
             font-weight: 500;
             color: var(--text-0);
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
             line-height: 1.15;
         }
-        .hr-author {
+        .feat-author {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-style: italic;
-            color: var(--gold);
+            color: var(--text-1);
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-top: -12px;
+            margin-top: -14px;
         }
-        .hr-author .verified {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .feat-author .verified {
             width: 14px; height: 14px;
             border-radius: 50%;
             background: var(--gold);
-            color: var(--velvet-black);
+            color: var(--bg-deep);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.55rem;
             font-weight: 900;
         }
 
-        .hr-bid-block {
+        .feat-bid {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            padding: 18px 22px;
-            background: rgba(10, 46, 29, 0.6);
-            border: 1px solid var(--gold-soft);
-            border-radius: 6px;
-            border-left: 3px solid var(--neon-emerald);
+            gap: 4px;
+            padding: 18px 0;
+            border-top: 1px solid var(--line-mid);
+            border-bottom: 1px solid var(--line-mid);
         }
-        .hr-bid-label {
+        .feat-bid-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.58rem;
-            font-weight: 500;
+            font-size: 0.55rem;
+            font-weight: 600;
             letter-spacing: 2.5px;
             color: var(--text-2);
             text-transform: uppercase;
         }
-        .hr-bid-value {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+        .feat-bid-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
             font-weight: 500;
-            color: var(--neon-emerald);
+            color: var(--gold);
             letter-spacing: 1px;
             line-height: 1;
-            text-shadow: 0 0 20px var(--neon-emerald-glow);
             display: flex;
             align-items: baseline;
-            gap: 8px;
+            gap: 10px;
         }
-        .hr-bid-value .unit {
+        .feat-bid-value .unit {
             font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
+            font-size: 0.8rem;
             color: var(--text-2);
+            letter-spacing: 2px;
             font-weight: 500;
-            letter-spacing: 1.5px;
         }
-        .hr-bid-meta {
+        .feat-bid-meta {
             display: flex;
-            gap: 16px;
+            gap: 18px;
             font-family: 'Inter', sans-serif;
             font-size: 0.72rem;
             color: var(--text-1);
             margin-top: 4px;
         }
-        .hr-bid-meta .timer {
+        .feat-bid-meta .timer {
             font-family: 'JetBrains Mono', monospace;
             color: var(--gold);
             font-weight: 500;
         }
 
-        .hr-cta {
+        .feat-actions {
             display: flex;
-            gap: 12px;
-            margin-top: 6px;
+            gap: 10px;
         }
-        .btn-bet {
+        .btn-primary {
             flex: 1;
+            padding: 15px 24px;
             font-family: 'Inter', sans-serif;
             font-size: 0.72rem;
             font-weight: 600;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--velvet-black);
-            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+            color: var(--bg-deep);
+            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 100%);
             border: none;
-            padding: 15px 24px;
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
-            overflow: hidden;
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.35),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
         }
-        .btn-bet:hover {
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.5),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
-                0 0 30px rgba(212, 175, 55, 0.4);
+        .btn-primary:hover {
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.4);
+            letter-spacing: 3px;
         }
-        .btn-autobuy {
+        .btn-ghost {
+            padding: 15px 20px;
             font-family: 'Inter', sans-serif;
             font-size: 0.68rem;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--text-0);
             background: transparent;
-            border: 1px solid var(--gold-soft);
-            padding: 15px 20px;
-            border-radius: 4px;
+            border: 1px solid var(--line-hi);
+            border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all 0.3s;
             white-space: nowrap;
         }
-        .btn-autobuy:hover {
+        .btn-ghost:hover {
             border-color: var(--gold);
-            background: rgba(212, 175, 55, 0.08);
+            color: var(--gold);
         }
 
         /* ============================================
-           СЕКТОРА КАТЕГОРИЙ
+           MASONRY ГАЛЕРЕЯ
            ============================================ */
-        .sectors {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
+        .masonry {
+            columns: 4;
+            column-gap: 18px;
             margin-bottom: 40px;
         }
-        .sector {
+        @media (max-width: 1400px) { .masonry { columns: 3; } }
+        @media (max-width: 1000px) { .masonry { columns: 2; } }
+        @media (max-width: 640px) { .masonry { columns: 1; } }
+
+        .m-card {
+            break-inside: avoid;
+            margin-bottom: 18px;
             position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 18px 10px;
-            background: linear-gradient(180deg, rgba(14, 58, 38, 0.6) 0%, rgba(10, 46, 29, 0.4) 100%);
-            border: 1px solid var(--gold-soft);
-            border-radius: 6px;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-            overflow: hidden;
-        }
-        .sector:hover {
-            border-color: var(--gold);
-            background: linear-gradient(180deg, rgba(20, 67, 44, 0.8) 0%, rgba(14, 58, 38, 0.6) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 175, 55, 0.15);
-        }
-        .sector-icon {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: var(--gold);
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .sector:hover .sector-icon {
-            transform: scale(1.15);
-        }
-        .sector-name {
-            font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--text-0);
-            text-align: center;
-        }
-        .sector-count {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem;
-            color: var(--text-2);
-            letter-spacing: 0.5px;
-        }
-
-        /* ============================================
-           СЕКЦИИ
-           ============================================ */
-        .section { margin-bottom: 50px; position: relative; }
-        .section-head {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 24px;
-            margin-bottom: 22px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--emerald-line);
-        }
-        .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-0);
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .section-title .live-dot {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--neon-emerald);
-            box-shadow: 0 0 10px var(--neon-emerald-glow);
-            animation: softPulse 2.4s ease-in-out infinite;
-        }
-        @keyframes softPulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-        .section-title .count {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.8rem;
-            font-style: italic;
-            font-weight: 400;
-            color: var(--text-2);
-            letter-spacing: 1px;
-            text-transform: none;
-        }
-        .section-link {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.64rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-1);
-            text-decoration: none;
-            padding: 8px 14px;
-            border: 1px solid var(--emerald-line);
-            border-radius: 4px;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-        .section-link:hover {
-            color: var(--gold);
-            border-color: var(--gold-soft);
-        }
-
-        /* ============================================
-           СЕТКА КАРТОЧЕК
-           ============================================ */
-        .lot-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 16px;
-        }
-
-        /* ============================================
-           КАРТОЧКА ЛОТА
-           ============================================ */
-        .lot-card {
-            position: relative;
-            aspect-ratio: 4 / 5.4;
-            background: linear-gradient(180deg, var(--emerald-soft) 0%, var(--emerald-deep) 100%);
-            border: 1px solid var(--emerald-line);
             border-radius: var(--radius);
             overflow: hidden;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
+            background: var(--bg-card);
+            border: 1px solid var(--line);
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(16px);
             filter: blur(3px);
-            animation: cardEntrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s, background 0.4s;
+            animation: entrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s, box-shadow 0.4s;
         }
-        .lot-card:nth-child(1) { animation-delay: 0.04s; }
-        .lot-card:nth-child(2) { animation-delay: 0.08s; }
-        .lot-card:nth-child(3) { animation-delay: 0.12s; }
-        .lot-card:nth-child(4) { animation-delay: 0.16s; }
-        .lot-card:nth-child(5) { animation-delay: 0.20s; }
-        .lot-card:nth-child(6) { animation-delay: 0.24s; }
-        .lot-card:nth-child(7) { animation-delay: 0.28s; }
-        .lot-card:nth-child(8) { animation-delay: 0.32s; }
-        .lot-card:nth-child(9) { animation-delay: 0.36s; }
-        .lot-card:nth-child(10) { animation-delay: 0.40s; }
-        .lot-card:nth-child(11) { animation-delay: 0.44s; }
-        .lot-card:nth-child(12) { animation-delay: 0.48s; }
+        .m-card:nth-child(1) { animation-delay: 0.04s; }
+        .m-card:nth-child(2) { animation-delay: 0.08s; }
+        .m-card:nth-child(3) { animation-delay: 0.12s; }
+        .m-card:nth-child(4) { animation-delay: 0.16s; }
+        .m-card:nth-child(5) { animation-delay: 0.20s; }
+        .m-card:nth-child(6) { animation-delay: 0.24s; }
+        .m-card:nth-child(7) { animation-delay: 0.28s; }
+        .m-card:nth-child(8) { animation-delay: 0.32s; }
+        .m-card:nth-child(9) { animation-delay: 0.36s; }
+        .m-card:nth-child(10) { animation-delay: 0.40s; }
+        .m-card:nth-child(11) { animation-delay: 0.44s; }
+        .m-card:nth-child(12) { animation-delay: 0.48s; }
 
-        @keyframes cardEntrance {
+        @keyframes entrance {
             to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        .lot-card:hover {
-            transform: translateY(-4px);
+        .m-card:hover {
+            transform: translateY(-5px);
             border-color: var(--gold-soft);
-            background: linear-gradient(180deg, var(--emerald-hover) 0%, var(--emerald-soft) 100%);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.08);
         }
 
-        /* Золотой луч по контуру */
-        .lot-card::before {
+        /* Луч по контуру */
+        .m-card::before {
             content: '';
             position: absolute;
             inset: -1px;
@@ -674,9 +700,9 @@
                 from var(--beam-angle, 0deg),
                 transparent 0deg,
                 transparent 340deg,
-                rgba(212, 175, 55, 0.4) 350deg,
+                rgba(212, 175, 55, 0.5) 350deg,
                 var(--gold-hi) 355deg,
-                rgba(212, 175, 55, 0.4) 360deg
+                rgba(212, 175, 55, 0.5) 360deg
             );
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
@@ -686,84 +712,88 @@
             transition: opacity 0.4s;
             z-index: 5;
         }
-        .lot-card:hover::before {
+        .m-card:hover::before {
             opacity: 1;
-            animation: borderBeamRotate 3s linear infinite;
+            animation: beamRotate 3s linear infinite;
         }
         @property --beam-angle {
             syntax: '<angle>';
             initial-value: 0deg;
             inherits: false;
         }
-        @keyframes borderBeamRotate {
+        @keyframes beamRotate {
             to { --beam-angle: 360deg; }
         }
 
-        /* ============================================
-           ПРЕВЬЮ
-           ============================================ */
-        .lc-thumb {
+        /* Разные высоты для masonry */
+        .m-card[data-h="1"] .m-thumb { aspect-ratio: 3 / 4; }
+        .m-card[data-h="2"] .m-thumb { aspect-ratio: 1 / 1; }
+        .m-card[data-h="3"] .m-thumb { aspect-ratio: 4 / 5; }
+        .m-card[data-h="4"] .m-thumb { aspect-ratio: 3 / 5; }
+        .m-card[data-h="5"] .m-thumb { aspect-ratio: 2 / 3; }
+        .m-card[data-h="6"] .m-thumb { aspect-ratio: 4 / 3; }
+
+        .m-thumb {
             position: relative;
-            flex: 1;
+            width: 100%;
+            background: linear-gradient(135deg, #143527, #0a1f18);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: rgba(6, 22, 18, 0.5);
         }
-        .lc-thumb .lc-art {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            color: rgba(212, 175, 55, 0.15);
-            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), color 0.5s;
+        .m-thumb .m-art {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: rgba(212, 175, 55, 0.14);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), color 0.5s;
             text-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
         }
-        .lot-card:hover .lc-thumb .lc-art {
+        .m-card:hover .m-thumb .m-art {
             transform: scale(1.06);
-            color: rgba(212, 175, 55, 0.28);
+            color: rgba(212, 175, 55, 0.24);
         }
 
-        /* Водяной знак — при hover */
-        .lc-watermark {
+        /* Водяной знак */
+        .m-watermark {
             position: absolute;
             inset: 0;
             pointer-events: none;
             opacity: 0;
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(212, 175, 55, 0.06) 22px, rgba(212, 175, 55, 0.06) 23px);
-            transition: opacity 0.6s ease;
+            transition: opacity 0.5s;
             z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(212, 175, 55, 0.05) 20px, rgba(212, 175, 55, 0.05) 21px);
         }
-        .lc-watermark::after {
+        .m-watermark::after {
             content: 'FENBO';
-            font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 500;
             letter-spacing: 6px;
-            color: rgba(212, 175, 55, 0.15);
+            color: rgba(212, 175, 55, 0.14);
             transform: rotate(-25deg);
         }
-        .lot-card:hover .lc-watermark { opacity: 1; }
+        .m-card:hover .m-watermark { opacity: 1; }
 
-        .lc-thumb::after {
+        /* Пар снизу */
+        .m-thumb::after {
             content: '';
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            height: 40%;
-            background: linear-gradient(180deg, transparent 0%, rgba(10, 46, 29, 0.7) 100%);
+            height: 45%;
+            background: linear-gradient(180deg, transparent 0%, rgba(10, 31, 24, 0.75) 100%);
             pointer-events: none;
             z-index: 1;
         }
 
-        /* ============================================
-           ВЕРХНЯЯ ПАНЕЛЬ КАРТОЧКИ
-           ============================================ */
-        .lc-top {
+        /* Верхняя панель карточки */
+        .m-top {
             position: absolute;
             top: 0; left: 0; right: 0;
-            padding: 10px 12px;
+            padding: 12px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -772,467 +802,279 @@
             pointer-events: none;
         }
 
-        .lc-status {
+        .m-status {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             font-family: 'Inter', sans-serif;
             font-size: 0.52rem;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 2px;
-            color: var(--neon-emerald);
+            color: var(--emerald-bright);
             text-transform: uppercase;
+            background: rgba(10, 31, 24, 0.7);
+            padding: 4px 8px;
+            border-radius: 3px;
+            backdrop-filter: blur(8px);
         }
-        .lc-status::before {
+        .m-status::before {
             content: '';
-            width: 5px; height: 5px;
+            width: 4px; height: 4px;
             border-radius: 50%;
-            background: var(--neon-emerald);
-            box-shadow: 0 0 8px var(--neon-emerald-glow);
-            animation: softPulse 2.4s ease-in-out infinite;
+            background: var(--emerald-bright);
+            box-shadow: 0 0 6px var(--emerald-glow);
+            animation: pulse 2s ease-in-out infinite;
         }
-        .lc-status.ych {
+        .m-status.ych {
             color: var(--gold);
         }
-        .lc-status.ych::before {
+        .m-status.ych::before {
             background: var(--gold);
-            box-shadow: 0 0 8px var(--gold-glow);
+            box-shadow: 0 0 6px var(--gold);
             animation: none;
         }
-        .lc-status.adopt {
-            color: var(--gold-hi);
+        .m-status.adopt {
+            color: var(--platinum);
         }
-        .lc-status.adopt::before {
-            background: var(--gold-hi);
-            box-shadow: 0 0 8px var(--gold-glow);
+        .m-status.adopt::before {
+            background: var(--platinum);
+            box-shadow: none;
             animation: none;
         }
 
-        .lc-timer {
+        .m-timer {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.62rem;
             font-weight: 500;
             color: var(--text-1);
             letter-spacing: 0.5px;
+            background: rgba(10, 31, 24, 0.7);
+            padding: 4px 8px;
+            border-radius: 3px;
+            backdrop-filter: blur(8px);
             transition: color 0.3s;
         }
-        .lot-card.ending-soon .lc-timer {
-            color: var(--danger);
-        }
-        .lot-card.ending-soon {
-            border-color: rgba(184, 76, 76, 0.35);
-        }
+        .m-card.ending .m-timer { color: var(--danger); }
+        .m-card.ending { border-color: rgba(200, 84, 80, 0.35); }
 
-        /* Прогресс-бар YCH */
-        .lc-progress {
+        /* YCH прогресс */
+        .m-progress {
             position: absolute;
-            top: 30px; left: 12px; right: 12px;
+            top: 42px; left: 14px; right: 14px;
             height: 2px;
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(212, 175, 55, 0.12);
             border-radius: 1px;
             overflow: hidden;
             z-index: 4;
         }
-        .lc-progress-fill {
+        .m-progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--gold) 0%, var(--gold-hi) 100%);
             border-radius: 1px;
             box-shadow: 0 0 6px var(--gold-soft);
-            transition: width 0.5s ease;
         }
 
-        /* Фишки SB / MI / AB */
-        .lc-chips {
-            position: absolute;
-            top: 10px; right: 12px;
-            display: flex;
-            gap: 4px;
-            z-index: 4;
-            opacity: 0;
-            transition: opacity 0.35s;
-        }
-        .lot-card:hover .lc-chips { opacity: 1; }
-        .lc-chip {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cinzel', serif;
-            font-size: 0.5rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            padding: 2px 6px;
-            border-radius: 3px;
-            border: 1px solid var(--gold-soft);
-            color: var(--gold);
-            background: rgba(10, 46, 29, 0.9);
-            text-transform: uppercase;
-        }
-        .lc-chip.ab {
-            border-color: var(--gold);
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--gold-hi);
-        }
-
-        /* ============================================
-           ИНФО
-           ============================================ */
-        .lc-info {
-            padding: 12px 14px 14px;
+        /* Инфо */
+        .m-info {
+            padding: 14px 16px 16px;
             display: flex;
             flex-direction: column;
-            gap: 3px;
-            position: relative;
-            z-index: 4;
-            background: rgba(6, 22, 18, 0.4);
+            gap: 4px;
         }
-
-        .lc-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.74rem;
+        .m-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
             font-weight: 500;
             color: var(--text-0);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            line-height: 1.25;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            line-height: 1.3;
         }
-        .lc-author {
+        .m-author {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.74rem;
+            font-size: 0.8rem;
             font-style: italic;
             color: var(--text-2);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             line-height: 1.3;
-            margin-bottom: 10px;
         }
-
-        .lc-price-wrap {
+        .m-bottom {
             display: flex;
             align-items: baseline;
             justify-content: space-between;
             gap: 8px;
             padding-top: 10px;
-            border-top: 1px solid var(--emerald-line);
-            margin-top: auto;
+            margin-top: 6px;
+            border-top: 1px solid var(--line);
         }
-        .lc-price-label {
+        .m-price-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.46rem;
-            font-weight: 500;
-            letter-spacing: 1.5px;
+            font-size: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 1.8px;
             color: var(--text-2);
             text-transform: uppercase;
         }
-        .lc-price {
-            font-family: 'Cormorant Garamond', serif;
+        .m-price {
+            font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
             font-weight: 500;
             color: var(--gold);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             line-height: 1;
-            transition: color 0.4s ease;
             white-space: nowrap;
+            transition: color 0.4s;
         }
-        .lc-price .unit {
+        .m-price .unit {
             font-family: 'Inter', sans-serif;
-            font-size: 0.48rem;
+            font-size: 0.5rem;
             color: var(--text-2);
             font-weight: 500;
             margin-left: 4px;
             letter-spacing: 1.2px;
         }
-        .lot-card:hover .lc-price { color: var(--gold-hi); }
+        .m-card:hover .m-price { color: var(--gold-hi); }
 
-        .lc-price.bump {
-            animation: priceBump 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        .m-price.bump {
+            animation: bump 1s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        @keyframes priceBump {
+        @keyframes bump {
             0% { color: var(--gold); }
-            25% { color: var(--gold-hi); transform: translateX(-1px); }
-            50% { transform: translateX(1px); }
-            100% { color: var(--gold); transform: translateX(0); }
+            20% { color: var(--gold-hi); text-shadow: 0 0 20px var(--gold-soft); }
+            100% { color: var(--gold); text-shadow: none; }
         }
 
-        /* Мини-лента ставок на карточке */
-        .lc-bet-ticker {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.58rem;
-            color: var(--text-2);
-            letter-spacing: 0.3px;
-            height: 14px;
-            overflow: hidden;
-            opacity: 0;
-            transition: opacity 0.35s;
-            white-space: nowrap;
-        }
-        .lot-card:hover .lc-bet-ticker { opacity: 1; }
-        .lc-bet-ticker .who { color: var(--neon-emerald); font-weight: 500; }
-        .lc-bet-ticker .amount { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
-
-        /* Кнопка — при hover */
-        .lc-btn {
+        /* Кнопка при hover */
+        .m-btn {
             position: absolute;
             bottom: 0; left: 0; right: 0;
             font-family: 'Inter', sans-serif;
-            font-size: 0.6rem;
+            font-size: 0.62rem;
             font-weight: 600;
             letter-spacing: 2.5px;
             text-transform: uppercase;
-            color: var(--velvet-black);
-            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+            color: var(--bg-deep);
+            background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 100%);
             border: none;
-            padding: 11px 10px;
+            padding: 12px 10px;
             cursor: pointer;
             opacity: 0;
             transform: translateY(100%);
-            transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: opacity 0.35s, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
             z-index: 10;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
-        .lot-card:hover .lc-btn {
+        .m-card:hover .m-btn {
             opacity: 1;
             transform: translateY(0);
         }
-        .lc-btn:hover { filter: brightness(1.08); }
+        .m-btn:hover { filter: brightness(1.1); letter-spacing: 3px; }
 
-        /* ============================================
-           TICKER — ЖИВОЙ РЕЙТИНГ СПРАВА
-           ============================================ */
-        .ticker {
-            position: fixed;
-            right: 28px;
-            top: 100px;
-            width: 230px;
-            padding: 18px;
-            background: rgba(18, 18, 18, 0.75);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 0.5px solid var(--gold-soft);
-            border-radius: 8px;
-            z-index: 15;
-            display: none;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        @media (min-width: 1600px) { .ticker { display: block; } }
-
-        .ticker-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.55rem;
-            font-weight: 500;
-            letter-spacing: 4px;
-            color: var(--text-1);
-            text-transform: uppercase;
-            padding-bottom: 12px;
-            margin-bottom: 14px;
-            border-bottom: 0.5px solid var(--emerald-line);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .ticker-title::before {
-            content: '';
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: var(--neon-emerald);
-            box-shadow: 0 0 8px var(--neon-emerald-glow);
-            animation: softPulse 2.4s ease-in-out infinite;
-        }
-
-        .ticker-section {
-            margin-bottom: 18px;
-        }
-        .ticker-subtitle {
+        /* Лента ставок в карточке */
+        .m-bet {
             font-family: 'Inter', sans-serif;
-            font-size: 0.56rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: var(--gold);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .ticker-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 7px 0;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
-            color: var(--text-1);
-            border-bottom: 0.5px solid rgba(212, 175, 55, 0.06);
-        }
-        .ticker-item:last-child { border-bottom: none; }
-        .ticker-rank {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--gold);
-            width: 16px;
-            flex-shrink: 0;
-        }
-        .ticker-name {
-            color: var(--text-0);
-            font-weight: 500;
-            flex: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .ticker-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--neon-emerald);
-            font-weight: 500;
-            flex-shrink: 0;
-        }
-
-        .ticker-feed {
-            max-height: 220px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .feed-line {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.64rem;
+            font-size: 0.62rem;
             color: var(--text-2);
-            padding: 5px 8px;
-            background: rgba(10, 46, 29, 0.4);
-            border-left: 2px solid var(--emerald-line);
-            border-radius: 3px;
-            animation: feedEntrance 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            margin-top: 4px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            height: 14px;
+            line-height: 14px;
+            transition: opacity 0.3s;
         }
-        .feed-line .who { color: var(--neon-emerald); font-weight: 500; }
-        .feed-line .amount { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
-
-        @keyframes feedEntrance {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .feed-line.fade { animation: feedFade 0.5s ease forwards; }
-        @keyframes feedFade { to { opacity: 0; transform: translateY(-8px); } }
+        .m-bet .who { color: var(--emerald-bright); font-weight: 500; }
+        .m-bet .amount { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
 
         /* ============================================
            ПОДВАЛ
            ============================================ */
         .footer {
-            width: 100%;
-            max-width: 1560px;
-            padding: 40px 40px 24px;
-            border-top: 1px solid var(--emerald-line);
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 30px;
-            align-items: center;
-            position: relative;
-            z-index: 5;
-            margin-top: 40px;
-        }
-
-        .footer-left {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--line);
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .footer-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.62rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            color: var(--gold);
-            text-transform: uppercase;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: var(--text-2);
+            letter-spacing: 1.5px;
         }
         .footer-links {
             display: flex;
+            gap: 24px;
             flex-wrap: wrap;
-            gap: 14px;
         }
         .footer-links a {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
             color: var(--text-1);
             text-decoration: none;
-            transition: color 0.25s;
-            letter-spacing: 0.3px;
+            transition: color 0.3s;
         }
         .footer-links a:hover { color: var(--gold); }
-
-        .footer-center {
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            letter-spacing: 5px;
+        .footer-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
             color: var(--text-2);
-            text-align: center;
             text-transform: uppercase;
         }
-        .footer-center span { color: var(--gold); }
-
-        .footer-right {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 10px;
-        }
-        .pay-badge {
-            font-family: 'Cinzel', serif;
-            font-size: 0.5rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            color: var(--gold);
-            padding: 5px 9px;
-            border: 1px solid var(--gold-soft);
-            border-radius: 3px;
-            text-transform: uppercase;
-        }
+        .footer-mark span { color: var(--gold); }
 
         /* ============================================
            АДАПТИВ
            ============================================ */
         @media (max-width: 1200px) {
-            .high-roller { grid-template-columns: 1fr; }
-            .hr-art { min-height: 240px; }
+            .featured { grid-template-columns: 1fr; }
+            .feat-art { min-height: 260px; }
         }
-        @media (max-width: 1000px) {
-            .topbar { padding: 12px 24px; }
-            .pool-counter { display: none; }
-            .main-wrap { padding: 90px 24px 30px; }
-            .lot-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
-            .sectors { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (max-width: 768px) {
-            .topbar { grid-template-columns: 1fr auto; gap: 10px; padding: 10px 16px; }
-            .logo { font-size: 1.05rem; letter-spacing: 6px; }
-            .logo .sub { font-size: 0.7rem; }
-            .main-wrap { padding: 80px 16px 20px; }
-            .high-roller { grid-template-columns: 1fr; }
-            .hr-art { min-height: 200px; }
-            .hr-info { padding: 24px 20px; gap: 16px; }
-            .hr-title { font-size: 1.1rem; letter-spacing: 2px; }
-            .hr-bid-value { font-size: 1.5rem; }
-            .hr-cta { flex-direction: column; }
-            .sectors { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .sector { padding: 12px 8px; gap: 6px; }
-            .sector-icon { font-size: 1.1rem; }
-            .sector-name { font-size: 0.55rem; letter-spacing: 2px; }
-            .lot-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .lc-btn { opacity: 1; transform: translateY(0); }
-            .ticker { display: none; }
-            .footer { grid-template-columns: 1fr; gap: 16px; padding: 30px 16px 20px; text-align: center; }
-            .footer-right { justify-content: center; }
-            .footer-left { align-items: center; }
-            .footer-links { justify-content: center; }
+        @media (max-width: 900px) {
+            body { grid-template-columns: 1fr; }
+            .sidebar {
+                display: none;
+            }
+            .main {
+                grid-column: 1;
+                padding: 24px 20px 60px;
+            }
+            .page-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .page-title { font-size: 1.8rem; }
+            .feat-info { padding: 30px 24px; gap: 16px; }
+            .feat-title { font-size: 1.4rem; }
+            .feat-bid-value { font-size: 1.8rem; }
+            .feat-actions { flex-direction: column; }
+            .masonry { columns: 2; column-gap: 12px; }
+            .m-card { margin-bottom: 12px; }
+            .m-btn { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 480px) {
-            .lot-grid { grid-template-columns: 1fr; }
-            .sectors { grid-template-columns: 1fr 1fr; }
+            .masonry { columns: 1; }
+        }
+
+        /* Мобильный топбар — только для узких экранов */
+        .mobile-bar {
+            display: none;
+        }
+        @media (max-width: 900px) {
+            .mobile-bar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 14px 20px;
+                background: var(--bg-panel);
+                border-bottom: 1px solid var(--line);
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                width: 100%;
+            }
+            .mobile-bar .side-logo { margin-bottom: 0; font-size: 1.2rem; }
+            .mobile-bar .side-wallet-value { font-size: 1rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1242,472 +1084,424 @@
 </head>
 <body>
 
-    <!-- ШАПКА -->
-    <div class="topbar-wrap">
-        <header class="topbar">
-            <a href="#" class="logo">FENBO<span class="sub">рынок</span></a>
-
-            <div class="pool-counter">
-                <span class="pool-label">Пул платформы</span>
-                <span class="pool-value" id="poolValue">0<span class="unit">FEN</span></span>
-            </div>
-
-            <div class="topbar-user">
-                <div class="wallet" title="Кошелёк">
-                    <div class="vault-icon"></div>
-                    <div class="balance">
-                        <div class="chips">1 250<span class="unit">FEN</span></div>
-                        <div class="usdt"><span class="usdt-icon">₮</span>12.50</div>
-                    </div>
-                </div>
-                <div class="avatar-ring gold" title="Профиль">
-                    <div class="avatar-letter">F</div>
-                </div>
-            </div>
-        </header>
+    <!-- МОБИЛЬНАЯ ШАПКА -->
+    <div class="mobile-bar">
+        <a href="#" class="side-logo">FENBO</a>
+        <div class="side-wallet-value">1 250<span class="unit">FEN</span></div>
     </div>
 
-    <div class="main-wrap">
+    <!-- САЙДБАР -->
+    <aside class="sidebar">
+        <a href="#" class="side-logo">FENBO</a>
+        <div class="side-logo-sub">рынок художников</div>
 
-        <!-- HIGH ROLLERS TABLE -->
-        <div class="high-roller">
-            <div class="hr-art">
-                <span class="hr-badge">Топ-лот недели</span>
+        <div class="side-wallet">
+            <div class="side-wallet-label">Кошелёк</div>
+            <div class="side-wallet-value">1 250<span class="unit">FEN</span></div>
+            <div class="side-wallet-usd">≈ $12.50 USDT</div>
+            <button class="side-wallet-btn" type="button">Пополнить</button>
+        </div>
+
+        <div class="side-jackpot">
+            <div class="side-jackpot-label">Пул платформы</div>
+            <div class="side-jackpot-value" id="poolValue">187 450 FEN</div>
+        </div>
+
+        <div class="side-nav-label">Навигация</div>
+        <nav class="side-nav">
+            <a href="#" class="active">
+                <span class="nav-icon">◆</span>
+                <span>Все лоты</span>
+                <span class="nav-count">2 480</span>
+            </a>
+            <a href="#">
+                <span class="nav-icon">♦</span>
+                <span>Аукционы</span>
+                <span class="nav-count">42</span>
+            </a>
+            <a href="#">
+                <span class="nav-icon">❦</span>
+                <span>YCH</span>
+                <span class="nav-count">86</span>
+            </a>
+            <a href="#">
+                <span class="nav-icon">✦</span>
+                <span>Адопты</span>
+                <span class="nav-count">342</span>
+            </a>
+            <a href="#">
+                <span class="nav-icon">◇</span>
+                <span>Коммишены</span>
+                <span class="nav-count">218</span>
+            </a>
+            <a href="#">
+                <span class="nav-icon">◈</span>
+                <span>Подписки</span>
+                <span class="nav-count">42</span>
+            </a>
+        </nav>
+
+        <div class="side-nav-label">Мастерская</div>
+        <nav class="side-nav">
+            <a href="#">
+                <span class="nav-icon">+</span>
+                <span>Новый лот</span>
+            </a>
+            <a href="#">
+                <span class="nav-icon">◎</span>
+                <span>Мои заказы</span>
+            </a>
+        </nav>
+
+        <div class="side-user">
+            <div class="side-user-avatar">F</div>
+            <div class="side-user-info">
+                <div class="side-user-name">Художник</div>
+                <div class="side-user-status">в сети</div>
             </div>
-            <div class="hr-info">
-                <div class="hr-title">Золотая клетка</div>
-                <div class="hr-author">
+        </div>
+    </aside>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="main">
+
+        <!-- HEAD -->
+        <div class="page-head">
+            <h1 class="page-title">
+                Все лоты
+                <span class="sub">витрина рынка — свежие работы, аукционы и открытые слоты</span>
+            </h1>
+            <div class="page-filters">
+                <button class="filter-btn active" type="button">Все</button>
+                <button class="filter-btn" type="button">Аукционы</button>
+                <button class="filter-btn" type="button">YCH</button>
+                <button class="filter-btn" type="button">Адопты</button>
+                <button class="filter-btn" type="button">Коммишены</button>
+                <button class="search-btn" type="button">⌕</button>
+            </div>
+        </div>
+
+        <!-- FEATURED -->
+        <div class="featured">
+            <div class="feat-art">
+                <span class="feat-badge">Featured · Lot of the Week</span>
+                <span class="feat-art-icon">✦</span>
+            </div>
+            <div class="feat-info">
+                <div class="feat-title">Золотая клетка</div>
+                <div class="feat-author">
                     GoldenCage
                     <span class="verified">✓</span>
                 </div>
-                <div class="hr-bid-block">
-                    <span class="hr-bid-label">Текущая ставка</span>
-                    <span class="hr-bid-value" data-bid-el>4 200<span class="unit">FEN</span></span>
-                    <div class="hr-bid-meta">
+                <div class="feat-bid">
+                    <span class="feat-bid-label">Текущая ставка</span>
+                    <span class="feat-bid-value" data-bid-el>4 200<span class="unit">FEN</span></span>
+                    <div class="feat-bid-meta">
                         <span>21 ставка</span>
                         <span>·</span>
                         <span class="timer" data-end="2027-12-30T18:00:00">—</span>
                     </div>
                 </div>
-                <div class="hr-cta">
-                    <button class="btn-bet" type="button">Сделать ставку</button>
-                    <button class="btn-autobuy" type="button">Выкупить · 8 000</button>
+                <div class="feat-actions">
+                    <button class="btn-primary" type="button">Сделать ставку</button>
+                    <button class="btn-ghost" type="button">Выкупить · 8 000</button>
                 </div>
             </div>
         </div>
 
-        <!-- СЕКТОРА КАТЕГОРИЙ -->
-        <div class="sectors">
-            <a href="#adopts" class="sector">
-                <span class="sector-icon">♦</span>
-                <span class="sector-name">Адопты</span>
-                <span class="sector-count">342 лота</span>
-            </a>
-            <a href="#ych" class="sector">
-                <span class="sector-icon">❦</span>
-                <span class="sector-name">YCH</span>
-                <span class="sector-count">86 лотов</span>
-            </a>
-            <a href="#commissions" class="sector">
-                <span class="sector-icon">✦</span>
-                <span class="sector-name">Коммишены</span>
-                <span class="sector-count">218 слотов</span>
-            </a>
-            <a href="#digital" class="sector">
-                <span class="sector-icon">♣</span>
-                <span class="sector-name">Цифровое</span>
-                <span class="sector-count">54 товара</span>
-            </a>
-            <a href="#subs" class="sector">
-                <span class="sector-icon">♥</span>
-                <span class="sector-name">Подписки</span>
-                <span class="sector-count">42 клуба</span>
-            </a>
+        <!-- MASONRY -->
+        <div class="masonry">
+
+            <div class="m-card" data-h="1" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250">
+                <div class="m-thumb">
+                    <span class="m-art">♦</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status">Live</span>
+                    <span class="m-timer" data-end="2027-12-31T23:59:59">—</span>
+                </div>
+                <div class="m-info">
+                    <div class="m-title">Сцена · 03:00</div>
+                    <div class="m-author">MidnightLux</div>
+                    <div class="m-bet"><span class="who">Anonymous_01</span> · <span class="amount">1 250</span></div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Ставка</span>
+                        <span class="m-price" data-bid-el>1 250<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Сделать ставку</button>
+            </div>
+
+            <div class="m-card" data-h="3" data-title="Красный шёлк" data-author="ScarletDream" data-bid="2400">
+                <div class="m-thumb">
+                    <span class="m-art">♥</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status">Live</span>
+                    <span class="m-timer" data-end="2027-12-29T12:30:00">—</span>
+                </div>
+                <div class="m-info">
+                    <div class="m-title">Красный шёлк</div>
+                    <div class="m-author">ScarletDream</div>
+                    <div class="m-bet"><span class="who">Velvet_Rose</span> · <span class="amount">2 400</span></div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Ставка</span>
+                        <span class="m-price" data-bid-el>2 400<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Сделать ставку</button>
+            </div>
+
+            <div class="m-card" data-h="2" data-title="Парный портрет" data-author="TwinFlame">
+                <div class="m-thumb">
+                    <span class="m-art">❦</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status ych">YCH</span>
+                    <span class="m-timer" style="color: var(--gold);">2 / 3</span>
+                </div>
+                <div class="m-progress"><div class="m-progress-fill" style="width: 33%"></div></div>
+                <div class="m-info">
+                    <div class="m-title">Парный портрет</div>
+                    <div class="m-author">TwinFlame</div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Слот</span>
+                        <span class="m-price">600<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Записаться</button>
+            </div>
+
+            <div class="m-card" data-h="5" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200">
+                <div class="m-thumb">
+                    <span class="m-art">♠</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status">Live</span>
+                    <span class="m-timer" data-end="2027-12-28T22:00:00">—</span>
+                </div>
+                <div class="m-info">
+                    <div class="m-title">Алый закат</div>
+                    <div class="m-author">ScarletSunset</div>
+                    <div class="m-bet"><span class="who">TwinFlame</span> · <span class="amount">3 200</span></div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Ставка</span>
+                        <span class="m-price" data-bid-el>3 200<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Сделать ставку</button>
+            </div>
+
+            <div class="m-card" data-h="4" data-title="Шёлковые оковы" data-author="BoundElegance">
+                <div class="m-thumb">
+                    <span class="m-art">♣</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status ych">YCH</span>
+                    <span class="m-timer" style="color: var(--gold);">1 / 3</span>
+                </div>
+                <div class="m-progress"><div class="m-progress-fill" style="width: 66%"></div></div>
+                <div class="m-info">
+                    <div class="m-title">Шёлковые оковы</div>
+                    <div class="m-author">BoundElegance</div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Слот</span>
+                        <span class="m-price">450<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Записаться</button>
+            </div>
+
+            <div class="m-card" data-h="1" data-title="Золотая клетка" data-author="GoldenCage">
+                <div class="m-thumb">
+                    <span class="m-art">✦</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status adopt">Adopt</span>
+                </div>
+                <div class="m-info">
+                    <div class="m-title">Золотая клетка</div>
+                    <div class="m-author">GoldenCage</div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Выкуп</span>
+                        <span class="m-price">3 200<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Купить</button>
+            </div>
+
+            <div class="m-card" data-h="3" data-title="Пурпурный дым" data-author="PurpleSmoke" data-bid="890">
+                <div class="m-thumb">
+                    <span class="m-art">♥</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status">Live</span>
+                    <span class="m-timer" data-end="2027-12-29T20:00:00">—</span>
+                </div>
+                <div class="m-info">
+                    <div class="m-title">Пурпурный дым</div>
+                    <div class="m-author">PurpleSmoke</div>
+                    <div class="m-bet"><span class="who">SilverFox</span> · <span class="amount">890</span></div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Ставка</span>
+                        <span class="m-price" data-bid-el>890<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Сделать ставку</button>
+            </div>
+
+            <div class="m-card" data-h="2" data-title="Ночной гость" data-author="Noir_Art">
+                <div class="m-thumb">
+                    <span class="m-art">♠</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status ych">YCH</span>
+                    <span class="m-timer" style="color: var(--gold);">3 / 3</span>
+                </div>
+                <div class="m-progress"><div class="m-progress-fill" style="width: 0%"></div></div>
+                <div class="m-info">
+                    <div class="m-title">Ночной гость</div>
+                    <div class="m-author">Noir_Art</div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Слот</span>
+                        <span class="m-price">800<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Записаться</button>
+            </div>
+
+            <div class="m-card" data-h="5" data-title="Шёпот в темноте" data-author="WhisperArt">
+                <div class="m-thumb">
+                    <span class="m-art">◇</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status adopt">Adopt</span>
+                </div>
+                <div class="m-info">
+                    <div class="m-title">Шёпот в темноте</div>
+                    <div class="m-author">WhisperArt</div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Выкуп</span>
+                        <span class="m-price">1 800<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Купить</button>
+            </div>
+
+            <div class="m-card" data-h="4" data-title="Тёмный бархат" data-author="DarkVelvet" data-bid="1550">
+                <div class="m-thumb">
+                    <span class="m-art">◆</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status">Live</span>
+                    <span class="m-timer" data-end="2027-12-30T15:00:00">—</span>
+                </div>
+                <div class="m-info">
+                    <div class="m-title">Тёмный бархат</div>
+                    <div class="m-author">DarkVelvet</div>
+                    <div class="m-bet"><span class="who">IronMask</span> · <span class="amount">1 550</span></div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Ставка</span>
+                        <span class="m-price" data-bid-el>1 550<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Сделать ставку</button>
+            </div>
+
+            <div class="m-card" data-h="1" data-title="Две свечи" data-author="TwinFlame">
+                <div class="m-thumb">
+                    <span class="m-art">❦</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status adopt">Adopt</span>
+                </div>
+                <div class="m-info">
+                    <div class="m-title">Две свечи</div>
+                    <div class="m-author">TwinFlame</div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Выкуп</span>
+                        <span class="m-price">1 500<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Купить</button>
+            </div>
+
+            <div class="m-card" data-h="3" data-title="Бархатный вечер" data-author="Velvet_Rose">
+                <div class="m-thumb">
+                    <span class="m-art">♥</span>
+                    <div class="m-watermark"></div>
+                </div>
+                <div class="m-top">
+                    <span class="m-status ych">YCH</span>
+                    <span class="m-timer" style="color: var(--gold);">1 / 3</span>
+                </div>
+                <div class="m-progress"><div class="m-progress-fill" style="width: 66%"></div></div>
+                <div class="m-info">
+                    <div class="m-title">Бархатный вечер</div>
+                    <div class="m-author">Velvet_Rose</div>
+                    <div class="m-bottom">
+                        <span class="m-price-label">Слот</span>
+                        <span class="m-price">900<span class="unit">FEN</span></span>
+                    </div>
+                </div>
+                <button class="m-btn" type="button">Записаться</button>
+            </div>
+
         </div>
 
-        <!-- АУКЦИОНЫ -->
-        <section class="section" id="auctions">
-            <div class="section-head">
-                <h2 class="section-title">
-                    <span class="live-dot"></span>
-                    Живые аукционы
-                    <span class="count">— активные столы</span>
-                </h2>
-                <a href="#" class="section-link">Все →</a>
-            </div>
-
-            <div class="lot-grid">
-
-                <div class="lot-card" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250">
-                    <div class="lc-thumb">
-                        <span class="lc-art">♦</span>
-                        <div class="lc-watermark"></div>
-                    </div>
-                    <div class="lc-top">
-                        <span class="lc-status">Live</span>
-                        <span class="lc-timer" data-end="2027-12-31T23:59:59">—</span>
-                    </div>
-                    <div class="lc-chips">
-                        <span class="lc-chip">SB 1k</span>
-                        <span class="lc-chip ab">AB 5k</span>
-                    </div>
-                    <div class="lc-info">
-                        <div class="lc-title">Сцена · 03:00</div>
-                        <div class="lc-author">MidnightLux</div>
-                        <div class="lc-bet-ticker"><span class="who">Anonymous_01</span> · <span class="amount">1 250</span></div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Ставка</span>
-                            <span class="lc-price" data-bid-el>1 250<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Сделать ставку</button>
-                </div>
-
-                <div class="lot-card" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200">
-                    <div class="lc-thumb">
-                        <span class="lc-art">♠</span>
-                        <div class="lc-watermark"></div>
-                    </div>
-                    <div class="lc-top">
-                        <span class="lc-status">Live</span>
-                        <span class="lc-timer" data-end="2027-12-28T22:00:00">—</span>
-                    </div>
-                    <div class="lc-chips">
-                        <span class="lc-chip">SB 2k</span>
-                        <span class="lc-chip ab">AB 10k</span>
-                    </div>
-                    <div class="lc-info">
-                        <div class="lc-title">Алый закат</div>
-                        <div class="lc-author">ScarletSunset</div>
-                        <div class="lc-bet-ticker"><span class="who">TwinFlame</span> · <span class="amount">3 200</span></div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Ставка</span>
-                            <span class="lc-price" data-bid-el>3 200<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Сделать ставку</button>
-                </div>
-
-                <div class="lot-card" data-title="Пурпурный дым" data-author="PurpleSmoke" data-bid="890">
-                    <div class="lc-thumb">
-                        <span class="lc-art">♥</span>
-                        <div class="lc-watermark"></div>
-                    </div>
-                    <div class="lc-top">
-                        <span class="lc-status">Live</span>
-                        <span class="lc-timer" data-end="2027-12-29T12:30:00">—</span>
-                    </div>
-                    <div class="lc-chips">
-                        <span class="lc-chip">SB 500</span>
-                        <span class="lc-chip ab">AB 3k</span>
-                    </div>
-                    <div class="lc-info">
-                        <div class="lc-title">Пурпурный дым</div>
-                        <div class="lc-author">PurpleSmoke</div>
-                        <div class="lc-bet-ticker"><span class="who">Velvet_Rose</span> · <span class="amount">890</span></div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Ставка</span>
-                            <span class="lc-price" data-bid-el>890<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Сделать ставку</button>
-                </div>
-
-                <div class="lot-card" data-title="Тёмный бархат" data-author="DarkVelvet" data-bid="1550">
-                    <div class="lc-thumb">
-                        <span class="lc-art">♣</span>
-                        <div class="lc-watermark"></div>
-                    </div>
-                    <div class="lc-top">
-                        <span class="lc-status">Live</span>
-                        <span class="lc-timer" data-end="2027-12-27T15:00:00">—</span>
-                    </div>
-                    <div class="lc-chips">
-                        <span class="lc-chip">SB 1k</span>
-                        <span class="lc-chip ab">AB 6k</span>
-                    </div>
-                    <div class="lc-info">
-                        <div class="lc-title">Тёмный бархат</div>
-                        <div class="lc-author">DarkVelvet</div>
-                        <div class="lc-bet-ticker"><span class="who">SilverFox</span> · <span class="amount">1 550</span></div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Ставка</span>
-                            <span class="lc-price" data-bid-el>1 550<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Сделать ставку</button>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- YCH -->
-        <section class="section" id="ych">
-            <div class="section-head">
-                <h2 class="section-title">
-                    YCH
-                    <span class="count">— открытые слоты</span>
-                </h2>
-                <a href="#" class="section-link">Все →</a>
-            </div>
-
-            <div class="lot-grid">
-
-                <div class="lot-card" data-title="Парный портрет" data-author="TwinFlame">
-                    <div class="lc-thumb">
-                        <span class="lc-art">❦</span>
-                        <div class="lc-watermark"></div>
-                    </div>
-                    <div class="lc-top">
-                        <span class="lc-status ych">YCH</span>
-                        <span class="lc-timer" style="color: var(--gold);">2 / 3</span>
-                    </div>
-                    <div class="lc-progress"><div class="lc-progress-fill" style="width: 33%"></div></div>
-                    <div class="lc-info">
-                        <div class="lc-title">Парный портрет</div>
-                        <div class="lc-author">TwinFlame</div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Цена слота</span>
-                            <span class="lc-price">600<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Записаться</button>
-                </div>
-
-                <div class="lot-card" data-title="Шёлковые оковы" data-author="BoundElegance">
-                    <div class="lc-thumb">
-                        <span class="lc-art">♥</span>
-                        <div class="lc-watermark"></div>
-                    </div>
-                    <div class="lc-top">
-                        <span class="lc-status ych">YCH</span>
-                        <span class="lc-timer" style="color: var(--gold);">1 / 3</span>
-                    </div>
-                    <div class="lc-progress"><div class="lc-progress-fill" style="width: 66%"></div></div>
-                    <div class="lc-info">
-                        <div class="lc-title">Шёлковые оковы</div>
-                        <div class="lc-author">BoundElegance</div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Цена слота</span>
-                            <span class="lc-price">450<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Записаться</button>
-                </div>
-
-                <div class="lot-card" data-title="Ночной гость" data-author="Noir_Art">
-                    <div class="lc-thumb">
-                        <span class="lc-art">♠</span>
-                        <div class="lc-watermark"></div>
-                    </div>
-                    <div class="lc-top">
-                        <span class="lc-status ych">YCH</span>
-                        <span class="lc-timer" style="color: var(--gold);">3 / 3</span>
-                    </div>
-                    <div class="lc-progress"><div class="lc-progress-fill" style="width: 0%"></div></div>
-                    <div class="lc-info">
-                        <div class="lc-title">Ночной гость</div>
-                        <div class="lc-author">Noir_Art</div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Цена слота</span>
-                            <span class="lc-price">800<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Записаться</button>
-                </div>
-
-                <div class="lot-card" data-title="Бархатный вечер" data-author="Velvet_Rose">
-                    <div class="lc-thumb">
-                        <span class="lc-art">♦</span>
-                        <div class="lc-watermark"></div>
-                    </div>
-                    <div class="lc-top">
-                        <span class="lc-status ych">YCH</span>
-                        <span class="lc-timer" style="color: var(--gold);">1 / 3</span>
-                    </div>
-                    <div class="lc-progress"><div class="lc-progress-fill" style="width: 66%"></div></div>
-                    <div class="lc-info">
-                        <div class="lc-title">Бархатный вечер</div>
-                        <div class="lc-author">Velvet_Rose</div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Цена слота</span>
-                            <span class="lc-price">900<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Записаться</button>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- АДОПТЫ -->
-        <section class="section" id="adopts">
-            <div class="section-head">
-                <h2 class="section-title">
-                    Адопты
-                    <span class="count">— уникальные дизайны</span>
-                </h2>
-                <a href="#" class="section-link">Все →</a>
-            </div>
-
-            <div class="lot-grid">
-
-                <div class="lot-card" data-title="Красный шёлк" data-author="ScarletDream">
-                    <div class="lc-thumb"><span class="lc-art">♥</span><div class="lc-watermark"></div></div>
-                    <div class="lc-top"><span class="lc-status adopt">Adopt</span></div>
-                    <div class="lc-info">
-                        <div class="lc-title">Красный шёлк</div>
-                        <div class="lc-author">ScarletDream</div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Выкуп</span>
-                            <span class="lc-price">2 400<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Купить</button>
-                </div>
-
-                <div class="lot-card" data-title="Золотая клетка" data-author="GoldenCage">
-                    <div class="lc-thumb"><span class="lc-art">♣</span><div class="lc-watermark"></div></div>
-                    <div class="lc-top"><span class="lc-status adopt">Adopt</span></div>
-                    <div class="lc-info">
-                        <div class="lc-title">Золотая клетка</div>
-                        <div class="lc-author">GoldenCage</div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Выкуп</span>
-                            <span class="lc-price">3 200<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Купить</button>
-                </div>
-
-                <div class="lot-card" data-title="Шёпот в темноте" data-author="WhisperArt">
-                    <div class="lc-thumb"><span class="lc-art">♠</span><div class="lc-watermark"></div></div>
-                    <div class="lc-top"><span class="lc-status adopt">Adopt</span></div>
-                    <div class="lc-info">
-                        <div class="lc-title">Шёпот в темноте</div>
-                        <div class="lc-author">WhisperArt</div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Выкуп</span>
-                            <span class="lc-price">1 800<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Купить</button>
-                </div>
-
-                <div class="lot-card" data-title="Две свечи" data-author="TwinFlame">
-                    <div class="lc-thumb"><span class="lc-art">♥</span><div class="lc-watermark"></div></div>
-                    <div class="lc-top"><span class="lc-status adopt">Adopt</span></div>
-                    <div class="lc-info">
-                        <div class="lc-title">Две свечи</div>
-                        <div class="lc-author">TwinFlame</div>
-                        <div class="lc-price-wrap">
-                            <span class="lc-price-label">Выкуп</span>
-                            <span class="lc-price">1 500<span class="unit">FEN</span></span>
-                        </div>
-                    </div>
-                    <button class="lc-btn" type="button">Купить</button>
-                </div>
-
-            </div>
-        </section>
-
-    </div>
-
-    <!-- TICKER СПРАВА -->
-    <aside class="ticker">
-        <div class="ticker-title">Live</div>
-
-        <div class="ticker-section">
-            <div class="ticker-subtitle">Топ недели</div>
-            <div class="ticker-item">
-                <span class="ticker-rank">01</span>
-                <span class="ticker-name">GoldenCage</span>
-                <span class="ticker-value">24 200</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-rank">02</span>
-                <span class="ticker-name">ScarletDream</span>
-                <span class="ticker-value">18 900</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-rank">03</span>
-                <span class="ticker-name">Velvet_Rose</span>
-                <span class="ticker-value">15 400</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-rank">04</span>
-                <span class="ticker-name">ScarletSunset</span>
-                <span class="ticker-value">12 100</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-rank">05</span>
-                <span class="ticker-name">MidnightLux</span>
-                <span class="ticker-value">9 800</span>
-            </div>
-        </div>
-
-        <div class="ticker-section">
-            <div class="ticker-subtitle">Ставки</div>
-            <div class="ticker-feed" id="tickerFeed"></div>
-        </div>
-    </aside>
-
-    <!-- ПОДВАЛ -->
-    <footer class="footer">
-        <div class="footer-left">
-            <div class="footer-title">FENBO · рынок</div>
+        <!-- ПОДВАЛ -->
+        <footer class="footer">
             <div class="footer-links">
                 <a href="#">Правила клуба</a>
                 <a href="#">Безопасные сделки</a>
                 <a href="#">Связаться с дилером</a>
             </div>
-        </div>
-        <div class="footer-center">✦ 2025 ✦ <span>18+</span> ✦</div>
-        <div class="footer-right">
-            <span class="pay-badge">Visa</span>
-            <span class="pay-badge">PayPal</span>
-            <span class="pay-badge">Crypto</span>
-            <span class="pay-badge">Stripe</span>
-        </div>
-    </footer>
+            <div class="footer-mark">FENBO · <span>2025</span></div>
+        </footer>
+
+    </main>
 
     <script>
-        /* ============================================
-           ПУЛ ПЛАТФОРМЫ — БЕГУЩИЕ ЦИФРЫ
-           ============================================ */
-        (function poolCounter() {
+        /* ПУЛ ПЛАТФОРМЫ */
+        (function pool() {
             const el = document.getElementById('poolValue');
             if (!el) return;
-            let current = 187_450;
+            let current = 187450;
             function tick() {
-                const delta = Math.floor(Math.random() * 400) + 50;
-                current += delta;
-                el.innerHTML = current.toLocaleString('ru-RU') + '<span class="unit">FEN</span>';
+                current += Math.floor(Math.random() * 400) + 50;
+                el.textContent = current.toLocaleString('ru-RU') + ' FEN';
             }
-            tick();
-            setInterval(tick, 2400);
+            setInterval(tick, 2800);
         })();
 
-        /* ============================================
-           ТАЙМЕРЫ
-           ============================================ */
+        /* ТАЙМЕРЫ */
         (function timers() {
             const timers = document.querySelectorAll('[data-end]');
             if (!timers.length) return;
             function pad(n) { return n < 10 ? '0' + n : n; }
             function update(el) {
                 const diff = Math.floor((new Date(el.dataset.end).getTime() - Date.now()) / 1000);
-                const card = el.closest('.lot-card, .hr-bid-block');
-                const cardEl = el.closest('.lot-card');
+                const card = el.closest('.m-card');
                 if (diff <= 0) {
                     el.textContent = 'Завершён';
                     el.style.color = 'var(--text-2)';
-                    if (cardEl) cardEl.classList.remove('ending-soon');
+                    if (card) card.classList.remove('ending');
                     return;
                 }
-                if (cardEl) {
-                    if (diff < 600) cardEl.classList.add('ending-soon');
-                    else cardEl.classList.remove('ending-soon');
+                if (card) {
+                    if (diff < 600) card.classList.add('ending');
+                    else card.classList.remove('ending');
                 }
                 const d = Math.floor(diff / 86400);
                 const h = Math.floor((diff % 86400) / 3600);
@@ -1721,77 +1515,58 @@
             tick(); setInterval(tick, 1000);
         })();
 
-        /* ============================================
-           ЖИВЫЕ СТАВКИ + TICKER
-           ============================================ */
+        /* ЖИВЫЕ СТАВКИ */
         (function liveBids() {
-            const cards = document.querySelectorAll('.lot-card[data-bid]');
-            const feedList = document.getElementById('tickerFeed');
-            const fakeLeaders = ['Velvet_Rose', 'Noir_Art', 'SilentBid', 'TwinFlame', 'Luxuria', 'SilverFox', 'IronMask', 'CrimsonFang', 'NightBidder'];
-            const MAX_FEED = 6;
+            const cards = document.querySelectorAll('.m-card[data-bid]');
             if (!cards.length) return;
-
+            const fakeLeaders = ['Velvet_Rose', 'Noir_Art', 'SilentBid', 'TwinFlame', 'Luxuria', 'SilverFox', 'IronMask', 'CrimsonFang', 'NightBidder'];
             function formatNum(n) { return n.toLocaleString('ru-RU'); }
-
-            function pushFeed(who, amount) {
-                if (!feedList) return;
-                const line = document.createElement('div');
-                line.className = 'feed-line';
-                line.innerHTML = '<span class="who">' + who + '</span> → <span class="amount">' + formatNum(amount) + '</span>';
-                feedList.insertBefore(line, feedList.firstChild);
-                while (feedList.children.length > MAX_FEED) {
-                    const last = feedList.lastChild;
-                    if (last) {
-                        last.classList.add('fade');
-                        setTimeout(() => last.remove(), 500);
-                    } else break;
-                }
-            }
-
-            function updateBid(card) {
+            function update(card) {
                 const priceEl = card.querySelector('[data-bid-el]');
-                const tickerEl = card.querySelector('.lc-bet-ticker');
+                const betEl = card.querySelector('.m-bet');
                 if (!priceEl) return;
                 let current = parseInt(card.dataset.bid, 10) || 0;
-                const step = Math.floor(Math.random() * 100) + 50;
-                current += step;
+                current += Math.floor(Math.random() * 100) + 50;
                 card.dataset.bid = current;
                 priceEl.innerHTML = formatNum(current) + '<span class="unit">FEN</span>';
                 priceEl.classList.remove('bump');
                 void priceEl.offsetWidth;
                 priceEl.classList.add('bump');
-
                 const who = fakeLeaders[Math.floor(Math.random() * fakeLeaders.length)];
-
-                if (tickerEl) {
-                    tickerEl.innerHTML = '<span class="who">' + who + '</span> · <span class="amount">' + formatNum(current) + '</span>';
+                if (betEl) {
+                    betEl.innerHTML = '<span class="who">' + who + '</span> · <span class="amount">' + formatNum(current) + '</span>';
                 }
-                pushFeed(who, current);
             }
-
             cards.forEach(card => {
                 function sched() {
-                    const delay = Math.random() * 6000 + 7000;
-                    setTimeout(() => { updateBid(card); sched(); }, delay);
+                    setTimeout(() => { update(card); sched(); }, Math.random() * 6000 + 7000);
                 }
                 sched();
             });
         })();
 
-        /* ============================================
-           КЛИКИ
-           ============================================ */
+        /* ФИЛЬТРЫ */
+        (function filters() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+        })();
+
+        /* КЛИКИ */
         (function clicks() {
-            document.querySelectorAll('.lot-card').forEach(card => {
+            document.querySelectorAll('.m-card').forEach(card => {
                 card.addEventListener('click', e => {
-                    if (e.target.classList.contains('lc-btn')) return;
+                    if (e.target.classList.contains('m-btn')) return;
                     alert('✦ ' + (card.dataset.title || 'Лот') + '\n\nАвтор: ' + (card.dataset.author || '—'));
                 });
             });
-            document.querySelectorAll('.lc-btn').forEach(btn => {
+            document.querySelectorAll('.m-btn').forEach(btn => {
                 btn.addEventListener('click', e => {
                     e.stopPropagation();
-                    const card = btn.closest('.lot-card');
+                    const card = btn.closest('.m-card');
                     alert('✦ ' + (card.dataset.title || 'Лот') + '\n\n(здесь будет действие)');
                 });
             });
