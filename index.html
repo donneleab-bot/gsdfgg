@@ -37,19 +37,12 @@
             --pink: #ff44aa;
             --pink-glow: rgba(255, 68, 170, 0.4);
             --radius: 14px;
-            --radius-sm: 10px;
         }
 
         /* ============================================
            БАЗА
            ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
         html { scroll-behavior: smooth; }
 
         body {
@@ -73,7 +66,6 @@
             letter-spacing: 0.1px;
         }
 
-        /* Тонкая сетка на фоне */
         body::before {
             content: '';
             position: fixed;
@@ -88,9 +80,6 @@
             -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
         }
 
-        /* ============================================
-           ЛАМПЫ НАД БАРОМ (улучшены)
-           ============================================ */
         .bar-lights {
             position: fixed;
             top: 0; left: 0;
@@ -113,7 +102,6 @@
             89% { opacity: 1; }
         }
 
-        /* Тёплое свечение снизу-слева — как барная стойка */
         .bar-glow {
             position: fixed;
             bottom: 0; left: 0;
@@ -123,16 +111,7 @@
             background: radial-gradient(ellipse 80% 60% at 0% 100%, rgba(246, 70, 93, 0.08) 0%, transparent 70%);
         }
 
-        /* ============================================
-           ПЫЛЬ
-           ============================================ */
-        .dust-bg {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
+        .dust-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
         .dust-bg .mote {
             position: absolute;
             border-radius: 50%;
@@ -151,13 +130,7 @@
         /* ============================================
            ШАПКА
            ============================================ */
-        .topbar-wrap {
-            width: 100%;
-            max-width: 1500px;
-            position: relative;
-            z-index: 20;
-            padding: 0 32px;
-        }
+        .topbar-wrap { width: 100%; max-width: 1500px; position: relative; z-index: 20; padding: 0 32px; }
         .topbar {
             width: 100%;
             display: grid;
@@ -206,8 +179,7 @@
             position: relative;
             white-space: nowrap;
         }
-        .topbar-nav a:hover,
-        .topbar-nav a.active { color: var(--gold); }
+        .topbar-nav a:hover, .topbar-nav a.active { color: var(--gold); }
         .topbar-nav a::after {
             content: '';
             position: absolute;
@@ -218,15 +190,9 @@
             transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
             box-shadow: 0 0 12px var(--gold-glow);
         }
-        .topbar-nav a:hover::after,
-        .topbar-nav a.active::after { transform: scaleX(1); }
+        .topbar-nav a:hover::after, .topbar-nav a.active::after { transform: scaleX(1); }
 
-        .topbar-user {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: flex-end;
-        }
+        .topbar-user { display: flex; align-items: center; gap: 10px; justify-content: flex-end; }
         .btn-new-lot {
             font-family: 'Inter', sans-serif;
             font-size: 0.72rem;
@@ -245,12 +211,9 @@
             transition: all 0.25s;
             white-space: nowrap;
         }
-        .btn-new-lot:hover {
-            background: var(--gold-hi);
-            box-shadow: 0 4px 24px rgba(240, 185, 11, 0.55);
-            transform: translateY(-1px);
-        }
+        .btn-new-lot:hover { background: var(--gold-hi); box-shadow: 0 4px 24px rgba(240, 185, 11, 0.55); transform: translateY(-1px); }
         .btn-new-lot .plus { font-size: 1rem; line-height: 1; font-weight: 400; }
+
         .wallet {
             display: flex;
             align-items: center;
@@ -262,10 +225,7 @@
             cursor: pointer;
             transition: all 0.25s;
         }
-        .wallet:hover {
-            border-color: var(--gold);
-            box-shadow: 0 0 24px var(--gold-glow);
-        }
+        .wallet:hover { border-color: var(--gold); box-shadow: 0 0 24px var(--gold-glow); }
         .wallet .chip-icon {
             width: 34px; height: 34px;
             border-radius: 50%;
@@ -277,48 +237,12 @@
             box-shadow: 0 0 14px var(--gold-glow), inset 0 -3px 6px rgba(0, 0, 0, 0.4);
             flex-shrink: 0;
         }
-        .wallet .chip-icon::after {
-            content: '♠';
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            font-weight: 900;
-            color: #0a0e14;
-        }
+        .wallet .chip-icon::after { content: '♠'; font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 900; color: #0a0e14; }
         .wallet .balance { display: flex; flex-direction: column; line-height: 1.15; }
-        .wallet .chips {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 0.3px;
-        }
-        .wallet .chips .unit {
-            font-size: 0.6rem;
-            color: var(--text-2);
-            letter-spacing: 1.5px;
-            margin-left: 3px;
-            font-weight: 500;
-        }
-        .wallet .usdt {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
-            color: var(--text-2);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 1px;
-        }
-        .wallet .usdt-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 12px; height: 12px;
-            background: #26A17B;
-            border-radius: 50%;
-            color: #fff;
-            font-size: 0.6rem;
-            font-weight: 700;
-        }
+        .wallet .chips { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--gold); letter-spacing: 0.3px; }
+        .wallet .chips .unit { font-size: 0.6rem; color: var(--text-2); letter-spacing: 1.5px; margin-left: 3px; font-weight: 500; }
+        .wallet .usdt { font-family: 'Inter', sans-serif; font-size: 0.7rem; color: var(--text-2); display: flex; align-items: center; gap: 4px; margin-top: 1px; }
+        .wallet .usdt-icon { display: inline-flex; align-items: center; justify-content: center; width: 12px; height: 12px; background: #26A17B; border-radius: 50%; color: #fff; font-size: 0.6rem; font-weight: 700; }
         .wallet .plus {
             width: 22px; height: 22px;
             border-radius: 6px;
@@ -333,10 +257,7 @@
             line-height: 1;
             transition: all 0.25s;
         }
-        .wallet:hover .plus {
-            background: var(--gold);
-            color: var(--bg-0);
-        }
+        .wallet:hover .plus { background: var(--gold); color: var(--bg-0); }
         .topbar-user .avatar {
             width: 38px; height: 38px;
             border-radius: 50%;
@@ -351,10 +272,7 @@
             cursor: pointer;
             transition: all 0.25s;
         }
-        .topbar-user .avatar:hover {
-            box-shadow: 0 0 20px var(--gold-glow);
-            border-color: var(--gold);
-        }
+        .topbar-user .avatar:hover { box-shadow: 0 0 20px var(--gold-glow); border-color: var(--gold); }
 
         /* ============================================
            HERO
@@ -384,12 +302,7 @@
             align-items: center;
             gap: 10px;
         }
-        .market-hero .hero-eyebrow::before {
-            content: '♠ ♥ ♦ ♣';
-            color: var(--gold);
-            font-size: 0.9rem;
-            letter-spacing: 4px;
-        }
+        .market-hero .hero-eyebrow::before { content: '♠ ♥ ♦ ♣'; color: var(--gold); font-size: 0.9rem; letter-spacing: 4px; }
         .market-hero h1 {
             font-family: 'Cinzel', serif;
             font-size: 3.6rem;
@@ -399,28 +312,10 @@
             line-height: 1.05;
             text-transform: uppercase;
         }
-        .market-hero h1 .gold {
-            color: var(--gold);
-            display: block;
-            text-shadow: 0 0 40px var(--gold-glow);
-        }
-        .market-hero .hero-tagline {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            color: var(--text-1);
-            margin-top: 18px;
-            line-height: 1.75;
-            max-width: 520px;
-        }
-        .market-hero .hero-tagline strong {
-            color: var(--gold);
-            font-weight: 600;
-        }
-        .market-hero .hero-right {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        .market-hero h1 .gold { color: var(--gold); display: block; text-shadow: 0 0 40px var(--gold-glow); }
+        .market-hero .hero-tagline { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-1); margin-top: 18px; line-height: 1.75; max-width: 520px; }
+        .market-hero .hero-tagline strong { color: var(--gold); font-weight: 600; }
+        .market-hero .hero-right { display: flex; gap: 10px; flex-wrap: wrap; }
         .btn-hero {
             font-family: 'Inter', sans-serif;
             font-size: 0.78rem;
@@ -438,45 +333,22 @@
             white-space: nowrap;
             border: none;
         }
-        .btn-hero.primary {
-            background: var(--gold);
-            color: var(--bg-0);
-            box-shadow: 0 4px 24px rgba(240, 185, 11, 0.3);
-        }
-        .btn-hero.primary:hover {
-            background: var(--gold-hi);
-            box-shadow: 0 4px 32px rgba(240, 185, 11, 0.6);
-            transform: translateY(-1px);
-        }
-        .btn-hero.ghost {
-            background: transparent;
-            color: var(--text-0);
-            border: 1px solid var(--border-hi);
-        }
-        .btn-hero.ghost:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
+        .btn-hero.primary { background: var(--gold); color: var(--bg-0); box-shadow: 0 4px 24px rgba(240, 185, 11, 0.3); }
+        .btn-hero.primary:hover { background: var(--gold-hi); box-shadow: 0 4px 32px rgba(240, 185, 11, 0.6); transform: translateY(-1px); }
+        .btn-hero.ghost { background: transparent; color: var(--text-0); border: 1px solid var(--border-hi); }
+        .btn-hero.ghost:hover { border-color: var(--gold); color: var(--gold); }
 
         /* ============================================
-           ТОП-СТОЛ НЕДЕЛИ
+           ТОП-СТОЛ
            ============================================ */
-        .top-table {
-            width: 100%;
-            max-width: 1500px;
-            padding: 12px 32px 30px;
-            position: relative;
-            z-index: 5;
-        }
+        .top-table { width: 100%; max-width: 1500px; padding: 12px 32px 30px; position: relative; z-index: 5; }
         .top-table-inner {
             display: grid;
             grid-template-columns: auto 1fr auto;
             gap: 24px;
             align-items: center;
             padding: 22px 26px;
-            background: 
-                linear-gradient(135deg, rgba(240, 185, 11, 0.08) 0%, transparent 60%),
-                var(--bg-1);
+            background: linear-gradient(135deg, rgba(240, 185, 11, 0.08) 0%, transparent 60%), var(--bg-1);
             border: 1px solid var(--border);
             border-left: 3px solid var(--gold);
             border-radius: var(--radius);
@@ -527,32 +399,10 @@
             background: var(--green);
             box-shadow: 0 0 10px var(--green-glow);
         }
-        .top-table .tt-sub {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            color: var(--text-2);
-            margin-top: 6px;
-        }
-        .top-table .tt-stats {
-            display: flex;
-            gap: 22px;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-        .top-table .tt-stat {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
-            color: var(--text-2);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .top-table .tt-stat strong {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 700;
-            color: var(--gold);
-            font-size: 0.85rem;
-        }
+        .top-table .tt-sub { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--text-2); margin-top: 6px; }
+        .top-table .tt-stats { display: flex; gap: 22px; margin-top: 12px; flex-wrap: wrap; }
+        .top-table .tt-stat { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--text-2); display: flex; align-items: center; gap: 6px; }
+        .top-table .tt-stat strong { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--gold); font-size: 0.85rem; }
         .top-table .tt-go {
             font-family: 'Inter', sans-serif;
             font-size: 0.72rem;
@@ -568,22 +418,12 @@
             transition: all 0.25s;
             white-space: nowrap;
         }
-        .top-table .tt-go:hover {
-            background: var(--gold-hi);
-            box-shadow: 0 4px 24px rgba(240, 185, 11, 0.55);
-            transform: translateY(-1px);
-        }
+        .top-table .tt-go:hover { background: var(--gold-hi); box-shadow: 0 4px 24px rgba(240, 185, 11, 0.55); transform: translateY(-1px); }
 
         /* ============================================
            СЕКЦИИ
            ============================================ */
-        .section {
-            width: 100%;
-            max-width: 1500px;
-            padding: 24px 32px 40px;
-            position: relative;
-            z-index: 5;
-        }
+        .section { width: 100%; max-width: 1500px; padding: 24px 32px 40px; position: relative; z-index: 5; }
         .section-head {
             display: flex;
             align-items: center;
@@ -615,19 +455,7 @@
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.4; transform: scale(1.35); }
         }
-        .section-title .count {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 400;
-            color: var(--text-2);
-            letter-spacing: 0.5px;
-            text-transform: none;
-        }
-        .section-nav {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+        .section-title .count { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 400; color: var(--text-2); letter-spacing: 0.5px; text-transform: none; }
         .section-link {
             font-family: 'Inter', sans-serif;
             font-size: 0.72rem;
@@ -642,17 +470,12 @@
             transition: all 0.25s;
             white-space: nowrap;
         }
-        .section-link:hover {
-            color: var(--gold);
-            border-color: var(--gold);
-        }
+        .section-link:hover { color: var(--gold); border-color: var(--gold); }
 
         /* ============================================
-           КАРУСЕЛЬ (общая)
+           КАРУСЕЛЬ
            ============================================ */
-        .carousel-wrap {
-            position: relative;
-        }
+        .carousel-wrap { position: relative; }
         .carousel {
             display: flex;
             gap: 18px;
@@ -688,31 +511,16 @@
             backdrop-filter: blur(8px);
             user-select: none;
         }
-        .carousel-nav:hover {
-            background: var(--gold);
-            color: var(--bg-0);
-            border-color: var(--gold);
-            box-shadow: 0 0 24px var(--gold-glow);
-        }
+        .carousel-nav:hover { background: var(--gold); color: var(--bg-0); border-color: var(--gold); box-shadow: 0 0 24px var(--gold-glow); }
         .carousel-nav.prev { left: -18px; }
         .carousel-nav.next { right: -18px; }
-        .carousel-nav:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-        .carousel-nav:disabled:hover {
-            background: rgba(15, 17, 23, 0.95);
-            color: var(--text-0);
-            border-color: var(--border-hi);
-            box-shadow: none;
-        }
+        .carousel-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+        .carousel-nav:disabled:hover { background: rgba(15, 17, 23, 0.95); color: var(--text-0); border-color: var(--border-hi); box-shadow: none; }
 
-        @media (max-width: 900px) {
-            .carousel-nav { display: none; }
-        }
+        @media (max-width: 900px) { .carousel-nav { display: none; } }
 
         /* ============================================
-           АУКЦИОНЫ — КАРТОЧКИ В КАРУСЕЛИ
+           АУКЦИОНЫ
            ============================================ */
         .auction-card {
             flex: 0 0 340px;
@@ -736,23 +544,45 @@
             position: relative;
             width: 100%;
             aspect-ratio: 16 / 10;
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(246, 70, 93, 0.4) 0%, transparent 55%),
-                radial-gradient(ellipse at 70% 80%, rgba(180, 0, 60, 0.3) 0%, transparent 55%),
-                linear-gradient(135deg, #1a0508, #0a0205);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
-        .auction-card .ac-thumb::after {
-            content: '❦';
+        /* Разные фоны для каждой карточки */
+        .ac-thumb.bg-1 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(246, 70, 93, 0.4) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 80%, rgba(180, 0, 60, 0.3) 0%, transparent 55%),
+                linear-gradient(135deg, #1a0508, #0a0205);
+        }
+        .ac-thumb.bg-2 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(240, 185, 11, 0.35) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 80%, rgba(140, 100, 0, 0.3) 0%, transparent 55%),
+                linear-gradient(135deg, #1a1505, #0a0802);
+        }
+        .ac-thumb.bg-3 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(160, 60, 220, 0.4) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 80%, rgba(90, 0, 140, 0.3) 0%, transparent 55%),
+                linear-gradient(135deg, #15051a, #08020a);
+        }
+        .ac-thumb.bg-4 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(60, 140, 220, 0.35) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 80%, rgba(0, 60, 140, 0.3) 0%, transparent 55%),
+                linear-gradient(135deg, #05101a, #02060a);
+        }
+        .ac-thumb::after {
             font-family: 'Cinzel', serif;
             font-size: 4.5rem;
-            color: rgba(246, 70, 93, 0.2);
-            text-shadow: 0 0 60px rgba(246, 70, 93, 0.5);
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
+        .ac-thumb.bg-1::after { content: '♦'; color: rgba(246, 70, 93, 0.25); text-shadow: 0 0 60px rgba(246, 70, 93, 0.6); }
+        .ac-thumb.bg-2::after { content: '♣'; color: rgba(240, 185, 11, 0.25); text-shadow: 0 0 60px rgba(240, 185, 11, 0.6); }
+        .ac-thumb.bg-3::after { content: '♥'; color: rgba(160, 60, 220, 0.25); text-shadow: 0 0 60px rgba(160, 60, 220, 0.6); }
+        .ac-thumb.bg-4::after { content: '♠'; color: rgba(60, 140, 220, 0.25); text-shadow: 0 0 60px rgba(60, 140, 220, 0.6); }
         .auction-card:hover .ac-thumb::after { transform: scale(1.1); }
 
         .auction-card .ac-badge-live {
@@ -799,10 +629,7 @@
             align-items: center;
             gap: 5px;
         }
-        .auction-card .ac-timer::before {
-            content: '⏱';
-            font-size: 0.85rem;
-        }
+        .auction-card .ac-timer::before { content: '⏱'; font-size: 0.85rem; }
 
         .auction-card .ac-body {
             padding: 16px 18px 18px;
@@ -838,10 +665,7 @@
             background: var(--green);
             box-shadow: 0 0 8px var(--green-glow);
         }
-        .auction-card .ac-author .status.offline {
-            background: var(--text-2);
-            box-shadow: none;
-        }
+        .auction-card .ac-author .status.offline { background: var(--text-2); box-shadow: none; }
 
         .auction-card .ac-bid-block {
             display: flex;
@@ -866,12 +690,17 @@
             color: var(--red);
             letter-spacing: 0.5px;
             line-height: 1;
+            transition: color 0.4s ease, text-shadow 0.4s ease;
         }
         .auction-card .ac-bid-value .unit {
             font-size: 0.7rem;
             color: var(--text-2);
             font-weight: 500;
             margin-left: 4px;
+        }
+        .auction-card .ac-bid-value.bump {
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold-glow);
         }
 
         .auction-card .ac-meta {
@@ -881,8 +710,14 @@
             display: flex;
             justify-content: space-between;
             gap: 10px;
+            transition: color 0.4s ease;
         }
         .auction-card .ac-meta strong { color: var(--text-1); font-weight: 600; }
+        .auction-card .ac-meta .leader {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
         .auction-card .ac-btn {
             font-family: 'Inter', sans-serif;
@@ -900,13 +735,10 @@
             width: 100%;
             margin-top: auto;
         }
-        .auction-card .ac-btn:hover {
-            background: var(--red-hi);
-            box-shadow: 0 0 24px var(--red-glow);
-        }
+        .auction-card .ac-btn:hover { background: var(--red-hi); box-shadow: 0 0 24px var(--red-glow); }
 
         /* ============================================
-           ЮЧИ — КАРТОЧКИ В КАРУСЕЛИ
+           ЮЧИ
            ============================================ */
         .ych-card {
             flex: 0 0 300px;
@@ -930,23 +762,44 @@
             position: relative;
             width: 100%;
             aspect-ratio: 4 / 3;
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(255, 68, 170, 0.3) 0%, transparent 55%),
-                radial-gradient(ellipse at 70% 80%, rgba(120, 0, 60, 0.3) 0%, transparent 55%),
-                linear-gradient(135deg, #1a0515, #0a0208);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
-        .ych-card .yc-thumb::after {
-            content: '❦';
+        .yc-thumb.bg-1 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(255, 68, 170, 0.35) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 80%, rgba(120, 0, 60, 0.3) 0%, transparent 55%),
+                linear-gradient(135deg, #1a0515, #0a0208);
+        }
+        .yc-thumb.bg-2 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(255, 130, 60, 0.35) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 80%, rgba(140, 40, 0, 0.3) 0%, transparent 55%),
+                linear-gradient(135deg, #1a0a05, #0a0402);
+        }
+        .yc-thumb.bg-3 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(80, 220, 200, 0.3) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 80%, rgba(0, 100, 90, 0.3) 0%, transparent 55%),
+                linear-gradient(135deg, #051a18, #020a09);
+        }
+        .yc-thumb.bg-4 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(220, 100, 255, 0.35) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 80%, rgba(120, 0, 140, 0.3) 0%, transparent 55%),
+                linear-gradient(135deg, #15051a, #08020a);
+        }
+        .yc-thumb::after {
             font-family: 'Cinzel', serif;
             font-size: 4rem;
-            color: rgba(255, 68, 170, 0.2);
-            text-shadow: 0 0 60px rgba(255, 68, 170, 0.5);
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
+        .yc-thumb.bg-1::after { content: '❦'; color: rgba(255, 68, 170, 0.25); text-shadow: 0 0 60px rgba(255, 68, 170, 0.6); }
+        .yc-thumb.bg-2::after { content: '♥'; color: rgba(255, 130, 60, 0.25); text-shadow: 0 0 60px rgba(255, 130, 60, 0.6); }
+        .yc-thumb.bg-3::after { content: '♠'; color: rgba(80, 220, 200, 0.25); text-shadow: 0 0 60px rgba(80, 220, 200, 0.6); }
+        .yc-thumb.bg-4::after { content: '♦'; color: rgba(220, 100, 255, 0.25); text-shadow: 0 0 60px rgba(220, 100, 255, 0.6); }
         .ych-card:hover .yc-thumb::after { transform: scale(1.1); }
 
         .ych-card .yc-badge {
@@ -965,13 +818,7 @@
             box-shadow: 0 4px 16px var(--pink-glow);
         }
 
-        .ych-card .yc-body {
-            padding: 16px 18px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            flex: 1;
-        }
+        .ych-card .yc-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
         .ych-card .yc-title {
             font-family: 'Cinzel', serif;
             font-size: 1rem;
@@ -983,12 +830,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .ych-card .yc-author {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.78rem;
-            color: var(--text-2);
-            margin-top: -6px;
-        }
+        .ych-card .yc-author { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: var(--text-2); margin-top: -6px; }
 
         .ych-card .yc-slots {
             display: flex;
@@ -1007,11 +849,7 @@
             color: var(--text-2);
             text-transform: uppercase;
         }
-        .ych-card .yc-slot-bar {
-            display: flex;
-            gap: 4px;
-            flex: 1;
-        }
+        .ych-card .yc-slot-bar { display: flex; gap: 4px; flex: 1; }
         .ych-card .yc-slot {
             width: 100%;
             height: 14px;
@@ -1024,10 +862,7 @@
             border-color: #ff88dd;
             box-shadow: 0 0 10px rgba(255, 68, 170, 0.7);
         }
-        .ych-card .yc-slot.taken {
-            background: rgba(60, 15, 45, 0.5);
-            border-color: rgba(255, 68, 170, 0.1);
-        }
+        .ych-card .yc-slot.taken { background: rgba(60, 15, 45, 0.5); border-color: rgba(255, 68, 170, 0.1); }
         .ych-card .yc-slots-num {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
@@ -1058,12 +893,7 @@
             color: var(--gold);
             letter-spacing: 0.3px;
         }
-        .ych-card .yc-price .unit {
-            font-size: 0.65rem;
-            color: var(--text-2);
-            font-weight: 500;
-            margin-left: 3px;
-        }
+        .ych-card .yc-price .unit { font-size: 0.65rem; color: var(--text-2); font-weight: 500; margin-left: 3px; }
 
         .ych-card .yc-btn {
             font-family: 'Inter', sans-serif;
@@ -1081,13 +911,10 @@
             width: 100%;
             margin-top: auto;
         }
-        .ych-card .yc-btn:hover {
-            background: var(--green-hi);
-            box-shadow: 0 0 24px var(--green-glow);
-        }
+        .ych-card .yc-btn:hover { background: var(--green-hi); box-shadow: 0 0 24px var(--green-glow); }
 
         /* ============================================
-           АРТЫ — СЕТКА
+           АРТЫ
            ============================================ */
         .art-grid {
             display: grid;
@@ -1116,22 +943,47 @@
             position: relative;
             width: 100%;
             aspect-ratio: 4 / 3;
-            background: 
-                radial-gradient(ellipse at 40% 30%, rgba(240, 185, 11, 0.15) 0%, transparent 55%),
-                linear-gradient(135deg, #1a0e05, #0d0703);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
-        .art-tile .at-thumb::after {
-            content: '❦';
+        /* Разные фоны для артов */
+        .at-thumb.bg-1 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(240, 185, 11, 0.15) 0%, transparent 55%),
+                linear-gradient(135deg, #1a0e05, #0d0703);
+        }
+        .at-thumb.bg-2 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(246, 70, 93, 0.15) 0%, transparent 55%),
+                linear-gradient(135deg, #1a0508, #0d0305);
+        }
+        .at-thumb.bg-3 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(160, 60, 220, 0.15) 0%, transparent 55%),
+                linear-gradient(135deg, #15051a, #08020a);
+        }
+        .at-thumb.bg-4 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(60, 140, 220, 0.15) 0%, transparent 55%),
+                linear-gradient(135deg, #05101a, #02060a);
+        }
+        .at-thumb.bg-5 {
+            background: 
+                radial-gradient(ellipse at 40% 30%, rgba(14, 203, 129, 0.15) 0%, transparent 55%),
+                linear-gradient(135deg, #051a10, #020a06);
+        }
+        .at-thumb::after {
             font-family: 'Cinzel', serif;
             font-size: 3.5rem;
-            color: rgba(240, 185, 11, 0.15);
-            text-shadow: 0 0 40px rgba(240, 185, 11, 0.3);
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
+        .at-thumb.bg-1::after { content: '❦'; color: rgba(240, 185, 11, 0.18); text-shadow: 0 0 40px rgba(240, 185, 11, 0.4); }
+        .at-thumb.bg-2::after { content: '♥'; color: rgba(246, 70, 93, 0.18); text-shadow: 0 0 40px rgba(246, 70, 93, 0.4); }
+        .at-thumb.bg-3::after { content: '♦'; color: rgba(160, 60, 220, 0.18); text-shadow: 0 0 40px rgba(160, 60, 220, 0.4); }
+        .at-thumb.bg-4::after { content: '♠'; color: rgba(60, 140, 220, 0.18); text-shadow: 0 0 40px rgba(60, 140, 220, 0.4); }
+        .at-thumb.bg-5::after { content: '♣'; color: rgba(14, 203, 129, 0.18); text-shadow: 0 0 40px rgba(14, 203, 129, 0.4); }
         .art-tile:hover .at-thumb::after { transform: scale(1.1); }
 
         .art-tile .at-badge {
@@ -1163,13 +1015,7 @@
             text-transform: uppercase;
             z-index: 2;
         }
-        .art-tile .at-info {
-            padding: 12px 14px 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            flex: 1;
-        }
+        .art-tile .at-info { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
         .art-tile .at-title {
             font-family: 'Cinzel', serif;
             font-size: 0.88rem;
@@ -1181,14 +1027,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .art-tile .at-author {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
-            color: var(--text-2);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .art-tile .at-author { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--text-2); display: flex; align-items: center; gap: 6px; }
         .art-tile .at-author .status {
             display: inline-block;
             width: 6px; height: 6px;
@@ -1196,10 +1035,7 @@
             background: var(--green);
             box-shadow: 0 0 6px var(--green-glow);
         }
-        .art-tile .at-author .status.offline {
-            background: var(--text-2);
-            box-shadow: none;
-        }
+        .art-tile .at-author .status.offline { background: var(--text-2); box-shadow: none; }
         .art-tile .at-bottom {
             display: flex;
             align-items: center;
@@ -1216,19 +1052,8 @@
             color: var(--gold);
             letter-spacing: 0.3px;
         }
-        .art-tile .at-price .unit {
-            font-size: 0.6rem;
-            color: var(--text-2);
-            font-weight: 500;
-            margin-left: 3px;
-        }
-        .art-tile .at-stats {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
-            color: var(--text-2);
-            display: flex;
-            gap: 10px;
-        }
+        .art-tile .at-price .unit { font-size: 0.6rem; color: var(--text-2); font-weight: 500; margin-left: 3px; }
+        .art-tile .at-stats { font-family: 'Inter', sans-serif; font-size: 0.7rem; color: var(--text-2); display: flex; gap: 10px; }
         .art-tile .at-stats .heart { color: var(--red); }
 
         /* ============================================
@@ -1259,10 +1084,7 @@
             letter-spacing: 0.5px;
             text-transform: none;
         }
-        .footer .back-link:hover {
-            color: var(--gold-hi);
-            text-shadow: 0 0 20px var(--gold-glow);
-        }
+        .footer .back-link:hover { color: var(--gold-hi); text-shadow: 0 0 20px var(--gold-glow); }
         .footer span { color: var(--red); }
 
         /* ============================================
@@ -1351,18 +1173,14 @@
 </head>
 <body>
 
-    <!-- Атмосфера -->
     <div class="bar-lights"></div>
     <div class="bar-glow"></div>
     <div class="dust-bg" id="dustBg"></div>
 
-    <!-- ============================================
-         ШАПКА
-         ============================================ -->
+    <!-- ШАПКА -->
     <div class="topbar-wrap">
         <header class="topbar">
             <a href="#" class="logo">FENBO<span class="sub">казик</span></a>
-
             <nav class="topbar-nav">
                 <a href="#" class="active">Главная</a>
                 <a href="#">Аукционы</a>
@@ -1370,11 +1188,8 @@
                 <a href="#">Адопты</a>
                 <a href="#">Заказы</a>
             </nav>
-
             <div class="topbar-user">
-                <button class="btn-new-lot" type="button">
-                    <span class="plus">+</span> Новый лот
-                </button>
+                <button class="btn-new-lot" type="button"><span class="plus">+</span> Новый лот</button>
                 <div class="wallet" title="Кошелёк FENBO">
                     <div class="chip-icon"></div>
                     <div class="balance">
@@ -1388,16 +1203,12 @@
         </header>
     </div>
 
-    <!-- ============================================
-         HERO
-         ============================================ -->
+    <!-- HERO -->
     <section class="market-hero">
         <div class="hero-left">
             <div class="hero-eyebrow">Художественный рынок</div>
             <h1>Ставь на <span class="gold">талант</span></h1>
-            <p class="hero-tagline">
-                Здесь художники <strong>зарабатывают</strong>, а коллекционеры находят своё. Заказы, ючи, адопты — за одним столом.
-            </p>
+            <p class="hero-tagline">Здесь художники <strong>зарабатывают</strong>, а коллекционеры находят своё. Заказы, ючи, адопты — за одним столом.</p>
         </div>
         <div class="hero-right">
             <a href="#auctions" class="btn-hero primary">Живые аукционы</a>
@@ -1405,17 +1216,12 @@
         </div>
     </section>
 
-    <!-- ============================================
-         ТОП-СТОЛ НЕДЕЛИ
-         ============================================ -->
+    <!-- ТОП-СТОЛ -->
     <div class="top-table">
         <div class="top-table-inner">
             <div class="tt-avatar">V</div>
             <div class="tt-body">
-                <div class="tt-name">
-                    Velvet_Rose
-                    <span class="status"></span>
-                </div>
+                <div class="tt-name">Velvet_Rose <span class="status"></span></div>
                 <div class="tt-sub">Живопись · бархат · интим · 5 лет на сцене</div>
                 <div class="tt-stats">
                     <div class="tt-stat">Заказов: <strong>342</strong></div>
@@ -1427,9 +1233,7 @@
         </div>
     </div>
 
-    <!-- ============================================
-         АУКЦИОНЫ — КАРУСЕЛЬ
-         ============================================ -->
+    <!-- АУКЦИОНЫ -->
     <section class="section" id="auctions">
         <div class="section-head">
             <h2 class="section-title">
@@ -1442,10 +1246,10 @@
 
         <div class="carousel-wrap">
             <button class="carousel-nav prev" data-target="auctionCarousel" type="button">‹</button>
-            <div class="carousel" id="auctionCarousel">
+            <div class="carousel" id="auctionCarousel" data-autoscroll="5000">
 
-                <div class="auction-card" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250">
-                    <div class="ac-thumb">
+                <div class="auction-card" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250" data-bids="12" data-leader="Anonymous_01">
+                    <div class="ac-thumb bg-1">
                         <span class="ac-badge-live">LIVE</span>
                         <span class="ac-timer" data-end="2026-12-31T23:59:59">—</span>
                     </div>
@@ -1454,18 +1258,18 @@
                         <div class="ac-author"><span class="status"></span>MidnightLux</div>
                         <div class="ac-bid-block">
                             <span class="ac-bid-label">Текущая ставка</span>
-                            <span class="ac-bid-value">1 250<span class="unit">FEN</span></span>
+                            <span class="ac-bid-value" data-bid-el>1 250<span class="unit">FEN</span></span>
                         </div>
                         <div class="ac-meta">
-                            <span><strong>12</strong> ставок</span>
-                            <span>лидер: Anonymous_01</span>
+                            <span><strong data-bids-el>12</strong> ставок</span>
+                            <span class="leader">лидер: <span data-leader-el>Anonymous_01</span></span>
                         </div>
                         <button class="ac-btn" type="button">Сделать ставку</button>
                     </div>
                 </div>
 
-                <div class="auction-card" data-title="Золотая клетка" data-author="GoldenCage" data-bid="2400">
-                    <div class="ac-thumb">
+                <div class="auction-card" data-title="Золотая клетка" data-author="GoldenCage" data-bid="2400" data-bids="21" data-leader="Noir_Art">
+                    <div class="ac-thumb bg-2">
                         <span class="ac-badge-live">LIVE</span>
                         <span class="ac-timer" data-end="2026-12-30T18:00:00">—</span>
                     </div>
@@ -1474,18 +1278,18 @@
                         <div class="ac-author"><span class="status"></span>GoldenCage</div>
                         <div class="ac-bid-block">
                             <span class="ac-bid-label">Текущая ставка</span>
-                            <span class="ac-bid-value">2 400<span class="unit">FEN</span></span>
+                            <span class="ac-bid-value" data-bid-el>2 400<span class="unit">FEN</span></span>
                         </div>
                         <div class="ac-meta">
-                            <span><strong>21</strong> ставка</span>
-                            <span>лидер: Noir_Art</span>
+                            <span><strong data-bids-el>21</strong> ставка</span>
+                            <span class="leader">лидер: <span data-leader-el>Noir_Art</span></span>
                         </div>
                         <button class="ac-btn" type="button">Сделать ставку</button>
                     </div>
                 </div>
 
-                <div class="auction-card" data-title="Пурпурный дым" data-author="PurpleSmoke" data-bid="890">
-                    <div class="ac-thumb">
+                <div class="auction-card" data-title="Пурпурный дым" data-author="PurpleSmoke" data-bid="890" data-bids="7" data-leader="Velvet_Rose">
+                    <div class="ac-thumb bg-3">
                         <span class="ac-badge-live">LIVE</span>
                         <span class="ac-timer" data-end="2026-12-29T12:30:00">—</span>
                     </div>
@@ -1494,18 +1298,18 @@
                         <div class="ac-author"><span class="status"></span>PurpleSmoke</div>
                         <div class="ac-bid-block">
                             <span class="ac-bid-label">Текущая ставка</span>
-                            <span class="ac-bid-value">890<span class="unit">FEN</span></span>
+                            <span class="ac-bid-value" data-bid-el>890<span class="unit">FEN</span></span>
                         </div>
                         <div class="ac-meta">
-                            <span><strong>7</strong> ставок</span>
-                            <span>лидер: Velvet_Rose</span>
+                            <span><strong data-bids-el>7</strong> ставок</span>
+                            <span class="leader">лидер: <span data-leader-el>Velvet_Rose</span></span>
                         </div>
                         <button class="ac-btn" type="button">Сделать ставку</button>
                     </div>
                 </div>
 
-                <div class="auction-card" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200">
-                    <div class="ac-thumb">
+                <div class="auction-card" data-title="Алый закат" data-author="ScarletSunset" data-bid="3200" data-bids="34" data-leader="TwinFlame">
+                    <div class="ac-thumb bg-4">
                         <span class="ac-badge-live">LIVE</span>
                         <span class="ac-timer" data-end="2026-12-28T22:00:00">—</span>
                     </div>
@@ -1514,11 +1318,11 @@
                         <div class="ac-author"><span class="status offline"></span>ScarletSunset</div>
                         <div class="ac-bid-block">
                             <span class="ac-bid-label">Текущая ставка</span>
-                            <span class="ac-bid-value">3 200<span class="unit">FEN</span></span>
+                            <span class="ac-bid-value" data-bid-el>3 200<span class="unit">FEN</span></span>
                         </div>
                         <div class="ac-meta">
-                            <span><strong>34</strong> ставки</span>
-                            <span>лидер: TwinFlame</span>
+                            <span><strong data-bids-el>34</strong> ставки</span>
+                            <span class="leader">лидер: <span data-leader-el>TwinFlame</span></span>
                         </div>
                         <button class="ac-btn" type="button">Сделать ставку</button>
                     </div>
@@ -1529,9 +1333,7 @@
         </div>
     </section>
 
-    <!-- ============================================
-         ЮЧИ — КАРУСЕЛЬ
-         ============================================ -->
+    <!-- ЮЧИ -->
     <section class="section" id="ych">
         <div class="section-head">
             <h2 class="section-title">
@@ -1543,12 +1345,10 @@
 
         <div class="carousel-wrap">
             <button class="carousel-nav prev" data-target="ychCarousel" type="button">‹</button>
-            <div class="carousel" id="ychCarousel">
+            <div class="carousel" id="ychCarousel" data-autoscroll="5000">
 
                 <div class="ych-card" data-title="Парный портрет" data-author="TwinFlame" data-slots="2">
-                    <div class="yc-thumb">
-                        <span class="yc-badge">YCH</span>
-                    </div>
+                    <div class="yc-thumb bg-1"><span class="yc-badge">YCH</span></div>
                     <div class="yc-body">
                         <div class="yc-title">Парный портрет</div>
                         <div class="yc-author">by TwinFlame</div>
@@ -1570,9 +1370,7 @@
                 </div>
 
                 <div class="ych-card" data-title="Шёлковые оковы" data-author="BoundElegance" data-slots="1">
-                    <div class="yc-thumb">
-                        <span class="yc-badge">YCH</span>
-                    </div>
+                    <div class="yc-thumb bg-2"><span class="yc-badge">YCH</span></div>
                     <div class="yc-body">
                         <div class="yc-title">Шёлковые оковы</div>
                         <div class="yc-author">by BoundElegance</div>
@@ -1594,9 +1392,7 @@
                 </div>
 
                 <div class="ych-card" data-title="Ночной гость" data-author="Noir_Art" data-slots="3">
-                    <div class="yc-thumb">
-                        <span class="yc-badge">YCH</span>
-                    </div>
+                    <div class="yc-thumb bg-3"><span class="yc-badge">YCH</span></div>
                     <div class="yc-body">
                         <div class="yc-title">Ночной гость</div>
                         <div class="yc-author">by Noir_Art</div>
@@ -1618,9 +1414,7 @@
                 </div>
 
                 <div class="ych-card" data-title="Бархатный вечер" data-author="Velvet_Rose" data-slots="1">
-                    <div class="yc-thumb">
-                        <span class="yc-badge">YCH</span>
-                    </div>
+                    <div class="yc-thumb bg-4"><span class="yc-badge">YCH</span></div>
                     <div class="yc-body">
                         <div class="yc-title">Бархатный вечер</div>
                         <div class="yc-author">by Velvet_Rose</div>
@@ -1646,195 +1440,126 @@
         </div>
     </section>
 
-    <!-- ============================================
-         АРТЫ
-         ============================================ -->
+    <!-- АРТЫ -->
     <section class="section" id="arts">
         <div class="section-head">
-            <h2 class="section-title">
-                🎨 Арты
-                <span class="count">· вся витрина зала</span>
-            </h2>
+            <h2 class="section-title">🎨 Арты <span class="count">· вся витрина зала</span></h2>
         </div>
 
         <div class="art-grid">
 
             <a href="#" class="art-tile" data-title="Бархатный вечер" data-author="Velvet_Rose" data-price="500">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                    <span class="at-hot">HOT</span>
-                </div>
+                <div class="at-thumb bg-1"><span class="at-badge">Арт</span><span class="at-hot">HOT</span></div>
                 <div class="at-info">
                     <div class="at-title">Бархатный вечер</div>
                     <div class="at-author"><span class="status"></span>Velvet_Rose</div>
-                    <div class="at-bottom">
-                        <div class="at-price">500<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>1.2k · 👁 4.5k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">500<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>1.2k · 👁 4.5k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="Ночная смена" data-author="Noir_Art" data-price="400">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                </div>
+                <div class="at-thumb bg-2"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Ночная смена</div>
                     <div class="at-author"><span class="status offline"></span>Noir_Art</div>
-                    <div class="at-bottom">
-                        <div class="at-price">400<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>856 · 👁 2.1k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">400<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>856 · 👁 2.1k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="Красный шёлк" data-author="ScarletDream" data-price="750">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                </div>
+                <div class="at-thumb bg-3"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Красный шёлк</div>
                     <div class="at-author"><span class="status"></span>ScarletDream</div>
-                    <div class="at-bottom">
-                        <div class="at-price">750<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>2.4k · 👁 8.9k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">750<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>2.4k · 👁 8.9k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="Тёмный бархат" data-author="DarkVelvet" data-price="550">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                </div>
+                <div class="at-thumb bg-4"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Тёмный бархат</div>
                     <div class="at-author"><span class="status"></span>DarkVelvet</div>
-                    <div class="at-bottom">
-                        <div class="at-price">550<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>1.4k · 👁 4.1k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">550<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>1.4k · 👁 4.1k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="Шёпот в темноте" data-author="WhisperArt" data-price="900">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                </div>
+                <div class="at-thumb bg-5"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Шёпот в темноте</div>
                     <div class="at-author"><span class="status"></span>WhisperArt</div>
-                    <div class="at-bottom">
-                        <div class="at-price">900<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>1.9k · 👁 6.3k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">900<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>1.9k · 👁 6.3k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="За кулисами" data-author="Backstage_" data-price="700">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                </div>
+                <div class="at-thumb bg-1"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">За кулисами</div>
                     <div class="at-author"><span class="status"></span>Backstage_</div>
-                    <div class="at-bottom">
-                        <div class="at-price">700<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>921 · 👁 3.4k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">700<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>921 · 👁 3.4k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="Две свечи" data-author="TwinFlame" data-price="650">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                </div>
+                <div class="at-thumb bg-2"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Две свечи</div>
                     <div class="at-author"><span class="status offline"></span>TwinFlame</div>
-                    <div class="at-bottom">
-                        <div class="at-price">650<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>3.1k · 👁 12k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">650<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>3.1k · 👁 12k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="Шёлковые оковы" data-author="BoundElegance" data-price="1200">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                </div>
+                <div class="at-thumb bg-3"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Шёлковые оковы</div>
                     <div class="at-author"><span class="status"></span>BoundElegance</div>
-                    <div class="at-bottom">
-                        <div class="at-price">1 200<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>1.8k · 👁 5.2k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">1 200<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>1.8k · 👁 5.2k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="Сцена · 03:00" data-author="MidnightLux" data-price="1500">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                </div>
+                <div class="at-thumb bg-4"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Сцена · 03:00</div>
                     <div class="at-author"><span class="status"></span>MidnightLux</div>
-                    <div class="at-bottom">
-                        <div class="at-price">1 500<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>631 · 👁 1.7k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">1 500<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>631 · 👁 1.7k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="Пурпурный дым" data-author="PurpleSmoke" data-price="400">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                </div>
+                <div class="at-thumb bg-5"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Пурпурный дым</div>
                     <div class="at-author"><span class="status offline"></span>PurpleSmoke</div>
-                    <div class="at-bottom">
-                        <div class="at-price">400<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>1.1k · 👁 2.9k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">400<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>1.1k · 👁 2.9k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="Алый закат" data-author="ScarletSunset" data-price="1800">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                    <span class="at-hot">TOP</span>
-                </div>
+                <div class="at-thumb bg-1"><span class="at-badge">Арт</span><span class="at-hot">TOP</span></div>
                 <div class="at-info">
                     <div class="at-title">Алый закат</div>
                     <div class="at-author"><span class="status"></span>ScarletSunset</div>
-                    <div class="at-bottom">
-                        <div class="at-price">1 800<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>3.5k · 👁 15k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">1 800<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>3.5k · 👁 15k</div></div>
                 </div>
             </a>
 
             <a href="#" class="art-tile" data-title="Золотая клетка" data-author="GoldenCage" data-price="2000">
-                <div class="at-thumb">
-                    <span class="at-badge">Арт</span>
-                </div>
+                <div class="at-thumb bg-2"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Золотая клетка</div>
                     <div class="at-author"><span class="status"></span>GoldenCage</div>
-                    <div class="at-bottom">
-                        <div class="at-price">2 000<span class="unit">FEN</span></div>
-                        <div class="at-stats"><span class="heart">♥</span>2.7k · 👁 9.8k</div>
-                    </div>
+                    <div class="at-bottom"><div class="at-price">2 000<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>2.7k · 👁 9.8k</div></div>
                 </div>
             </a>
 
         </div>
     </section>
 
-    <!-- ============================================
-         ПОДВАЛ
-         ============================================ -->
+    <!-- ПОДВАЛ -->
     <footer class="footer">
         <a href="#" class="back-link">← Вернуться в главное меню</a>
         <div>✦ FENBO · РЫНОК ✦ 2025 ✦ <span>Только 18+</span> ✦</div>
@@ -1863,7 +1588,7 @@
         })();
 
         /* ============================================
-           ТАЙМЕРЫ
+           ТАЙМЕРЫ АУКЦИОНОВ
            ============================================ */
         (function auctionTimers() {
             const timers = document.querySelectorAll('[data-end]');
@@ -1894,9 +1619,78 @@
         })();
 
         /* ============================================
+           АВТОПРОКРУТКА КАРУСЕЛЕЙ
+           ============================================ */
+        (function autoScroll() {
+            document.querySelectorAll('.carousel[data-autoscroll]').forEach(carousel => {
+                const interval = parseInt(carousel.dataset.autoscroll, 10) || 5000;
+                let paused = false;
+                let resumeTimer = null;
+                let autoTimer = null;
+
+                function scrollNext() {
+                    if (paused) return;
+                    const firstCard = carousel.querySelector('*');
+                    if (!firstCard) return;
+                    const cardWidth = firstCard.offsetWidth + 18;
+                    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+                    if (carousel.scrollLeft >= maxScroll - 5) {
+                        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        carousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                    }
+                }
+
+                function start() {
+                    stop();
+                    autoTimer = setInterval(scrollNext, interval);
+                }
+                function stop() {
+                    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+                }
+                function pause() {
+                    paused = true;
+                    if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
+                }
+                function resume(delay) {
+                    paused = false;
+                    if (resumeTimer) clearTimeout(resumeTimer);
+                    resumeTimer = setTimeout(() => {
+                        start();
+                    }, delay || 3000);
+                }
+
+                /* Пауза при наведении */
+                carousel.addEventListener('mouseenter', pause);
+                carousel.addEventListener('mouseleave', () => resume(2000));
+
+                /* Пауза при касании */
+                carousel.addEventListener('touchstart', pause, { passive: true });
+                carousel.addEventListener('touchend', () => resume(3000));
+
+                /* Пауза при ручной прокрутке */
+                carousel.addEventListener('wheel', pause, { passive: true });
+                carousel.addEventListener('scroll', () => {
+                    /* Не сбивать автоскролл, если это он сам */
+                    if (paused) return;
+                });
+
+                /* Пауза, если пользователь нажал стрелку */
+                document.querySelectorAll('.carousel-nav[data-target="' + carousel.id + '"]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        pause();
+                        resume(5000);
+                    });
+                });
+
+                start();
+            });
+        })();
+
+        /* ============================================
            КАРУСЕЛИ — СТРЕЛКИ
            ============================================ */
-        (function carousels() {
+        (function carouselArrows() {
             document.querySelectorAll('.carousel-nav').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const targetId = btn.dataset.target;
@@ -1909,7 +1703,6 @@
                 });
             });
 
-            /* Обновление состояния стрелок */
             document.querySelectorAll('.carousel').forEach(carousel => {
                 const prev = document.querySelector('.carousel-nav.prev[data-target="' + carousel.id + '"]');
                 const next = document.querySelector('.carousel-nav.next[data-target="' + carousel.id + '"]');
@@ -1920,6 +1713,82 @@
                 carousel.addEventListener('scroll', updateArrows);
                 window.addEventListener('resize', updateArrows);
                 updateArrows();
+            });
+        })();
+
+        /* ============================================
+           ЖИВЫЕ СТАВКИ
+           +50-150 FEN раз в 5-10 сек
+           смена лидера раз в 30 сек
+           ============================================ */
+        (function liveBids() {
+            const cards = document.querySelectorAll('.auction-card');
+            if (!cards.length) return;
+
+            const fakeLeaders = ['Anonymous_01', 'Dark_Player', 'NightBidder', 'Anonymous_77', 'RedQueen', 'SilentBid', 'TwinFlame', 'GoldenCage', 'Noir_Art', 'Velvet_Rose', 'Midnight_777', 'Luxuria', 'CrimsonFang'];
+
+            function formatNum(n) {
+                return n.toLocaleString('ru-RU');
+            }
+
+            function updateBid(card) {
+                const bidEl = card.querySelector('[data-bid-el]');
+                const bidsEl = card.querySelector('[data-bids-el]');
+                const leaderEl = card.querySelector('[data-leader-el]');
+                if (!bidEl) return;
+
+                let currentBid = parseInt(card.dataset.bid, 10) || 0;
+                const step = Math.floor(Math.random() * 100) + 50; /* 50-150 */
+                currentBid += step;
+                card.dataset.bid = currentBid;
+
+                /* Обновляем текст: значение + единица */
+                bidEl.innerHTML = formatNum(currentBid) + '<span class="unit">FEN</span>';
+
+                /* Эффект вспышки */
+                bidEl.classList.add('bump');
+                setTimeout(() => bidEl.classList.remove('bump'), 900);
+
+                /* Обновляем число ставок */
+                if (bidsEl) {
+                    let bids = parseInt(bidsEl.textContent, 10) || 0;
+                    bids += 1;
+                    bidsEl.textContent = bids;
+                }
+            }
+
+            function changeLeader(card) {
+                const leaderEl = card.querySelector('[data-leader-el]');
+                if (!leaderEl) return;
+                const current = leaderEl.textContent;
+                let next = current;
+                let guard = 0;
+                while (next === current && guard < 10) {
+                    next = fakeLeaders[Math.floor(Math.random() * fakeLeaders.length)];
+                    guard++;
+                }
+                leaderEl.textContent = next;
+            }
+
+            /* Каждая карточка обновляется со своей случайной задержкой 5-10 сек */
+            cards.forEach(card => {
+                function scheduleBid() {
+                    const delay = Math.random() * 5000 + 5000; /* 5-10 сек */
+                    setTimeout(() => {
+                        updateBid(card);
+                        scheduleBid();
+                    }, delay);
+                }
+                scheduleBid();
+
+                function scheduleLeader() {
+                    const delay = Math.random() * 20000 + 20000; /* 20-40 сек */
+                    setTimeout(() => {
+                        changeLeader(card);
+                        scheduleLeader();
+                    }, delay);
+                }
+                scheduleLeader();
             });
         })();
 
