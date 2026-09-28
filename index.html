@@ -33,15 +33,15 @@
             --gold-hi: #ffd97a;
             --gold-deep: #8a6d2c;
             --gold-glow: rgba(232, 193, 104, 0.35);
-            --gold-line: rgba(232, 193, 104, 0.25);
 
             --wine: #8b2a2a;
             --wine-hi: #b83838;
             --wine-glow: rgba(139, 42, 42, 0.4);
 
+            --green: #0ecb81;
+            --green-glow: rgba(14, 203, 129, 0.4);
             --ivory: #e8e3d7;
 
-            --radius: 4px;
             --radius-lg: 8px;
         }
 
@@ -71,8 +71,6 @@
             letter-spacing: 0.15px;
             font-feature-settings: 'ss01', 'cv11';
         }
-
-        /* Тонкая текстура бумаги */
         body::before {
             content: '';
             position: fixed;
@@ -83,9 +81,6 @@
             z-index: 0;
         }
 
-        /* ============================================
-           СВЕТ СВЕРХУ
-           ============================================ */
         .top-light {
             position: fixed;
             top: 0; left: 0;
@@ -103,7 +98,6 @@
             z-index: 0;
             background: radial-gradient(ellipse 60% 50% at 100% 30%, rgba(139, 42, 42, 0.06) 0%, transparent 70%);
         }
-
         .dust-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
         .dust-bg .mote {
             position: absolute;
@@ -261,7 +255,6 @@
             transition: all 0.3s;
         }
         .wallet:hover .plus { background: var(--gold); color: var(--bg-0); }
-
         .topbar-user .avatar {
             width: 36px; height: 36px;
             border-radius: 50%;
@@ -359,7 +352,6 @@
             gap: 10px;
             white-space: nowrap;
             border: none;
-            position: relative;
         }
         .btn-hero.primary {
             color: var(--bg-0);
@@ -469,11 +461,7 @@
             margin-top: 6px;
         }
         .top-table .tt-stats { display: flex; gap: 32px; margin-top: 14px; flex-wrap: wrap; }
-        .top-table .tt-stat {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
+        .top-table .tt-stat { display: flex; flex-direction: column; gap: 3px; }
         .top-table .tt-stat-label {
             font-family: 'Inter', sans-serif;
             font-size: 0.6rem;
@@ -586,24 +574,22 @@
         .section-link:hover { color: var(--gold); border-color: var(--gold-deep); background: rgba(232, 193, 104, 0.03); }
 
         /* ============================================
-           КАРУСЕЛЬ
+           КАРУСЕЛЬ (без полосы скролла)
            ============================================ */
         .carousel-wrap { position: relative; }
         .carousel {
             display: flex;
-            gap: 22px;
+            gap: 20px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
-            padding: 8px 4px 22px;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(232, 193, 104, 0.25) transparent;
+            padding: 8px 4px 8px;
             -webkit-overflow-scrolling: touch;
+            /* Убираем полосу скролла полностью */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-        .carousel::-webkit-scrollbar { height: 4px; }
-        .carousel::-webkit-scrollbar-track { background: transparent; }
-        .carousel::-webkit-scrollbar-thumb { background: rgba(232, 193, 104, 0.25); border-radius: 2px; }
-        .carousel::-webkit-scrollbar-thumb:hover { background: rgba(232, 193, 104, 0.45); }
+        .carousel::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
         .carousel-nav {
             position: absolute;
@@ -637,10 +623,10 @@
         @media (max-width: 900px) { .carousel-nav { display: none; } }
 
         /* ============================================
-           АУКЦИОНЫ — PREMIUM CARDS
+           АУКЦИОНЫ — УМЕНЬШЕНЫ
            ============================================ */
         .auction-card {
-            flex: 0 0 380px;
+            flex: 0 0 280px;
             scroll-snap-align: start;
             background: var(--bg-1);
             border: 1px solid var(--line);
@@ -651,7 +637,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
         }
         .auction-card::before {
             content: '';
@@ -659,7 +645,7 @@
             inset: 0;
             border-radius: var(--radius-lg);
             padding: 1px;
-            background: linear-gradient(180deg, transparent 0%, transparent 60%, rgba(232, 193, 104, 0.2) 100%);
+            background: linear-gradient(180deg, transparent 0%, transparent 60%, rgba(232, 193, 104, 0.15) 100%);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -668,16 +654,15 @@
             transition: background 0.4s;
         }
         .auction-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-4px);
             border-color: var(--line-hi);
             box-shadow: 
-                0 30px 80px rgba(0, 0, 0, 0.7),
-                0 0 60px rgba(232, 193, 104, 0.12);
+                0 20px 50px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(232, 193, 104, 0.1);
         }
         .auction-card:hover::before {
-            background: linear-gradient(180deg, rgba(232, 193, 104, 0.3) 0%, rgba(232, 193, 104, 0.5) 100%);
+            background: linear-gradient(180deg, rgba(232, 193, 104, 0.25) 0%, rgba(232, 193, 104, 0.4) 100%);
         }
-
         .auction-card .ac-thumb {
             position: relative;
             width: 100%;
@@ -687,7 +672,6 @@
             justify-content: center;
             overflow: hidden;
         }
-        /* Premium BG gradients */
         .ac-thumb.bg-1 {
             background: 
                 radial-gradient(ellipse at 40% 30%, rgba(139, 42, 42, 0.5) 0%, transparent 55%),
@@ -714,8 +698,8 @@
         }
         .ac-thumb::after {
             font-family: 'Cinzel', serif;
-            font-size: 5rem;
-            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.5s;
+            font-size: 3.6rem;
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .ac-thumb.bg-1::after { content: '♦'; color: rgba(232, 193, 104, 0.12); text-shadow: 0 0 60px rgba(139, 42, 42, 0.7); }
         .ac-thumb.bg-2::after { content: '♣'; color: rgba(232, 193, 104, 0.15); text-shadow: 0 0 60px rgba(232, 193, 104, 0.6); }
@@ -723,7 +707,6 @@
         .ac-thumb.bg-4::after { content: '♠'; color: rgba(232, 193, 104, 0.12); text-shadow: 0 0 60px rgba(60, 130, 190, 0.7); }
         .auction-card:hover .ac-thumb::after { transform: scale(1.08); }
 
-        /* Мягкий пар снизу превью */
         .ac-thumb .ac-vapor {
             position: absolute;
             bottom: 0; left: 0; right: 0;
@@ -734,22 +717,22 @@
 
         .ac-badge-live {
             position: absolute;
-            top: 16px; left: 16px;
+            top: 12px; left: 12px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.58rem;
+            font-size: 0.55rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 1.8px;
             color: #fff;
             background: rgba(139, 42, 42, 0.9);
             backdrop-filter: blur(6px);
-            padding: 5px 11px;
+            padding: 4px 9px;
             border-radius: 3px;
             text-transform: uppercase;
             z-index: 3;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
         .ac-badge-live::before {
             content: '';
@@ -758,42 +741,41 @@
             background: #fff;
             animation: livePulse 1.2s infinite;
         }
-
         .ac-timer {
             position: absolute;
-            top: 16px; right: 16px;
+            top: 12px; right: 12px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
+            font-size: 0.66rem;
             font-weight: 700;
             color: var(--gold);
             background: rgba(7, 8, 12, 0.9);
             border: 1px solid rgba(232, 193, 104, 0.35);
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 3px;
             letter-spacing: 1.2px;
             z-index: 3;
             backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
-        .ac-timer::before { content: '⏱'; font-size: 0.8rem; }
+        .ac-timer::before { content: '⏱'; font-size: 0.72rem; }
 
         .ac-body {
-            padding: 22px 24px 24px;
+            padding: 16px 18px 18px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
             flex: 1;
             position: relative;
             z-index: 3;
         }
         .ac-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.15rem;
+            font-size: 0.95rem;
             font-weight: 500;
             color: var(--ivory);
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
             white-space: nowrap;
             overflow: hidden;
@@ -801,29 +783,28 @@
         }
         .ac-author {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-style: italic;
             color: var(--text-1);
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-top: -10px;
+            gap: 6px;
+            margin-top: -8px;
         }
         .ac-author .status {
             display: inline-block;
-            width: 6px; height: 6px;
+            width: 5px; height: 5px;
             border-radius: 50%;
             background: var(--green);
-            box-shadow: 0 0 8px var(--green-glow);
+            box-shadow: 0 0 6px var(--green-glow);
         }
         .ac-author .status.offline { background: var(--text-2); box-shadow: none; }
 
-        /* Блок ставки — самый важный */
         .ac-bid-block {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            padding: 18px 20px;
+            gap: 6px;
+            padding: 12px 14px;
             background: 
                 linear-gradient(135deg, rgba(139, 42, 42, 0.08) 0%, transparent 60%),
                 var(--bg-2);
@@ -842,28 +823,28 @@
         }
         .ac-bid-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.58rem;
+            font-size: 0.52rem;
             font-weight: 600;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             color: var(--text-2);
             text-transform: uppercase;
         }
         .ac-bid-value {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.85rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--gold);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.4px;
             line-height: 1;
             transition: color 0.5s, text-shadow 0.5s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
             text-shadow: 0 0 20px rgba(232, 193, 104, 0.3);
             transform-origin: left center;
         }
         .ac-bid-value .unit {
-            font-size: 0.75rem;
+            font-size: 0.62rem;
             color: var(--text-2);
             font-weight: 500;
-            margin-left: 6px;
+            margin-left: 5px;
             letter-spacing: 1px;
         }
         .ac-bid-value.bump {
@@ -874,27 +855,26 @@
 
         .ac-meta {
             font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
+            font-size: 0.66rem;
             color: var(--text-2);
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            padding-top: 4px;
+            gap: 8px;
+            padding-top: 2px;
         }
         .ac-meta strong { color: var(--text-1); font-weight: 500; }
         .ac-meta .leader { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-        /* Платиновая кнопка */
         .ac-btn {
             font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
+            font-size: 0.66rem;
             font-weight: 600;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--ivory);
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
             border: 1px solid var(--line-hi);
-            padding: 14px 20px;
+            padding: 11px 16px;
             border-radius: 3px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -925,10 +905,10 @@
         .ac-btn:hover::before { left: 130%; }
 
         /* ============================================
-           ЮЧИ — PREMIUM CARDS
+           ЮЧИ — УМЕНЬШЕНЫ
            ============================================ */
         .ych-card {
-            flex: 0 0 320px;
+            flex: 0 0 240px;
             scroll-snap-align: start;
             background: var(--bg-1);
             border: 1px solid var(--line);
@@ -939,7 +919,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
         }
         .ych-card::before {
             content: '';
@@ -947,7 +927,7 @@
             inset: 0;
             border-radius: var(--radius-lg);
             padding: 1px;
-            background: linear-gradient(180deg, transparent 0%, transparent 60%, rgba(232, 193, 104, 0.2) 100%);
+            background: linear-gradient(180deg, transparent 0%, transparent 60%, rgba(232, 193, 104, 0.15) 100%);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -956,16 +936,15 @@
             transition: background 0.4s;
         }
         .ych-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-4px);
             border-color: var(--line-hi);
             box-shadow: 
-                0 30px 80px rgba(0, 0, 0, 0.7),
-                0 0 60px rgba(232, 193, 104, 0.12);
+                0 20px 50px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(232, 193, 104, 0.1);
         }
         .ych-card:hover::before {
-            background: linear-gradient(180deg, rgba(232, 193, 104, 0.3) 0%, rgba(232, 193, 104, 0.5) 100%);
+            background: linear-gradient(180deg, rgba(232, 193, 104, 0.25) 0%, rgba(232, 193, 104, 0.4) 100%);
         }
-
         .yc-thumb {
             position: relative;
             width: 100%;
@@ -997,7 +976,7 @@
         }
         .yc-thumb::after {
             font-family: 'Cinzel', serif;
-            font-size: 4.2rem;
+            font-size: 3rem;
             transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .yc-thumb.bg-1::after { content: '❦'; color: rgba(232, 193, 104, 0.12); text-shadow: 0 0 60px rgba(139, 42, 42, 0.7); }
@@ -1008,36 +987,36 @@
 
         .yc-badge {
             position: absolute;
-            top: 16px; left: 16px;
+            top: 12px; left: 12px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.56rem;
+            font-size: 0.52rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 1.8px;
             color: var(--ivory);
             background: rgba(7, 8, 12, 0.85);
             border: 1px solid var(--line-hi);
             backdrop-filter: blur(6px);
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 3px;
             text-transform: uppercase;
             z-index: 3;
         }
 
         .yc-body {
-            padding: 20px 22px 22px;
+            padding: 14px 16px 16px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 10px;
             flex: 1;
             position: relative;
             z-index: 3;
         }
         .yc-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.05rem;
+            font-size: 0.88rem;
             font-weight: 500;
             color: var(--ivory);
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             white-space: nowrap;
             overflow: hidden;
@@ -1045,18 +1024,17 @@
         }
         .yc-author {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.92rem;
+            font-size: 0.78rem;
             font-style: italic;
             color: var(--text-1);
-            margin-top: -8px;
+            margin-top: -6px;
         }
 
-        /* Слоты */
         .yc-slots {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            padding: 14px 16px;
+            gap: 6px;
+            padding: 10px 12px;
             background: var(--bg-2);
             border: 1px solid var(--border);
             border-radius: 4px;
@@ -1068,22 +1046,22 @@
         }
         .yc-slots-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.58rem;
+            font-size: 0.52rem;
             font-weight: 600;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             color: var(--text-2);
             text-transform: uppercase;
         }
         .yc-slots-num {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--gold);
         }
-        .yc-slot-bar { display: flex; gap: 4px; }
+        .yc-slot-bar { display: flex; gap: 3px; }
         .yc-slot {
             width: 100%;
-            height: 20px;
+            height: 16px;
             border-radius: 3px;
             background: rgba(232, 193, 104, 0.06);
             border: 1px solid rgba(232, 193, 104, 0.2);
@@ -1091,7 +1069,7 @@
             align-items: center;
             justify-content: center;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem;
+            font-size: 0.55rem;
             font-weight: 700;
             color: var(--text-2);
             transition: all 0.4s;
@@ -1100,7 +1078,7 @@
             background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold) 50%, var(--gold-deep) 100%);
             border-color: var(--gold);
             color: var(--bg-0);
-            box-shadow: 0 0 12px var(--gold-glow), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 10px var(--gold-glow), inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
         .yc-slot.taken {
             background: rgba(139, 42, 42, 0.15);
@@ -1114,39 +1092,38 @@
             align-items: baseline;
             justify-content: space-between;
             gap: 10px;
-            padding-top: 12px;
+            padding-top: 10px;
             border-top: 1px solid var(--border);
             margin-top: auto;
         }
         .yc-price-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.58rem;
+            font-size: 0.52rem;
             font-weight: 600;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             color: var(--text-2);
             text-transform: uppercase;
         }
         .yc-price {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.4rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--gold);
             letter-spacing: 0.3px;
             text-shadow: 0 0 15px rgba(232, 193, 104, 0.3);
         }
-        .yc-price .unit { font-size: 0.68rem; color: var(--text-2); font-weight: 500; margin-left: 4px; }
+        .yc-price .unit { font-size: 0.58rem; color: var(--text-2); font-weight: 500; margin-left: 3px; }
 
-        /* Платиновая кнопка — как аукционы */
         .yc-btn {
             font-family: 'Inter', sans-serif;
-            font-size: 0.72rem;
+            font-size: 0.64rem;
             font-weight: 600;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--ivory);
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
             border: 1px solid var(--line-hi);
-            padding: 14px 20px;
+            padding: 10px 14px;
             border-radius: 3px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1177,12 +1154,12 @@
         .yc-btn:hover::before { left: 130%; }
 
         /* ============================================
-           АРТЫ — PREMIUM GRID
+           АРТЫ — ФОКУС, КРУПНЫЕ, БЕЗ ЦЕН
            ============================================ */
         .art-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 24px;
         }
         .art-tile {
             background: var(--bg-1);
@@ -1190,13 +1167,13 @@
             border-radius: var(--radius-lg);
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
             position: relative;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
         }
         .art-tile::before {
             content: '';
@@ -1210,19 +1187,18 @@
             mask-composite: exclude;
             pointer-events: none;
             z-index: 2;
-            transition: background 0.4s;
+            transition: background 0.5s;
         }
         .art-tile:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
             border-color: var(--line-hi);
             box-shadow: 
-                0 25px 70px rgba(0, 0, 0, 0.7),
-                0 0 50px rgba(232, 193, 104, 0.12);
+                0 30px 70px rgba(0, 0, 0, 0.75),
+                0 0 60px rgba(232, 193, 104, 0.15);
         }
         .art-tile:hover::before {
-            background: linear-gradient(180deg, rgba(232, 193, 104, 0.3) 0%, rgba(232, 193, 104, 0.5) 100%);
+            background: linear-gradient(180deg, rgba(232, 193, 104, 0.35) 0%, rgba(232, 193, 104, 0.55) 100%);
         }
-
         .at-thumb {
             position: relative;
             width: 100%;
@@ -1239,8 +1215,8 @@
         .at-thumb.bg-5 { background: radial-gradient(ellipse at 40% 30%, rgba(14, 203, 129, 0.18) 0%, transparent 55%), linear-gradient(135deg, #051a10, #020a06); }
         .at-thumb::after {
             font-family: 'Cinzel', serif;
-            font-size: 3.8rem;
-            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            font-size: 4.5rem;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .at-thumb.bg-1::after { content: '❦'; color: rgba(232, 193, 104, 0.15); text-shadow: 0 0 40px rgba(232, 193, 104, 0.4); }
         .at-thumb.bg-2::after { content: '♥'; color: rgba(232, 193, 104, 0.15); text-shadow: 0 0 40px rgba(139, 42, 42, 0.5); }
@@ -1251,12 +1227,12 @@
 
         .at-badge {
             position: absolute;
-            top: 12px; left: 12px;
+            top: 14px; left: 14px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.54rem;
+            font-size: 0.56rem;
             font-weight: 700;
             letter-spacing: 2px;
-            padding: 5px 9px;
+            padding: 5px 10px;
             background: rgba(7, 8, 12, 0.85);
             color: var(--gold);
             border: 1px solid var(--line-hi);
@@ -1267,12 +1243,12 @@
         }
         .at-hot {
             position: absolute;
-            top: 12px; right: 12px;
+            top: 14px; right: 14px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.54rem;
+            font-size: 0.56rem;
             font-weight: 700;
             letter-spacing: 2px;
-            padding: 5px 9px;
+            padding: 5px 10px;
             background: linear-gradient(180deg, var(--wine-hi), var(--wine));
             color: #fff;
             border-radius: 3px;
@@ -1280,10 +1256,10 @@
             z-index: 2;
             box-shadow: 0 0 15px var(--wine-glow);
         }
-        .at-info { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; position: relative; z-index: 3; }
+        .at-info { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; position: relative; z-index: 3; }
         .at-title {
             font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             font-weight: 500;
             color: var(--ivory);
             letter-spacing: 1px;
@@ -1294,7 +1270,7 @@
         }
         .at-author {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem;
+            font-size: 0.92rem;
             font-style: italic;
             color: var(--text-1);
             display: flex;
@@ -1312,22 +1288,14 @@
         .at-bottom {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             gap: 8px;
             margin-top: auto;
             padding-top: 14px;
             border-top: 1px solid var(--border);
         }
-        .at-price {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 0.3px;
-            text-shadow: 0 0 12px rgba(232, 193, 104, 0.25);
-        }
-        .at-price .unit { font-size: 0.62rem; color: var(--text-2); font-weight: 500; margin-left: 4px; }
-        .at-stats { font-family: 'Inter', sans-serif; font-size: 0.7rem; color: var(--text-2); display: flex; gap: 10px; }
+        /* Цена убрана — только лайки/просмотры */
+        .at-stats { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--text-2); display: flex; gap: 12px; }
         .at-stats .heart { color: var(--wine-hi); }
 
         /* ============================================
@@ -1375,9 +1343,9 @@
             .market-hero h1 { font-size: 2.8rem; letter-spacing: 3px; }
             .top-table { padding: 20px 24px 40px; }
             .section { padding: 26px 24px 44px; }
-            .art-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-            .auction-card { flex: 0 0 340px; }
-            .ych-card { flex: 0 0 290px; }
+            .art-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+            .auction-card { flex: 0 0 260px; }
+            .ych-card { flex: 0 0 220px; }
         }
         @media (max-width: 768px) {
             .topbar-wrap { padding: 0 16px; }
@@ -1425,24 +1393,24 @@
             .section-head { flex-direction: column; align-items: flex-start; gap: 12px; }
             .section-title { font-size: 1rem; letter-spacing: 2px; }
 
-            .carousel { gap: 14px; padding: 6px 2px 16px; }
-            .auction-card { flex: 0 0 300px; }
-            .ych-card { flex: 0 0 270px; }
-            .ac-bid-value { font-size: 1.5rem; }
-            .yc-price { font-size: 1.2rem; }
+            .carousel { gap: 14px; padding: 6px 2px 6px; }
+            .auction-card { flex: 0 0 240px; }
+            .ych-card { flex: 0 0 200px; }
+            .ac-bid-value { font-size: 1.15rem; }
+            .yc-price { font-size: 0.92rem; }
 
             .art-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             .at-info { padding: 12px 14px 14px; }
-            .at-title { font-size: 0.8rem; }
-            .at-stats { display: none; }
+            .at-title { font-size: 0.82rem; }
+            .at-stats { font-size: 0.66rem; }
 
             .footer { margin-top: 40px; padding: 30px 16px 14px; font-size: 0.56rem; }
         }
         @media (max-width: 480px) {
             .market-hero h1 { font-size: 1.55rem; letter-spacing: 1px; }
             .art-grid { grid-template-columns: 1fr; }
-            .auction-card { flex: 0 0 270px; }
-            .ych-card { flex: 0 0 250px; }
+            .auction-card { flex: 0 0 220px; }
+            .ych-card { flex: 0 0 180px; }
         }
     </style>
 </head>
@@ -1530,7 +1498,7 @@
 
         <div class="carousel-wrap">
             <button class="carousel-nav prev" data-target="auctionCarousel" type="button">‹</button>
-            <div class="carousel" id="auctionCarousel" data-autoscroll="2500">
+            <div class="carousel" id="auctionCarousel" data-autoscroll="6000">
 
                 <div class="auction-card" data-title="Сцена · 03:00" data-author="MidnightLux" data-bid="1250" data-bids="12" data-leader="Anonymous_01">
                     <div class="ac-thumb bg-1">
@@ -1633,7 +1601,7 @@
 
         <div class="carousel-wrap">
             <button class="carousel-nav prev" data-target="ychCarousel" type="button">‹</button>
-            <div class="carousel" id="ychCarousel" data-autoscroll="2800">
+            <div class="carousel" id="ychCarousel" data-autoscroll="6500">
 
                 <div class="ych-card" data-title="Парный портрет" data-author="TwinFlame" data-slots="2">
                     <div class="yc-thumb bg-1"><span class="yc-badge">YCH</span></div>
@@ -1736,7 +1704,7 @@
         </div>
     </section>
 
-    <!-- АРТЫ -->
+    <!-- АРТЫ — ФОКУС -->
     <section class="section" id="arts">
         <div class="section-head">
             <h2 class="section-title">🎨 Витрина <span class="count">— работы зала</span></h2>
@@ -1744,111 +1712,111 @@
 
         <div class="art-grid">
 
-            <a href="#" class="art-tile" data-title="Бархатный вечер" data-author="Velvet_Rose" data-price="500">
+            <a href="#" class="art-tile" data-title="Бархатный вечер" data-author="Velvet_Rose">
                 <div class="at-thumb bg-1"><span class="at-badge">Арт</span><span class="at-hot">HOT</span></div>
                 <div class="at-info">
                     <div class="at-title">Бархатный вечер</div>
                     <div class="at-author"><span class="status"></span>Velvet_Rose</div>
-                    <div class="at-bottom"><div class="at-price">500<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>1.2k · 👁 4.5k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>1.2k · 👁 4.5k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="Ночная смена" data-author="Noir_Art" data-price="400">
+            <a href="#" class="art-tile" data-title="Ночная смена" data-author="Noir_Art">
                 <div class="at-thumb bg-2"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Ночная смена</div>
                     <div class="at-author"><span class="status offline"></span>Noir_Art</div>
-                    <div class="at-bottom"><div class="at-price">400<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>856 · 👁 2.1k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>856 · 👁 2.1k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="Красный шёлк" data-author="ScarletDream" data-price="750">
+            <a href="#" class="art-tile" data-title="Красный шёлк" data-author="ScarletDream">
                 <div class="at-thumb bg-3"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Красный шёлк</div>
                     <div class="at-author"><span class="status"></span>ScarletDream</div>
-                    <div class="at-bottom"><div class="at-price">750<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>2.4k · 👁 8.9k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>2.4k · 👁 8.9k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="Тёмный бархат" data-author="DarkVelvet" data-price="550">
+            <a href="#" class="art-tile" data-title="Тёмный бархат" data-author="DarkVelvet">
                 <div class="at-thumb bg-4"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Тёмный бархат</div>
                     <div class="at-author"><span class="status"></span>DarkVelvet</div>
-                    <div class="at-bottom"><div class="at-price">550<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>1.4k · 👁 4.1k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>1.4k · 👁 4.1k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="Шёпот в темноте" data-author="WhisperArt" data-price="900">
+            <a href="#" class="art-tile" data-title="Шёпот в темноте" data-author="WhisperArt">
                 <div class="at-thumb bg-5"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Шёпот в темноте</div>
                     <div class="at-author"><span class="status"></span>WhisperArt</div>
-                    <div class="at-bottom"><div class="at-price">900<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>1.9k · 👁 6.3k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>1.9k · 👁 6.3k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="За кулисами" data-author="Backstage_" data-price="700">
+            <a href="#" class="art-tile" data-title="За кулисами" data-author="Backstage_">
                 <div class="at-thumb bg-1"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">За кулисами</div>
                     <div class="at-author"><span class="status"></span>Backstage_</div>
-                    <div class="at-bottom"><div class="at-price">700<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>921 · 👁 3.4k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>921 · 👁 3.4k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="Две свечи" data-author="TwinFlame" data-price="650">
+            <a href="#" class="art-tile" data-title="Две свечи" data-author="TwinFlame">
                 <div class="at-thumb bg-2"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Две свечи</div>
                     <div class="at-author"><span class="status offline"></span>TwinFlame</div>
-                    <div class="at-bottom"><div class="at-price">650<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>3.1k · 👁 12k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>3.1k · 👁 12k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="Шёлковые оковы" data-author="BoundElegance" data-price="1200">
+            <a href="#" class="art-tile" data-title="Шёлковые оковы" data-author="BoundElegance">
                 <div class="at-thumb bg-3"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Шёлковые оковы</div>
                     <div class="at-author"><span class="status"></span>BoundElegance</div>
-                    <div class="at-bottom"><div class="at-price">1 200<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>1.8k · 👁 5.2k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>1.8k · 👁 5.2k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="Сцена · 03:00" data-author="MidnightLux" data-price="1500">
+            <a href="#" class="art-tile" data-title="Сцена · 03:00" data-author="MidnightLux">
                 <div class="at-thumb bg-4"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Сцена · 03:00</div>
                     <div class="at-author"><span class="status"></span>MidnightLux</div>
-                    <div class="at-bottom"><div class="at-price">1 500<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>631 · 👁 1.7k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>631 · 👁 1.7k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="Пурпурный дым" data-author="PurpleSmoke" data-price="400">
+            <a href="#" class="art-tile" data-title="Пурпурный дым" data-author="PurpleSmoke">
                 <div class="at-thumb bg-5"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Пурпурный дым</div>
                     <div class="at-author"><span class="status offline"></span>PurpleSmoke</div>
-                    <div class="at-bottom"><div class="at-price">400<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>1.1k · 👁 2.9k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>1.1k · 👁 2.9k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="Алый закат" data-author="ScarletSunset" data-price="1800">
+            <a href="#" class="art-tile" data-title="Алый закат" data-author="ScarletSunset">
                 <div class="at-thumb bg-1"><span class="at-badge">Арт</span><span class="at-hot">TOP</span></div>
                 <div class="at-info">
                     <div class="at-title">Алый закат</div>
                     <div class="at-author"><span class="status"></span>ScarletSunset</div>
-                    <div class="at-bottom"><div class="at-price">1 800<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>3.5k · 👁 15k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>3.5k · 👁 15k</div></div>
                 </div>
             </a>
 
-            <a href="#" class="art-tile" data-title="Золотая клетка" data-author="GoldenCage" data-price="2000">
+            <a href="#" class="art-tile" data-title="Золотая клетка" data-author="GoldenCage">
                 <div class="at-thumb bg-2"><span class="at-badge">Арт</span></div>
                 <div class="at-info">
                     <div class="at-title">Золотая клетка</div>
                     <div class="at-author"><span class="status"></span>GoldenCage</div>
-                    <div class="at-bottom"><div class="at-price">2 000<span class="unit">FEN</span></div><div class="at-stats"><span class="heart">♥</span>2.7k · 👁 9.8k</div></div>
+                    <div class="at-bottom"><div class="at-stats"><span class="heart">♥</span>2.7k · 👁 9.8k</div></div>
                 </div>
             </a>
 
@@ -1901,27 +1869,32 @@
             tick(); setInterval(tick, 1000);
         })();
 
-        /* АВТОПРОКРУТКА */
+        /* АВТОПРОКРУТКА — МЕДЛЕННАЯ, ПИНГ-ПОНГ (туда-обратно) */
         (function autoScroll() {
             document.querySelectorAll('.carousel[data-autoscroll]').forEach(carousel => {
-                const interval = parseInt(carousel.dataset.autoscroll, 10) || 2500;
+                const interval = parseInt(carousel.dataset.autoscroll, 10) || 6000;
                 let paused = false;
                 let resumeTimer = null;
                 let autoTimer = null;
+                let direction = 1; /* 1 = вправо, -1 = влево */
 
-                function scrollNext() {
+                function step() {
                     if (paused) return;
                     const firstCard = carousel.querySelector('*');
                     if (!firstCard) return;
-                    const cardWidth = firstCard.offsetWidth + 22;
+                    const cardWidth = firstCard.offsetWidth + 20;
                     const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-                    if (carousel.scrollLeft >= maxScroll - 5) {
-                        carousel.scrollTo({ left: 0, behavior: 'smooth' });
-                    } else {
-                        carousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+
+                    /* Пинг-понг: дошли до конца — едем обратно */
+                    if (direction === 1 && carousel.scrollLeft >= maxScroll - 5) {
+                        direction = -1;
+                    } else if (direction === -1 && carousel.scrollLeft <= 5) {
+                        direction = 1;
                     }
+
+                    carousel.scrollBy({ left: cardWidth * direction, behavior: 'smooth' });
                 }
-                function start() { stop(); autoTimer = setInterval(scrollNext, interval); }
+                function start() { stop(); autoTimer = setInterval(step, interval); }
                 function stop() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
                 function pause() { paused = true; if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; } }
                 function resume(delay) {
@@ -1936,7 +1909,7 @@
                 carousel.addEventListener('touchend', () => resume(3000));
                 carousel.addEventListener('wheel', pause, { passive: true });
                 document.querySelectorAll('.carousel-nav[data-target="' + carousel.id + '"]').forEach(btn => {
-                    btn.addEventListener('click', () => { pause(); resume(6000); });
+                    btn.addEventListener('click', () => { pause(); resume(8000); });
                 });
                 start();
             });
@@ -1949,7 +1922,7 @@
                     const carousel = document.getElementById(btn.dataset.target);
                     if (!carousel) return;
                     const firstCard = carousel.querySelector('*');
-                    const cardWidth = firstCard ? firstCard.offsetWidth + 22 : 380;
+                    const cardWidth = firstCard ? firstCard.offsetWidth + 20 : 280;
                     const dir = btn.classList.contains('next') ? 1 : -1;
                     carousel.scrollBy({ left: cardWidth * dir, behavior: 'smooth' });
                 });
@@ -1967,7 +1940,7 @@
             });
         })();
 
-        /* ЖИВЫЕ СТАВКИ — 2-4 сек */
+        /* ЖИВЫЕ СТАВКИ — 3-6 сек */
         (function liveBids() {
             const cards = document.querySelectorAll('.auction-card');
             if (!cards.length) return;
@@ -2006,7 +1979,7 @@
 
             cards.forEach(card => {
                 function schedBid() {
-                    const delay = Math.random() * 2000 + 2000;
+                    const delay = Math.random() * 3000 + 3000;
                     setTimeout(() => { updateBid(card); schedBid(); }, delay);
                 }
                 schedBid();
@@ -2023,7 +1996,7 @@
             const cards = document.querySelectorAll('.ych-card');
             cards.forEach(card => {
                 function scheduleSlotChange() {
-                    const delay = Math.random() * 15000 + 15000;
+                    const delay = Math.random() * 20000 + 20000;
                     setTimeout(() => {
                         const freeSlots = card.querySelectorAll('.yc-slot.free');
                         if (freeSlots.length > 1) {
@@ -2031,7 +2004,6 @@
                             randomFree.classList.remove('free');
                             randomFree.classList.add('taken');
                             randomFree.textContent = '';
-                            /* Обновить счётчик */
                             const numEl = card.querySelector('.yc-slots-num');
                             const freeCount = card.querySelectorAll('.yc-slot.free').length;
                             if (numEl) numEl.textContent = freeCount + ' / 3';
@@ -2074,7 +2046,7 @@
             document.querySelectorAll('.art-tile').forEach(tile => {
                 tile.addEventListener('click', e => {
                     e.preventDefault();
-                    alert('🎨 АРТ\n\nРабота: ' + (tile.dataset.title || '—') + '\nАвтор: ' + (tile.dataset.author || '—') + '\nЦена: ' + (tile.dataset.price || '—') + ' FEN\n\n(Здесь будет лайтбокс с заказом)');
+                    alert('🎨 АРТ\n\nРабота: ' + (tile.dataset.title || '—') + '\nАвтор: ' + (tile.dataset.author || '—') + '\n\n(Здесь будет лайтбокс с заказом)');
                 });
             });
         })();
